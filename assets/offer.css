@@ -1007,9 +1007,10 @@ a { color: inherit; }
   margin: 0 auto 1.15rem;
 }
 .deposit-close .resonant-logo {
-  width: min(280px, 88%);
+  width: min(300px, 92%);
   height: auto;
   margin: 0 auto;
+  border-radius: 10px;
   filter: drop-shadow(0 0 18px rgba(56, 189, 248, 0.28));
 }
 .deposit-close h2 {
