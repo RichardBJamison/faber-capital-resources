@@ -188,6 +188,54 @@
     }
     .chat-head h3 { font-size: 1rem; font-weight: 750; }
     .chat-head span { font-size: .78rem; color: var(--muted); }
+    .chat-tabs {
+      display: flex; gap: .4rem; padding: .65rem 1rem 0; background: #fff;
+      border-bottom: 1px solid var(--line);
+    }
+    .chat-tabs button {
+      padding: .55rem .95rem; border-radius: 12px 12px 0 0; font-size: .82rem; font-weight: 800;
+      background: transparent; color: var(--muted); border: 1px solid transparent; border-bottom: 0;
+      cursor: pointer;
+    }
+    .chat-tabs button.active {
+      background: linear-gradient(180deg, #faf8ff, #fff);
+      color: var(--purple); border-color: var(--line); position: relative; top: 1px;
+    }
+    .chat-tab-panel { display: none; flex: 1; flex-direction: column; min-height: 0; }
+    .chat-tab-panel.active { display: flex; }
+    .bot-coming {
+      flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 1rem; padding: 2rem 1.5rem; text-align: center;
+      background: linear-gradient(180deg, #f0fdf4 0%, #fff 55%);
+    }
+    .bot-coming .bot-ico {
+      width: 72px; height: 72px; border-radius: 22px;
+      background: linear-gradient(135deg, #3DFF8A, #22c55e);
+      display: grid; place-items: center; font-size: 2rem;
+      box-shadow: 0 12px 28px rgba(34, 197, 94, .35);
+    }
+    .bot-coming h4 {
+      margin: 0; font-size: 1.35rem; font-weight: 900; letter-spacing: -.01em;
+      color: #04351C;
+    }
+    .bot-coming p { margin: 0; max-width: 28rem; color: var(--muted); font-size: .95rem; line-height: 1.5; }
+    .bot-coming .soon-pill {
+      display: inline-block; margin-top: .25rem; padding: .45rem 1rem; border-radius: 999px;
+      background: #04351C; color: #3DFF8A; font-size: .78rem; font-weight: 800;
+      letter-spacing: .06em; text-transform: uppercase;
+    }
+    .bot-compose-disabled {
+      border-top: 1px solid var(--line); padding: .85rem 1rem; background: #f8faf9;
+      display: flex; gap: .55rem; align-items: center; opacity: .72;
+    }
+    .bot-compose-disabled input {
+      flex: 1; border: 1px solid var(--line); border-radius: 12px; padding: .75rem .9rem;
+      font: inherit; background: #fff; color: var(--muted);
+    }
+    .bot-compose-disabled button {
+      padding: .75rem 1.1rem; border-radius: 12px; font-weight: 800;
+      background: #d1d5db; color: #6b7280; cursor: not-allowed;
+    }
     .chat-stream {
       flex: 1; overflow-y: auto; padding: 1.1rem; background:
         linear-gradient(180deg, #faf8ff 0%, #fff 40%);
@@ -410,7 +458,8 @@
           <div class="help-item"><strong>FCR Site Demo</strong>Large green button at the top of the left menu. Opens the live FCR site demo (offer / site package) in a new tab.</div>
           <div class="help-item"><strong>Back to Dashboard</strong>Returns you to the main Dashboard overview from any section.</div>
           <div class="help-item"><strong>Dashboard</strong>Overview of FCR traffic, build-out schedule (8 weeks), upgrades, and latest activity. Humans only — not internal admin noise.</div>
-          <div class="help-item"><strong>Communications</strong>Shared chat between Richard and FCR Capital. Messages, file attachments, and the File Cabinet live here. Richard is notified by text on new messages.</div>
+          <div class="help-item"><strong>Communications</strong>Shared project chat between Richard and FCR Capital, plus Live Chat with Richard (chatbot — coming soon). File Cabinet lives on the right. Richard is notified by text on new project messages.</div>
+          <div class="help-item"><strong>Live Chat with Richard</strong>Chatbot talk window inside Communications. Status: Coming Soon. Use Project Chat until live chat is enabled.</div>
           <div class="help-item"><strong>Website analytics</strong>Traffic for FCR surfaces (pageviews, sessions, uniques) from the Nexus first-party feed.</div>
           <div class="help-item"><strong>FCR Agency Build</strong>Engineering / architecture of the agency system. Stage 1 is Discovery &amp; Agency Mapping (this week).</div>
           <div class="help-item"><strong>Search engine optimization marketing</strong>SEO plan, intent map, and measurement workstream for FCR.</div>
@@ -560,28 +609,53 @@
       <section class="panel" id="panel-communications">
         <div class="comms-layout">
           <div class="chat-shell">
-            <div class="chat-head">
-              <div>
-                <h3>FCR Capital · Nexus Chat</h3>
-                <span>Richard ↔ FCR · shared workspace</span>
-              </div>
-              <span class="pill" id="chatStatus">Connecting…</span>
+            <div class="chat-tabs" role="tablist" aria-label="Chat modes">
+              <button type="button" role="tab" class="active" data-chat-tab="project" id="tabProject" aria-selected="true">Project Chat</button>
+              <button type="button" role="tab" data-chat-tab="bot" id="tabBot" aria-selected="false">💬 Live Chat with Richard</button>
             </div>
-            <div class="chat-stream" id="chatStream" aria-live="polite"></div>
-            <div class="chat-compose">
-              <div class="compose-who" id="composeWho">
-                <button type="button" data-who="fcr" class="active">Send as FCR / Bill</button>
-                <button type="button" data-who="richard">Send as Richard</button>
-              </div>
-              <div class="compose-row">
-                <textarea id="chatInput" placeholder="Write a message… (optional if uploading a file)" rows="4"></textarea>
-                <div class="compose-actions">
-                  <button type="button" class="btn-send" id="chatSend">Send</button>
-                  <button type="button" class="btn-attach" id="chatAttach" title="Add files to this message">📎 Upload file</button>
+            <div class="chat-tab-panel active" id="chatTabProject" role="tabpanel" style="flex:1;min-height:0;">
+              <div class="chat-head">
+                <div>
+                  <h3>FCR Capital · Nexus Chat</h3>
+                  <span>Richard ↔ FCR · shared workspace</span>
                 </div>
+                <span class="pill" id="chatStatus">Connecting…</span>
               </div>
-              <input type="file" id="chatFile" multiple hidden />
-              <div class="pending-files" id="pendingFiles"></div>
+              <div class="chat-stream" id="chatStream" aria-live="polite"></div>
+              <div class="chat-compose">
+                <div class="compose-who" id="composeWho">
+                  <button type="button" data-who="fcr" class="active">Send as FCR / Bill</button>
+                  <button type="button" data-who="richard">Send as Richard</button>
+                </div>
+                <div class="compose-row">
+                  <textarea id="chatInput" placeholder="Write a message… (optional if uploading a file)" rows="4"></textarea>
+                  <div class="compose-actions">
+                    <button type="button" class="btn-send" id="chatSend">Send</button>
+                    <button type="button" class="btn-attach" id="chatAttach" title="Add files to this message">📎 Upload file</button>
+                  </div>
+                </div>
+                <input type="file" id="chatFile" multiple hidden />
+                <div class="pending-files" id="pendingFiles"></div>
+              </div>
+            </div>
+            <div class="chat-tab-panel" id="chatTabBot" role="tabpanel" style="flex:1;min-height:0;">
+              <div class="chat-head">
+                <div>
+                  <h3>Live Chat with Richard</h3>
+                  <span>AI chatbot · private channel to Richard</span>
+                </div>
+                <span class="pill" style="background:#d1fae5;color:#047857;">Coming soon</span>
+              </div>
+              <div class="bot-coming" aria-live="polite">
+                <div class="bot-ico" aria-hidden="true">🤖</div>
+                <h4>Live Chat With Richard Coming Soon</h4>
+                <p>Bill will be able to message Richard here in real time through the Nexus chatbot. Until then, use <strong>Project Chat</strong> for shared notes and files.</p>
+                <span class="soon-pill">Coming Soon</span>
+              </div>
+              <div class="bot-compose-disabled">
+                <input type="text" disabled placeholder="Live chat unavailable — coming soon" aria-disabled="true" />
+                <button type="button" disabled>Send</button>
+              </div>
             </div>
           </div>
           <aside class="cabinet">
@@ -814,6 +888,27 @@
         if (sidebar) sidebar.classList.remove("open");
         if (overlay) overlay.classList.remove("show");
       };
+
+      /* Communications: Project Chat vs Live Chat with Richard (bot) */
+      function setChatTab(which) {
+        var isBot = which === "bot";
+        var tabProject = document.getElementById("tabProject");
+        var tabBot = document.getElementById("tabBot");
+        var panelProject = document.getElementById("chatTabProject");
+        var panelBot = document.getElementById("chatTabBot");
+        if (tabProject) {
+          tabProject.classList.toggle("active", !isBot);
+          tabProject.setAttribute("aria-selected", isBot ? "false" : "true");
+        }
+        if (tabBot) {
+          tabBot.classList.toggle("active", isBot);
+          tabBot.setAttribute("aria-selected", isBot ? "true" : "false");
+        }
+        if (panelProject) panelProject.classList.toggle("active", !isBot);
+        if (panelBot) panelBot.classList.toggle("active", isBot);
+      }
+      document.getElementById("tabProject").onclick = function () { setChatTab("project"); };
+      document.getElementById("tabBot").onclick = function () { setChatTab("bot"); };
       function openCommsPanel() {
         showPanel("communications");
         document.querySelectorAll(".nav a").forEach(function (a) {
