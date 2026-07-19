@@ -104,6 +104,63 @@
     isNewSession = true;
   }
 
+  function isOwnerBrowser() {
+    try {
+      if (localStorage.getItem("ot_owner") === "1") return true;
+    } catch (e) {}
+    if (location.hostname === "localhost" || location.hostname === "127.0.0.1") return true;
+    return !!cfg.self;
+  }
+
+  /*
+   * OWNER / SELF — never send page journeys.
+   * Only mark this visitor as owner once so the server ignores us forever.
+   */
+  if (isOwnerBrowser()) {
+    try {
+      if (!sessionGet("ot_marked_owner")) {
+        sessionSet("ot_marked_owner", "1");
+        var markBody = JSON.stringify({
+          type: "mark_owner",
+          site: SITE,
+          visitor_id: visitorId,
+          self: true,
+          ts: Date.now(),
+        });
+        if (ENDPOINT) {
+          try {
+            if (navigator.sendBeacon) {
+              navigator.sendBeacon(
+                ENDPOINT,
+                new Blob([markBody], { type: "application/json" })
+              );
+            } else {
+              fetch(ENDPOINT, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: markBody,
+                keepalive: true,
+                mode: "cors",
+              }).catch(function () {});
+            }
+          } catch (e) {}
+        }
+      }
+    } catch (e) {}
+    window.OfferTracker = {
+      visitorId: visitorId,
+      sessionId: sessionId,
+      siteId: SITE,
+      owner: true,
+      emit: function () {},
+      getJourney: function () {
+        return [];
+      },
+    };
+    log("owner browser — tracking suppressed");
+    return;
+  }
+
   function getJourney() {
     try {
       var raw = sessionGet(JOURNEY_KEY);
@@ -155,14 +212,6 @@
     return Math.min(100, Math.round((scrollTop / height) * 100));
   }
 
-  function isOwnerBrowser() {
-    try {
-      if (localStorage.getItem("ot_owner") === "1") return true;
-    } catch (e) {}
-    if (location.hostname === "localhost" || location.hostname === "127.0.0.1") return true;
-    return !!cfg.self;
-  }
-
   function basePayload(type, extra) {
     var p = {
       v: VERSION,
@@ -180,7 +229,7 @@
       journey_len: journey.length,
       utm: utmParams(),
       lang: navigator.language || "",
-      self: isOwnerBrowser(),
+      self: false,
       tz: (function () {
         try {
           return Intl.DateTimeFormat().resolvedOptions().timeZone || "";
