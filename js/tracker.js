@@ -25,11 +25,23 @@
   var cfg = window.OFFER_TRACKER || {};
   var SITE = cfg.siteId || location.hostname || "unknown";
   var GA4 = cfg.ga4Id || "";
-  var ENDPOINT = cfg.endpoint || "";
+  var ENDPOINT =
+    cfg.endpoint ||
+    "https://opensourcebarware.com/api/nexus-collect";
   var CLARITY = cfg.clarityId || "";
   var DEBUG = !!cfg.debug;
   var HEARTBEAT_MS = Math.max(10000, Number(cfg.heartbeatMs) || 15000);
   var VERSION = 1;
+
+  /* Mark this browser as Richard / owner → ignored for live + alerts */
+  try {
+    if (/[?&]owner=1(?:&|$)/.test(location.search || "")) {
+      localStorage.setItem("ot_owner", "1");
+    }
+    if ((location.pathname || "").indexOf("B-ATCAVE") !== -1) {
+      localStorage.setItem("ot_owner", "1");
+    }
+  } catch (e) {}
 
   function log() {
     if (DEBUG && console && console.log) {
@@ -143,6 +155,14 @@
     return Math.min(100, Math.round((scrollTop / height) * 100));
   }
 
+  function isOwnerBrowser() {
+    try {
+      if (localStorage.getItem("ot_owner") === "1") return true;
+    } catch (e) {}
+    if (location.hostname === "localhost" || location.hostname === "127.0.0.1") return true;
+    return !!cfg.self;
+  }
+
   function basePayload(type, extra) {
     var p = {
       v: VERSION,
@@ -160,6 +180,7 @@
       journey_len: journey.length,
       utm: utmParams(),
       lang: navigator.language || "",
+      self: isOwnerBrowser(),
       tz: (function () {
         try {
           return Intl.DateTimeFormat().resolvedOptions().timeZone || "";
