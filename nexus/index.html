@@ -1173,7 +1173,52 @@
       loadComms();
       setInterval(load, 15000);
       setInterval(loadComms, 8000);
+
+      /* Robot chat CTAs → Communications talk tabs */
+      window.fcrNexusOpenLiveChat = function () {
+        showPanel("communications");
+        setChatTab("bot");
+        var sidebar = document.getElementById("sidebar");
+        var overlay = document.getElementById("overlay");
+        if (sidebar) sidebar.classList.remove("open");
+        if (overlay) overlay.classList.remove("show");
+      };
+      window.fcrNexusOpenProjectChat = function () {
+        showPanel("communications");
+        setChatTab("project");
+        var sidebar = document.getElementById("sidebar");
+        var overlay = document.getElementById("overlay");
+        if (sidebar) sidebar.classList.remove("open");
+        if (overlay) overlay.classList.remove("show");
+      };
+      document.addEventListener("click", function (e) {
+        var a = e.target && e.target.closest && e.target.closest("#sj-chatbot a.sj-btn");
+        if (!a) return;
+        var href = a.getAttribute("href") || "";
+        if (href === "#fcr-live-chat") {
+          e.preventDefault();
+          window.fcrNexusOpenLiveChat();
+        } else if (href === "#fcr-project-chat") {
+          e.preventDefault();
+          window.fcrNexusOpenProjectChat();
+        }
+      });
     })();
   </script>
+  <!-- Resonant-style robot: intro sequence once ever (localStorage), then corner circle -->
+  <script>
+    window.ROBOT_CHAT_CONFIG = {
+      robotSrc: "./robot/chatbot-robot.png",
+      robotCircleSrc: "./robot/chatbot-robot-circle.png",
+      storageKey: "fcr-nexus-robot-seen-v1",
+      storage: "local",
+      messageHtml: "Live Chat With Richard<br><strong>Coming Soon</strong>",
+      chatLabel: "Open Live Chat",
+      homeLabel: "Project Chat",
+      chatHref: "#fcr-live-chat",
+      homeHref: "#fcr-project-chat"
+    };
+  </script>
+  <script src="./robot/robot-chat.js" defer></script>
 </body>
 </html>
