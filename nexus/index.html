@@ -35,7 +35,39 @@
       background: rgba(255,255,255,.85); backdrop-filter: blur(16px); border-right: 1px solid var(--line);
       padding: 1.25rem 1rem 1.5rem; display: flex; flex-direction: column; gap: 1rem;
     }
-    .brand { display: flex; align-items: center; gap: .75rem; padding: .35rem .5rem .75rem; }
+    .sidebar-top {
+      display: flex; flex-direction: column; gap: .65rem;
+      padding: 0 0 .85rem;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: .15rem;
+    }
+    .site-demo-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 100%; min-height: 56px; padding: .9rem 1rem;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #3DFF8A, #22c55e 55%, #16a34a);
+      color: #04351C;
+      font-size: 1.05rem; font-weight: 900; letter-spacing: .03em;
+      text-decoration: none; text-align: center;
+      box-shadow: 0 0 0 2px rgba(4, 53, 28, .1), 0 10px 22px rgba(61, 255, 138, .4);
+      transition: transform .15s, filter .15s;
+    }
+    .site-demo-btn:hover { filter: brightness(1.05); transform: translateY(-1px); color: #04351C; }
+    .site-demo-btn .demo-label { display: flex; flex-direction: column; line-height: 1.15; gap: .15rem; }
+    .site-demo-btn .demo-label strong { font-size: 1.08rem; font-weight: 900; }
+    .site-demo-btn .demo-label span { font-size: .72rem; font-weight: 700; opacity: .85; letter-spacing: .02em; }
+    .back-dash-btn {
+      display: flex; align-items: center; justify-content: center; gap: .4rem;
+      width: 100%; padding: .55rem .75rem;
+      border-radius: 12px;
+      background: #f4f1fb; color: var(--purple);
+      border: 1px solid #e9e5f5;
+      font-size: .82rem; font-weight: 800;
+      cursor: pointer;
+      transition: background .15s, color .15s;
+    }
+    .back-dash-btn:hover { background: var(--purple-soft); }
+    .brand { display: flex; align-items: center; gap: .75rem; padding: .15rem .35rem 0; }
     .brand-mark {
       width: 42px; height: 42px; border-radius: 12px;
       background: linear-gradient(135deg, #7c3aed, #c084fc 55%, #f0abfc);
@@ -327,11 +359,20 @@
   <div class="overlay" id="overlay"></div>
   <div class="app">
     <aside class="sidebar" id="sidebar">
-      <div class="brand">
-        <div class="brand-mark">FCR</div>
-        <div>
-          <h1>FCR Capital</h1>
-          <p>Admin Dashboard</p>
+      <div class="sidebar-top">
+        <a class="site-demo-btn" href="https://richardbjamison.github.io/faber-capital-resources/" target="_blank" rel="noopener" title="Open FCR site demo">
+          <span class="demo-label">
+            <strong>FCR Site Demo</strong>
+            <span>Open live site →</span>
+          </span>
+        </a>
+        <button type="button" class="back-dash-btn" id="btnBackDashboard" title="Return to dashboard">← Back to Dashboard</button>
+        <div class="brand">
+          <div class="brand-mark">FCR</div>
+          <div>
+            <h1>FCR Capital</h1>
+            <p>Admin Dashboard</p>
+          </div>
         </div>
       </div>
       <nav class="nav" aria-label="FCR only">
@@ -366,6 +407,8 @@
         <div class="help-panel">
           <h3 id="helpTitle">Nexus Help</h3>
           <p class="sub">Quick descriptions for every area of the FCR Capital Working Admin Dashboard.</p>
+          <div class="help-item"><strong>FCR Site Demo</strong>Large green button at the top of the left menu. Opens the live FCR site demo (offer / site package) in a new tab.</div>
+          <div class="help-item"><strong>Back to Dashboard</strong>Returns you to the main Dashboard overview from any section.</div>
           <div class="help-item"><strong>Dashboard</strong>Overview of FCR traffic, build-out schedule (8 weeks), upgrades, and latest activity. Humans only — not internal admin noise.</div>
           <div class="help-item"><strong>Communications</strong>Shared chat between Richard and FCR Capital. Messages, file attachments, and the File Cabinet live here. Richard is notified by text on new messages.</div>
           <div class="help-item"><strong>Website analytics</strong>Traffic for FCR surfaces (pageviews, sessions, uniques) from the Nexus first-party feed.</div>
@@ -764,6 +807,13 @@
           }
         });
       });
+      document.getElementById("btnBackDashboard").onclick = function () {
+        showPanel("dashboard");
+        var sidebar = document.getElementById("sidebar");
+        var overlay = document.getElementById("overlay");
+        if (sidebar) sidebar.classList.remove("open");
+        if (overlay) overlay.classList.remove("show");
+      };
       function openCommsPanel() {
         showPanel("communications");
         document.querySelectorAll(".nav a").forEach(function (a) {
