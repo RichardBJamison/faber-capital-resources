@@ -9,7 +9,7 @@
   if (!v) return;
 
   var CRUISE = 0.65;
-  var HOLD_MS = 1000;
+  var HOLD_MS = 500;
   var BOOM = 0;
   var D = 0;
   var leg = "idle";
