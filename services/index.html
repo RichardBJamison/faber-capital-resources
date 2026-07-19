@@ -388,26 +388,54 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }</style>
 <style id="resonant-offer-nav-css">
-.resonant-offer-pill,
-#menu-top-header a.resonant-offer-pill,
-.main-menu a.resonant-offer-pill {
+/* Offer link is plain nav; NEXUS is the bright pastel green CTA */
+.nexus-nav-btn,
+#menu-top-header a.nexus-nav-btn,
+.main-menu a.nexus-nav-btn {
   display: inline-block !important;
-  background: #8FCB9B !important;
-  color: #1E3D2A !important;
-  padding: 0.42rem 0.8rem !important;
+  background: #7DFFB0 !important;
+  color: #0A3D22 !important;
+  padding: 0.42rem 0.9rem !important;
   border-radius: 999px !important;
-  font-size: 11px !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.08em !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.12em !important;
   text-transform: uppercase !important;
   line-height: 1.25 !important;
   text-decoration: none !important;
-  box-shadow: 0 0 0 1px rgba(30, 61, 42, 0.08);
+  box-shadow: 0 0 0 1px rgba(10, 61, 34, 0.1), 0 0 16px rgba(125, 255, 176, 0.5);
   opacity: 1 !important;
 }
-.resonant-offer-pill:hover {
-  background: #9fd9ab !important;
-  color: #1E3D2A !important;
+.nexus-nav-btn:hover,
+#menu-top-header a.nexus-nav-btn:hover,
+.main-menu a.nexus-nav-btn:hover {
+  background: #9AFFC4 !important;
+  color: #0A3D22 !important;
+}
+/* neutralize old offer pill if any leftover markup */
+.resonant-offer-pill {
+  background: transparent !important;
+  color: inherit !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  letter-spacing: inherit !important;
+}
+
+/* beat theme white/mobile link colors on NEXUS CTA */
+#menu-top-header li a.nexus-nav-btn,
+.main-menu li a.nexus-nav-btn,
+.mobile-view #menu-top-header li a.nexus-nav-btn,
+.mobile-view .main-menu li a.nexus-nav-btn {
+  color: #0A3D22 !important;
+  background: #7DFFB0 !important;
+}
+#menu-top-header li a.nexus-nav-btn:hover,
+.main-menu li a.nexus-nav-btn:hover {
+  color: #0A3D22 !important;
+  background: #9AFFC4 !important;
 }
 </style>
 </head>
@@ -437,12 +465,12 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
                                     <span class="hide-visually expanded-text">expanded</span>
                                     <span class="hide-visually collapsed-text">collapsed</span>
                                 </label>
-                                <div class="menu-top-header-container"><ul id="menu-top-header" class="main-menu" aria-label="submenu"><li id="menu-item-100025" class="home-page menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-100025"><a href="/faber-capital-resources/">Home</a></li>
+                                <div class="menu-top-header-container"><ul id="menu-top-header" class="main-menu" aria-label="submenu"><li id="menu-item-nexus" class="menu-item"><a class="nexus-nav-btn" href="https://opensourcebarware.com/B-ATCAVE/fcr/" target="_blank" rel="noopener">NEXUS</a></li><li id="menu-item-100025" class="home-page menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-100025"><a href="/faber-capital-resources/">Home</a></li>
 <li id="menu-item-100024" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-100024"><a href="/faber-capital-resources/about-us/">About Us</a></li>
 <li id="menu-item-100052" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-100052"><a href="/faber-capital-resources/services-2/">Services</a></li>
 <li id="menu-item-100053" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-100053"><a href="/faber-capital-resources/funding-solutions/">Funding Solutions</a></li>
 <li id="menu-item-100054" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-100054"><a href="/faber-capital-resources/referrals/">Referrals</a></li>
-<li id="menu-item-resonant-offer" class="menu-item"><a class="resonant-offer-pill" href="/faber-capital-resources/resonant-design-offer/">Resonant Design Offer</a></li>
+<li id="menu-item-resonant-offer" class="menu-item"><a href="/faber-capital-resources/resonant-design-offer/">Resonant Design Offer</a></li>
 </ul></div>                                
                             </nav><!-- #site-navigation -->
                                             </div>
@@ -476,7 +504,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 <footer id="colophon" class="site-footer responsive-max-width">
             <div class="footer-inner-wrapper">
                                     
-            <div class="">
+            <div>
                                             </div>       
              <nav class="footer-navigation flex-child" aria-label="Footer Menu">
                 <div class="menu-footer-container"><ul id="menu-footer" class="footer-menu"><li id="menu-item-100026" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-100026"><a href="/faber-capital-resources/">Home</a></li>

@@ -211,16 +211,24 @@
     }
     .btn-send:hover { filter: brightness(1.05); }
     .btn-attach {
-      border-radius: 12px; padding: .55rem .7rem; font-size: .75rem; font-weight: 700;
-      background: #f4f1fb; color: var(--purple); border: 1px solid #e9e5f5;
+      border-radius: 12px; padding: .6rem .75rem; font-size: .78rem; font-weight: 800;
+      background: #fff7ed; color: #c2410c; border: 1.5px solid #fdba74;
+      min-width: 110px;
     }
+    .btn-attach:hover { background: #ffedd5; }
+    .btn-cab-upload {
+      width: 100%; border-radius: 12px; padding: .7rem .85rem; font-size: .82rem; font-weight: 800;
+      background: linear-gradient(135deg, #f97316, #ea580c); color: #fff;
+      box-shadow: 0 8px 18px rgba(234,88,12,.25); margin-bottom: .85rem;
+    }
+    .btn-cab-upload:hover { filter: brightness(1.05); }
     .pending-files { font-size: .75rem; color: var(--muted); margin-top: .45rem; min-height: 1.1em; }
     .cabinet {
       background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
       border: 1px solid rgba(255,255,255,.7); padding: 1rem 1.05rem; min-height: 320px;
     }
     .cabinet h3 { font-size: .95rem; font-weight: 750; margin-bottom: .35rem; }
-    .cabinet .cab-sub { font-size: .78rem; color: var(--muted); margin-bottom: .85rem; }
+    .cabinet .cab-sub { font-size: .78rem; color: var(--muted); margin-bottom: .65rem; }
     .file-row {
       display: flex; align-items: flex-start; gap: .65rem; padding: .7rem 0;
       border-bottom: 1px solid var(--line); font-size: .84rem;
@@ -256,6 +264,63 @@
       margin-top: 1rem; width: 100%; padding: .7rem; border-radius: 12px; font-weight: 750;
       background: #f4f1fb; color: var(--purple);
     }
+    /* —— Comms widget (dashboard · Traffic status slot) —— */
+    .comms-widget {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      height: 100%;
+      min-height: 248px;
+    }
+    .comms-widget-body {
+      flex: 1;
+      font-size: .86rem;
+      line-height: 1.48;
+      color: var(--text);
+      white-space: pre-wrap;
+      overflow: hidden;
+      max-height: 11.5em;
+      display: -webkit-box;
+      -webkit-line-clamp: 9;
+      -webkit-box-orient: vertical;
+    }
+    .comms-widget-from {
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--purple);
+    }
+    .comms-flag {
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .comms-flag.unread { color: #dc2626; }
+    .comms-flag.read { color: #16a34a; }
+    .comms-widget-btn {
+      margin-top: auto;
+      align-self: stretch;
+      padding: .65rem 1.1rem;
+      border-radius: 12px;
+      font-size: .88rem;
+      font-weight: 800;
+      letter-spacing: .02em;
+      background: linear-gradient(135deg, #fb923c, #ea580c 55%, #c2410c);
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(234, 88, 12, .32);
+    }
+    .comms-widget-btn:hover { filter: brightness(1.06); }
+    .comms-widget.empty-state .comms-widget-body { color: var(--muted); }
+    /* Traffic status nested under Chart summary — keep donut block same size */
+    .chart-summary-card .donut-wrap { min-height: 140px; }
+    .chart-summary-card .traffic-status {
+      margin-top: .85rem;
+      padding-top: .75rem;
+      border-top: 1px solid var(--line);
+      gap: .55rem;
+    }
+    .chart-summary-card .traffic-status .rowline { font-size: .78rem; }
+    .chart-summary-card .traffic-status .meter { margin-top: .25rem; }
   </style>
 </head>
 <body>
@@ -351,12 +416,15 @@
             <svg class="line-chart" id="trafficChart" viewBox="0 0 640 220" preserveAspectRatio="none"></svg>
             <p class="empty" id="chartNote" style="margin-top:.5rem;">Period chart · unique / new overlaid when data exists</p>
           </article>
-          <article class="card">
-            <div class="card-h"><h3>Traffic status</h3><span class="pill" id="statusPill">Healthy</span></div>
-            <div class="traffic-status">
-              <div><div class="rowline"><span>FCR offer tracker</span><span class="pill">Live</span></div><div class="meter"><i style="width:90%"></i></div></div>
-              <div><div class="rowline"><span>Communication site</span><span class="pill">Live</span></div><div class="meter"><i style="width:86%"></i></div></div>
-              <div><div class="rowline"><span>Live presence</span><span id="liveCountLabel">0 now</span></div><div class="meter"><i id="liveMeter" style="width:12%"></i></div></div>
+          <article class="card" id="commsPeek" title="Latest communication">
+            <div class="card-h">
+              <h3>Latest chat</h3>
+              <span class="comms-flag unread" id="commsFlag">unread</span>
+            </div>
+            <div class="comms-widget empty-state" id="commsWidgetInner">
+              <div class="comms-widget-from" id="commsPeekFrom">—</div>
+              <div class="comms-widget-body" id="commsPeekBody">Loading latest message…</div>
+              <button type="button" class="comms-widget-btn" id="commsPeekBtn">Go To Communication</button>
             </div>
           </article>
         </div>
@@ -366,7 +434,7 @@
             <div class="card-h"><h3>Visitors</h3><span class="link" data-panel="website-analytics">View more</span></div>
             <div class="bars" id="visitorBars"></div>
           </article>
-          <article class="card">
+          <article class="card chart-summary-card">
             <div class="card-h"><h3>Chart summary</h3></div>
             <div class="donut-wrap">
               <div class="donut" id="donut"></div>
@@ -380,6 +448,15 @@
               <div><strong id="sumPv">0</strong><span>Pageviews</span></div>
               <div><strong id="sumSess">0</strong><span>Sessions</span></div>
               <div><strong id="sumNew">0</strong><span>Uniques</span></div>
+            </div>
+            <div class="card-h" style="margin-top:1rem;margin-bottom:.55rem;">
+              <h3 style="font-size:.92rem;">Traffic status</h3>
+              <span class="pill" id="statusPill">Healthy</span>
+            </div>
+            <div class="traffic-status">
+              <div><div class="rowline"><span>FCR offer tracker</span><span class="pill">Live</span></div><div class="meter"><i style="width:90%"></i></div></div>
+              <div><div class="rowline"><span>Communication site</span><span class="pill">Live</span></div><div class="meter"><i style="width:86%"></i></div></div>
+              <div><div class="rowline"><span>Live presence</span><span id="liveCountLabel">0 now</span></div><div class="meter"><i id="liveMeter" style="width:12%"></i></div></div>
             </div>
           </article>
           <article class="card">
@@ -454,10 +531,10 @@
                 <button type="button" data-who="richard">Send as Richard</button>
               </div>
               <div class="compose-row">
-                <textarea id="chatInput" placeholder="Write a message…" rows="4"></textarea>
+                <textarea id="chatInput" placeholder="Write a message… (optional if uploading a file)" rows="4"></textarea>
                 <div class="compose-actions">
                   <button type="button" class="btn-send" id="chatSend">Send</button>
-                  <button type="button" class="btn-attach" id="chatAttach">📎 Attach</button>
+                  <button type="button" class="btn-attach" id="chatAttach" title="Add files to this message">📎 Upload file</button>
                 </div>
               </div>
               <input type="file" id="chatFile" multiple hidden />
@@ -466,7 +543,9 @@
           </div>
           <aside class="cabinet">
             <h3>🗄 File Cabinet</h3>
-            <p class="cab-sub">Shared files for later reference. Uploads from chat land here automatically.</p>
+            <p class="cab-sub">Shared files for later download. Upload here or attach in chat — both land in this cabinet.</p>
+            <button type="button" class="btn-cab-upload" id="cabUpload">⬆ Upload to File Cabinet</button>
+            <input type="file" id="cabFile" multiple hidden />
             <div id="fileCabinet"><p class="empty">Loading files…</p></div>
           </aside>
         </div>
@@ -591,6 +670,70 @@
           document.getElementById("chartNote").textContent = "Nexus API offline — " + e.message;
         }
       }
+      var READ_KEY = "fcr_comms_last_read_id";
+      var latestMsgId = "";
+
+      /* Fill widget with most of the unread message (for Faber), soft-truncate only if huge */
+      function peekPreview(text) {
+        var t = String(text || "").trim();
+        if (!t) return "No message text.";
+        if (t.length > 720) return t.slice(0, 717) + "…";
+        return t;
+      }
+
+      function updateCommsPeek(messages) {
+        var inner = document.getElementById("commsWidgetInner");
+        var body = document.getElementById("commsPeekBody");
+        var from = document.getElementById("commsPeekFrom");
+        var flag = document.getElementById("commsFlag");
+        if (!body) return;
+        var list = messages || [];
+        if (!list.length) {
+          if (inner) inner.classList.add("empty-state");
+          latestMsgId = "";
+          if (from) from.textContent = "—";
+          body.textContent = "No messages yet.";
+          if (flag) { flag.textContent = "read"; flag.className = "comms-flag read"; }
+          return;
+        }
+        if (inner) inner.classList.remove("empty-state");
+        var readId = "";
+        try { readId = localStorage.getItem(READ_KEY) || ""; } catch (e) {}
+        /* Prefer latest message not yet seen by Faber (role richard preferred) */
+        var target = null;
+        for (var i = list.length - 1; i >= 0; i--) {
+          var m = list[i];
+          if (m && m.id && m.id !== readId && (m.role === "richard" || !m.role)) {
+            target = m;
+            break;
+          }
+        }
+        if (!target) {
+          for (var j = list.length - 1; j >= 0; j--) {
+            if (list[j] && list[j].id && list[j].id !== readId) { target = list[j]; break; }
+          }
+        }
+        if (!target) target = list[list.length - 1];
+        latestMsgId = target.id || "";
+        if (from) from.textContent = (target.author || "Chat") + " · " + fmtWhen(target.ts);
+        body.textContent = peekPreview(target.text);
+        var unread = latestMsgId && latestMsgId !== readId;
+        if (flag) {
+          flag.textContent = unread ? "unread" : "read";
+          flag.className = "comms-flag " + (unread ? "unread" : "read");
+        }
+      }
+
+      function markCommsRead() {
+        if (!latestMsgId) return;
+        try { localStorage.setItem(READ_KEY, latestMsgId); } catch (e) {}
+        var flag = document.getElementById("commsFlag");
+        if (flag) {
+          flag.textContent = "read";
+          flag.className = "comms-flag read";
+        }
+      }
+
       function showPanel(id) {
         document.querySelectorAll(".panel").forEach(function (p) { p.classList.remove("active"); });
         var el = document.getElementById("panel-" + id);
@@ -598,6 +741,16 @@
         document.querySelectorAll(".nav a").forEach(function (a) {
           a.classList.toggle("active", a.getAttribute("data-panel") === id);
         });
+        if (id === "communications") {
+          markCommsRead();
+          document.getElementById("pageTitle").textContent = "Communications";
+          document.getElementById("pageSub").textContent = "Nexus chat · file cabinet · shared workspace";
+          var stream = document.getElementById("chatStream");
+          if (stream) setTimeout(function () { stream.scrollTop = stream.scrollHeight; }, 50);
+        } else if (id === "dashboard") {
+          document.getElementById("pageTitle").textContent = "FCR Capital Working Admin Dashboard";
+          document.getElementById("pageSub").textContent = "Nexus 1 UI · FCR only · what we’re building for you";
+        }
       }
       document.querySelectorAll(".nav a[data-panel], [data-panel]").forEach(function (a) {
         a.addEventListener("click", function (e) {
@@ -605,8 +758,25 @@
           var id = a.getAttribute("data-panel");
           if (!id) return;
           showPanel(id);
-          document.getElementById("pageTitle").textContent = id === "dashboard" ? "FCR Capital Working Admin Dashboard" : a.textContent.trim();
+          if (id !== "dashboard" && id !== "communications") {
+            document.getElementById("pageTitle").textContent = a.textContent.trim();
+            document.getElementById("pageSub").textContent = "FCR Capital · Nexus 1 UI";
+          }
         });
+      });
+      function openCommsPanel() {
+        showPanel("communications");
+        document.querySelectorAll(".nav a").forEach(function (a) {
+          a.classList.toggle("active", a.getAttribute("data-panel") === "communications");
+        });
+      }
+      document.getElementById("commsPeekBtn").onclick = function (e) {
+        e.stopPropagation();
+        openCommsPanel();
+      };
+      document.getElementById("commsPeek").addEventListener("click", function (e) {
+        if (e.target && (e.target.id === "commsPeekBtn" || e.target.closest(".comms-widget-btn"))) return;
+        openCommsPanel();
       });
       document.querySelectorAll("#periods button").forEach(function (btn) {
         btn.onclick = function () {
@@ -705,9 +875,17 @@
           var d = await r.json();
           renderMessages(d.messages || []);
           renderCabinet(d.files || []);
+          updateCommsPeek(d.messages || []);
           if (status) { status.textContent = "Live"; status.className = "pill"; }
           var badge = document.getElementById("alertBadge");
-          if (badge && d.messages) badge.textContent = String(Math.min(99, d.messages.length));
+          if (badge && d.messages) {
+            var readId = "";
+            try { readId = localStorage.getItem(READ_KEY) || ""; } catch (err) {}
+            var last = (d.messages || [])[(d.messages || []).length - 1];
+            var unread = last && last.id && last.id !== readId ? 1 : 0;
+            badge.textContent = String(unread);
+            badge.style.display = unread ? "grid" : "none";
+          }
         } catch (e) {
           if (status) { status.textContent = "Offline"; status.className = "pill"; }
           var stream = document.getElementById("chatStream");
@@ -817,9 +995,31 @@
         var files = Array.prototype.slice.call(this.files || []);
         pending = pending.concat(files);
         document.getElementById("pendingFiles").textContent = pending.length
-          ? "Ready to send: " + pending.map(function (f) { return f.name; }).join(", ")
+          ? "Ready to send with message: " + pending.map(function (f) { return f.name; }).join(", ")
           : "";
         this.value = "";
+      };
+
+      /* Direct File Cabinet upload (no chat message required) */
+      document.getElementById("cabUpload").onclick = function () {
+        document.getElementById("cabFile").click();
+      };
+      document.getElementById("cabFile").onchange = async function () {
+        var files = Array.prototype.slice.call(this.files || []);
+        this.value = "";
+        if (!files.length) return;
+        var btn = document.getElementById("cabUpload");
+        if (btn) { btn.disabled = true; btn.textContent = "Uploading…"; }
+        try {
+          for (var i = 0; i < files.length; i++) {
+            await uploadFile(files[i]);
+          }
+          await loadComms();
+        } catch (e) {
+          alert("Upload failed: " + (e.message || e));
+        } finally {
+          if (btn) { btn.disabled = false; btn.textContent = "⬆ Upload to File Cabinet"; }
+        }
       };
 
       /* open communications by default? keep dashboard; load chat in background */
