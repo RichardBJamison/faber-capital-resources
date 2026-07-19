@@ -1,10 +1,8 @@
 /**
- * FCR hero boomerang controller
- * Exact measurements from Resonant System Integrations hero:
- * - CRUISE 0.65x between turnarounds
- * - HOLD_MS 1000 at start / mid / end
- * - Pause in place (do not seek to midpoint)
- * Expects pre-baked forward+reverse MP4 (duration = 2 * source).
+ * FCR hero boomerang — exact Resonant System Integrations controller.
+ * Measurements: CRUISE 0.65 · HOLD_MS 1000
+ * Expects pre-baked forward+reverse MP4 (midpoint = reverse turn).
+ * Do not seek to midpoint on hold (pause in place).
  */
 (function () {
   var v = document.getElementById("fcr-hero-video");
@@ -20,15 +18,18 @@
   var lastT = -1;
   var started = false;
 
-  // iOS/Safari: muted + playsinline required for autoplay
   v.muted = true;
   v.defaultMuted = true;
   v.setAttribute("muted", "");
   v.setAttribute("playsinline", "");
   v.setAttribute("webkit-playsinline", "");
+  v.setAttribute("autoplay", "");
   v.playsInline = true;
   v.controls = false;
   v.removeAttribute("controls");
+  v.loop = false;
+  v.removeAttribute("loop");
+  v.preload = "auto";
 
   function setRate(rate) {
     try {
@@ -92,7 +93,6 @@
     try {
       v.currentTime = 0;
     } catch (e) {}
-    // On mobile, avoid starting paused (shows Safari play button). Play first, then cycle.
     if (!started) {
       started = true;
       leg = "forward";
@@ -117,7 +117,6 @@
 
     var t = v.currentTime;
 
-    // First pass: when we hit midpoint after initial free play, enter hold/reverse cycle
     if (leg === "forward" && lastT < D && t >= D) {
       if (!started) started = true;
       beginHold(startReverseLeg);
@@ -141,7 +140,7 @@
   function setup() {
     if (BOOM) return;
     BOOM = v.duration || 0;
-    if (!BOOM) return;
+    if (!BOOM || !isFinite(BOOM)) return;
     D = BOOM / 2;
     v.loop = false;
     startCycle();
@@ -176,7 +175,6 @@
     if (!holding) play();
   });
 
-  // First gesture unlocks autoplay on stubborn mobile browsers
   var unlock = function () {
     play();
     if (!BOOM && v.readyState >= 1) setup();
