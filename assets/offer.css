@@ -90,27 +90,27 @@ a { color: inherit; }
   outline-offset: 4px;
 }
 
-/* NEXUS — bright pastel green CTA (header) */
+/* NEXUS — large, bright green CTA to the right of Resonant Design Offer */
 .nexus-nav-btn {
   display: inline-block !important;
-  background: #7DFFB0 !important;
-  color: #0A3D22 !important;
-  padding: 0.45rem 0.95rem !important;
+  background: #3DFF8A !important;
+  color: #04351C !important;
+  padding: 0.55rem 1.15rem !important;
   border-radius: 999px !important;
-  font-size: 12px !important;
-  font-weight: 800 !important;
-  letter-spacing: 0.12em !important;
-  text-transform: uppercase !important;
-  line-height: 1.25 !important;
-  box-shadow: 0 0 0 1px rgba(10, 61, 34, 0.1), 0 0 18px rgba(125, 255, 176, 0.55);
+  font-size: 16px !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: none !important;
+  line-height: 1.2 !important;
+  box-shadow: 0 0 0 2px rgba(4, 53, 28, 0.12), 0 0 22px rgba(61, 255, 138, 0.75);
   transition: background 0.2s, transform 0.2s, box-shadow 0.2s !important;
   opacity: 1 !important;
 }
 .nexus-nav-btn:hover {
-  background: #9AFFC4 !important;
-  color: #0A3D22 !important;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(125, 255, 176, 0.55);
+  background: #6BFFA8 !important;
+  color: #04351C !important;
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(61, 255, 138, 0.65);
   opacity: 1 !important;
 }
 .nexus-nav-btn:focus-visible {
