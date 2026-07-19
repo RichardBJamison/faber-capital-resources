@@ -1,22 +1,23 @@
 /**
- * FCR hero boomerang — exact Resonant System Integrations controller.
- * Measurements: CRUISE 0.65 · HOLD_MS 1000
- * Expects pre-baked forward+reverse MP4 (midpoint = reverse turn).
- * Do not seek to midpoint on hold (pause in place).
+ * FCR hero boomerang — continuous play, soft end-caps (no hard freeze).
+ * Pre-baked forward+reverse MP4.
+ *
+ * Cruise 0.65. Cap zones at start / mid / end.
+ * End-cap slow is heavier than systems-control: floor ~half (0.12),
+ * and easing dives harder into the turn (stay-cruise then steep drop).
  */
 (function () {
   var v = document.getElementById("fcr-hero-video");
   if (!v) return;
 
   var CRUISE = 0.65;
-  var HOLD_MS = 500;
-  var BOOM = 0;
+  // Twice as slow at the turn as systems-control floor (0.23 → ~0.12)
+  var FLOOR = 0.12;
+  // Soft slow zone length (seconds of timeline on each side of a turnaround)
+  var CAP = 0.55;
   var D = 0;
-  var leg = "idle";
-  var holding = false;
-  var holdTimer = null;
-  var lastT = -1;
-  var started = false;
+  var MID = 0;
+  var ready = false;
 
   v.muted = true;
   v.defaultMuted = true;
@@ -32,15 +33,17 @@
   v.preload = "auto";
 
   function setRate(rate) {
+    var r = Math.max(0.0625, Math.min(2, rate));
     try {
-      v.playbackRate = rate;
-    } catch (error) {
-      v.playbackRate = Math.max(0.0625, rate);
+      v.playbackRate = r;
+    } catch (e) {
+      try {
+        v.playbackRate = CRUISE;
+      } catch (e2) {}
     }
   }
 
   function play() {
-    if (holding) return;
     try {
       v.muted = true;
       var p = v.play();
@@ -48,106 +51,76 @@
     } catch (e) {}
   }
 
-  function clearHoldTimer() {
-    if (holdTimer) {
-      clearTimeout(holdTimer);
-      holdTimer = null;
-    }
+  /** Distance to nearest turnaround (start, mid reverse, end). */
+  function distToCap(t) {
+    return Math.min(t, Math.abs(t - MID), Math.max(0, D - t));
   }
 
-  function beginHold(resume) {
-    if (holding) return;
-    holding = true;
-    leg = "hold";
-    clearHoldTimer();
-    try {
-      v.pause();
-    } catch (e) {}
-    lastT = v.currentTime;
-
-    holdTimer = window.setTimeout(function () {
-      holdTimer = null;
-      holding = false;
-      resume();
-    }, HOLD_MS);
+  /**
+   * Soft cruise with end-cap dive.
+   * Stays near CRUISE longer, then slows harder as it enters the turn —
+   * not a linear/deliberate ease, not a hard stop.
+   */
+  function rateAt(t) {
+    if (D <= 0) return CRUISE;
+    var d = distToCap(t);
+    if (d >= CAP) return CRUISE;
+    var u = d / CAP; // 1 = zone edge (still fast), 0 = turnaround (floor)
+    // Ease: stay closer to cruise early, dive to floor near the cap (power 3)
+    var f = 1 - Math.pow(1 - u, 3);
+    return FLOOR + (CRUISE - FLOOR) * f;
   }
 
-  function startForwardLeg() {
-    leg = "forward";
-    lastT = -1;
-    try {
-      if (v.currentTime > 0.2) v.currentTime = 0;
-    } catch (e) {}
-    setRate(CRUISE);
-    play();
-  }
-
-  function startReverseLeg() {
-    leg = "reverse";
-    lastT = v.currentTime;
-    setRate(CRUISE);
-    play();
-  }
-
-  function startCycle() {
-    try {
-      v.currentTime = 0;
-    } catch (e) {}
-    if (!started) {
-      started = true;
-      leg = "forward";
-      setRate(CRUISE);
-      play();
-      return;
-    }
-    beginHold(startForwardLeg);
-  }
-
-  function finishCycle() {
-    beginHold(function () {
+  function wrapIfNeeded(t) {
+    // Seamless cycle at end of reverse half — no pause
+    if (t >= D - 0.04) {
       try {
-        v.currentTime = 0;
+        v.currentTime = 0.02;
       } catch (e) {}
-      startForwardLeg();
-    });
+      setRate(rateAt(0.02));
+      play();
+      return true;
+    }
+    return false;
   }
 
   function onTick() {
-    if (!BOOM || holding || D <= 0) return;
+    if (!ready || D <= 0) return;
+    if (v.paused) play();
 
-    var t = v.currentTime;
+    var t = v.currentTime || 0;
+    if (wrapIfNeeded(t)) return;
 
-    if (leg === "forward" && lastT < D && t >= D) {
-      if (!started) started = true;
-      beginHold(startReverseLeg);
-      return;
-    }
-
-    if (leg === "reverse" && lastT < BOOM - 0.05 && t >= BOOM - 0.05) {
-      finishCycle();
-      return;
-    }
-
-    lastT = t;
+    setRate(rateAt(t));
   }
 
   function onEnded() {
-    if (holding) return;
-    if (leg === "forward") beginHold(startReverseLeg);
-    else finishCycle();
+    try {
+      v.currentTime = 0.02;
+    } catch (e) {}
+    setRate(rateAt(0.02));
+    play();
   }
 
   function setup() {
-    if (BOOM) return;
-    BOOM = v.duration || 0;
-    if (!BOOM || !isFinite(BOOM)) return;
-    D = BOOM / 2;
+    if (ready) return;
+    D = v.duration || 0;
+    if (!D || !isFinite(D)) return;
+    MID = D * 0.5;
+    ready = true;
     v.loop = false;
-    startCycle();
+    try {
+      if (v.currentTime > 0.15) v.currentTime = 0;
+    } catch (e) {}
+    setRate(rateAt(0));
+    play();
   }
 
   v.addEventListener("timeupdate", onTick);
   v.addEventListener("ended", onEnded);
+  v.addEventListener("seeking", function () {
+    if (ready) setRate(rateAt(v.currentTime || 0));
+  });
 
   function frame() {
     onTick();
@@ -161,23 +134,19 @@
   v.addEventListener("loadeddata", play);
   v.addEventListener("canplay", function () {
     v.classList.add("ready");
-    if (!BOOM) setup();
-    else if (!holding && leg === "idle") startCycle();
+    if (!ready) setup();
     play();
   });
   v.addEventListener("canplaythrough", play, { once: true });
 
   document.addEventListener("visibilitychange", function () {
-    if (!document.hidden && !holding) play();
+    if (!document.hidden) play();
   });
-
-  window.addEventListener("pageshow", function () {
-    if (!holding) play();
-  });
+  window.addEventListener("pageshow", play);
 
   var unlock = function () {
     play();
-    if (!BOOM && v.readyState >= 1) setup();
+    if (!ready && v.readyState >= 1) setup();
     document.removeEventListener("touchstart", unlock, true);
     document.removeEventListener("scroll", unlock, true);
     document.removeEventListener("click", unlock, true);
@@ -189,6 +158,6 @@
   setTimeout(play, 400);
   setTimeout(function () {
     play();
-    if (!BOOM && v.readyState >= 1) setup();
+    if (!ready && v.readyState >= 1) setup();
   }, 1200);
 })();
