@@ -109,7 +109,11 @@
     .upgrade { display: flex; gap: .75rem; padding: .75rem; border-radius: 14px; background: #f8f6fd; border: 1px solid var(--line); }
     .upgrade .icon { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; font-size: 1.2rem; flex-shrink: 0; }
     .upgrade .icon.web { background: linear-gradient(135deg, #dbeafe, #93c5fd); }
-    .upgrade .icon.ghl { background: linear-gradient(135deg, #fce7f3, #f9a8d4); }
+    .upgrade .icon.ghl {
+      background: linear-gradient(135deg, #e0e7ff, #94a3b8 40%, #64748b);
+      color: #0f172a;
+      font-size: 1.05rem;
+    }
     .upgrade .icon.seo { background: linear-gradient(135deg, #d1fae5, #6ee7b7); }
     .upgrade strong { display: block; font-size: .88rem; }
     .upgrade span { font-size: .78rem; color: var(--muted); }
@@ -151,10 +155,10 @@
       </div>
       <nav class="nav" aria-label="FCR only">
         <a href="#dashboard" class="active" data-panel="dashboard"><span class="ico">⌂</span> Dashboard</a>
-        <a href="#website-analytics" data-panel="website-analytics"><span class="ico">◈</span> Website analytics</a>
-        <a href="#ghl-build" data-panel="ghl-build"><span class="ico">◎</span> Go High Level build</a>
-        <a href="#seo-marketing" data-panel="seo-marketing"><span class="ico">✴</span> Search engine optimization marketing</a>
         <a href="#communications" data-panel="communications"><span class="ico">✉</span> Communications</a>
+        <a href="#website-analytics" data-panel="website-analytics"><span class="ico">◈</span> Website analytics</a>
+        <a href="#ghl-build" data-panel="ghl-build"><span class="ico">⬡</span> FCR Agency Build</a>
+        <a href="#seo-marketing" data-panel="seo-marketing"><span class="ico">✴</span> Search engine optimization marketing</a>
         <div class="nav-section">Account</div>
         <a href="#settings" data-panel="settings"><span class="ico">⚙</span> Settings</a>
       </nav>
@@ -248,7 +252,7 @@
             <div class="card-h"><h3>Recent upgrades</h3></div>
             <div class="upgrade-list">
               <div class="upgrade"><div class="icon web">🧱</div><div><strong>Website development</strong><span>FCR communication site &amp; offer surfaces</span><br /><a href="#website-analytics" data-panel="website-analytics">Open analytics →</a></div></div>
-              <div class="upgrade"><div class="icon ghl">🔗</div><div><strong>Website development</strong><span>Go High Level account &amp; pipelines</span><br /><a href="#ghl-build" data-panel="ghl-build">Open GHL build →</a></div></div>
+              <div class="upgrade"><div class="icon ghl" aria-hidden="true" title="Architecture">📐</div><div><strong>FCR Agency Build</strong><span>Engineering the agency system — map, structure, pipelines</span><br /><a href="#ghl-build" data-panel="ghl-build">Open Agency Build →</a></div></div>
               <div class="upgrade"><div class="icon seo">📡</div><div><strong>SEO marketing</strong><span>Search plan &amp; content growth</span><br /><a href="#seo-marketing" data-panel="seo-marketing">Open SEO →</a></div></div>
             </div>
           </article>
@@ -280,11 +284,12 @@
       </section>
       <section class="panel" id="panel-ghl-build">
         <div class="card">
-          <div class="card-h"><h3>Go High Level build — FCR</h3></div>
+          <div class="card-h"><h3>FCR Agency Build</h3></div>
+          <p class="empty" style="margin-bottom:1rem;">Engineering / architecture of the FCR agency system — not “done,” starting Stage 1 this week.</p>
           <div class="upgrade-list">
-            <div class="upgrade"><div class="icon ghl">1</div><div><strong>Sub-account shell</strong><span>Brand, users, pipelines</span></div></div>
-            <div class="upgrade"><div class="icon ghl">2</div><div><strong>Lead capture</strong><span>Offer / funding inquiries → GHL</span></div></div>
-            <div class="upgrade"><div class="icon ghl">3</div><div><strong>Follow-up workflows</strong><span>Sequences for capital conversations</span></div></div>
+            <div class="upgrade"><div class="icon ghl">📐</div><div><strong>Stage 1 · Discovery &amp; Agency Mapping</strong><span>How the agency is structured — people, offers, systems, handoffs</span></div></div>
+            <div class="upgrade"><div class="icon ghl">⬡</div><div><strong>Stage 2 · System blueprint</strong><span>Accounts, pipelines, and operating rooms (upcoming)</span></div></div>
+            <div class="upgrade"><div class="icon ghl">▣</div><div><strong>Stage 3 · Build &amp; wire</strong><span>GHL + site + comms connected (upcoming)</span></div></div>
           </div>
         </div>
       </section>
@@ -319,23 +324,23 @@
       var SITE = "fcr-funding";
       var period = "today";
       var WEEKS = [
-        { w: 1, label: "Discovery & offer surfaces", state: "done" },
-        { w: 2, label: "Site shell & branding", state: "done" },
-        { w: 3, label: "Funding / lender pages", state: "done" },
-        { w: 4, label: "Resonant design offer", state: "done" },
-        { w: 5, label: "Tracker + working admin", state: "now" },
-        { w: 6, label: "GHL pipelines", state: "todo" },
+        { w: 1, label: "Discovery & Agency Mapping", state: "now" },
+        { w: 2, label: "Agency blueprint & rooms", state: "todo" },
+        { w: 3, label: "Site shell & branding", state: "todo" },
+        { w: 4, label: "Funding / lender surfaces", state: "todo" },
+        { w: 5, label: "Offer & working admin", state: "todo" },
+        { w: 6, label: "Agency systems / pipelines", state: "todo" },
         { w: 7, label: "SEO content wave", state: "todo" },
         { w: 8, label: "Handoff & training", state: "todo" },
       ];
       function esc(s) { return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
       function renderBuild() {
-        var done = WEEKS.filter(function (x) { return x.state === "done" || x.state === "now"; }).length;
-        document.getElementById("buildProgress").style.width = Math.round((done / 8) * 100) + "%";
+        /* Nothing done yet — Stage 1 starts this week */
+        document.getElementById("buildProgress").style.width = "8%";
         document.getElementById("buildWeeks").innerHTML = WEEKS.map(function (w) {
           return '<div class="build-week ' + w.state + '"><div class="wk">W' + w.w + "</div><div>" + esc(w.label) +
             '</div><div class="muted" style="font-size:.75rem">' +
-            (w.state === "done" ? "Done" : w.state === "now" ? "In progress" : "Upcoming") + "</div></div>";
+            (w.state === "done" ? "Done" : w.state === "now" ? "This week · starting" : "Upcoming") + "</div></div>";
         }).join("");
       }
       function drawChart(trend) {
