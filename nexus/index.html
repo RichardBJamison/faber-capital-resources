@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Self-contained Nexus 1 UI page (no site-wide base required) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>FCR Capital Working Admin Dashboard — Nexus 1 UI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f3f0fa;
+      --bg2: #ebe6f7;
+      --card: #ffffff;
+      --text: #1e1b2e;
+      --muted: #7a7490;
+      --line: #e8e4f2;
+      --purple: #7c3aed;
+      --purple2: #a78bfa;
+      --purple-soft: #ede9fe;
+      --pink: #c084fc;
+      --green: #10b981;
+      --red: #f43f5e;
+      --orange: #f59e0b;
+      --blue: #3b82f6;
+      --sidebar-w: 260px;
+      --radius: 18px;
+      --shadow: 0 10px 40px rgba(88, 70, 160, 0.08);
+      --shadow-sm: 0 4px 16px rgba(88, 70, 160, 0.06);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "DM Sans", system-ui, sans-serif;
+      background:
+        radial-gradient(ellipse 60% 40% at 100% 0%, rgba(167, 139, 250, 0.35), transparent 55%),
+        radial-gradient(ellipse 50% 35% at 0% 100%, rgba(192, 132, 252, 0.2), transparent 50%),
+        var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.45;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; border: 0; background: none; }
+
+    .app {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      min-height: 100vh;
+    }
+    @media (max-width: 960px) {
+      .app { grid-template-columns: 1fr; }
+      .sidebar { position: fixed; inset: 0 auto 0 0; z-index: 40; transform: translateX(-105%); transition: .25s; }
+      .sidebar.open { transform: none; }
+      .menu-toggle { display: inline-flex !important; }
+    }
+
+    /* —— Sidebar —— */
+    .sidebar {
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(16px);
+      border-right: 1px solid var(--line);
+      padding: 1.25rem 1rem 1.5rem;
+      display: flex; flex-direction: column; gap: 1.25rem;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 0.75rem; padding: 0.35rem 0.5rem 0.75rem;
+    }
+    .brand-mark {
+      width: 42px; height: 42px; border-radius: 12px;
+      background: linear-gradient(135deg, #7c3aed, #c084fc 55%, #f0abfc);
+      display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 0.72rem;
+      letter-spacing: 0.04em; box-shadow: 0 8px 20px rgba(124, 58, 237, 0.35);
+    }
+    .brand h1 { font-size: 0.95rem; font-weight: 700; line-height: 1.2; }
+    .brand p { font-size: 0.72rem; color: var(--muted); font-weight: 500; }
+
+    .nav-section { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 0.5rem 0.75rem 0.35rem; }
+    .nav a, .nav button.nav-item {
+      display: flex; align-items: center; gap: 0.7rem; width: 100%;
+      padding: 0.7rem 0.85rem; border-radius: 12px;
+      font-size: 0.9rem; font-weight: 600; color: var(--text);
+      transition: background .15s, color .15s;
+      text-align: left;
+    }
+    .nav a:hover, .nav button.nav-item:hover { background: var(--purple-soft); color: var(--purple); }
+    .nav a.active, .nav button.nav-item.active {
+      background: linear-gradient(90deg, var(--purple-soft), #f3e8ff);
+      color: var(--purple);
+      box-shadow: inset 0 0 0 1px rgba(124, 58, 237, 0.12);
+    }
+    .nav .ico {
+      width: 28px; height: 28px; border-radius: 8px;
+      display: grid; place-items: center; font-size: 0.95rem;
+      background: #f4f1fb;
+    }
+    .nav a.active .ico, .nav button.nav-item.active .ico { background: #fff; }
+    .nav-sub {
+      margin: 0.15rem 0 0.35rem 0.5rem; padding-left: 0.75rem;
+      border-left: 2px solid var(--line); display: none; flex-direction: column; gap: 0.15rem;
+    }
+    .nav-sub.open { display: flex; }
+    .nav-sub a {
+      font-size: 0.82rem; padding: 0.45rem 0.7rem; font-weight: 500; color: var(--muted);
+    }
+    .nav-sub a.active { color: var(--purple); background: var(--purple-soft); }
+
+    /* —— Main —— */
+    .main { padding: 1.25rem 1.35rem 2.5rem; min-width: 0; }
+    .topbar {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      gap: 0.85rem; margin-bottom: 1.25rem;
+    }
+    .topbar h2 { font-size: 1.45rem; font-weight: 700; letter-spacing: -0.02em; }
+    .topbar .sub { color: var(--muted); font-size: 0.88rem; margin-top: 0.15rem; }
+    .topbar-right { display: flex; align-items: center; gap: 0.65rem; flex-wrap: wrap; }
+    .menu-toggle {
+      display: none; width: 40px; height: 40px; border-radius: 12px;
+      background: var(--card); border: 1px solid var(--line); align-items: center; justify-content: center;
+    }
+    .search {
+      display: flex; align-items: center; gap: 0.45rem;
+      background: var(--card); border: 1px solid var(--line); border-radius: 999px;
+      padding: 0.45rem 0.9rem; min-width: min(220px, 50vw); box-shadow: var(--shadow-sm);
+    }
+    .search input {
+      border: 0; outline: 0; background: transparent; width: 100%; font-size: 0.85rem; color: var(--text);
+    }
+    .chip {
+      width: 40px; height: 40px; border-radius: 12px; background: var(--card);
+      border: 1px solid var(--line); display: grid; place-items: center; font-size: 0.95rem;
+      box-shadow: var(--shadow-sm); position: relative;
+    }
+    .chip .badge {
+      position: absolute; top: -4px; right: -4px; background: var(--purple); color: #fff;
+      font-size: 0.62rem; font-weight: 700; min-width: 16px; height: 16px; border-radius: 999px;
+      display: grid; place-items: center; padding: 0 4px;
+    }
+    .avatar {
+      width: 40px; height: 40px; border-radius: 12px;
+      background: linear-gradient(135deg, #7c3aed, #c084fc); color: #fff;
+      display: grid; place-items: center; font-weight: 700; font-size: 0.85rem;
+    }
+
+    /* —— KPI cards —— */
+    .kpis {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1rem;
+    }
+    @media (max-width: 800px) { .kpis { grid-template-columns: 1fr; } }
+    .kpi {
+      background: var(--card); border-radius: var(--radius); padding: 1.1rem 1.15rem;
+      border: 1px solid rgba(255,255,255,0.7); box-shadow: var(--shadow);
+      position: relative; overflow: hidden;
+    }
+    .kpi::after {
+      content: ""; position: absolute; right: -20px; top: -20px; width: 90px; height: 90px;
+      border-radius: 50%; background: radial-gradient(circle, rgba(167,139,250,0.2), transparent 70%);
+    }
+    .kpi .label { font-size: 0.8rem; color: var(--muted); font-weight: 600; }
+    .kpi .value { font-size: 1.65rem; font-weight: 750; letter-spacing: -0.03em; margin: 0.35rem 0 0.25rem; }
+    .kpi .delta { font-size: 0.78rem; font-weight: 700; }
+    .kpi .delta.up { color: var(--green); }
+    .kpi .delta.down { color: var(--red); }
+    .kpi .spark {
+      position: absolute; right: 1rem; bottom: 1rem; width: 72px; height: 32px; opacity: 0.9;
+    }
+
+    /* —— Layout rows —— */
+    .row { display: grid; gap: 1rem; margin-bottom: 1rem; }
+    .row-2 { grid-template-columns: 1.4fr 1fr; }
+    .row-3 { grid-template-columns: 1.2fr 1fr 1fr; }
+    @media (max-width: 1100px) {
+      .row-2, .row-3 { grid-template-columns: 1fr; }
+    }
+    .card {
+      background: var(--card); border-radius: var(--radius); padding: 1.15rem 1.2rem;
+      border: 1px solid rgba(255,255,255,0.7); box-shadow: var(--shadow); min-width: 0;
+    }
+    .card-h {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      gap: 0.5rem; margin-bottom: 0.9rem;
+    }
+    .card-h h3 { font-size: 1rem; font-weight: 700; }
+    .card-h .link { font-size: 0.8rem; font-weight: 650; color: var(--purple); }
+
+    .periods { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .periods button {
+      padding: 0.35rem 0.65rem; border-radius: 999px; font-size: 0.72rem; font-weight: 700;
+      color: var(--muted); background: #f4f1fb; border: 1px solid transparent;
+    }
+    .periods button.active {
+      background: var(--purple-soft); color: var(--purple); border-color: rgba(124,58,237,0.2);
+    }
+
+    /* charts */
+    .line-chart {
+      width: 100%; height: 220px; display: block;
+    }
+    .bars {
+      display: flex; align-items: flex-end; gap: 0.55rem; height: 150px; padding-top: 0.5rem;
+    }
+    .bars .col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0.35rem; min-width: 0; }
+    .bars .col .b {
+      width: 100%; max-width: 36px; border-radius: 8px 8px 4px 4px;
+      background: linear-gradient(180deg, #a78bfa, #7c3aed); min-height: 4px;
+    }
+    .bars .col .b.hi { background: linear-gradient(180deg, #c084fc, #7c3aed); box-shadow: 0 6px 16px rgba(124,58,237,0.3); }
+    .bars .col span { font-size: 0.68rem; color: var(--muted); font-weight: 600; }
+
+    .donut-wrap { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .donut {
+      width: 140px; height: 140px; border-radius: 50%;
+      background: conic-gradient(#7c3aed 0 42%, #a78bfa 42% 68%, #e9d5ff 68% 100%);
+      position: relative; flex-shrink: 0;
+    }
+    .donut::after {
+      content: ""; position: absolute; inset: 22px; background: var(--card); border-radius: 50%;
+    }
+    .legend { display: flex; flex-direction: column; gap: 0.45rem; font-size: 0.82rem; }
+    .legend i {
+      display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 0.4rem;
+    }
+    .stat-row {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; margin-top: 0.85rem;
+    }
+    .stat-row div {
+      background: #f7f5fc; border-radius: 12px; padding: 0.65rem 0.7rem; text-align: center;
+    }
+    .stat-row strong { display: block; font-size: 1.05rem; }
+    .stat-row span { font-size: 0.7rem; color: var(--muted); font-weight: 600; }
+
+    /* traffic status */
+    .traffic-status {
+      display: flex; flex-direction: column; gap: 0.75rem;
+    }
+    .traffic-status .rowline {
+      display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;
+    }
+    .pill {
+      font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.55rem; border-radius: 999px;
+    }
+    .pill.ok { background: #d1fae5; color: #047857; }
+    .pill.warn { background: #fef3c7; color: #b45309; }
+    .meter {
+      height: 8px; background: #eee9f8; border-radius: 999px; overflow: hidden; margin-top: 0.35rem;
+    }
+    .meter > i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #7c3aed, #c084fc); }
+
+    /* upgrades */
+    .upgrade-list { display: flex; flex-direction: column; gap: 0.75rem; }
+    .upgrade {
+      display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.75rem;
+      border-radius: 14px; background: #f8f6fd; border: 1px solid var(--line);
+    }
+    .upgrade .icon {
+      width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center;
+      font-size: 1.2rem; flex-shrink: 0;
+    }
+    .upgrade .icon.web { background: linear-gradient(135deg, #dbeafe, #93c5fd); }
+    .upgrade .icon.ghl { background: linear-gradient(135deg, #fce7f3, #f9a8d4); }
+    .upgrade .icon.seo { background: linear-gradient(135deg, #d1fae5, #6ee7b7); }
+    .upgrade strong { display: block; font-size: 0.88rem; }
+    .upgrade span { font-size: 0.78rem; color: var(--muted); }
+    .upgrade a { font-size: 0.75rem; font-weight: 700; color: var(--purple); }
+
+    /* build-out */
+    .build-week {
+      display: grid; grid-template-columns: 48px 1fr auto; gap: 0.65rem; align-items: center;
+      padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.84rem;
+    }
+    .build-week:last-child { border-bottom: 0; }
+    .build-week .wk {
+      font-weight: 800; font-size: 0.72rem; color: var(--purple); background: var(--purple-soft);
+      border-radius: 8px; padding: 0.35rem 0.4rem; text-align: center;
+    }
+    .build-week.done .wk { background: #d1fae5; color: #047857; }
+    .build-week.now .wk { background: #7c3aed; color: #fff; }
+    .progress-ring {
+      height: 10px; background: #eee9f8; border-radius: 999px; overflow: hidden; margin: 0.75rem 0 1rem;
+    }
+    .progress-ring > i {
+      display: block; height: 100%; width: 62%;
+      background: linear-gradient(90deg, #7c3aed, #c084fc); border-radius: 999px;
+    }
+
+    /* activity */
+    .activity { display: flex; flex-direction: column; gap: 0; }
+    .activity-item {
+      display: grid; grid-template-columns: 14px 1fr; gap: 0.75rem; padding: 0.65rem 0;
+      border-bottom: 1px solid var(--line); font-size: 0.84rem;
+    }
+    .activity-item:last-child { border-bottom: 0; }
+    .activity-item .dot {
+      width: 10px; height: 10px; border-radius: 50%; background: var(--purple); margin-top: 0.35rem;
+      box-shadow: 0 0 0 4px rgba(124,58,237,0.15);
+    }
+    .activity-item .when { font-size: 0.72rem; color: var(--muted); margin-top: 0.15rem; }
+
+    .panel { display: none; }
+    .panel.active { display: block; }
+    .empty { color: var(--muted); font-size: 0.9rem; padding: 0.5rem 0; }
+
+    .overlay {
+      display: none; position: fixed; inset: 0; background: rgba(30,27,46,0.35); z-index: 30;
+    }
+    .overlay.show { display: block; }
+
+    footer.note {
+      margin-top: 0.5rem; font-size: 0.75rem; color: var(--muted); text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <div class="app">
+    <!-- LEFT MENU -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">FCR</div>
+        <div>
+          <h1>FCR Capital</h1>
+          <p>Admin Dashboard</p>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="#dashboard" class="active" data-panel="dashboard"><span class="ico">⌂</span> Dashboard</a>
+        <a href="#website-analytics" data-panel="website-analytics"><span class="ico">◈</span> Website analytics</a>
+        <a href="#ghl-build" data-panel="ghl-build"><span class="ico">◎</span> Go High Level build</a>
+        <a href="#seo-marketing" data-panel="seo-marketing"><span class="ico">✴</span> Search engine optimization marketing</a>
+        <a href="#communications" data-panel="communications"><span class="ico">✉</span> Communications</a>
+
+        <div class="nav-section">Sites</div>
+        <button type="button" class="nav-item" id="btnResident" aria-expanded="false">
+          <span class="ico">◎</span> Resident Websites
+        </button>
+        <div class="nav-sub" id="subResident">
+          <a href="#site-osb" data-panel="site" data-site="osb">Open Source Barware</a>
+          <a href="#site-ovlp" data-panel="site" data-site="ovlp">Ohio Valley Land Partners</a>
+          <a href="#site-resonant" data-panel="site" data-site="resonant">Resonant Web Design</a>
+          <a href="#site-rbj" data-panel="site" data-site="rbj">Richard B. Jamison</a>
+        </div>
+
+        <button type="button" class="nav-item" id="btnClient" aria-expanded="false">
+          <span class="ico">◇</span> Client Websites
+        </button>
+        <div class="nav-sub" id="subClient">
+          <a href="#site-fcr" class="active" data-panel="site" data-site="fcr-funding">FCR Capital / Faber</a>
+          <a href="#site-batiya" data-panel="site" data-site="batiya-realty">Batiya Realty</a>
+          <a href="#site-hvac" data-panel="site" data-site="sulieman-hvac">Sulieman HVAC</a>
+        </div>
+
+        <div class="nav-section">System</div>
+        <a href="#settings" data-panel="settings"><span class="ico">⚙</span> Settings</a>
+      </nav>
+    </aside>
+
+    <div class="main">
+      <div class="topbar">
+        <div style="display:flex;align-items:flex-start;gap:0.65rem;">
+          <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+          <div>
+            <h2 id="pageTitle">FCR Capital Working Admin Dashboard</h2>
+            <p class="sub" id="pageSub">Nexus 1 UI · what we’ve built · live offer traffic (others only)</p>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <label class="search">
+            <span aria-hidden="true">⌕</span>
+            <input type="search" placeholder="Search here…" id="searchBox" />
+          </label>
+          <div class="chip" title="Alerts">🔔<span class="badge" id="alertBadge">0</span></div>
+          <div class="avatar" title="Admin">RB</div>
+        </div>
+      </div>
+
+      <!-- DASHBOARD -->
+      <section class="panel active" id="panel-dashboard">
+        <div class="kpis">
+          <article class="kpi">
+            <div class="label">Total web traffic</div>
+            <div class="value" id="kpiTraffic">—</div>
+            <div class="delta up" id="kpiTrafficDelta">Pageviews · humans</div>
+            <svg class="spark" viewBox="0 0 72 32" fill="none" aria-hidden="true"><path d="M1 24 C12 22 14 10 24 12 S40 28 48 18 S62 6 71 8" stroke="#10b981" stroke-width="2.5" stroke-linecap="round"/></svg>
+          </article>
+          <article class="kpi">
+            <div class="label">Visitors</div>
+            <div class="value" id="kpiVisitors">—</div>
+            <div class="delta" id="kpiVisitorsDelta">Sessions · all tracked</div>
+            <svg class="spark" viewBox="0 0 72 32" fill="none" aria-hidden="true"><path d="M1 20 C10 8 18 26 28 18 S48 4 56 14 S66 22 71 12" stroke="#f43f5e" stroke-width="2.5" stroke-linecap="round"/></svg>
+          </article>
+          <article class="kpi">
+            <div class="label">New visitors</div>
+            <div class="value" id="kpiNew">—</div>
+            <div class="delta up" id="kpiNewDelta">Uniques in period</div>
+            <svg class="spark" viewBox="0 0 72 32" fill="none" aria-hidden="true"><path d="M1 26 C14 24 16 6 30 10 S46 28 58 12 S66 8 71 6" stroke="#7c3aed" stroke-width="2.5" stroke-linecap="round"/></svg>
+          </article>
+        </div>
+
+        <div class="row row-2">
+          <article class="card">
+            <div class="card-h">
+              <h3>Overall traffic</h3>
+              <div class="periods" id="periods">
+                <button type="button" data-p="today" class="active">1 day</button>
+                <button type="button" data-p="3d">3 days</button>
+                <button type="button" data-p="7d">7 days</button>
+                <button type="button" data-p="7d">1 week</button>
+                <button type="button" data-p="30d">30 days</button>
+              </div>
+            </div>
+            <svg class="line-chart" id="trafficChart" viewBox="0 0 640 220" preserveAspectRatio="none" role="img" aria-label="Traffic chart"></svg>
+            <p class="empty" id="chartNote" style="margin-top:0.5rem;">Expand period for detailed traffic analysis · unique / new users overlaid</p>
+          </article>
+
+          <article class="card">
+            <div class="card-h">
+              <h3>Traffic status</h3>
+              <span class="pill ok" id="statusPill">Healthy</span>
+            </div>
+            <div class="traffic-status">
+              <div>
+                <div class="rowline"><span>Offer tracker</span><span class="pill ok">Live</span></div>
+                <div class="meter"><i style="width:92%"></i></div>
+              </div>
+              <div>
+                <div class="rowline"><span>Nexus collect</span><span class="pill ok">OK</span></div>
+                <div class="meter"><i style="width:88%"></i></div>
+              </div>
+              <div>
+                <div class="rowline"><span>Live presence window</span><span id="liveCountLabel">0 now</span></div>
+                <div class="meter"><i id="liveMeter" style="width:12%"></i></div>
+              </div>
+              <div>
+                <div class="rowline"><span>Filter</span><span class="muted" style="font-size:0.78rem;">humans · not us · not bots</span></div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="row row-3">
+          <article class="card">
+            <div class="card-h">
+              <h3>Visitors</h3>
+              <a class="link" href="#website-analytics">View more</a>
+            </div>
+            <div class="bars" id="visitorBars"></div>
+          </article>
+
+          <article class="card">
+            <div class="card-h">
+              <h3>Chart summary</h3>
+              <span class="link" id="downloadNote">Period mix</span>
+            </div>
+            <div class="donut-wrap">
+              <div class="donut" id="donut" aria-hidden="true"></div>
+              <div class="legend" id="donutLegend">
+                <div><i style="background:#7c3aed"></i> Pageviews</div>
+                <div><i style="background:#a78bfa"></i> Sessions</div>
+                <div><i style="background:#e9d5ff"></i> New uniques</div>
+              </div>
+            </div>
+            <div class="stat-row">
+              <div><strong id="sumPv">0</strong><span>Pageviews</span></div>
+              <div><strong id="sumSess">0</strong><span>Sessions</span></div>
+              <div><strong id="sumNew">0</strong><span>Uniques</span></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-h">
+              <h3>Recent upgrades</h3>
+              <a class="link" href="#website-analytics">View more</a>
+            </div>
+            <div class="upgrade-list">
+              <div class="upgrade" id="up-web">
+                <div class="icon web" aria-hidden="true">🧱</div>
+                <div>
+                  <strong>Website development</strong>
+                  <span>Build &amp; polish — public site + offer surfaces</span><br />
+                  <a href="#website-analytics">Open analytics →</a>
+                </div>
+              </div>
+              <div class="upgrade" id="up-ghl">
+                <div class="icon ghl" aria-hidden="true">🔗</div>
+                <div>
+                  <strong>Website development</strong>
+                  <span>Go High Level systems &amp; pipelines</span><br />
+                  <a href="#ghl-build">Open GHL build →</a>
+                </div>
+              </div>
+              <div class="upgrade" id="up-seo">
+                <div class="icon seo" aria-hidden="true">📡</div>
+                <div>
+                  <strong>SEO marketing</strong>
+                  <span>Search visibility &amp; content growth</span><br />
+                  <a href="#seo-marketing">Open SEO →</a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="row row-2">
+          <article class="card">
+            <div class="card-h">
+              <h3>Build-out summary</h3>
+              <span class="muted" style="font-size:0.8rem;">8-week schedule</span>
+            </div>
+            <p style="font-size:0.88rem;color:var(--muted);margin-bottom:0.35rem;">
+              Progress toward the FCR working system — milestones by week.
+            </p>
+            <div class="progress-ring" title="~5 of 8 weeks in motion"><i id="buildProgress"></i></div>
+            <div id="buildWeeks"></div>
+          </article>
+
+          <article class="card">
+            <div class="card-h">
+              <h3>Latest activity</h3>
+            </div>
+            <div class="activity" id="activityList">
+              <p class="empty">Waiting for external visitors on offer surfaces…</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- OTHER PANELS -->
+      <section class="panel" id="panel-website-analytics">
+        <div class="card">
+          <div class="card-h"><h3>Website analytics</h3></div>
+          <p class="empty">Connected to Nexus first-party feed (offer sites) + OSB analytics stack.</p>
+          <p style="margin-top:0.75rem;font-size:0.9rem;">
+            Live board: <a class="link" href="https://opensourcebarware.com/B-ATCAVE/" target="_blank" rel="noopener">opensourcebarware.com/B-ATCAVE</a>
+          </p>
+          <div class="stat-row" style="margin-top:1rem;">
+            <div><strong id="waPv">—</strong><span>Pageviews</span></div>
+            <div><strong id="waSess">—</strong><span>Sessions</span></div>
+            <div><strong id="waUni">—</strong><span>Uniques</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="panel-ghl-build">
+        <div class="card">
+          <div class="card-h"><h3>Go High Level build</h3></div>
+          <p style="font-size:0.92rem;color:var(--muted);">
+            Pipeline, calendars, and automation for FCR Capital operations. This panel tracks build status — not GHL’s own UI.
+          </p>
+          <div class="upgrade-list" style="margin-top:1rem;">
+            <div class="upgrade"><div class="icon ghl">1</div><div><strong>Sub-account shell</strong><span>Brand, users, pipelines mapped</span></div></div>
+            <div class="upgrade"><div class="icon ghl">2</div><div><strong>Lead capture</strong><span>Forms / offer pages → GHL</span></div></div>
+            <div class="upgrade"><div class="icon ghl">3</div><div><strong>Follow-up workflows</strong><span>Sequences for funding inquiries</span></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="panel-seo-marketing">
+        <div class="card">
+          <div class="card-h"><h3>Search engine optimization marketing</h3></div>
+          <p style="font-size:0.92rem;color:var(--muted);">
+            SEO plan pages already on the FCR communication site (seo-plan, content structure). Track visibility work here as upgrades ship.
+          </p>
+          <div class="upgrade-list" style="margin-top:1rem;">
+            <div class="upgrade"><div class="icon seo">📑</div><div><strong>SEO plan surface</strong><span>On-site plan &amp; structure for FCR</span></div></div>
+            <div class="upgrade"><div class="icon seo">🎯</div><div><strong>Keyword / intent map</strong><span>Funding &amp; investor language</span></div></div>
+            <div class="upgrade"><div class="icon seo">📡</div><div><strong>Measurement</strong><span>GA + Nexus journey tracking</span></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="panel-communications">
+        <div class="card">
+          <div class="card-h"><h3>Communications</h3></div>
+          <p class="empty">Client-facing offer surfaces and pitch links for FCR. Movements appear under Latest activity when external visitors arrive.</p>
+        </div>
+      </section>
+
+      <section class="panel" id="panel-site">
+        <div class="card">
+          <div class="card-h"><h3 id="sitePanelTitle">Site</h3></div>
+          <div class="stat-row">
+            <div><strong id="sitePv">—</strong><span>Pageviews</span></div>
+            <div><strong id="siteSess">—</strong><span>Sessions</span></div>
+            <div><strong id="siteLive">—</strong><span>Live</span></div>
+          </div>
+          <div id="siteJourneys" style="margin-top:1rem;"></div>
+        </div>
+      </section>
+
+      <section class="panel" id="panel-settings">
+        <div class="card">
+          <div class="card-h"><h3>Settings</h3></div>
+          <p style="font-size:0.9rem;color:var(--muted);">
+            Nexus 1 UI · FCR Capital Working Admin Dashboard. Password / access control can be added later (same plan as B-ATCAVE).
+          </p>
+          <ul style="margin:1rem 0 0 1.1rem;color:var(--muted);font-size:0.88rem;line-height:1.7;">
+            <li>Data: opensourcebarware.com/api/nexus-stats (humans only)</li>
+            <li>Owner browsers ignored via <code>?owner=1</code></li>
+            <li>Site filter: Client / Resident menus on the left</li>
+          </ul>
+        </div>
+      </section>
+
+      <p class="note footer">Nexus 1 UI · FCR Capital Working Admin Dashboard · not a Geex product — layout inspired for our build</p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var API = "https://opensourcebarware.com/api/nexus-stats";
+      var period = "today";
+      var activeSite = "fcr-funding";
+      var lastData = null;
+
+      var SITE_META = {
+        "fcr-funding": { name: "FCR Capital / Faber", url: "https://richardbjamison.github.io/faber-capital-resources/" },
+        "batiya-realty": { name: "Batiya Realty", url: "https://batiya-realty.vercel.app/pitch.html" },
+        "sulieman-hvac": { name: "Sulieman HVAC", url: "https://sulieman-go.vercel.app/pitch.html" },
+        osb: { name: "Open Source Barware", url: "https://opensourcebarware.com/" },
+        ovlp: { name: "Ohio Valley Land Partners", url: "https://ohiovalleylandpartners.com/" },
+        resonant: { name: "Resonant Web Design", url: "https://resonantwebdesign.com/" },
+        rbj: { name: "Richard B. Jamison", url: "https://richardbjamison.com/" },
+      };
+
+      var WEEKS = [
+        { w: 1, label: "Discovery & offer surfaces", state: "done" },
+        { w: 2, label: "Site shell & branding", state: "done" },
+        { w: 3, label: "Funding / lender pages", state: "done" },
+        { w: 4, label: "Resonant design offer", state: "done" },
+        { w: 5, label: "Tracker + Nexus feed", state: "now" },
+        { w: 6, label: "GHL pipelines", state: "todo" },
+        { w: 7, label: "SEO content wave", state: "todo" },
+        { w: 8, label: "Handoff & training", state: "todo" },
+      ];
+
+      function esc(s) {
+        return String(s || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+      }
+
+      function renderBuild() {
+        var done = WEEKS.filter(function (x) { return x.state === "done" || x.state === "now"; }).length;
+        var pct = Math.round((done / 8) * 100);
+        document.getElementById("buildProgress").style.width = pct + "%";
+        document.getElementById("buildWeeks").innerHTML = WEEKS.map(function (w) {
+          return '<div class="build-week ' + w.state + '"><div class="wk">W' + w.w + "</div><div>" +
+            esc(w.label) + "</div><div class=\"muted\" style=\"font-size:0.75rem\">" +
+            (w.state === "done" ? "Done" : w.state === "now" ? "In progress" : "Upcoming") +
+            "</div></div>";
+        }).join("");
+      }
+
+      function drawChart(trend) {
+        var svg = document.getElementById("trafficChart");
+        var w = 640, h = 220, pad = 24;
+        if (!trend || !trend.length) {
+          svg.innerHTML = '<text x="50%" y="50%" text-anchor="middle" fill="#7a7490" font-size="14">No traffic in this period yet</text>';
+          return;
+        }
+        var vals = trend.map(function (t) { return t.pageviews || 0; });
+        var uniques = trend.map(function (t) { return t.uniques || 0; });
+        var max = Math.max.apply(null, vals.concat(uniques).concat([1]));
+        function pts(arr) {
+          return arr.map(function (v, i) {
+            var x = pad + (i * (w - pad * 2)) / Math.max(arr.length - 1, 1);
+            var y = h - pad - ((v / max) * (h - pad * 2));
+            return x + "," + y;
+          }).join(" ");
+        }
+        var polyPv = pts(vals);
+        var polyU = pts(uniques);
+        svg.innerHTML =
+          '<polyline fill="none" stroke="#7c3aed" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" points="' + polyPv + '" />' +
+          '<polyline fill="none" stroke="#f472b6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" points="' + polyU + '" />' +
+          vals.map(function (v, i) {
+            var x = pad + (i * (w - pad * 2)) / Math.max(vals.length - 1, 1);
+            var y = h - pad - ((v / max) * (h - pad * 2));
+            return '<circle cx="' + x + '" cy="' + y + '" r="4" fill="#7c3aed" />';
+          }).join("");
+      }
+
+      function drawBars(trend) {
+        var el = document.getElementById("visitorBars");
+        var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+        var data = trend && trend.length ? trend.slice(-7) : [];
+        if (!data.length) {
+          el.innerHTML = days.map(function (d) {
+            return '<div class="col"><div class="b" style="height:12%"></div><span>' + d + "</span></div>";
+          }).join("");
+          return;
+        }
+        var max = Math.max.apply(null, data.map(function (t) { return t.pageviews || 0; }).concat([1]));
+        el.innerHTML = data.map(function (t, i) {
+          var h = Math.max(8, Math.round(((t.pageviews || 0) / max) * 100));
+          var label = (t.date || "").slice(5) || days[i % 7];
+          var hi = i === data.length - 1 ? " hi" : "";
+          return '<div class="col"><div class="b' + hi + '" style="height:' + h + '%"></div><span>' + esc(label) + "</span></div>";
+        }).join("");
+      }
+
+      function setDonut(o) {
+        var pv = o.pageviews || 0, se = o.sessions || 0, un = o.uniques || 0;
+        var total = Math.max(pv + se + un, 1);
+        var a = (pv / total) * 100;
+        var b = ((pv + se) / total) * 100;
+        document.getElementById("donut").style.background =
+          "conic-gradient(#7c3aed 0 " + a + "%, #a78bfa " + a + "% " + b + "%, #e9d5ff " + b + "% 100%)";
+        document.getElementById("sumPv").textContent = pv;
+        document.getElementById("sumSess").textContent = se;
+        document.getElementById("sumNew").textContent = un;
+      }
+
+      function filterBySite(data, siteId) {
+        if (!siteId || !data) return data;
+        // Client-side filter for journeys / live / recent; overview stays global unless site dominates
+        var out = Object.assign({}, data);
+        out.journeys = (data.journeys || []).filter(function (j) { return j.site === siteId; });
+        out.live = (data.live || []).filter(function (j) { return j.site === siteId; });
+        out.recent = (data.recent || []).filter(function (j) { return j.site === siteId; });
+        var siteHit = (data.topSites || []).find(function (s) { return s.name === siteId; });
+        if (siteHit) {
+          out.overview = Object.assign({}, data.overview, {
+            pageviews: siteHit.count,
+            // sessions/uniques not split perfectly without server filter — show site pageviews as traffic
+          });
+        }
+        return out;
+      }
+
+      function renderActivity(data) {
+        var items = (data.live || []).concat(data.journeys || data.recent || []).slice(0, 8);
+        var el = document.getElementById("activityList");
+        if (!items.length) {
+          el.innerHTML = '<p class="empty">Waiting for external visitors on offer surfaces…</p>';
+          return;
+        }
+        el.innerHTML = items.map(function (row) {
+          var title = (row.site || "") + " · " + (row.path || row.land || "");
+          var when = row.last_ts || row.ts;
+          var geo = [row.city, row.country].filter(Boolean).join(", ");
+          return '<div class="activity-item"><div class="dot"></div><div><strong>' +
+            esc(title) + "</strong><div class=\"when\">" +
+            (when ? new Date(when).toLocaleString() : "—") +
+            (geo ? " · " + esc(geo) : "") +
+            (row.refDomain ? " · via " + esc(row.refDomain) : "") +
+            "</div></div></div>";
+        }).join("");
+        document.getElementById("alertBadge").textContent = String((data.alerts || []).length);
+      }
+
+      function applyDashboard(data) {
+        lastData = data;
+        var o = data.overview || {};
+        document.getElementById("kpiTraffic").textContent = (o.pageviews != null ? o.pageviews : "—");
+        document.getElementById("kpiVisitors").textContent = (o.sessions != null ? o.sessions : "—");
+        document.getElementById("kpiNew").textContent = (o.uniques != null ? o.uniques : "—");
+        document.getElementById("kpiTrafficDelta").textContent = "Pageviews · " + (data.period && data.period.label || "");
+        document.getElementById("kpiVisitorsDelta").textContent = "Sessions (tracked humans)";
+        document.getElementById("kpiNewDelta").textContent = "Uniques · not us · not bots";
+
+        document.getElementById("waPv").textContent = o.pageviews != null ? o.pageviews : "—";
+        document.getElementById("waSess").textContent = o.sessions != null ? o.sessions : "—";
+        document.getElementById("waUni").textContent = o.uniques != null ? o.uniques : "—";
+
+        var live = data.live_count || (data.live || []).length || 0;
+        document.getElementById("liveCountLabel").textContent = live + " now";
+        document.getElementById("liveMeter").style.width = Math.min(100, 10 + live * 18) + "%";
+
+        drawChart(data.dailyTrend || []);
+        drawBars(data.dailyTrend || []);
+        setDonut(o);
+        renderActivity(data);
+      }
+
+      async function load() {
+        try {
+          var r = await fetch(API + "?period=" + encodeURIComponent(period) + "&_=" + Date.now(), { cache: "no-store", mode: "cors" });
+          if (!r.ok) throw new Error("API " + r.status);
+          var data = await r.json();
+          var filtered = activeSite ? filterBySite(data, activeSite) : data;
+          // For FCR dashboard default, prefer showing global if site has zero, still annotate
+          if (activeSite === "fcr-funding") {
+            var siteHit = (data.topSites || []).find(function (s) { return s.name === "fcr-funding"; });
+            if (!siteHit || !siteHit.count) {
+              applyDashboard(data);
+              document.getElementById("chartNote").textContent =
+                "Showing network feed · FCR-specific hits appear as clients visit · period " + (data.period && data.period.label || "");
+            } else {
+              applyDashboard(filtered);
+            }
+          } else {
+            applyDashboard(filtered);
+          }
+          // site panel
+          var meta = SITE_META[activeSite] || { name: activeSite };
+          document.getElementById("sitePanelTitle").textContent = meta.name;
+          var o = (filtered.overview || data.overview || {});
+          document.getElementById("sitePv").textContent = o.pageviews != null ? o.pageviews : "—";
+          document.getElementById("siteSess").textContent = o.sessions != null ? o.sessions : "—";
+          document.getElementById("siteLive").textContent = (filtered.live || []).length;
+          var j = filtered.journeys || filtered.recent || [];
+          document.getElementById("siteJourneys").innerHTML = j.length
+            ? j.slice(0, 12).map(function (row) {
+                return '<div class="activity-item"><div class="dot"></div><div><strong>' +
+                  esc((row.journey || []).join(" → ") || row.path) + "</strong><div class=\"when\">" +
+                  esc(row.site || "") + " · " + (row.duration_ms ? Math.round(row.duration_ms/1000)+"s" : "—") +
+                  "</div></div></div>";
+              }).join("")
+            : '<p class="empty">No journeys for this site yet.</p>';
+        } catch (e) {
+          document.getElementById("chartNote").textContent = "Could not reach Nexus API — " + e.message;
+        }
+      }
+
+      // nav panels
+      function showPanel(id) {
+        document.querySelectorAll(".panel").forEach(function (p) { p.classList.remove("active"); });
+        var el = document.getElementById("panel-" + id);
+        if (el) el.classList.add("active");
+        document.querySelectorAll(".nav a[data-panel]").forEach(function (a) {
+          a.classList.toggle("active", a.getAttribute("data-panel") === id || (id === "site" && a.getAttribute("data-panel") === "site" && a.classList.contains("active")));
+        });
+      }
+
+      document.querySelectorAll(".nav a[data-panel]").forEach(function (a) {
+        a.addEventListener("click", function (e) {
+          e.preventDefault();
+          var panel = a.getAttribute("data-panel");
+          if (a.getAttribute("data-site")) {
+            activeSite = a.getAttribute("data-site");
+            document.querySelectorAll(".nav-sub a").forEach(function (x) { x.classList.remove("active"); });
+            a.classList.add("active");
+            document.getElementById("pageTitle").textContent = (SITE_META[activeSite] || {}).name || activeSite;
+            document.getElementById("pageSub").textContent = "Site detail · same stats widgets · Nexus feed";
+            showPanel("site");
+            // highlight only site links
+            document.querySelectorAll(".nav > a").forEach(function (x) { x.classList.remove("active"); });
+            load();
+            return;
+          }
+          document.querySelectorAll(".nav > a").forEach(function (x) { x.classList.remove("active"); });
+          a.classList.add("active");
+          if (panel === "dashboard") {
+            activeSite = "fcr-funding";
+            document.getElementById("pageTitle").textContent = "FCR Capital Working Admin Dashboard";
+            document.getElementById("pageSub").textContent = "Nexus 1 UI · what we’ve built · live offer traffic (others only)";
+          } else {
+            document.getElementById("pageTitle").textContent = a.textContent.trim();
+            document.getElementById("pageSub").textContent = "FCR Capital · Nexus 1 UI";
+          }
+          showPanel(panel);
+          load();
+        });
+      });
+
+      function toggleSub(btn, sub) {
+        var open = sub.classList.toggle("open");
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+        btn.classList.toggle("active", open);
+      }
+      document.getElementById("btnResident").onclick = function () {
+        toggleSub(this, document.getElementById("subResident"));
+      };
+      document.getElementById("btnClient").onclick = function () {
+        toggleSub(this, document.getElementById("subClient"));
+        document.getElementById("subClient").classList.add("open");
+      };
+
+      document.querySelectorAll("#periods button").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          period = btn.getAttribute("data-p") || "today";
+          document.querySelectorAll("#periods button").forEach(function (b) { b.classList.remove("active"); });
+          btn.classList.add("active");
+          load();
+        });
+      });
+
+      // mobile menu
+      var sidebar = document.getElementById("sidebar");
+      var overlay = document.getElementById("overlay");
+      document.getElementById("menuToggle").onclick = function () {
+        sidebar.classList.add("open");
+        overlay.classList.add("show");
+      };
+      overlay.onclick = function () {
+        sidebar.classList.remove("open");
+        overlay.classList.remove("show");
+      };
+
+      // open client sites by default
+      document.getElementById("subClient").classList.add("open");
+      document.getElementById("btnClient").classList.add("active");
+
+      renderBuild();
+      load();
+      setInterval(load, 15000);
+    })();
+  </script>
+</body>
+</html>
