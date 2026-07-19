@@ -140,6 +140,122 @@
       font-size: .8rem; color: var(--muted); background: #f8f6fd; border: 1px solid var(--line);
       border-radius: 12px; padding: .65rem .85rem; margin-bottom: 1rem;
     }
+    /* —— Communications chat —— */
+    .comms-layout {
+      display: grid; grid-template-columns: 1.55fr 0.9fr; gap: 1rem; min-height: 70vh;
+    }
+    @media (max-width: 960px) { .comms-layout { grid-template-columns: 1fr; } }
+    .chat-shell {
+      background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
+      display: flex; flex-direction: column; min-height: 640px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,.7);
+    }
+    .chat-head {
+      padding: .9rem 1.1rem; border-bottom: 1px solid var(--line);
+      display: flex; justify-content: space-between; align-items: center; gap: .75rem;
+    }
+    .chat-head h3 { font-size: 1rem; font-weight: 750; }
+    .chat-head span { font-size: .78rem; color: var(--muted); }
+    .chat-stream {
+      flex: 1; overflow-y: auto; padding: 1.1rem; background:
+        linear-gradient(180deg, #faf8ff 0%, #fff 40%);
+      display: flex; flex-direction: column; gap: .85rem;
+    }
+    .bubble {
+      max-width: min(92%, 520px); padding: .85rem 1rem; border-radius: 16px;
+      font-size: .92rem; line-height: 1.5; white-space: pre-wrap; word-break: break-word;
+    }
+    .bubble.richard {
+      align-self: flex-start; background: #ede9fe; border: 1px solid #ddd6fe; color: var(--text);
+      border-bottom-left-radius: 6px;
+    }
+    .bubble.fcr {
+      align-self: flex-end; background: linear-gradient(135deg, #7c3aed, #6d28d9); color: #fff;
+      border-bottom-right-radius: 6px;
+    }
+    .bubble .meta {
+      font-size: .68rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+      margin-bottom: .4rem; opacity: .75;
+    }
+    .bubble.fcr .meta { color: #e9d5ff; }
+    .bubble .atts { margin-top: .65rem; display: flex; flex-direction: column; gap: .4rem; }
+    .att {
+      display: inline-flex; align-items: center; gap: .45rem; padding: .45rem .65rem;
+      border-radius: 10px; background: rgba(255,255,255,.55); font-size: .8rem; font-weight: 650;
+      border: 1px solid rgba(124,58,237,.15); color: var(--purple); text-decoration: none;
+    }
+    .bubble.fcr .att { background: rgba(255,255,255,.15); color: #fff; border-color: rgba(255,255,255,.25); }
+    .chat-compose {
+      border-top: 1px solid var(--line); padding: .85rem 1rem 1rem; background: #fff;
+    }
+    .compose-who {
+      display: flex; gap: .4rem; margin-bottom: .55rem; flex-wrap: wrap;
+    }
+    .compose-who button {
+      padding: .3rem .7rem; border-radius: 999px; font-size: .72rem; font-weight: 700;
+      background: #f4f1fb; color: var(--muted);
+    }
+    .compose-who button.active { background: var(--purple-soft); color: var(--purple); }
+    .compose-row { display: flex; gap: .55rem; align-items: flex-end; }
+    .compose-row textarea {
+      flex: 1; min-height: 88px; max-height: 200px; resize: vertical;
+      border: 1px solid var(--line); border-radius: 14px; padding: .75rem .9rem;
+      font: inherit; font-size: .92rem; outline: none; background: #fbfaff;
+    }
+    .compose-row textarea:focus { border-color: #c4b5fd; box-shadow: 0 0 0 3px rgba(124,58,237,.12); }
+    .compose-actions { display: flex; flex-direction: column; gap: .45rem; }
+    .btn-send {
+      min-width: 110px; min-height: 88px; border-radius: 14px; font-weight: 800; font-size: .95rem;
+      background: linear-gradient(135deg, #7c3aed, #6d28d9); color: #fff;
+      box-shadow: 0 10px 24px rgba(124,58,237,.3); padding: .75rem 1rem;
+    }
+    .btn-send:hover { filter: brightness(1.05); }
+    .btn-attach {
+      border-radius: 12px; padding: .55rem .7rem; font-size: .75rem; font-weight: 700;
+      background: #f4f1fb; color: var(--purple); border: 1px solid #e9e5f5;
+    }
+    .pending-files { font-size: .75rem; color: var(--muted); margin-top: .45rem; min-height: 1.1em; }
+    .cabinet {
+      background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,.7); padding: 1rem 1.05rem; min-height: 320px;
+    }
+    .cabinet h3 { font-size: .95rem; font-weight: 750; margin-bottom: .35rem; }
+    .cabinet .cab-sub { font-size: .78rem; color: var(--muted); margin-bottom: .85rem; }
+    .file-row {
+      display: flex; align-items: flex-start; gap: .65rem; padding: .7rem 0;
+      border-bottom: 1px solid var(--line); font-size: .84rem;
+    }
+    .file-row:last-child { border-bottom: 0; }
+    .file-ico {
+      width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+      display: grid; place-items: center; flex-shrink: 0; font-size: 1rem;
+    }
+    .file-row a { color: var(--purple); font-weight: 700; font-size: .82rem; }
+    .file-meta { font-size: .72rem; color: var(--muted); margin-top: .15rem; }
+    .help-btn {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .5rem .9rem; border-radius: 12px; font-weight: 750; font-size: .82rem;
+      background: linear-gradient(135deg, #7c3aed, #6d28d9); color: #fff;
+      box-shadow: 0 6px 16px rgba(124,58,237,.28);
+    }
+    .help-modal {
+      display: none; position: fixed; inset: 0; z-index: 80;
+      background: rgba(30,27,46,.45); align-items: center; justify-content: center; padding: 1rem;
+    }
+    .help-modal.show { display: flex; }
+    .help-panel {
+      background: #fff; border-radius: 20px; max-width: 520px; width: 100%; max-height: min(80vh, 640px);
+      overflow: auto; padding: 1.25rem 1.35rem 1.4rem; box-shadow: 0 24px 60px rgba(30,27,46,.25);
+    }
+    .help-panel h3 { font-size: 1.1rem; margin-bottom: .35rem; }
+    .help-panel .sub { font-size: .82rem; color: var(--muted); margin-bottom: 1rem; }
+    .help-item { padding: .7rem 0; border-bottom: 1px solid var(--line); font-size: .88rem; }
+    .help-item:last-child { border-bottom: 0; }
+    .help-item strong { display: block; color: var(--purple); margin-bottom: .2rem; }
+    .help-close {
+      margin-top: 1rem; width: 100%; padding: .7rem; border-radius: 12px; font-weight: 750;
+      background: #f4f1fb; color: var(--purple);
+    }
   </style>
 </head>
 <body>
@@ -174,8 +290,26 @@
           </div>
         </div>
         <div class="topbar-right">
-          <div class="chip">🔔<span class="badge" id="alertBadge">0</span></div>
+          <button type="button" class="help-btn" id="btnHelp" title="Menu help">? Help</button>
+          <div class="chip" title="Notifications">🔔<span class="badge" id="alertBadge">0</span></div>
           <div class="avatar">FC</div>
+        </div>
+      </div>
+
+      <!-- HELP MODAL -->
+      <div class="help-modal" id="helpModal" role="dialog" aria-labelledby="helpTitle" aria-modal="true">
+        <div class="help-panel">
+          <h3 id="helpTitle">Nexus Help</h3>
+          <p class="sub">Quick descriptions for every area of the FCR Capital Working Admin Dashboard.</p>
+          <div class="help-item"><strong>Dashboard</strong>Overview of FCR traffic, build-out schedule (8 weeks), upgrades, and latest activity. Humans only — not internal admin noise.</div>
+          <div class="help-item"><strong>Communications</strong>Shared chat between Richard and FCR Capital. Messages, file attachments, and the File Cabinet live here. Richard is notified by text on new messages.</div>
+          <div class="help-item"><strong>Website analytics</strong>Traffic for FCR surfaces (pageviews, sessions, uniques) from the Nexus first-party feed.</div>
+          <div class="help-item"><strong>FCR Agency Build</strong>Engineering / architecture of the agency system. Stage 1 is Discovery &amp; Agency Mapping (this week).</div>
+          <div class="help-item"><strong>Search engine optimization marketing</strong>SEO plan, intent map, and measurement workstream for FCR.</div>
+          <div class="help-item"><strong>Settings</strong>Workspace notes and future access control.</div>
+          <div class="help-item"><strong>File Cabinet</strong>Files shared in chat are saved here for later download/reference.</div>
+          <div class="help-item"><strong>Notifications</strong>Richard receives a text on new communications. FCR can also be notified of new messages.</div>
+          <button type="button" class="help-close" id="helpClose">Close</button>
         </div>
       </div>
 
@@ -304,9 +438,37 @@
         </div>
       </section>
       <section class="panel" id="panel-communications">
-        <div class="card">
-          <div class="card-h"><h3>Communications — FCR</h3></div>
-          <p class="empty">Client-facing FCR offer and communication pages. External visitor paths show under Latest activity.</p>
+        <div class="comms-layout">
+          <div class="chat-shell">
+            <div class="chat-head">
+              <div>
+                <h3>FCR Capital · Nexus Chat</h3>
+                <span>Richard ↔ FCR · shared workspace</span>
+              </div>
+              <span class="pill" id="chatStatus">Connecting…</span>
+            </div>
+            <div class="chat-stream" id="chatStream" aria-live="polite"></div>
+            <div class="chat-compose">
+              <div class="compose-who" id="composeWho">
+                <button type="button" data-who="fcr" class="active">Send as FCR / Bill</button>
+                <button type="button" data-who="richard">Send as Richard</button>
+              </div>
+              <div class="compose-row">
+                <textarea id="chatInput" placeholder="Write a message…" rows="4"></textarea>
+                <div class="compose-actions">
+                  <button type="button" class="btn-send" id="chatSend">Send</button>
+                  <button type="button" class="btn-attach" id="chatAttach">📎 Attach</button>
+                </div>
+              </div>
+              <input type="file" id="chatFile" multiple hidden />
+              <div class="pending-files" id="pendingFiles"></div>
+            </div>
+          </div>
+          <aside class="cabinet">
+            <h3>🗄 File Cabinet</h3>
+            <p class="cab-sub">Shared files for later reference. Uploads from chat land here automatically.</p>
+            <div id="fileCabinet"><p class="empty">Loading files…</p></div>
+          </aside>
         </div>
       </section>
       <section class="panel" id="panel-settings">
@@ -457,7 +619,215 @@
       var sidebar = document.getElementById("sidebar"), overlay = document.getElementById("overlay");
       document.getElementById("menuToggle").onclick = function () { sidebar.classList.add("open"); overlay.classList.add("show"); };
       overlay.onclick = function () { sidebar.classList.remove("open"); overlay.classList.remove("show"); };
-      renderBuild(); load(); setInterval(load, 15000);
+
+      /* —— Help —— */
+      var helpModal = document.getElementById("helpModal");
+      document.getElementById("btnHelp").onclick = function () { helpModal.classList.add("show"); };
+      document.getElementById("helpClose").onclick = function () { helpModal.classList.remove("show"); };
+      helpModal.addEventListener("click", function (e) {
+        if (e.target === helpModal) helpModal.classList.remove("show");
+      });
+
+      /* —— Communications chat + cabinet —— */
+      var COMMS = "https://opensourcebarware.com/api/fcr-comms";
+      var chatAuthor = "FCR / Bill";
+      var chatRole = "fcr";
+      var pending = [];
+
+      function fmtBytes(n) {
+        n = Number(n) || 0;
+        if (n < 1024) return n + " B";
+        if (n < 1024 * 1024) return (n / 1024).toFixed(1) + " KB";
+        return (n / (1024 * 1024)).toFixed(1) + " MB";
+      }
+      function fmtWhen(ts) {
+        try { return new Date(ts).toLocaleString(); } catch (e) { return ""; }
+      }
+      function absFileUrl(url) {
+        if (!url) return "#";
+        if (/^https?:\/\//i.test(url)) return url;
+        if (url.indexOf("/B-ATCAVE/") === 0 || url.indexOf("/api/") === 0) {
+          return "https://opensourcebarware.com" + url;
+        }
+        /* local / GH Pages relative */
+        if (url.indexOf("files/") === 0 || url.indexOf("./files/") === 0) return url.replace(/^\.\//, "");
+        return url;
+      }
+
+      function renderMessages(messages) {
+        var el = document.getElementById("chatStream");
+        if (!el) return;
+        if (!messages || !messages.length) {
+          el.innerHTML = '<p class="empty">No messages yet.</p>';
+          return;
+        }
+        el.innerHTML = messages.map(function (m) {
+          var cls = m.role === "richard" ? "richard" : "fcr";
+          var atts = (m.attachments || []).map(function (a) {
+            var href = absFileUrl(a.url);
+            return '<a class="att" href="' + esc(href) + '" target="_blank" rel="noopener" download>' +
+              "📎 " + esc(a.name || "file") +
+              (a.size ? " · " + fmtBytes(a.size) : "") +
+              "</a>";
+          }).join("");
+          return '<div class="bubble ' + cls + '"><div class="meta">' +
+            esc(m.author || cls) + " · " + esc(fmtWhen(m.ts)) +
+            "</div><div>" + esc(m.text || "") + "</div>" +
+            (atts ? '<div class="atts">' + atts + "</div>" : "") +
+            "</div>";
+        }).join("");
+        el.scrollTop = el.scrollHeight;
+      }
+
+      function renderCabinet(files) {
+        var el = document.getElementById("fileCabinet");
+        if (!el) return;
+        if (!files || !files.length) {
+          el.innerHTML = '<p class="empty">No files yet — attach from chat.</p>';
+          return;
+        }
+        el.innerHTML = files.map(function (f) {
+          var href = absFileUrl(f.url);
+          var ico = (f.mime || "").indexOf("image/") === 0 ? "🖼" : (f.name || "").toLowerCase().indexOf(".pdf") >= 0 ? "📄" : "📁";
+          return '<div class="file-row"><div class="file-ico">' + ico + '</div><div>' +
+            '<a href="' + esc(href) + '" target="_blank" rel="noopener" download>' + esc(f.name) + "</a>" +
+            '<div class="file-meta">' + esc(f.uploaded_by || "—") + " · " + esc(fmtWhen(f.ts)) +
+            (f.size ? " · " + fmtBytes(f.size) : "") +
+            "</div></div></div>";
+        }).join("");
+      }
+
+      async function loadComms() {
+        var status = document.getElementById("chatStatus");
+        try {
+          var r = await fetch(COMMS + "?_=" + Date.now(), { cache: "no-store", mode: "cors" });
+          if (!r.ok) throw new Error("HTTP " + r.status);
+          var d = await r.json();
+          renderMessages(d.messages || []);
+          renderCabinet(d.files || []);
+          if (status) { status.textContent = "Live"; status.className = "pill"; }
+          var badge = document.getElementById("alertBadge");
+          if (badge && d.messages) badge.textContent = String(Math.min(99, d.messages.length));
+        } catch (e) {
+          if (status) { status.textContent = "Offline"; status.className = "pill"; }
+          var stream = document.getElementById("chatStream");
+          if (stream && !stream.dataset.seeded) {
+            stream.innerHTML = '<p class="empty">Chat server connecting… ' + esc(e.message || "") + "</p>";
+          }
+        }
+      }
+
+      function fileToBase64(file) {
+        return new Promise(function (resolve, reject) {
+          var reader = new FileReader();
+          reader.onload = function () {
+            var res = String(reader.result || "");
+            var i = res.indexOf(",");
+            resolve(i >= 0 ? res.slice(i + 1) : res);
+          };
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+      }
+
+      async function uploadFile(file) {
+        if (file.size > 650000) {
+          throw new Error(file.name + " is too large (max ~650KB for now). Share larger files via Drive/email.");
+        }
+        var b64 = await fileToBase64(file);
+        var r = await fetch(COMMS, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          mode: "cors",
+          body: JSON.stringify({
+            action: "upload",
+            name: file.name,
+            mime: file.type || "application/octet-stream",
+            size: file.size,
+            data_base64: b64,
+            author: chatAuthor,
+          }),
+        });
+        var d = await r.json();
+        if (!r.ok || !d.ok) throw new Error(d.error || "upload failed");
+        return d.file;
+      }
+
+      async function sendChat() {
+        var input = document.getElementById("chatInput");
+        var text = (input && input.value || "").trim();
+        if (!text && !pending.length) return;
+        var sendBtn = document.getElementById("chatSend");
+        if (sendBtn) { sendBtn.disabled = true; sendBtn.textContent = "Sending…"; }
+        try {
+          var attachments = [];
+          for (var i = 0; i < pending.length; i++) {
+            var f = await uploadFile(pending[i]);
+            attachments.push(f);
+          }
+          var r = await fetch(COMMS, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            mode: "cors",
+            body: JSON.stringify({
+              action: "send",
+              author: chatAuthor,
+              role: chatRole,
+              text: text,
+              attachments: attachments,
+            }),
+          });
+          var d = await r.json();
+          if (!r.ok || !d.ok) throw new Error(d.error || "send failed");
+          if (input) input.value = "";
+          pending = [];
+          document.getElementById("pendingFiles").textContent = "";
+          await loadComms();
+        } catch (e) {
+          alert("Could not send: " + (e.message || e));
+        } finally {
+          if (sendBtn) { sendBtn.disabled = false; sendBtn.textContent = "Send"; }
+        }
+      }
+
+      document.getElementById("composeWho").onclick = function (e) {
+        var btn = e.target.closest("button[data-who]");
+        if (!btn) return;
+        document.querySelectorAll("#composeWho button").forEach(function (b) { b.classList.remove("active"); });
+        btn.classList.add("active");
+        if (btn.getAttribute("data-who") === "richard") {
+          chatAuthor = "Richard";
+          chatRole = "richard";
+        } else {
+          chatAuthor = "FCR / Bill";
+          chatRole = "fcr";
+        }
+      };
+      document.getElementById("chatSend").onclick = sendChat;
+      document.getElementById("chatInput").addEventListener("keydown", function (e) {
+        if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+          e.preventDefault();
+          sendChat();
+        }
+      });
+      document.getElementById("chatAttach").onclick = function () {
+        document.getElementById("chatFile").click();
+      };
+      document.getElementById("chatFile").onchange = function () {
+        var files = Array.prototype.slice.call(this.files || []);
+        pending = pending.concat(files);
+        document.getElementById("pendingFiles").textContent = pending.length
+          ? "Ready to send: " + pending.map(function (f) { return f.name; }).join(", ")
+          : "";
+        this.value = "";
+      };
+
+      /* open communications by default? keep dashboard; load chat in background */
+      renderBuild();
+      load();
+      loadComms();
+      setInterval(load, 15000);
+      setInterval(loadComms, 8000);
     })();
   </script>
 </body>
