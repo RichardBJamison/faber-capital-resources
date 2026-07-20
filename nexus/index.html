@@ -1003,9 +1003,16 @@
         }
         el.innerHTML = files.map(function (f) {
           var href = absFileUrl(f.url);
-          var ico = (f.mime || "").indexOf("image/") === 0 ? "🖼" : (f.name || "").toLowerCase().indexOf(".pdf") >= 0 ? "📄" : "📁";
+          var name = f.name || "file";
+          var label = f.label || (
+            /FCR_New_Hero_Carousel/i.test(name) ? "FCR New Hero Carousel" : name
+          );
+          var ico = (f.mime || "").indexOf("image/") === 0 ? "🖼"
+            : /\.pdf$/i.test(name) ? "📄"
+            : /\.zip$/i.test(name) ? "📦" : "📁";
           return '<div class="file-row"><div class="file-ico">' + ico + '</div><div>' +
-            '<a href="' + esc(href) + '" target="_blank" rel="noopener" download>' + esc(f.name) + "</a>" +
+            '<a href="' + esc(href) + '" target="_blank" rel="noopener" download="' + esc(name) + '">' + esc(label) + "</a>" +
+            (label !== name ? '<div class="file-meta">' + esc(name) + "</div>" : "") +
             '<div class="file-meta">' + esc(f.uploaded_by || "—") + " · " + esc(fmtWhen(f.ts)) +
             (f.size ? " · " + fmtBytes(f.size) : "") +
             "</div></div></div>";
