@@ -104,63 +104,6 @@
     isNewSession = true;
   }
 
-  function isOwnerBrowser() {
-    try {
-      if (localStorage.getItem("ot_owner") === "1") return true;
-    } catch (e) {}
-    if (location.hostname === "localhost" || location.hostname === "127.0.0.1") return true;
-    return !!cfg.self;
-  }
-
-  /*
-   * OWNER / SELF — never send page journeys.
-   * Only mark this visitor as owner once so the server ignores us forever.
-   */
-  if (isOwnerBrowser()) {
-    try {
-      if (!sessionGet("ot_marked_owner")) {
-        sessionSet("ot_marked_owner", "1");
-        var markBody = JSON.stringify({
-          type: "mark_owner",
-          site: SITE,
-          visitor_id: visitorId,
-          self: true,
-          ts: Date.now(),
-        });
-        if (ENDPOINT) {
-          try {
-            if (navigator.sendBeacon) {
-              navigator.sendBeacon(
-                ENDPOINT,
-                new Blob([markBody], { type: "application/json" })
-              );
-            } else {
-              fetch(ENDPOINT, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: markBody,
-                keepalive: true,
-                mode: "cors",
-              }).catch(function () {});
-            }
-          } catch (e) {}
-        }
-      }
-    } catch (e) {}
-    window.OfferTracker = {
-      visitorId: visitorId,
-      sessionId: sessionId,
-      siteId: SITE,
-      owner: true,
-      emit: function () {},
-      getJourney: function () {
-        return [];
-      },
-    };
-    log("owner browser — tracking suppressed");
-    return;
-  }
-
   function getJourney() {
     try {
       var raw = sessionGet(JOURNEY_KEY);
@@ -212,6 +155,14 @@
     return Math.min(100, Math.round((scrollTop / height) * 100));
   }
 
+  function isOwnerBrowser() {
+    try {
+      if (localStorage.getItem("ot_owner") === "1") return true;
+    } catch (e) {}
+    if (location.hostname === "localhost" || location.hostname === "127.0.0.1") return true;
+    return !!cfg.self;
+  }
+
   function basePayload(type, extra) {
     var p = {
       v: VERSION,
@@ -229,7 +180,7 @@
       journey_len: journey.length,
       utm: utmParams(),
       lang: navigator.language || "",
-      self: false,
+      self: isOwnerBrowser(),
       tz: (function () {
         try {
           return Intl.DateTimeFormat().resolvedOptions().timeZone || "";
@@ -444,7 +395,39 @@
     }
   });
 
-  /* scroll milestones 25/50/75/100 */
+  /* —— Conversion spine helpers (aware / engage / convert) —— */
+  var engagedOnce = false;
+  var convertOnce = false;
+
+  function markEngage(reason) {
+    if (engagedOnce || isOwnerBrowser()) return;
+    engagedOnce = true;
+    emit("engage", { label: reason || "engage", scroll_pct: maxScroll, duration_ms: durationSoFar() });
+  }
+
+  function markConvert(label, extra) {
+    if (convertOnce && !(extra && extra.allowMultiple)) return;
+    if (isOwnerBrowser()) return;
+    convertOnce = true;
+    markEngage("pre_convert");
+    var payload = { label: label || "convert", action: (extra && extra.action) || "convert" };
+    if (extra) {
+      for (var k in extra) {
+        if (Object.prototype.hasOwnProperty.call(extra, k) && k !== "allowMultiple") {
+          payload[k] = extra[k];
+        }
+      }
+    }
+    emit("convert", payload);
+    fireGa4("offer_convert", {
+      site_id: SITE,
+      session_id: sessionId,
+      label: payload.label,
+      action: payload.action || "convert",
+    });
+  }
+
+  /* scroll milestones 25/50/75/100 — 50%+ = engage */
   var scrollMarks = { 25: false, 50: false, 75: false, 100: false };
   window.addEventListener(
     "scroll",
@@ -455,30 +438,105 @@
         if (!scrollMarks[m] && p >= m) {
           scrollMarks[m] = true;
           emit("scroll", { scroll_pct: m });
+          if (m >= 50) markEngage("scroll_" + m);
         }
       });
     },
     { passive: true }
   );
 
-  /* click / movement through links */
+  /* dwell 15s = engage */
+  setTimeout(function () {
+    if (!left) markEngage("dwell_15s");
+  }, 15000);
+
+  /* CTA view — elements with data-ot-cta enter viewport */
+  try {
+    if (typeof IntersectionObserver === "function") {
+      var io = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (en) {
+            if (en.isIntersecting) {
+              emit("cta_view", {
+                label: (en.target.getAttribute("data-ot-cta") || en.target.id || "cta").slice(0, 80),
+              });
+              markEngage("cta_view");
+              io.unobserve(en.target);
+            }
+          });
+        },
+        { threshold: 0.4 }
+      );
+      document.querySelectorAll("[data-ot-cta], .ot-cta, [data-ot-convert]").forEach(function (el) {
+        io.observe(el);
+      });
+    }
+  } catch (e) {}
+
+  /* click / movement through links + convert signals */
   document.addEventListener(
     "click",
     function (ev) {
       var t = ev.target;
       if (!t) return;
+      var convertEl = t.closest ? t.closest("[data-ot-convert], .ot-convert, button[type='submit']") : null;
       var a = t.closest ? t.closest("a") : null;
-      if (!a || !a.href) return;
-      var href = a.href;
-      var text = (a.textContent || "").trim().slice(0, 120);
-      var outbound = false;
-      try {
-        outbound = a.hostname && a.hostname !== location.hostname;
-      } catch (e) {}
-      emit("click", {
-        link_href: href,
-        link_text: text,
-        outbound: outbound,
+
+      if (a && a.href) {
+        var href = a.href;
+        var text = (a.textContent || "").trim().slice(0, 120);
+        var outbound = false;
+        try {
+          outbound = a.hostname && a.hostname !== location.hostname;
+        } catch (e) {}
+        var isTel = /^tel:/i.test(href);
+        var isMail = /^mailto:/i.test(href);
+        var isDl =
+          /\.(zip|pdf|csv|xlsx?)($|\?)/i.test(href) ||
+          /download/i.test(href) ||
+          a.hasAttribute("download");
+        var forceConvert =
+          a.hasAttribute("data-ot-convert") ||
+          (a.className && String(a.className).indexOf("ot-convert") !== -1);
+
+        emit("click", {
+          link_href: href,
+          link_text: text,
+          outbound: outbound,
+          convert: !!(isTel || isMail || isDl || forceConvert),
+        });
+
+        if (isTel) markConvert("call_click", { action: "call_click", href: href });
+        else if (isMail) markConvert("mailto_click", { action: "mailto_click", href: href });
+        else if (isDl) markConvert("download", { action: "download", href: href });
+        else if (forceConvert) markConvert(text || "cta_click", { action: "cta_click", href: href });
+        else if (/book|start|contact|apply|get started|deal|call|schedule|buy|sign up|signup/i.test(text)) {
+          markEngage("cta_click_soft");
+        }
+        return;
+      }
+
+      if (convertEl) {
+        markConvert(
+          convertEl.getAttribute("data-ot-convert") ||
+            (convertEl.textContent || "").trim().slice(0, 80) ||
+            "convert",
+          { action: convertEl.tagName === "BUTTON" ? "button" : "convert" }
+        );
+      }
+    },
+    true
+  );
+
+  /* form submits = convert */
+  document.addEventListener(
+    "submit",
+    function (ev) {
+      var form = ev.target;
+      if (!form || form.tagName !== "FORM") return;
+      if (form.getAttribute("data-ot-ignore") === "1") return;
+      markConvert(form.getAttribute("data-ot-convert") || form.id || form.name || "form_submit", {
+        action: "form_submit",
       });
     },
     true
@@ -493,6 +551,8 @@
     siteId: SITE,
     emit: emit,
     getJourney: getJourney,
+    engage: markEngage,
+    convert: markConvert,
   };
 
   log("ready", { SITE: SITE, visitorId: visitorId, sessionId: sessionId, GA4: GA4, ENDPOINT: ENDPOINT });
