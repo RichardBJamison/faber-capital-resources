@@ -1005,7 +1005,9 @@
           var href = absFileUrl(f.url);
           var name = f.name || "file";
           var label = f.label || (
-            /FCR_New_Hero_Carousel/i.test(name) ? "FCR New Hero Carousel" : name
+            /FCR_New_Hero_Carousel/i.test(name) ? "FCR New Hero Carousel"
+            : /FCR_Preliminary_Website_Build_Market_Analysis/i.test(name) ? "FCR Preliminary Website Build · Market Analysis & Handoff"
+            : name
           );
           var ico = (f.mime || "").indexOf("image/") === 0 ? "🖼"
             : /\.pdf$/i.test(name) ? "📄"
