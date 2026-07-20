@@ -33,12 +33,16 @@
   var HEARTBEAT_MS = Math.max(10000, Number(cfg.heartbeatMs) || 15000);
   var VERSION = 1;
 
-  /* Mark this browser as Richard / owner → ignored for live + alerts */
+  /* Mark this browser as Richard / owner → ignored for live + uniques + alerts */
   try {
     if (/[?&]owner=1(?:&|$)/.test(location.search || "")) {
       localStorage.setItem("ot_owner", "1");
     }
     if ((location.pathname || "").indexOf("B-ATCAVE") !== -1) {
+      localStorage.setItem("ot_owner", "1");
+    }
+    // Known owner hostnames (your machines browsing your own marketing/offer sites)
+    if (cfg.forceOwner || cfg.self) {
       localStorage.setItem("ot_owner", "1");
     }
   } catch (e) {}
@@ -102,6 +106,31 @@
     sessionSet(SESSION_KEY, sessionId);
     sessionSet(SESSION_START_KEY, String(Date.now()));
     isNewSession = true;
+  }
+
+  /* Register owner visitor_id server-side so uniques/live stay clean even if localStorage is cleared later */
+  function registerOwnerOnServer() {
+    if (!isOwnerBrowser()) return;
+    try {
+      var body = JSON.stringify({
+        type: "mark_owner",
+        visitor_id: visitorId,
+        site: SITE,
+        ts: Date.now(),
+      });
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(ENDPOINT, new Blob([body], { type: "application/json" }));
+      } else {
+        fetch(ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: body,
+          keepalive: true,
+          mode: "cors",
+          credentials: "omit",
+        }).catch(function () {});
+      }
+    } catch (e) {}
   }
 
   function getJourney() {
@@ -336,15 +365,21 @@
   }
 
   /* —— Lifecycle —— */
-  if (isNewSession) emit("session_start");
-  emit("page_view");
+  // Owner first: stamp server + never emit page stats for this browser
+  if (isOwnerBrowser()) {
+    registerOwnerOnServer();
+    log("owner browser — excluded from live, uniques, funnel, alerts");
+  } else {
+    if (isNewSession) emit("session_start");
+    emit("page_view");
+  }
 
   function durationSoFar() {
     return now() - pageEnteredAt;
   }
 
   function heartbeat() {
-    if (left || document.visibilityState === "hidden") return;
+    if (left || document.visibilityState === "hidden" || isOwnerBrowser()) return;
     maxScroll = Math.max(maxScroll, scrollPct());
     var d = durationSoFar();
     lastHeartbeatAt = now();
@@ -360,6 +395,7 @@
     if (left) return;
     left = true;
     clearInterval(hbTimer);
+    if (isOwnerBrowser()) return;
     maxScroll = Math.max(maxScroll, scrollPct());
     var d = durationSoFar();
     emit("page_leave", {
@@ -391,7 +427,7 @@
       left = false;
       pageEnteredAt = now();
       hbTimer = setInterval(heartbeat, HEARTBEAT_MS);
-      emit("page_view", { resumed: true });
+      if (!isOwnerBrowser()) emit("page_view", { resumed: true });
     }
   });
 
