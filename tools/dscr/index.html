@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>DSCR Calculator | Real Estate Capital Resources</title>
+  <meta name="description" content="Free DSCR calculator for rental property. Enter rent and PITIA to get your debt service coverage ratio to two decimals, plus a plain-English verdict.">
+  <link rel="canonical" href="https://realestatecapitalresources.com/tools/dscr/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/acqua-frame.css">
+</head>
+<body data-active="" data-schema="tool">
+  <div id="site-shell"></div>
+  <main id="main">
+
+<nav class="breadcrumb container" aria-label="Breadcrumb" style="padding-top:1rem;color:var(--muted)">
+  <a href="/" style="color:var(--blue)">Home</a> / <a href="/tools/" style="color:var(--blue)">Investor Tools</a> / <span>DSCR Calculator</span>
+</nav>
+
+<section class="section section--soft" style="padding-top:2rem">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="color:var(--gold)">Rental underwriting</div>
+      <h1 style="font-size:clamp(2rem,3.6vw,2.9rem);letter-spacing:-0.03em;line-height:1.08;margin:.3rem 0 .9rem">DSCR Calculator</h1>
+      <p class="lead-inline"><strong>Debt Service Coverage Ratio</strong> is the single number that decides most rental loans. It answers one question: does the property's income cover its own debt? Enter the rent and the four pieces of PITIA below to see your ratio to two decimals and where it lands.</p>
+    </div>
+    <div class="calc reveal">
+      <div class="calc-inputs">
+        <div class="calc-field"><label for="rent">Gross monthly rent ($)</label><input id="rent" type="number" inputmode="numeric" value="1850"></div>
+        <div class="calc-field"><label for="pi">Monthly principal &amp; interest ($)</label><input id="pi" type="number" inputmode="numeric" value="980"></div>
+        <div class="calc-field"><label for="taxes">Annual property taxes ($)</label><input id="taxes" type="number" inputmode="numeric" value="3200"></div>
+        <div class="calc-field"><label for="ins">Annual insurance ($)</label><input id="ins" type="number" inputmode="numeric" value="1400"></div>
+        <div class="calc-field"><label for="hoa">Monthly HOA / dues ($)</label><input id="hoa" type="number" inputmode="numeric" value="0"></div>
+      </div>
+      <div class="calc-result">
+        <div class="result-label">Debt service coverage ratio</div>
+        <div class="result-value" id="dscr">1.36</div>
+        <div class="result-note" id="verdict">Strong — income comfortably covers the full payment.</div>
+        <div class="result-row"><span>Gross monthly rent</span><span id="r-rent">$1,850</span></div>
+        <div class="result-row"><span>Monthly PITIA</span><span id="r-pitia">$1,363</span></div>
+        <div class="result-row"><span>Monthly surplus / (shortfall)</span><span id="r-net">$487</span></div>
+      </div>
+    </div>
+    <p class="section-note">Estimate — illustrative only. Not a quote, an approval, or a representation of terms. The 1.25 and 1.00 thresholds shown are common industry reference points, not RECR program minimums. Actual DSCR requirements are confirmed per transaction: <span class="pending">{{CLAIM:dscr.min_ratio}} — confirming against current program sheet</span>.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container article-body">
+    <h2>What DSCR Actually Measures</h2>
+    <p>The debt service coverage ratio divides a property's income by the cost of carrying its debt. A ratio of 1.00 means the property earns exactly enough to pay its housing obligation with nothing to spare. Above 1.00, there is a cushion; below 1.00, the property does not cover itself and the shortfall comes out of your pocket every month. Because a DSCR loan is underwritten to the property rather than to your personal income, this one ratio does most of the work a pay stub and tax return would do for a conventional mortgage.</p>
+    <p>The formula this calculator uses is straightforward:</p>
+    <div class="diagram reveal">
+      <div class="diagram-node">Gross monthly rent</div>
+      <div class="diagram-node">÷</div>
+      <div class="diagram-node">Monthly PITIA</div>
+      <div class="diagram-node">=</div>
+      <div class="diagram-node">DSCR</div>
+    </div>
+    <p>PITIA is the full monthly housing cost: <strong>P</strong>rincipal and <strong>I</strong>nterest on the loan, plus one-twelfth of annual <strong>T</strong>axes, one-twelfth of annual <strong>I</strong>nsurance, and any monthly <strong>A</strong>ssociation dues. Leaving out taxes and insurance is the most common way investors flatter a deal — a property that looks like it covers on principal and interest alone can slip under 1.00 once the escrow items are added back. This tool takes annual taxes and insurance and divides each by twelve so the ratio reflects the real monthly obligation.</p>
+
+    <h2>How to Read Your Result</h2>
+    <p>Lenders set their own minimums, but three reference bands are widely used across the industry as a way to talk about strength:</p>
+    <ul>
+      <li><strong>1.25 or higher — strong.</strong> The rent covers the payment with roughly a quarter of the income to spare. This is comfortable coverage that absorbs a rent dip, a vacancy month, or a tax reassessment without turning the property negative.</li>
+      <li><strong>1.00 to 1.25 — tight but positive.</strong> The property covers itself, but the margin is thin. A single surprise — a special assessment, an insurance increase, a few weeks of vacancy — can push it underwater. Deals in this band often still finance, sometimes at different terms, but they leave little room for error.</li>
+      <li><strong>Below 1.00 — negative coverage.</strong> The rent does not cover the debt. You are subsidizing the property monthly, and most rental programs will not lend against it without a larger down payment, a lower loan amount, or higher rent. It can still make sense as a value-add or appreciation play, but it is not a self-supporting rental as underwritten.</li>
+    </ul>
+    <p>These are general benchmarks for reading the number, not RECR's program threshold. The actual minimum ratio for any specific rental structure is confirmed against the current program sheet: <span class="pending">{{CLAIM:dscr.min_ratio}} — confirming</span>. What the calculator gives you is the ratio itself, cleanly and honestly, so you know where a deal stands before anyone underwrites it.</p>
+
+    <h2>A Worked Example</h2>
+    <p>Take the default numbers. A property rents for $1,850 a month. Principal and interest run $980. Annual taxes are $3,200, or about $267 a month; annual insurance is $1,400, or roughly $117 a month; there are no HOA dues. Monthly PITIA is therefore about $1,363. Divide $1,850 by $1,363 and the DSCR is 1.36 — a strong result, with roughly $487 of monthly cushion after the full payment. Now raise the taxes to $6,000 a year and the ratio falls toward 1.20; the same property in a higher-tax jurisdiction is a materially different loan. That sensitivity is exactly why taxes and insurance belong in the calculation from the start.</p>
+
+    <h2>Where DSCR Fits in an Investor's Toolkit</h2>
+    <p>DSCR tells you whether a rental covers its debt, but it does not tell you what you actually take home. For that, run the same property through the <a href="/tools/cash-flow/" style="color:var(--blue);font-weight:600">cash flow calculator</a>, which subtracts management, maintenance, vacancy, and reserves rather than stopping at PITIA. A deal can clear a healthy DSCR and still be thin on true cash flow once those real costs are honest. For income properties valued on their yield rather than their coverage — small commercial and larger multifamily — the <a href="/tools/cap-rate/" style="color:var(--blue);font-weight:600">cap rate calculator</a> is the better first screen. And when a rental clears the ratio and you are ready to move, the <a href="/rental/" style="color:var(--blue);font-weight:600">rental and DSCR financing program</a> is the path built for exactly these deals.</p>
+    <p>If you want the concept in more depth — how lenders treat gross versus net rent, how vacancy factors in, and why the ratio behaves the way it does — read <a href="/resources/dscr-explained/" style="color:var(--blue);font-weight:600">DSCR explained for real-estate investors</a>. When your numbers hold up, the next step is a real read on the deal.</p>
+  </div>
+</section>
+
+<section class="section section--gray">
+  <div class="container">
+    <div class="section-head center reveal"><div class="eyebrow" style="color:var(--gold)">FAQ</div><h2>DSCR Questions</h2></div>
+    <div class="faq-list reveal">
+      <details class="faq-item"><summary>What does PITIA stand for?</summary><div class="faq-body"><p>Principal, Interest, Taxes, Insurance, and Association dues — the five components of a property's full monthly housing cost. Calculating DSCR against principal and interest alone overstates coverage, so this tool folds in one-twelfth of annual taxes and insurance plus any monthly HOA.</p></div></details>
+      <details class="faq-item"><summary>Is a higher DSCR always better?</summary><div class="faq-body"><p>Higher coverage means more cushion, so from a lender's risk view, yes. From an investor's return view it is more nuanced — a very high DSCR sometimes signals underleverage or a low-growth market. The ratio is one input among several, alongside cash flow, appreciation potential, and your overall strategy.</p></div></details>
+      <details class="faq-item"><summary>Should I use market rent or actual rent?</summary><div class="faq-body"><p>Use the rent you can defend. For an occupied property, that is usually the in-place lease. For a vacant or under-rented property, a supportable market rent from comparable listings is reasonable, but expect an appraiser's rent schedule to be the figure underwriting relies on — not an optimistic projection.</p></div></details>
+      <details class="faq-item"><summary>What DSCR does RECR require?</summary><div class="faq-body"><p>The minimum ratio is set per program and confirmed against the current program sheet: <span class="pending">{{CLAIM:dscr.min_ratio}} — confirming</span>. The 1.25 and 1.00 bands on this page are general industry reference points for reading the number, not a stated RECR requirement.</p></div></details>
+      <details class="faq-item"><summary>Can a property below 1.00 DSCR still be financed?</summary><div class="faq-body"><p>Sometimes, with adjustments — a larger down payment, a smaller loan, or a plan to raise rents. It is not automatically disqualifying, but a self-supporting rental it is not, and the structure changes. The cleanest path is to improve the ratio before you submit.</p></div></details>
+      <details class="faq-item"><summary>Does DSCR include vacancy or maintenance?</summary><div class="faq-body"><p>The classic ratio does not — it compares gross rent to debt service only. That is why DSCR and true cash flow are different numbers. Run the property through the <a href="/tools/cash-flow/" style="color:var(--blue);font-weight:600">cash flow calculator</a> to see the figure after vacancy, management, maintenance, and reserves.</p></div></details>
+    </div>
+  </div>
+</section>
+
+<section class="section section--soft">
+  <div class="container">
+    <div class="cta-band reveal-scale">
+      <h2>Ratio Looks Strong? Let's See the Deal.</h2>
+      <p>Send the property, the rent, and your financing assumptions. A preliminary review gives you a first read on whether a rental structure fits — no full application required.</p>
+      <div class="cta-actions">
+        <a class="btn btn-white" href="/submit-a-deal/">Submit a Deal</a>
+        <a class="btn btn-ghost" href="/rental/">See Rental Financing</a>
+      </div>
+    </div>
+    <div class="disclosure" style="margin-top:2rem">
+      This calculator is provided for planning and education only. Results are illustrative estimates based on inputs you supply, are not a quote, an offer, an approval, or a representation of terms available for any specific transaction, and do not constitute financial, tax, legal, or investment advice. The 1.25 and 1.00 reference bands are common industry conventions, not RECR program minimums; actual debt service coverage requirements are confirmed per transaction against the current program sheet. All financing is subject to program availability, underwriting, property eligibility, borrower qualification, and final approval. Business-purpose, non-owner-occupied transactions only. [ADD APPROVED DISCLOSURE]
+    </div>
+  </div>
+</section>
+
+  </main>
+  <script src="/assets/js/site.js"></script>
+  <script>
+    (function () {
+      var ids = ["rent","pi","taxes","ins","hoa"];
+      function money(n){ return (n<0?"-$":"$") + Math.abs(Math.round(n)).toLocaleString("en-US"); }
+      function calc(){
+        var rent=+document.getElementById("rent").value||0,
+            pi=+document.getElementById("pi").value||0,
+            taxes=+document.getElementById("taxes").value||0,
+            ins=+document.getElementById("ins").value||0,
+            hoa=+document.getElementById("hoa").value||0;
+        var pitia = pi + (taxes/12) + (ins/12) + hoa;
+        var dscr = pitia>0 ? rent/pitia : 0;
+        document.getElementById("r-rent").textContent = money(rent);
+        document.getElementById("r-pitia").textContent = money(pitia);
+        document.getElementById("r-net").textContent = money(rent - pitia);
+        var out = document.getElementById("dscr"), v = document.getElementById("verdict");
+        if(pitia<=0){ out.textContent="—"; v.textContent="Enter a monthly payment and costs to see the ratio."; return; }
+        out.textContent = dscr.toFixed(2);
+        if(dscr>=1.25){ v.textContent="Strong — income comfortably covers the full payment."; }
+        else if(dscr>=1.00){ v.textContent="Tight but positive — covers the payment with a thin margin."; }
+        else { v.textContent="Negative — rent does not cover the full monthly obligation."; }
+      }
+      ids.forEach(function(id){ var el=document.getElementById(id); if(el) el.addEventListener("input", calc); });
+      calc();
+    })();
+  </script>
+</body>
+</html>

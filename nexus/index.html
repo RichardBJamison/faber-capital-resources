@@ -259,6 +259,34 @@
     .activity-item strong { color: var(--navy); }
     .activity-item .when { margin-top: 2px; color: var(--muted); font-size: 15px; }
 
+    /* Accounting ledgers */
+    .ledger-stack { display: grid; gap: 22px; }
+    .ledger-card { border: 2px solid var(--navy); border-radius: 24px; background: #fffaf1; box-shadow: var(--shadow-soft); overflow: hidden; }
+    .ledger-card header { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 14px; padding: 22px 24px; border-bottom: 2px solid var(--line); background: linear-gradient(180deg, #fff6e8, #ffefd7); }
+    .ledger-card header h3 { margin: 0 0 6px; font-size: 1.45rem; color: var(--navy); }
+    .ledger-card header p { margin: 0; color: var(--muted); font-size: 16px; max-width: 52ch; }
+    .ledger-totals { display: flex; flex-wrap: wrap; gap: 10px; }
+    .ledger-pill { min-width: 120px; padding: 10px 14px; border: 2px solid var(--line); border-radius: 14px; background: #fff; text-align: right; }
+    .ledger-pill strong { display: block; font-size: 1.2rem; color: var(--navy); }
+    .ledger-pill span { color: var(--muted); font-size: 13px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+    .ledger-pill.paid strong { color: #1b6b4a; }
+    .ledger-pill.due strong { color: #b45309; }
+    .ledger-table-wrap { overflow-x: auto; }
+    table.ledger { width: 100%; border-collapse: collapse; min-width: 640px; }
+    table.ledger th, table.ledger td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; font-size: 16px; }
+    table.ledger th { background: #f4efe6; color: var(--navy); font-size: 13px; font-weight: 900; letter-spacing: .05em; text-transform: uppercase; }
+    table.ledger tr:last-child td { border-bottom: 0; }
+    table.ledger td.num, table.ledger th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    table.ledger tfoot td { background: #fff6e8; font-weight: 800; color: var(--navy); }
+    .status-chip { display: inline-flex; align-items: center; min-height: 32px; padding: 4px 12px; border-radius: 999px; font-size: 13px; font-weight: 900; letter-spacing: .04em; text-transform: uppercase; border: 2px solid transparent; }
+    .status-chip.paid { background: #d8f3e7; color: #145c3e; border-color: #8fd4b0; }
+    .status-chip.due { background: #fff1d6; color: #8a4b08; border-color: #f0c36d; }
+    .status-chip.scheduled { background: #e7f1ff; color: #1e3a5f; border-color: #9bb8e0; }
+    .status-chip.active { background: #e9f8f5; color: #0f5c55; border-color: #7ecfc6; }
+    .status-chip.once { background: #eeeaff; color: #4b3f8a; border-color: #b8aee8; }
+    .ledger-note { margin: 0; padding: 16px 24px 20px; color: var(--muted); font-size: 15px; line-height: 1.5; border-top: 1px solid var(--line); background: #fffdf8; }
+    .ledger-note a { color: var(--teal); font-weight: 800; }
+
     /* Talk to Richard */
     .comms-layout { display: grid; grid-template-columns: minmax(0, 1.95fr) minmax(350px, 1fr); gap: 22px; align-items: stretch; }
     .chat-shell, .documents-shell { min-width: 0; border: 2px solid var(--coral); border-radius: 24px; background: #fffaf1; box-shadow: var(--shadow); }
@@ -409,7 +437,7 @@
         <nav class="primary-nav" aria-label="Main areas">
           <button type="button" class="nav-link" data-panel="communications">Talk to Richard</button>
           <button type="button" class="nav-link" data-panel="build-out-box">Build Out Box</button>
-          <button type="button" class="nav-link" data-panel="see-progress">See Our Progress</button>
+          <a class="nav-link website" href="https://richardbjamison.github.io/faber-capital-resources/resonant-design-offer/" target="_blank" rel="noopener">Your Offer</a>
           <a class="nav-link website" href="https://richardbjamison.github.io/faber-capital-resources/" target="_blank" rel="noopener">Open Website</a>
         </nav>
         <div class="top-actions">
@@ -446,9 +474,9 @@
             <button type="button" class="door-cta" data-panel="build-out-box"><strong>OPEN THE BUILD</strong><span>Week 1 · Discovery and Foundation</span><span class="arrow" aria-hidden="true">→</span></button>
           </article>
           <article class="door gold">
-            <div class="door-top"><div class="door-icon" aria-hidden="true">↗</div><h3>See Our Progress</h3></div>
-            <p class="door-support">Website growth, marketing and completed work</p>
-            <button type="button" class="door-cta" data-panel="see-progress"><strong>SEE OUR PROGRESS</strong><span id="progressStatus">Tracking is active</span><span class="arrow" aria-hidden="true">→</span></button>
+            <div class="door-top"><div class="door-icon" aria-hidden="true">↗</div><h3>Billing and Invoice</h3></div>
+            <p class="door-support">Your invoices and agency monthly expenses</p>
+            <button type="button" class="door-cta" data-panel="see-progress"><strong>OPEN TO ACCOUNTING</strong><span id="progressStatus">Invoices &amp; monthly expenses</span><span class="arrow" aria-hidden="true">→</span></button>
           </article>
           <article class="door iris">
             <div class="door-top"><div class="door-icon" aria-hidden="true">↗</div><h3>Faber Capital Resources</h3></div>
@@ -522,15 +550,337 @@
       </section>
 
       <section class="panel" id="panel-see-progress" aria-labelledby="progressTitle">
-        <div class="section-intro"><div><p class="section-kicker">See Our Progress</p><h2 id="progressTitle">A simple read on the work.</h2><p>Website growth, marketing activity, and completed build work — explained in plain English.</p></div><div class="current-note" id="progressNote">Tracking is installed; visitor information will begin appearing after the new website launches.</div></div>
-        <div class="analytics-empty" id="analyticsEmpty"><div class="analytics-empty-mark" aria-hidden="true">↗</div><div><h3>Tracking is ready.</h3><p>Visitor information will begin appearing after the new website launches. Until then, there is nothing for you to interpret.</p></div></div>
-        <div class="progress-grid">
-          <article class="progress-card card website"><h3>Website</h3><p>How people are finding and using the public website.</p><div class="metric-list"><div class="metric"><strong id="waVisitors">0</strong><span>Visitors</span></div><div class="metric"><strong id="waInquiries">0</strong><span>Inquiries</span></div><div class="metric"><strong id="waTopPage">—</strong><span>Most viewed page</span></div><div class="metric"><strong id="waTracking">Ready</strong><span>Tracking status</span></div></div><div class="interpretation" id="websiteInterpretation">Tracking is active; the public campaign has not started.</div></article>
-          <article class="progress-card card marketing"><h3>Marketing and Search</h3><p>What is ready to help the right people discover RECR.</p><div class="metric-list"><div class="metric"><strong>Included</strong><span>Search work</span></div><div class="metric"><strong id="marketingCampaign">Planning</strong><span>Campaign status</span></div><div class="metric"><strong id="marketingLeads">0</strong><span>Leads generated</span></div><div class="metric"><strong>Foundation</strong><span>Current focus</span></div></div><div class="interpretation" id="marketingInterpretation">Search planning is part of the build; public campaigns begin after launch preparation.</div></article>
-          <article class="progress-card card build"><h3>Build Progress</h3><p>The current place in the six-week RECR path.</p><div class="metric-list"><div class="metric"><strong>8%</strong><span>Overall starting line</span></div><div class="metric"><strong>Week 1</strong><span>Current week</span></div><div class="metric"><strong>0</strong><span>Weeks completed</span></div><div class="metric"><strong>Discovery</strong><span>Next milestone</span></div></div><div class="progress-meter" aria-label="Build progress 8 percent"><i></i></div><div class="progress-meter-row"><span>Discovery and Foundation</span><span>8%</span></div></article>
+        <div class="section-intro">
+          <div>
+            <p class="section-kicker">Billing and Invoice</p>
+            <h2 id="progressTitle">Accounting for the RECR engagement.</h2>
+            <p>Two simple ledgers: the complete-build offer schedule, and your recurring agency / platform fees.</p>
+          </div>
+          <div class="current-note" id="progressNote">$5,000 deposit received. Next project payment due Fri Jul 31. Project total restored to $16,499. End cap $1,499 fully covered by computer-invoice credit.</div>
         </div>
-        <div class="chart-card card" id="progressChartWrap" hidden><div class="card-header"><div><h3>Website visitors</h3><p>A small view of how website visits are changing.</p></div><span class="status-label gold">Live data</span></div><div class="chart-frame"><svg id="trafficChart" viewBox="0 0 900 240" role="img" aria-label="Website visitor trend"></svg><p class="chart-note" id="chartNote">Traffic trend.</p></div></div>
-        <div class="card pad progress-activity"><div class="card-header"><div><h3>Completed work and recent activity</h3><p>Only meaningful project movement appears here.</p></div><span class="status-label" id="livePresence">No visitors right now</span></div><div id="activityList"><div class="empty-state"><strong>Build work is at the discovery starting line.</strong>The next major milestone is mapping the RECR agency foundation.</div></div></div>
+
+        <div class="card pad" style="margin-bottom:22px">
+          <div class="card-header">
+            <div>
+              <h3>Documents</h3>
+              <p>Signed paperwork and the full proposal breakdown.</p>
+            </div>
+            <span class="status-label gold">Accounting</span>
+          </div>
+          <div class="file-row" style="margin-top:12px">
+            <div class="file-kind" aria-hidden="true">PDF</div>
+            <div>
+              <strong>Signed invoice &amp; connected build agreement</strong>
+              <div class="file-meta">Agency billing · available now</div>
+              <div class="file-actions">
+                <a href="files/Faber_Capital_Resources_Invoice_and_Connected_Build_Agreement_Signed.pdf" target="_blank" rel="noopener">OPEN</a>
+                <a class="download" href="files/Faber_Capital_Resources_Invoice_and_Connected_Build_Agreement_Signed.pdf" target="_blank" rel="noopener" download>DOWNLOAD</a>
+              </div>
+            </div>
+          </div>
+          <div class="file-row" style="margin-top:12px">
+            <div class="file-kind" aria-hidden="true">WEB</div>
+            <div>
+              <strong>Complete proposal (offer breakdown)</strong>
+              <div class="file-meta">Source package · ledger total $16,499 (original complete-build offer)</div>
+              <div class="file-actions">
+                <a href="https://richardbjamison.github.io/faber-capital-resources/complete-proposal/" target="_blank" rel="noopener">OPEN OFFER</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ledger-stack">
+
+          <!-- LEDGER 1: Offer / project payments -->
+          <article class="ledger-card" aria-labelledby="ledgerOfferTitle">
+            <header>
+              <div>
+                <h3 id="ledgerOfferTitle">Ledger 1 · Complete Build Offer</h3>
+                <p>Original complete-build offer restored: package standard <strong>$18,499</strong>, less <strong>$2,000</strong> acceptance discount = contract total <strong>$16,499</strong>.</p>
+              </div>
+              <div class="ledger-totals">
+                <div class="ledger-pill paid"><strong>$6,499</strong><span>Paid</span></div>
+                <div class="ledger-pill due"><strong>$10,000</strong><span>Remaining</span></div>
+                <div class="ledger-pill"><strong>$16,499</strong><span>Project total</span></div>
+              </div>
+            </header>
+            <div class="ledger-table-wrap">
+              <table class="ledger">
+                <caption class="sr-only">Project offer line items and payment schedule</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Line</th>
+                    <th scope="col">Detail</th>
+                    <th scope="col" class="num">Amount</th>
+                    <th scope="col">Due</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="5" style="background:#f8f4ec;font-weight:800;color:var(--navy);font-size:13px;letter-spacing:.04em;text-transform:uppercase">Project package</td>
+                  </tr>
+                  <tr>
+                    <td>Operating system build</td>
+                    <td>Six-week Faber operating system build</td>
+                    <td class="num">$15,000</td>
+                    <td>—</td>
+                    <td><span class="status-chip scheduled">Package</span></td>
+                  </tr>
+                  <tr>
+                    <td>Stabilization</td>
+                    <td>Four-week on-call stabilization</td>
+                    <td class="num">$1,000</td>
+                    <td>—</td>
+                    <td><span class="status-chip scheduled">Package</span></td>
+                  </tr>
+                  <tr>
+                    <td>Website rebuild</td>
+                    <td>Public RECR website rebuild</td>
+                    <td class="num">$1,500</td>
+                    <td>—</td>
+                    <td><span class="status-chip scheduled">Package</span></td>
+                  </tr>
+                  <tr>
+                    <td>SEO system setup</td>
+                    <td>Search foundation setup</td>
+                    <td class="num">$999</td>
+                    <td>—</td>
+                    <td><span class="status-chip scheduled">Package</span></td>
+                  </tr>
+                  <tr>
+                    <td>Package subtotal</td>
+                    <td>Before acceptance discount</td>
+                    <td class="num">$18,499</td>
+                    <td>—</td>
+                    <td><span class="status-chip scheduled">Standard</span></td>
+                  </tr>
+                  <tr>
+                    <td>Acceptance discount</td>
+                    <td>$2,000 complete-build reduction</td>
+                    <td class="num">−$2,000</td>
+                    <td>—</td>
+                    <td><span class="status-chip paid">Applied</span></td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" style="background:#f8f4ec;font-weight:800;color:var(--navy);font-size:13px;letter-spacing:.04em;text-transform:uppercase">Payment schedule → $16,499</td>
+                  </tr>
+                  <tr>
+                    <td>Deposit to begin</td>
+                    <td>$5,000 to begin · received</td>
+                    <td class="num">$5,000</td>
+                    <td>At start</td>
+                    <td><span class="status-chip paid">Paid</span></td>
+                  </tr>
+                  <tr>
+                    <td>Second payment</td>
+                    <td>$5,000 · end of week two (this Friday)</td>
+                    <td class="num">$5,000</td>
+                    <td>Fri, Jul 31, 2026</td>
+                    <td><span class="status-chip due">Due Friday</span></td>
+                  </tr>
+                  <tr>
+                    <td>Third payment</td>
+                    <td>$5,000 · before primary deployment</td>
+                    <td class="num">$5,000</td>
+                    <td>Fri, Aug 21, 2026</td>
+                    <td><span class="status-chip scheduled">Scheduled</span></td>
+                  </tr>
+                  <tr>
+                    <td>End cap / completion</td>
+                    <td>$1,499 at completion · satisfied via computer invoice credit (parts)</td>
+                    <td class="num">$1,499</td>
+                    <td>Completion</td>
+                    <td><span class="status-chip paid">Paid · gear credit</span></td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" style="background:#f8f4ec;font-weight:800;color:var(--navy);font-size:13px;letter-spacing:.04em;text-transform:uppercase">Computer invoice · applied to end cap</td>
+                  </tr>
+                  <tr>
+                    <td>Computer invoice total</td>
+                    <td>Laptop / computer parts invoice (source document pending attach)</td>
+                    <td class="num">$2,711.84</td>
+                    <td>—</td>
+                    <td><span class="status-chip paid">Invoiced</span></td>
+                  </tr>
+                  <tr>
+                    <td>Mac Mini (his machine)</td>
+                    <td>Personal equipment · already paid · not project end-cap credit</td>
+                    <td class="num">$650.99</td>
+                    <td>—</td>
+                    <td><span class="status-chip paid">Paid · personal</span></td>
+                  </tr>
+                  <tr>
+                    <td>Sales tax (est.)</td>
+                    <td>Tax on Mac Mini · ~$25 · already paid with Mini · not end-cap credit</td>
+                    <td class="num">$25.00</td>
+                    <td>—</td>
+                    <td><span class="status-chip paid">Paid · personal</span></td>
+                  </tr>
+                  <tr>
+                    <td>Applied to end cap</td>
+                    <td>Invoice remainder after Mini + tax covers the full $1,499 end cap (surplus stays as gear credit)</td>
+                    <td class="num">$2,035.85</td>
+                    <td>—</td>
+                    <td><span class="status-chip paid">Paid · end cap</span></td>
+                  </tr>
+                  <tr>
+                    <td>End cap balance</td>
+                    <td>$1,499 fully covered by computer-invoice credit</td>
+                    <td class="num">$0.00</td>
+                    <td>Completion</td>
+                    <td><span class="status-chip paid">Paid in full</span></td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="2">Paid to date (deposit $5,000 + end cap $1,499)</td>
+                    <td class="num">$6,499</td>
+                    <td colspan="2"></td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">Cash still due (Fri $5,000 + Aug 21 $5,000)</td>
+                    <td class="num">$10,000</td>
+                    <td colspan="2"></td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">Complete-build total</td>
+                    <td class="num">$16,499</td>
+                    <td colspan="2"></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <p class="ledger-note">
+              Restored original offer: $15,000 OS + $1,000 stabilization + $1,500 website + $999 SEO = <strong>$18,499</strong> standard;
+              less <strong>$2,000</strong> acceptance discount = <strong>$16,499</strong> contract total.
+              End cap is <strong>$1,499</strong> (not $3,499). Computer invoice credit of <strong>$2,035.85</strong> fully covers that end cap.
+              Next cash: <strong>July 31, 2026 — $5,000</strong>.
+            </p>
+          </article>
+
+          <!-- LEDGER 2: Monthly / business fees -->
+          <article class="ledger-card" aria-labelledby="ledgerMonthlyTitle">
+            <header>
+              <div>
+                <h3 id="ledgerMonthlyTitle">Ledger 2 · Monthly Agency &amp; Business Fees</h3>
+                <p>Recurring SEO and CRM management, plus monthly business platform costs. First month includes the primary AI avatar setup fee (one-time).</p>
+              </div>
+              <div class="ledger-totals">
+                <div class="ledger-pill due"><strong>$1,854</strong><span>Month 1 all-in</span></div>
+                <div class="ledger-pill"><strong>$1,555</strong><span>Month 2+ all-in</span></div>
+              </div>
+            </header>
+            <div class="ledger-table-wrap">
+              <table class="ledger">
+                <caption class="sr-only">Monthly agency and business fees</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Fee</th>
+                    <th scope="col">Category</th>
+                    <th scope="col" class="num">Amount</th>
+                    <th scope="col">Cadence</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="5" style="background:#f8f4ec;font-weight:800;color:var(--navy);font-size:13px;letter-spacing:.04em;text-transform:uppercase">Agency monthly</td>
+                  </tr>
+                  <tr>
+                    <td>SEO management</td>
+                    <td>Agency · search program</td>
+                    <td class="num">$599.00</td>
+                    <td>Monthly</td>
+                    <td><span class="status-chip active">Active</span></td>
+                  </tr>
+                  <tr>
+                    <td>CRM / website management</td>
+                    <td>Agency · CRM &amp; site care</td>
+                    <td class="num">$249.00</td>
+                    <td>Monthly</td>
+                    <td><span class="status-chip active">Active</span></td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" style="background:#f8f4ec;font-weight:800;color:var(--navy);font-size:13px;letter-spacing:.04em;text-transform:uppercase">Business platform fees (monthly)</td>
+                  </tr>
+                  <tr>
+                    <td>Primary AI avatar</td>
+                    <td>Business · first month only</td>
+                    <td class="num">$299.00</td>
+                    <td>Month 1 only</td>
+                    <td><span class="status-chip once">First month</span></td>
+                  </tr>
+                  <tr>
+                    <td>GoHighLevel</td>
+                    <td>Business · CRM / ops platform</td>
+                    <td class="num">$299.00</td>
+                    <td>Monthly</td>
+                    <td><span class="status-chip active">Active</span></td>
+                  </tr>
+                  <tr>
+                    <td>Power dialer</td>
+                    <td>Business · calling stack</td>
+                    <td class="num">$199.00</td>
+                    <td>Monthly</td>
+                    <td><span class="status-chip active">Active</span></td>
+                  </tr>
+                  <tr>
+                    <td>Google Workspace</td>
+                    <td>Business · email &amp; productivity</td>
+                    <td class="num">$140.00</td>
+                    <td>Monthly</td>
+                    <td><span class="status-chip active">Active</span></td>
+                  </tr>
+                  <tr>
+                    <td>Twilio (phone numbers)</td>
+                    <td>Business · numbers &amp; telephony</td>
+                    <td class="num">$69.00</td>
+                    <td>Monthly</td>
+                    <td><span class="status-chip active">Active</span></td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="2">Agency monthly (SEO + CRM)</td>
+                    <td class="num">$848.00</td>
+                    <td colspan="2"></td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">Business platforms month 1 (incl. AI avatar)</td>
+                    <td class="num">$1,006.00</td>
+                    <td colspan="2"></td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">Business platforms month 2+ (no AI avatar)</td>
+                    <td class="num">$707.00</td>
+                    <td colspan="2"></td>
+                  </tr>
+                  <tr>
+                    <td colspan="2"><strong>All-in month 1</strong> (agency + business)</td>
+                    <td class="num"><strong>$1,854.00</strong></td>
+                    <td colspan="2"></td>
+                  </tr>
+                  <tr>
+                    <td colspan="2"><strong>All-in month 2+</strong> (agency + business)</td>
+                    <td class="num"><strong>$1,555.00</strong></td>
+                    <td colspan="2"></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <p class="ledger-note">Agency fees: SEO <strong>$599/mo</strong> and CRM/website management <strong>$249/mo</strong> (offer-aligned monthly program fees). Business tools: GHL <strong>$299</strong>, power dialer <strong>$199</strong>, Google Workspace <strong>$140</strong>, Twilio <strong>$69</strong>, plus primary AI avatar <strong>$299</strong> in month 1 only. Totals auto-summed for month 1 vs ongoing months.</p>
+          </article>
+
+        </div>
+
+        <!-- Keep hidden analytics hooks so existing JS does not throw -->
+        <div hidden aria-hidden="true">
+          <span id="waVisitors">0</span><span id="waInquiries">0</span><span id="waTopPage">—</span><span id="waTracking">Ready</span>
+          <span id="websiteInterpretation"></span><span id="marketingCampaign"></span><span id="marketingLeads">0</span><span id="marketingInterpretation"></span>
+          <div id="analyticsEmpty"></div><div id="progressChartWrap"></div><div id="activityList"></div><span id="livePresence"></span><span id="chartNote"></span><svg id="trafficChart"></svg>
+        </div>
       </section>
 
       <section class="panel" id="panel-settings" aria-labelledby="settingsTitle">
@@ -543,7 +893,7 @@
   </div>
 
   <div class="modal" id="helpModal" role="dialog" aria-modal="true" aria-labelledby="helpTitle" aria-hidden="true">
-    <div class="modal-panel"><header><div><p class="section-kicker">A calm place to start</p><h2 id="helpTitle">How can I help?</h2><p>Choose one clear next step. You can always return HOME.</p></div><button type="button" class="close-button" data-close-modal="helpModal" aria-label="Close help">×</button></header><div class="help-options"><button type="button" class="help-option accent" data-help-action="tour">SHOW ME AROUND</button><button type="button" class="help-option" data-help-action="explain">WHAT AM I LOOKING AT?</button><button type="button" class="help-option" data-help-action="question">SEND RICHARD A QUESTION</button><button type="button" class="help-option" data-help-action="home">RETURN HOME</button></div><div class="help-explanation" id="helpExplanation"><strong>Doodle Bug has three doors.</strong><span>Talk to Richard is your conversation and shared documents. Build Out Box is the RECR plan and current work. See Our Progress is the plain-English view of website growth and completed milestones.</span></div><div class="secondary-actions"><button type="button" data-help-action="settings">WORKSPACE SETTINGS</button><button type="button" data-close-modal="helpModal">CLOSE HELP</button></div></div>
+    <div class="modal-panel"><header><div><p class="section-kicker">A calm place to start</p><h2 id="helpTitle">How can I help?</h2><p>Choose one clear next step. You can always return HOME.</p></div><button type="button" class="close-button" data-close-modal="helpModal" aria-label="Close help">×</button></header><div class="help-options"><button type="button" class="help-option accent" data-help-action="tour">SHOW ME AROUND</button><button type="button" class="help-option" data-help-action="explain">WHAT AM I LOOKING AT?</button><button type="button" class="help-option" data-help-action="question">SEND RICHARD A QUESTION</button><button type="button" class="help-option" data-help-action="home">RETURN HOME</button></div><div class="help-explanation" id="helpExplanation"><strong>Doodle Bug has three doors.</strong><span>Talk to Richard is your conversation and shared documents. Build Out Box is the RECR plan and current work. Billing and Invoice is your invoices and agency monthly expenses. Your Offer opens the Resonant Design offer page.</span></div><div class="secondary-actions"><button type="button" data-help-action="settings">WORKSPACE SETTINGS</button><button type="button" data-close-modal="helpModal">CLOSE HELP</button></div></div>
   </div>
   <div class="modal" id="tourModal" role="dialog" aria-modal="true" aria-labelledby="tourTitle" aria-hidden="true">
     <div class="modal-panel"><header><div><p class="section-kicker">Optional guided tour</p><h2 id="tourTitle">Four simple steps.</h2><p>Skip now or take the tour again from Help whenever you like.</p></div><button type="button" class="close-button" id="tourClose" aria-label="Skip tour">×</button></header><div class="tour-step"><div class="tour-number" id="tourNumber">Step 1 of 4</div><h3 id="tourStepTitle">Talk to Richard</h3><p id="tourStepBody">Start here for messages, questions, replies, and shared documents.</p></div><div class="tour-actions"><button type="button" class="quiet-button" id="tourSkip">SKIP TOUR</button><button type="button" class="action-link" id="tourNext">NEXT</button></div></div>
@@ -572,7 +922,7 @@
       var TOUR_STEPS = [
         { title: "Talk to Richard", body: "Start here for messages, questions, replies, and shared documents." },
         { title: "Follow the build", body: "Build Out Box shows what is being created for Real Estate Capital Resources and what comes next." },
-        { title: "See progress", body: "See Our Progress explains website growth, marketing activity, and completed build work." },
+        { title: "Billing and Invoice", body: "Billing and Invoice holds your invoices and agency monthly expenses — open accounting documents from here." },
         { title: "Return home anytime", body: "The HOME button stays in the top-right corner, no matter where you are." }
       ];
       var tourIndex = 0;
@@ -628,7 +978,7 @@
           dashboard: { title: "Good morning, Bill.", sub: "Everything we are building together is right here." },
           communications: { title: "Talk to Richard", sub: "Messages, questions, replies, and shared documents." },
           "build-out-box": { title: "Build Out Box", sub: "Real Estate Capital Resources is being built from the foundation up." },
-          "see-progress": { title: "See Our Progress", sub: "Website growth, marketing activity, and completed build work." },
+          "see-progress": { title: "Billing and Invoice", sub: "Your invoices and agency monthly expenses." },
           settings: { title: "Workspace settings", sub: "Comfort and session preferences for Doodle Bug." }
         };
         return meta[id] || meta.dashboard;
@@ -780,13 +1130,13 @@
           var raw = await r.json(); var d = fcrOnly(raw); lastAnalytics = d; var o = d.overview || {}; var hasData = Number(o.pageviews || 0) > 0 || Number(o.sessions || 0) > 0 || Number(o.uniques || 0) > 0;
           setText("waVisitors", fmtNumber(o.sessions)); setText("waInquiries", fmtNumber(o.convert)); setText("waTopPage", d.topPages && d.topPages[0] ? (d.topPages[0].path || d.topPages[0].title || "Website page") : "—"); setText("waTracking", "Ready"); setText("marketingLeads", fmtNumber(o.convert));
           var empty = byId("analyticsEmpty"); var chart = byId("progressChartWrap"); if (empty) empty.hidden = hasData; if (chart) chart.hidden = !hasData;
-          setText("progressStatus", hasData ? "Website activity is live" : "Tracking is active"); setText("progressNote", hasData ? "Website activity is now being measured." : "Tracking is installed; visitor information will begin appearing after the new website launches.");
+          setText("progressStatus", "Invoices & monthly expenses"); setText("progressNote", "Signed invoice and agreement are available here. Additional monthly statements will appear as they are issued.");
           setText("websiteInterpretation", hasData ? "Traffic is now being measured. This view will explain the trend as more visits arrive." : "Tracking is active; the public campaign has not started.");
           setText("marketingCampaign", hasData ? "Measuring" : "Planning"); setText("marketingInterpretation", hasData ? "Website activity is being measured; Richard will add campaign context as the public work begins." : "Search planning is part of the build; public campaigns begin after launch preparation.");
           if (hasData) { drawTrafficChart(d.dailyTrend); setText("chartNote", "This line shows daily website visits for the selected period."); }
           renderActivity(d); setText("livePresence", d.live_count ? String(d.live_count) + " visitor" + (d.live_count === 1 ? "" : "s") + " right now" : "No visitors right now"); updateNotification(lastCommsMessages, d.alerts);
         } catch (e) {
-          lastAnalytics = { alerts: [] }; setText("progressNote", "The website tracking feed is temporarily offline. Try again later; nothing has been changed."); setText("progressStatus", "Tracking feed offline"); var empty = byId("analyticsEmpty"); if (empty) empty.hidden = false;
+          lastAnalytics = { alerts: [] }; setText("progressNote", "Signed invoice and agreement are available here. Additional monthly statements will appear as they are issued."); setText("progressStatus", "Invoices & monthly expenses"); var empty = byId("analyticsEmpty"); if (empty) empty.hidden = false;
         }
       }
 

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Cap Rate Calculator | Real Estate Capital Resources</title>
+  <meta name="description" content="Free cap rate calculator for commercial and multifamily property. Enter annual rent, operating expenses, and price to get NOI and capitalization rate instantly.">
+  <link rel="canonical" href="https://realestatecapitalresources.com/tools/cap-rate/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/acqua-frame.css">
+</head>
+<body data-active="" data-schema="tool">
+  <div id="site-shell"></div>
+  <main id="main">
+
+<nav class="breadcrumb container" aria-label="Breadcrumb" style="padding-top:1rem;color:var(--muted)">
+  <a href="/" style="color:var(--blue)">Home</a> / <a href="/tools/" style="color:var(--blue)">Investor Tools</a> / <span>Cap Rate Calculator</span>
+</nav>
+
+<section class="section section--soft" style="padding-top:2rem">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="color:var(--gold)">Income-property yield</div>
+      <h1 style="font-size:clamp(2rem,3.6vw,2.9rem);letter-spacing:-0.03em;line-height:1.08;margin:.3rem 0 .9rem">Cap Rate Calculator</h1>
+      <p class="lead-inline"><strong>Capitalization rate</strong> is the yield an income property produces before financing — net operating income divided by price. It is the common language of commercial and multifamily value. Enter annual rent, annual operating expenses, and the purchase price to see NOI and the cap rate.</p>
+    </div>
+    <div class="calc reveal">
+      <div class="calc-inputs">
+        <div class="calc-field"><label for="rent">Annual gross rent ($)</label><input id="rent" type="number" inputmode="numeric" value="42000"></div>
+        <div class="calc-field"><label for="exp">Annual operating expenses ($)</label><input id="exp" type="number" inputmode="numeric" value="15000"></div>
+        <div class="calc-field"><label for="price">Purchase price ($)</label><input id="price" type="number" inputmode="numeric" value="320000"></div>
+      </div>
+      <div class="calc-result">
+        <div class="result-label">Capitalization rate</div>
+        <div class="result-value" id="cap">8.44%</div>
+        <div class="result-note" id="verdict">Yield the property produces before financing, at this price.</div>
+        <div class="result-row"><span>Net operating income (NOI)</span><span id="r-noi">$27,000</span></div>
+        <div class="result-row"><span>Purchase price</span><span id="r-price">$320,000</span></div>
+        <div class="result-row"><span>Implied value at 8%</span><span id="r-val">$337,500</span></div>
+      </div>
+    </div>
+    <p class="section-note">Estimate — illustrative only. Not a quote, an approval, or a representation of terms. Cap rate reflects the inputs you supply; expenses and market rents are subject to independent verification.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container article-body">
+    <h2>What a Cap Rate Tells You</h2>
+    <p>The capitalization rate expresses a property's annual return as if you had paid all cash — no mortgage, no leverage, just the income the asset throws off against what it costs. That makes it the cleanest way to compare two income properties on equal footing, because it strips out how each one happens to be financed. The formula this calculator runs is two steps:</p>
+    <div class="diagram reveal">
+      <div class="diagram-node">Gross rent − expenses</div>
+      <div class="diagram-node">=</div>
+      <div class="diagram-node">NOI</div>
+      <div class="diagram-node">÷ price ×100</div>
+      <div class="diagram-node">= Cap rate</div>
+    </div>
+    <p>First, net operating income: annual gross rent minus annual operating expenses. Then the cap rate: NOI divided by the purchase price, expressed as a percentage. A property earning $27,000 of NOI on a $320,000 price carries a cap rate of about 8.4%. The higher the cap rate, the more income you buy per dollar of price — and, usually, the more risk or the softer the market that comes with it.</p>
+
+    <h2>What Belongs in Operating Expenses — and What Does Not</h2>
+    <p>The accuracy of a cap rate lives or dies on the expense number, and this is where deals are most often misrepresented. Operating expenses include property taxes, insurance, property management, repairs and maintenance, utilities the owner pays, and a realistic allowance for vacancy. They do <em>not</em> include your mortgage payment, because the cap rate is deliberately measured before financing, and they do not include one-time capital improvements or depreciation. A seller's pro forma that shows a suspiciously low expense ratio — anything far below roughly a third of gross rent for a typical residential-style rental — deserves scrutiny, because trimming expenses is the easiest way to make a cap rate look better than the property earns.</p>
+
+    <h2>Reading the Number in Context</h2>
+    <p>There is no universal "good" cap rate, and any source that quotes one without naming a market is guessing. Cap rates are set by the local market for each asset class and location: a stabilized building in a strong, low-vacancy metro trades at a low cap rate because buyers accept a smaller yield for safety and growth, while the same building in a weaker market trades at a higher cap rate because buyers demand more income for the added risk. The useful move is to compare your subject property's cap rate to recent sales of similar assets in the same submarket. If comparable buildings are trading around 7% and your target pencils at 9%, that gap is either an opportunity or a warning — and the reason for it is worth understanding before you buy.</p>
+    <p>Cap rate also works in reverse, which is why it is so central to commercial valuation. If the market prices a class of asset at 8%, then a property producing $27,000 of NOI is worth roughly $337,500 — divide the income by the market cap rate and you have an implied value. That relationship is why raising NOI, through higher rents or lower expenses, increases value directly, and why value-add operators focus so heavily on the income line.</p>
+
+    <h2>From Cap Rate to Financing</h2>
+    <p>Cap rate measures the asset; it does not measure your financed return or tell you what a lender will do with the deal. For that, the property has to clear debt coverage as well — run it through the <a href="/tools/dscr/" style="color:var(--blue);font-weight:600">DSCR calculator</a> to see whether the income covers the debt service, and the <a href="/tools/cash-flow/" style="color:var(--blue);font-weight:600">cash flow calculator</a> to see what actually reaches you after the loan. When a commercial deal holds together, the <a href="/commercial/" style="color:var(--blue);font-weight:600">commercial real-estate financing</a> path covers acquisition, refinance, and value-add on income property. For apartment and larger residential income deals, the <a href="/multifamily/" style="color:var(--blue);font-weight:600">multifamily financing</a> path is built around exactly this kind of NOI-driven underwriting. Any specific leverage, minimum yield, or program threshold is confirmed per transaction rather than quoted here: <span class="pending">{{CLAIM:commercial.property_types}} — confirming against current program sheet</span>.</p>
+  </div>
+</section>
+
+<section class="section section--gray">
+  <div class="container">
+    <div class="section-head center reveal"><div class="eyebrow" style="color:var(--gold)">FAQ</div><h2>Cap Rate Questions</h2></div>
+    <div class="faq-list reveal">
+      <details class="faq-item"><summary>Does cap rate include my mortgage?</summary><div class="faq-body"><p>No — and that is the point. Cap rate measures the property's return before any financing, so two buyers with different loans can compare the same asset on equal terms. Your financed return is a separate calculation that depends on your loan amount, rate, and terms.</p></div></details>
+      <details class="faq-item"><summary>Is a high cap rate good or bad?</summary><div class="faq-body"><p>It depends. A high cap rate buys more income per dollar, but it usually reflects more risk, a weaker market, or an asset that needs work. A low cap rate signals a safer, higher-demand property with less immediate yield. Neither is universally better — the right level depends on your strategy and the local market.</p></div></details>
+      <details class="faq-item"><summary>What should I use for operating expenses?</summary><div class="faq-body"><p>Real, ongoing costs: taxes, insurance, management, maintenance, owner-paid utilities, and a vacancy allowance. Exclude the mortgage, capital improvements, and depreciation. Be skeptical of a seller's expense figure that looks too low — verify with actual statements where you can.</p></div></details>
+      <details class="faq-item"><summary>How does cap rate set a property's value?</summary><div class="faq-body"><p>Divide NOI by the market cap rate for that asset class and you get an implied value. If similar buildings trade at 8% and yours produces $27,000 of NOI, the implied value is about $337,500. Raising NOI raises value directly, which is the core of every value-add plan.</p></div></details>
+      <details class="faq-item"><summary>Should I use in-place or market rents?</summary><div class="faq-body"><p>Use in-place rents for a snapshot of what the property earns today, and run a separate market-rent scenario to see the upside. Underwriting typically relies on actual, documented income, so lead with the real numbers and present market rent as a plan, not a given.</p></div></details>
+      <details class="faq-item"><summary>Does cap rate apply to single-family rentals?</summary><div class="faq-body"><p>It can, but single-family homes are usually valued by comparable sales rather than by yield, so DSCR and cash flow are the more useful screens there. Cap rate comes into its own on commercial and multifamily assets that the market prices on their income.</p></div></details>
+    </div>
+  </div>
+</section>
+
+<section class="section section--soft">
+  <div class="container">
+    <div class="cta-band reveal-scale">
+      <h2>Cap Rate Works? Let's See the Asset.</h2>
+      <p>Send the property, the income and expense detail, and your price. A preliminary review gives you a first read on whether a commercial or multifamily structure fits.</p>
+      <div class="cta-actions">
+        <a class="btn btn-white" href="/submit-a-deal/">Submit a Deal</a>
+        <a class="btn btn-ghost" href="/commercial/">See Commercial Financing</a>
+      </div>
+    </div>
+    <div class="disclosure" style="margin-top:2rem">
+      This calculator is provided for planning and education only. Results are illustrative estimates based on inputs you supply, are not a quote, an offer, an approval, or a representation of terms available for any specific transaction, and do not constitute financial, tax, legal, or investment advice. Cap rate depends entirely on the income and expense figures entered and on independently verified market data. All financing is subject to program availability, underwriting, property eligibility, borrower qualification, and final approval. Business-purpose, non-owner-occupied transactions only. [ADD APPROVED DISCLOSURE]
+    </div>
+  </div>
+</section>
+
+  </main>
+  <script src="/assets/js/site.js"></script>
+  <script>
+    (function () {
+      var ids = ["rent","exp","price"];
+      function money(n){ return (n<0?"-$":"$") + Math.abs(Math.round(n)).toLocaleString("en-US"); }
+      function calc(){
+        var rent=+document.getElementById("rent").value||0,
+            exp=+document.getElementById("exp").value||0,
+            price=+document.getElementById("price").value||0;
+        var noi = rent - exp;
+        var cap = price>0 ? (noi/price*100) : 0;
+        document.getElementById("r-noi").textContent = money(noi);
+        document.getElementById("r-price").textContent = money(price);
+        document.getElementById("r-val").textContent = money(noi/0.08);
+        var out = document.getElementById("cap"), v = document.getElementById("verdict");
+        if(price<=0){ out.textContent="—"; v.textContent="Enter a purchase price to see the cap rate."; return; }
+        out.textContent = cap.toFixed(2) + "%";
+        if(noi<=0){ v.textContent="Expenses meet or exceed income — no positive yield at this price."; }
+        else { v.textContent="Yield the property produces before financing, at this price."; }
+      }
+      ids.forEach(function(id){ var el=document.getElementById(id); if(el) el.addEventListener("input", calc); });
+      calc();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+# Real Estate Capital Resources (RECR)
+> Capital-path guidance for real-estate investors. Property-first review across purchase, rehab, rental, bridge, construction, commercial, multifamily, portfolio, and joint-venture structures.
+
+Site: https://realestatecapitalresources.com/
+Markets: Cleveland, OH and Fort Lauderdale / South Florida
+Phone: 954-676-4205
+Email: fabercapitalresources@gmail.com
+Address: 1273 W 6th St, Cleveland, OH 44113
+
+## Confirmed differentiator (mockup; owner-confirmed, not yet launch-approved)
+- Up to 100% of purchase, rehab, and closing costs on qualifying joint-venture transactions
+- When total project cost is within 70% of after-repair value (ARV)
+- Always subject to ARV support, documentation, economics, availability, underwriting, and final approval
+- Not all transactions qualify
+
+## Primary pages
+- [Home](https://realestatecapitalresources.com/)
+- [Funding Programs](https://realestatecapitalresources.com/loan-products/)
+- [100% Purchase & Rehab](https://realestatecapitalresources.com/purchase-rehab/)
+- [Joint Venture](https://realestatecapitalresources.com/joint-venture/)
+- [Fix & Flip](https://realestatecapitalresources.com/fix-and-flip/)
+- [Rental / DSCR](https://realestatecapitalresources.com/rental/)
+- [Bridge](https://realestatecapitalresources.com/bridge/)
+- [Ground-Up](https://realestatecapitalresources.com/ground-up/)
+- [Commercial](https://realestatecapitalresources.com/commercial/)
+- [Multifamily](https://realestatecapitalresources.com/multifamily/)
+- [Portfolio](https://realestatecapitalresources.com/portfolio/)
+- [How It Works](https://realestatecapitalresources.com/how-it-works/)
+- [Submit a Deal](https://realestatecapitalresources.com/submit-a-deal/)
+- [Tools](https://realestatecapitalresources.com/tools/)
+- [Resources](https://realestatecapitalresources.com/resources/)
+- [Partners](https://realestatecapitalresources.com/partners/)
+
+## Optional
+- Sitemap: https://realestatecapitalresources.com/sitemap.xml
+- Robots: https://realestatecapitalresources.com/robots.txt

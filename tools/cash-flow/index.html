@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Rental Cash-Flow Calculator | Real Estate Capital Resources</title>
+  <meta name="description" content="Estimate monthly and annual rental cash flow and cash-on-cash return. Enter rent, P&I, taxes, insurance, HOA, plus vacancy, maintenance, and management.">
+  <link rel="canonical" href="https://realestatecapitalresources.com/tools/cash-flow/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/acqua-frame.css">
+</head>
+<body data-active="" data-schema="tool">
+  <div id="site-shell"></div>
+  <main id="main">
+
+<nav class="breadcrumb container" aria-label="Breadcrumb" style="padding-top:1rem;color:var(--muted)">
+  <a href="/" style="color:var(--blue)">Home</a> / <a href="/tools/" style="color:var(--blue)">Calculators &amp; Tools</a> / <span>Rental Cash-Flow Calculator</span>
+</nav>
+
+<section class="section section--soft" style="padding-top:2rem;padding-bottom:2rem">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="color:var(--gold)">Investor calculator</div>
+      <h1 style="font-size:clamp(1.9rem,3.4vw,2.7rem);letter-spacing:-0.03em;line-height:1.1;margin:.3rem 0 .8rem">Rental Cash-Flow Calculator</h1>
+      <p class="lead-inline">A rental property either pays you every month or quietly costs you money. This calculator separates the two before you buy. Enter the rent and every real monthly cost — including the reserves most spreadsheets leave out — and see monthly cash flow, annual cash flow, and cash-on-cash return on the capital you put in.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:1rem">
+  <div class="container">
+    <div class="calc reveal">
+      <div class="calc-inputs">
+        <div class="calc-field"><label for="rent">Monthly rent ($)</label><input id="rent" type="number" inputmode="numeric" value="1800"></div>
+        <div class="calc-field"><label for="pi">Monthly principal &amp; interest / P&amp;I ($)</label><input id="pi" type="number" inputmode="numeric" value="820"></div>
+        <div class="calc-field"><label for="tax">Monthly property taxes ($)</label><input id="tax" type="number" inputmode="numeric" value="220"></div>
+        <div class="calc-field"><label for="ins">Monthly insurance ($)</label><input id="ins" type="number" inputmode="numeric" value="95"></div>
+        <div class="calc-field"><label for="hoa">Monthly HOA / condo dues ($)</label><input id="hoa" type="number" inputmode="numeric" value="0"></div>
+        <div class="calc-field"><label for="vac">Vacancy (% of rent)</label><input id="vac" type="number" inputmode="decimal" value="5"></div>
+        <div class="calc-field"><label for="maint">Maintenance / repairs (% of rent)</label><input id="maint" type="number" inputmode="decimal" value="5"></div>
+        <div class="calc-field"><label for="mgmt">Property management (% of rent)</label><input id="mgmt" type="number" inputmode="decimal" value="8"></div>
+        <div class="calc-field"><label for="cash">Total cash invested — for cash-on-cash ($, optional)</label><input id="cash" type="number" inputmode="numeric" value="45000"></div>
+      </div>
+      <div class="calc-result">
+        <div class="result-label">Monthly cash flow</div>
+        <div class="result-value" id="mcf">$—</div>
+        <div class="result-note" id="verdict">Positive cash flow — the property covers its costs and pays you.</div>
+        <div class="result-row"><span>Annual cash flow</span><span id="acf">$—</span></div>
+        <div class="result-row"><span>Total monthly operating cost</span><span id="cost">$—</span></div>
+        <div class="result-row"><span>Vacancy + maintenance + management reserve</span><span id="reserve">$—</span></div>
+        <div class="result-row"><span>Cash-on-cash return</span><span id="coc">—</span></div>
+      </div>
+    </div>
+    <p class="section-note">Estimate — illustrative only. Not a quote, an approval, or investment advice. Defaults are common planning assumptions, not RECR figures; replace every field with your own numbers and confirm actual rent, taxes, insurance, and financing costs before you rely on any result.</p>
+  </div>
+</section>
+
+<section class="section section--gray">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="color:var(--gold)">How to read it</div>
+      <h2>What the Number Actually Tells You</h2>
+    </div>
+    <div class="two-col">
+      <div class="reveal-left">
+        <p>Monthly cash flow is what is left after the property pays for itself. It is rent minus every recurring cost of owning and operating the unit: the mortgage payment, taxes, insurance, any HOA dues, and the three reserves that separate a real projection from an optimistic one — vacancy, maintenance, and management. When that figure is positive, the property carries its own debt and still puts money in your account. When it is negative, you are subsidizing the asset every month and betting entirely on appreciation to bail you out.</p>
+        <p>The reserves are where most back-of-the-napkin math goes wrong. A property is not rented one hundred percent of the time, it does not maintain itself, and someone has to manage it even if that someone is you. Leaving those three lines out does not make them disappear — it just moves the surprise to the month a tenant leaves, the furnace dies, or your time runs out. Modeling them up front is the difference between a plan and a wish.</p>
+        <ul class="list-check">
+          <li><strong>Vacancy</strong> reserves for the weeks between tenants and the occasional non-paying month. Five percent is a common starting assumption; soft rental markets warrant more.</li>
+          <li><strong>Maintenance</strong> covers turns, repairs, and the slow replacement of roofs, systems, and appliances. Older properties carry a higher percentage.</li>
+          <li><strong>Management</strong> is a real cost even when you self-manage, because your time has value. If you plan to hire out, use the actual quoted rate.</li>
+        </ul>
+      </div>
+      <div class="reveal-right">
+        <h2 style="font-size:1.5rem;letter-spacing:-0.02em">Cash-on-Cash Return</h2>
+        <p>Cash flow tells you whether the property pays. Cash-on-cash tells you whether it is a good use of your money. It is annual cash flow divided by the total cash you actually put into the deal — down payment, closing costs, and any rehab you funded out of pocket. A property that throws off $3,000 a year on $45,000 of invested cash returns roughly 6.7 percent cash-on-cash, before any appreciation, loan paydown, or tax benefit.</p>
+        <p>That single percentage lets you compare a rental against every other place your capital could sit. It also exposes the quiet cost of a low-leverage purchase: put more cash in and monthly cash flow rises, but cash-on-cash can fall, because the return is now spread across a larger pile of money. The right amount of leverage is a deliberate choice, not an accident — and it is exactly the tension a joint-venture or higher-leverage structure is built to change.</p>
+        <p>Where financing lets you keep more of your own capital in reserve, the same rent can produce a stronger cash-on-cash figure on the cash you actually deployed. That is the lever this calculator helps you see. Run the debt-service side of the same property through the <a href="/tools/dscr/" style="color:var(--blue);font-weight:600">DSCR calculator</a> to check whether the rent also supports the loan a lender would underwrite.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="color:var(--gold)">The math, spelled out</div>
+      <h2>Every Line in the Formula</h2>
+      <p>Nothing hidden. This is exactly what the calculator computes when you change an input.</p>
+    </div>
+    <div class="table-scroll reveal">
+      <table class="worked">
+        <caption>Illustrative only. Not a quote, not an offer, not a representation of any specific property or financing.</caption>
+        <tbody>
+          <tr><th scope="row">Gross monthly rent</th><td class="num">$1,800</td><td>What the unit collects when occupied</td></tr>
+          <tr><th scope="row">Principal &amp; interest (P&amp;I)</th><td class="num">$820</td><td>The mortgage payment on your financing</td></tr>
+          <tr><th scope="row">Property taxes</th><td class="num">$220</td><td>Monthly share of the annual bill</td></tr>
+          <tr><th scope="row">Insurance</th><td class="num">$95</td><td>Landlord / hazard coverage</td></tr>
+          <tr><th scope="row">HOA / condo dues</th><td class="num">$0</td><td>Where applicable</td></tr>
+          <tr><th scope="row">Vacancy (5% of rent)</th><td class="num">$90</td><td>Reserve for empty months</td></tr>
+          <tr><th scope="row">Maintenance (5% of rent)</th><td class="num">$90</td><td>Repairs and capital reserve</td></tr>
+          <tr><th scope="row">Management (8% of rent)</th><td class="num">$144</td><td>Operating cost, even if self-managed</td></tr>
+          <tr class="total"><td>Monthly cash flow</td><td class="num">$341</td><td>Rent minus every cost above</td></tr>
+          <tr class="total"><td>Annual cash flow</td><td class="num">$4,092</td><td>Monthly cash flow &times; 12</td></tr>
+          <tr><th scope="row">Cash-on-cash (on $45,000 in)</th><td class="num">9.1%</td><td>Annual cash flow &divide; cash invested</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:1.25rem">Change one input and watch the chain move. Drop the rent by $150 and the reserves fall slightly while the payment stays fixed — cash flow compresses fast, because the costs are mostly rigid and the rent is the only elastic line. That sensitivity is the whole reason to model a rental before you own it, not after. A deal that clears by $341 a month has room; a deal that clears by $40 does not.</p>
+    <div class="hero-actions" style="margin-top:1.25rem"><a class="btn btn-primary" href="/submit-a-deal/">Submit a Deal for Review</a></div>
+  </div>
+</section>
+
+<section class="section section--soft">
+  <div class="container">
+    <div class="section-head center reveal"><div class="eyebrow" style="color:var(--gold)">FAQ</div><h2>Questions About Rental Cash Flow</h2></div>
+    <div class="faq-list reveal">
+      <details class="faq-item"><summary>Why does the calculator subtract vacancy, maintenance, and management as percentages?</summary><div class="faq-body"><p>Because those three costs scale with rent and recur forever, but they do not arrive on a neat monthly schedule. Reserving a percentage of every month's rent smooths a lumpy reality: the tenant turn, the roof, the eventual property manager. A projection that ignores them looks great on paper and disappoints in year two.</p></div></details>
+      <details class="faq-item"><summary>What is a "good" monthly cash flow?</summary><div class="faq-body"><p>There is no universal number — it depends on the price of the property, your market, and your goals. What matters is that the figure is positive after real reserves, and that it leaves enough room to absorb a bad month without forcing a sale. Thin positive cash flow on paper can turn negative the first time a major system fails.</p></div></details>
+      <details class="faq-item"><summary>How is cash-on-cash different from cap rate?</summary><div class="faq-body"><p>Cap rate measures the property's unleveraged return — net operating income divided by price, ignoring the loan. Cash-on-cash measures your return on the actual cash you invested, after financing. The two diverge the moment you use leverage, and cash-on-cash is usually the more useful number for an investor deciding where to put a limited amount of capital.</p></div></details>
+      <details class="faq-item"><summary>Should I include principal paydown or appreciation here?</summary><div class="faq-body"><p>No. This tool measures spendable cash flow only, which keeps it honest. Principal paydown builds equity but you cannot spend it monthly, and appreciation is a forecast, not a cash flow. Both are real parts of total return — they just belong in a separate calculation, not in the number that tells you whether the property pays its own bills.</p></div></details>
+      <details class="faq-item"><summary>Does financing structure change my cash flow?</summary><div class="faq-body"><p>Directly. The P&amp;I line is set entirely by how the purchase is financed, and the cash-invested figure driving cash-on-cash is set by how much of your own money the structure requires. Keeping more capital in reserve rather than in the deal can raise cash-on-cash on the money you actually deployed. See how a rental fits RECR's <a href="/rental/" style="color:var(--blue);font-weight:600">rental and DSCR financing</a>.</p></div></details>
+      <details class="faq-item"><summary>Can I use this for a property I plan to flip, not hold?</summary><div class="faq-body"><p>Not usefully — a flip is a one-time profit event, not a monthly income stream. For a resale project, model the spread between purchase, rehab, and after-repair value instead, using the <a href="/tools/deal-analyzer/" style="color:var(--blue);font-weight:600">fix-and-flip deal analyzer</a>. Use this calculator when the exit is to rent and hold.</p></div></details>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-band reveal-scale">
+      <h2>Rental Numbers That Work?</h2>
+      <p>If the cash flow and cash-on-cash hold up, the next step is financing that keeps the return strong. Send the property, the rent, and your numbers for a first read.</p>
+      <div class="cta-actions">
+        <a class="btn btn-white" href="/submit-a-deal/">Submit a Deal</a>
+        <a class="btn btn-ghost" href="/rental/">See Rental Financing</a>
+      </div>
+    </div>
+    <div class="disclosure" style="margin-top:2rem">
+      This calculator is an educational estimate only. It is not a quote, an approval, an appraisal, or investment, tax, or legal advice, and it does not represent terms available for any specific property or borrower. Default values are generic planning assumptions and are not figures offered by Real Estate Capital Resources. Actual rent, taxes, insurance, financing costs, and reserves vary; verify every input independently. All financing is subject to program availability, property eligibility, borrower qualification, underwriting, and final approval. Business-purpose, non-owner-occupied transactions only. [ADD APPROVED DISCLOSURE]
+    </div>
+  </div>
+</section>
+
+  </main>
+  <script src="/assets/js/site.js"></script>
+  <script>
+    (function () {
+      var ids = ["rent","pi","tax","ins","hoa","vac","maint","mgmt","cash"];
+      function money(n){ return (n<0?"-$":"$") + Math.round(Math.abs(n)).toLocaleString("en-US"); }
+      function val(id){ return +document.getElementById(id).value || 0; }
+      function calc(){
+        var rent=val("rent"), pi=val("pi"), tax=val("tax"), ins=val("ins"), hoa=val("hoa"),
+            vacP=val("vac"), maintP=val("maint"), mgmtP=val("mgmt"), cash=val("cash");
+        var vacancy=rent*vacP/100, maintenance=rent*maintP/100, management=rent*mgmtP/100;
+        var reserve=vacancy+maintenance+management;
+        var cost=pi+tax+ins+hoa+reserve;
+        var mcf=rent-cost, acf=mcf*12;
+        document.getElementById("mcf").textContent=money(mcf);
+        document.getElementById("acf").textContent=money(acf);
+        document.getElementById("cost").textContent=money(cost);
+        document.getElementById("reserve").textContent=money(reserve);
+        var cocEl=document.getElementById("coc");
+        cocEl.textContent = cash>0 ? (acf/cash*100).toFixed(1)+"%" : "add cash invested";
+        var v=document.getElementById("verdict");
+        if(mcf>0){ v.textContent="Positive cash flow — the property covers its costs and pays you."; }
+        else if(mcf===0){ v.textContent="Breakeven — the property covers its costs with nothing to spare."; }
+        else { v.textContent="Negative cash flow — the property costs you money every month as modeled."; }
+      }
+      ids.forEach(function(id){ var el=document.getElementById(id); if(el) el.addEventListener("input", calc); });
+      calc();
+    })();
+  </script>
+</body>
+</html>

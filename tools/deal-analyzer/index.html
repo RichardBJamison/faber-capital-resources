@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Fix-and-Flip Deal Analyzer | Real Estate Capital Resources</title>
+  <meta name="description" content="Estimate net profit, profit margin, and ROI on a fix-and-flip. Enter purchase, rehab, ARV, holding, and selling costs to see if the spread supports the deal.">
+  <link rel="canonical" href="https://realestatecapitalresources.com/tools/deal-analyzer/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/acqua-frame.css">
+</head>
+<body data-active="" data-schema="tool">
+  <div id="site-shell"></div>
+  <main id="main">
+
+<nav class="breadcrumb container" aria-label="Breadcrumb" style="padding-top:1rem;color:var(--muted)">
+  <a href="/" style="color:var(--blue)">Home</a> / <a href="/tools/" style="color:var(--blue)">Calculators &amp; Tools</a> / <span>Fix-and-Flip Deal Analyzer</span>
+</nav>
+
+<section class="section section--soft" style="padding-top:2rem;padding-bottom:2rem">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="color:var(--gold)">Investor calculator</div>
+      <h1 style="font-size:clamp(1.9rem,3.4vw,2.7rem);letter-spacing:-0.03em;line-height:1.1;margin:.3rem 0 .8rem">Fix-and-Flip Deal Analyzer</h1>
+      <p class="lead-inline">Every flip lives or dies on the spread between what you put in and what the market gives back. This analyzer takes the five numbers that decide it — purchase, rehab, after-repair value, holding costs, and selling costs — and returns net profit, profit margin, and return on the cash you have at risk. If the spread is thin here, no financing structure fixes it.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:1rem">
+  <div class="container">
+    <div class="calc reveal">
+      <div class="calc-inputs">
+        <div class="calc-field"><label for="purchase">Purchase price ($)</label><input id="purchase" type="number" inputmode="numeric" value="180000"></div>
+        <div class="calc-field"><label for="rehab">Rehab budget ($)</label><input id="rehab" type="number" inputmode="numeric" value="55000"></div>
+        <div class="calc-field"><label for="arv">After-repair value / ARV ($)</label><input id="arv" type="number" inputmode="numeric" value="330000"></div>
+        <div class="calc-field"><label for="holding">Holding costs ($)</label><input id="holding" type="number" inputmode="numeric" value="12000"></div>
+        <div class="calc-field"><label for="selling">Selling costs (% of ARV)</label><input id="selling" type="number" inputmode="decimal" value="8"></div>
+        <div class="calc-field"><label for="cashin">Cash invested / cash-in — for ROI ($)</label><input id="cashin" type="number" inputmode="numeric" value="70000"></div>
+      </div>
+      <div class="calc-result">
+        <div class="result-label">Estimated net profit</div>
+        <div class="result-value" id="profit">$—</div>
+        <div class="result-note" id="verdict">Profit is the after-repair value minus every cost of getting there.</div>
+        <div class="result-row"><span>Profit margin (profit &divide; ARV)</span><span id="margin">—</span></div>
+        <div class="result-row"><span>Return on cash-in (ROI)</span><span id="roi">—</span></div>
+        <div class="result-row"><span>Selling costs</span><span id="sellAmt">$—</span></div>
+        <div class="result-row"><span>Total project cost</span><span id="totalCost">$—</span></div>
+      </div>
+    </div>
+    <p class="section-note">Estimate — illustrative only. Not a quote, an approval, an appraisal, or a projection of results. Defaults are placeholders, not RECR figures; the ARV must be independently supported by comparable sales before any of these numbers mean anything.</p>
+  </div>
+</section>
+
+<section class="section section--gray">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="color:var(--gold)">The five numbers</div>
+      <h2>What Each Input Is Really Measuring</h2>
+    </div>
+    <div class="two-col">
+      <div class="reveal-left">
+        <p>A flip has exactly one source of money — the resale — and a stack of costs standing between you and it. The analyzer models that stack honestly, because the mistakes that sink flips are almost always costs left out, not revenue overestimated. Well, both happen — but an inflated ARV and a forgotten cost line are the two classics, and this tool puts them side by side where you can see them fight.</p>
+        <ul class="list-check">
+          <li><strong>Purchase price</strong> is your contract basis — what you actually pay to acquire, not the asking price or the tax value.</li>
+          <li><strong>Rehab budget</strong> is the full line-item cost to bring the property to resale condition, contingency included. Build it in the <a href="/tools/rehab-budget/" style="color:var(--blue);font-weight:600">rehab budget worksheet</a> first.</li>
+          <li><strong>After-repair value (ARV)</strong> is the defensible resale price the finished property supports — the number an appraiser and a buyer will both stand behind, not the optimistic top of the range.</li>
+          <li><strong>Holding costs</strong> are everything the project bleeds while you own it: loan cost, taxes, insurance, utilities, and the price of every extra month on market.</li>
+          <li><strong>Selling costs</strong> are commissions, closing, and concessions — modeled as a percentage of ARV because that is how they scale.</li>
+        </ul>
+      </div>
+      <div class="reveal-right">
+        <h2 style="font-size:1.5rem;letter-spacing:-0.02em">Profit, Margin, and ROI Are Three Different Questions</h2>
+        <p><strong>Net profit</strong> is the dollars left over: ARV minus purchase, rehab, holding, and selling costs. It is what you keep if everything goes to plan.</p>
+        <p><strong>Profit margin</strong> is that profit as a share of ARV. It answers "how much room does this deal have?" A wide margin can absorb an overrun, a soft market, or an extra month of holding; a thin margin means any one of those turns a winner into a loss. Margin is the single best measure of how much a deal can go wrong and still survive.</p>
+        <p><strong>ROI</strong> is profit divided by the cash you actually put in. This is where financing changes the picture entirely. Fund most of the deal and keep your own cash small, and the same dollar profit lands on a much smaller base — the return on your capital climbs. It is the difference between a deal that is merely profitable and one that is worth your limited cash. See how RECR structures the capital side on <a href="/fix-and-flip/" style="color:var(--blue);font-weight:600">fix-and-flip financing</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="color:var(--gold)">Worked example</div>
+      <h2>The Full Arithmetic on One Deal</h2>
+      <p>This is exactly what the analyzer computes. The relationships are real; only the numbers are illustrative.</p>
+    </div>
+    <div class="table-scroll reveal">
+      <table class="worked">
+        <caption>Illustrative only. Not a quote, not an offer, not a representation of results for any specific transaction.</caption>
+        <tbody>
+          <tr><th scope="row">After-repair value (ARV)</th><td class="num">$330,000</td><td>Supported by comparable sales</td></tr>
+          <tr><th scope="row">Purchase price</th><td class="num">$180,000</td><td>Contract basis</td></tr>
+          <tr><th scope="row">Rehab budget</th><td class="num">$55,000</td><td>Line-item, contingency included</td></tr>
+          <tr><th scope="row">Holding costs</th><td class="num">$12,000</td><td>Taxes, insurance, utilities, capital cost</td></tr>
+          <tr><th scope="row">Selling costs (8% of ARV)</th><td class="num">$26,400</td><td>Commission, closing, concessions</td></tr>
+          <tr class="total"><td>Total project cost</td><td class="num">$273,400</td><td>Everything between you and the sale</td></tr>
+          <tr class="total"><td>Estimated net profit</td><td class="num">$56,600</td><td>ARV minus total project cost</td></tr>
+          <tr><th scope="row">Profit margin (÷ ARV)</th><td class="num">17.2%</td><td>How much room the deal has</td></tr>
+          <tr><th scope="row">ROI (on $70,000 cash-in)</th><td class="num">80.9%</td><td>Return on the cash you risked</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:1.25rem">Now stress it. Hold the same purchase and rehab but drop the ARV to $305,000 — a market that came in softer than your comps promised — and the profit falls by roughly $23,000 while selling costs shrink only slightly, because most of the stack is fixed. That is the asymmetry every flipper learns eventually: costs are rigid and the exit is not, so a deal needs enough margin to survive an ARV that disappoints. A project analyzed at a 17% margin can weather that miss; one analyzed at 6% cannot.</p>
+    <p>Before you rely on any of this, set your maximum purchase price so the margin is built in from the offer, not hoped for afterward — run the numbers through the <a href="/tools/mao/" style="color:var(--blue);font-weight:600">maximum allowable offer calculator</a>. And where a deal is strong but your cash is committed elsewhere, a joint-venture structure can fund the stack instead — see <a href="/purchase-rehab/" style="color:var(--blue);font-weight:600">100% purchase and rehab funding</a>.</p>
+    <div class="hero-actions" style="margin-top:1.25rem"><a class="btn btn-primary" href="/submit-a-deal/">Submit a Deal for Review</a></div>
+  </div>
+</section>
+
+<section class="section section--soft">
+  <div class="container">
+    <div class="section-head center reveal"><div class="eyebrow" style="color:var(--gold)">FAQ</div><h2>Questions About Analyzing a Flip</h2></div>
+    <div class="faq-list reveal">
+      <details class="faq-item"><summary>What profit margin makes a flip worth doing?</summary><div class="faq-body"><p>There is no fixed threshold, but the principle is that margin has to be wide enough to survive the things that go wrong — an overrun, a slow sale, an ARV that comes in under your comps. A margin thin enough that a single surprise erases it is not a deal with a small profit; it is a deal with a large chance of a loss. Give yourself room.</p></div></details>
+      <details class="faq-item"><summary>Why are selling costs a percentage of ARV instead of a flat amount?</summary><div class="faq-body"><p>Because the biggest components — agent commission and buyer concessions — scale with the sale price. A percentage of ARV tracks that automatically, so a higher-value flip carries a proportionally higher selling cost. Eight percent is a common planning figure that covers commission, closing, and typical concessions, but you should use whatever your market and strategy actually require.</p></div></details>
+      <details class="faq-item"><summary>What should I include in holding costs?</summary><div class="faq-body"><p>Everything the property costs you while you own it and are not yet selling: financing cost, property taxes, insurance, utilities, and any staging or maintenance during the marketing period. The single biggest driver is time — every extra month on market adds another month of all of it, which is why an optimistic timeline is one of the most expensive mistakes in a flip.</p></div></details>
+      <details class="faq-item"><summary>How does financing change the ROI?</summary><div class="faq-body"><p>Profoundly. Net profit and margin depend on the deal; ROI depends on how much of your own cash is in it. Fund more of the purchase and rehab and keep your cash-in small, and the same profit is measured against a smaller base, so the return on your capital rises. It also lets one pool of cash run several deals instead of one. That leverage is the entire point of using capital rather than your own balance sheet.</p></div></details>
+      <details class="faq-item"><summary>Why does the ARV matter more than any other input?</summary><div class="faq-body"><p>Because it is the only number you do not control and the one everything else is measured against. Purchase and rehab are costs you can manage; ARV is the market's verdict, delivered at the worst possible time to be wrong about it. An inflated ARV makes every other number look fine right up until the property does not sell. Support it with real comparable sales, not the top of the range.</p></div></details>
+      <details class="faq-item"><summary>Does a strong result here mean the deal is approved?</summary><div class="faq-body"><p>No. This is a planning estimate, not an underwriting decision. A promising spread is a reason to take the deal to a real review, where the ARV, budget, and exit are tested against evidence. <a href="/submit-a-deal/" style="color:var(--blue);font-weight:600">Submit the deal</a> and let the numbers meet scrutiny.</p></div></details>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-band reveal-scale">
+      <h2>Spread Holds Up? Fund It.</h2>
+      <p>If the margin has room and the ARV is supported, the next step is capital that keeps your ROI high. Send the deal for a first read.</p>
+      <div class="cta-actions">
+        <a class="btn btn-white" href="/submit-a-deal/">Submit a Deal</a>
+        <a class="btn btn-ghost" href="/fix-and-flip/">See Fix-and-Flip Financing</a>
+      </div>
+    </div>
+    <div class="disclosure" style="margin-top:2rem">
+      This analyzer is an educational estimate only. It is not a quote, an approval, an appraisal, or a projection of results, and it does not represent terms available for any specific transaction or borrower. Default values are placeholders and are not figures offered by Real Estate Capital Resources. After-repair value must be independently supported by comparable sales; actual costs, timelines, and resale prices vary. All financing is subject to program availability, property eligibility, borrower qualification, underwriting, and final approval. Business-purpose, non-owner-occupied transactions only. [ADD APPROVED DISCLOSURE]
+    </div>
+  </div>
+</section>
+
+  </main>
+  <script src="/assets/js/site.js"></script>
+  <script>
+    (function () {
+      var ids = ["purchase","rehab","arv","holding","selling","cashin"];
+      function money(n){ return (n<0?"-$":"$") + Math.round(Math.abs(n)).toLocaleString("en-US"); }
+      function val(id){ return +document.getElementById(id).value || 0; }
+      function calc(){
+        var purchase=val("purchase"), rehab=val("rehab"), arv=val("arv"),
+            holding=val("holding"), sellP=val("selling"), cashin=val("cashin");
+        var sellAmt=arv*sellP/100;
+        var totalCost=purchase+rehab+holding+sellAmt;
+        var profit=arv-totalCost;
+        document.getElementById("sellAmt").textContent=money(sellAmt);
+        document.getElementById("totalCost").textContent=money(totalCost);
+        document.getElementById("profit").textContent=money(profit);
+        document.getElementById("margin").textContent = arv>0 ? (profit/arv*100).toFixed(1)+"%" : "enter ARV";
+        document.getElementById("roi").textContent = cashin>0 ? (profit/cashin*100).toFixed(1)+"%" : "add cash-in";
+        var v=document.getElementById("verdict");
+        if(arv<=0){ v.textContent="Enter a supported ARV to see the spread."; }
+        else if(profit>0){ v.textContent="Positive spread — the resale clears every cost of the deal as modeled."; }
+        else if(profit===0){ v.textContent="Breakeven — the deal returns exactly what it costs, with no margin for error."; }
+        else { v.textContent="Negative spread — costs exceed the after-repair value as modeled."; }
+      }
+      ids.forEach(function(id){ var el=document.getElementById(id); if(el) el.addEventListener("input", calc); });
+      calc();
+    })();
+  </script>
+</body>
+</html>

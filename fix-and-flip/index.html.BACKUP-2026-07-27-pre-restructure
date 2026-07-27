@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Fix and Flip Loans | Real Estate Capital Resources</title>
+  <meta name="description" content="Fix and flip loans and rehab loans for investors buying, renovating, reselling. See how deals are evaluated, the 70% rule math, and when a flip does not fit.">
+  <link rel="canonical" href="https://realestatecapitalresources.com/fix-and-flip/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/acqua-frame.css">
+  <link rel="preload" as="image" href="/assets/img/fix-and-flip-poster.jpg" fetchpriority="high">
+</head>
+<body data-active="" data-schema="program">
+  <div id="site-shell"></div>
+  <main id="main">
+
+<section class="hero hero--program">
+  <div class="hero-media" aria-hidden="true">
+    <video
+      class="hero-video"
+      autoplay
+      muted
+      playsinline
+      preload="metadata"
+      poster="/assets/img/fix-and-flip-poster.jpg"
+      data-loop="false"
+      disablepictureinpicture
+      disableremoteplayback
+    >
+      <source src="/assets/video/fix-and-flip-header.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <h1 class="reveal">Fix and Flip Loans.<br>Buy. Rehab. Exit Clean.</h1>
+      <p class="lead hero-text-panel reveal reveal-delay-1"><strong>Acquisition and rehab capital for investors who buy, renovate, and resell.</strong> The deal is underwritten on the project — purchase discount, renovation scope, and the after-repair value the finished house will actually sell for. See the 70% rule math below and when a flip is the wrong structure.</p>
+      <p class="support-line reveal reveal-delay-2"><strong>Same-day approval on a complete submission. Funding in 3–5 business days.</strong></p>
+      <div class="hero-actions reveal reveal-delay-2">
+        <a class="btn btn-primary" href="/submit-a-deal/">Submit a Deal</a>
+        <a class="btn btn-ghost" href="#the-math">See the 70% Rule Math</a>
+      </div>
+      <p class="claim-condition reveal reveal-delay-3">Approval timing depends on file completeness; approval is not funding. Funding timing depends on valuation, title, and third-party reports. Subject to underwriting and final approval.</p>
+    </div>
+    <div class="hero-product-btns reveal reveal-delay-4">
+      <a class="btn-product" href="/tools/mao/"><span>Max Offer</span></a>
+      <a class="btn-product" href="/tools/rehab-budget/"><span>Rehab Budget</span></a>
+      <a class="btn-product" href="/tools/deal-analyzer/"><span>Deal Analyzer</span></a>
+      <a class="btn-product" href="/purchase-rehab/"><span>100% JV Path</span></a>
+      <a class="btn-product" href="/resources/understanding-arv/"><span>Understanding ARV</span></a>
+    </div>
+  </div>
+</section>
+
+<nav class="breadcrumb container" aria-label="Breadcrumb" style="padding-top:1.25rem;color:var(--muted)">
+  <a href="/" style="color:var(--blue)">Home</a> / <a href="/loan-products/" style="color:var(--blue)">Funding Programs</a> / <span>Fix and Flip Loans</span>
+</nav>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="color:var(--gold)">Program parameters</div>
+      <h2>Fix and Flip Terms at a Glance</h2>
+      <p>Where a figure is still being confirmed against the current program sheet, it says so rather than guessing. Lending numbers are set per transaction and by the capital resource carrying the file.</p>
+    </div>
+    <dl class="params reveal">
+      <div class="params-row"><dt>Use of funds</dt><dd>Purchase plus renovation of a non-owner-occupied property to resell or refinance</dd></div>
+      <div class="params-row"><dt>Maximum leverage (cost)</dt><dd><span class="pending">{{CLAIM:fixflip.max_ltc}} — confirming against current program sheet</span></dd></div>
+      <div class="params-row"><dt>Maximum against ARV</dt><dd><span class="pending">{{CLAIM:fixflip.max_arv}} — confirming</span></dd></div>
+      <div class="params-row"><dt>Loan size range</dt><dd><span class="pending">{{CLAIM:fixflip.loan_size_range}} — confirming</span></dd></div>
+      <div class="params-row"><dt>Term</dt><dd><span class="pending">{{CLAIM:fixflip.term_range}} — confirming</span></dd></div>
+      <div class="params-row"><dt>Rate and points</dt><dd><span class="pending">{{CLAIM:fixflip.rate_range}} — confirming</span></dd></div>
+      <div class="params-row"><dt>Approval</dt><dd><strong>Same day</strong> on a complete submission — a credit decision or term sheet, not funded money</dd></div>
+      <div class="params-row"><dt>Time to funding</dt><dd><strong>3–5 business days</strong> from an approved, complete file, subject to valuation and title</dd></div>
+      <div class="params-row"><dt>Rehab funding</dt><dd>Released in draws against verified completed work, not as a lump sum at closing</dd></div>
+      <div class="params-row"><dt>Credit</dt><dd>An input, weighed with the deal and your track record — <span class="pending">{{CLAIM:fixflip.min_credit}}, confirming</span></dd></div>
+      <div class="params-row"><dt>Occupancy</dt><dd>Business-purpose, non-owner-occupied only</dd></div>
+      <div class="params-row"><dt>Markets</dt><dd>Cleveland, OH and Fort Lauderdale / South Florida</dd></div>
+      <div class="params-row"><dt>Zero-cash alternative</dt><dd>Deals within 70% of ARV may fit the <a href="/purchase-rehab/" style="color:var(--blue);font-weight:600">100% purchase and rehab</a> joint-venture path instead</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow" style="color:var(--gold)">Two ways to fund a flip</div>
+      <h2>Most Lenders Want 10–20% Down. We Have a Zero-Cash Path.</h2>
+      <p>Every fix-and-flip lender on your shortlist funds a percentage of cost and asks you to bring the rest. RECR does that too — and, on deals that qualify, an alternative that requires none of your cash. We start with the deal and tell you which path fits.</p>
+    </div>
+    <div class="program-band reveal">
+      <div class="program-panel">
+        <span class="tag">Path one · Conventional flip debt</span>
+        <h3>Leverage on Cost, You Bring the Rest</h3>
+        <p>The standard structure: capital covers most of the purchase and the rehab in draws; you contribute the balance and the buy-side costs. Fastest to set up, and you keep all of the resale profit.</p>
+        <ul class="list-check">
+          <li>Purchase to <span class="pending">{{CLAIM:fixflip.max_ltc}}, confirming</span>, rehab funded in draws</li>
+          <li>You bring the down payment and closing costs</li>
+          <li>You keep 100% of the resale profit</li>
+          <li>Best when you have cash and want all the upside</li>
+        </ul>
+      </div>
+      <div class="program-panel premium">
+        <span class="tag">Path two · 100% joint venture</span>
+        <h3>$0 Down on Qualifying Deals</h3>
+        <p>When total project cost lands within 70% of a defensible ARV, the joint-venture structure can fund <strong>100% of purchase, rehab, and closing</strong> — no cash from you. The capital partner shares project economics instead of charging a down payment.</p>
+        <ul class="list-check">
+          <li>Full stack covered — purchase, rehab, and closing</li>
+          <li>The gate: total project cost within 70% of ARV</li>
+          <li>Profit split per the joint-venture agreement</li>
+          <li>Best when you have the deal, not the cash</li>
+        </ul>
+        <a class="btn btn-white" href="/purchase-rehab/" style="margin-top:1rem">See the 100% JV Path →</a>
+      </div>
+    </div>
+    <p class="section-note reveal">Up to 100% applies to qualifying joint-venture transactions within 70% of ARV only. Subject to ARV support, documentation, total project economics, program availability, underwriting, and final approval. Not all transactions qualify.</p>
+  </div>
+</section>
+
+<section class="section section--gray">
+  <div class="container">
+    <div class="two-col">
+      <div class="reveal-left">
+        <h2 style="font-size:1.6rem;letter-spacing:-0.02em">Who Fix and Flip Loans Are For</h2>
+        <p>A fix and flip loan is built for an operator who can find a property below market, has a credible plan to renovate it, and intends to exit within months rather than hold it for years.</p>
+        <ul class="list-check">
+          <li>Investors buying distressed or dated houses at a genuine discount to resale value</li>
+          <li>Operators who want to keep their own cash liquid for contingency or the next deal</li>
+          <li>Flippers running more than one project who need capital that scales with deal flow</li>
+          <li>BRRRR investors who will renovate now and refinance into a rental at stabilization</li>
+          <li>Newer operators with a cosmetic-to-moderate scope and a defensible ARV spread</li>
+        </ul>
+        <h2 style="font-size:1.6rem;letter-spacing:-0.02em;margin-top:2rem">Documentation</h2>
+        <ul class="list-check">
+          <li><strong>Purchase contract or LOI</strong> — the real basis, not an asking price</li>
+          <li><strong>Line-item rehab budget by trade</strong> — a lump sum will not underwrite</li>
+          <li><strong>Comparable sales supporting ARV</strong> — the number the whole deal rests on</li>
+          <li><strong>Photos or an inspection</strong> — confirms the scope matches the budget</li>
+          <li><strong>Scope of work and timeline</strong> — what gets done, in what order, by when</li>
+          <li><strong>Experience summary and entity documents</strong> — prior projects and the borrowing entity</li>
+        </ul>
+      </div>
+      <div class="reveal-right">
+        <h2 style="font-size:1.6rem;letter-spacing:-0.02em">How a Flip Is Evaluated</h2>
+        <p>Because a fix and flip is repaid from the resale, the review concentrates on whether the finished property can carry the debt with room to spare.</p>
+        <ul class="list-check">
+          <li><strong>After-repair value.</strong> Comparable sales an appraiser would stand behind, not optimistic pricing</li>
+          <li><strong>Purchase discount.</strong> Whether you bought with enough spread beneath ARV to make the numbers work</li>
+          <li><strong>Rehab budget realism.</strong> Line-item scope with contingency, matched to the condition of the house</li>
+          <li><strong>Total cost against ARV.</strong> The screen that decides how much leverage a deal can safely carry</li>
+          <li><strong>Exit credibility.</strong> A resale price the market supports, or a refinance that genuinely underwrites</li>
+          <li><strong>Timeline.</strong> Whether the schedule is achievable for the work described, plus holding cost</li>
+          <li><strong>Operator capability.</strong> Whether this person can execute this specific scope on budget</li>
+        </ul>
+        <p style="margin-top:1rem">Run the numbers before you submit. The <a href="/tools/deal-analyzer/" style="color:var(--blue);font-weight:600">deal analyzer</a> and the <a href="/tools/mao/" style="color:var(--blue);font-weight:600">maximum allowable offer calculator</a> build exactly the figures this review needs, and <a href="/resources/understanding-arv/" style="color:var(--blue);font-weight:600">how ARV is determined</a> walks through the value that anchors every flip.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow" style="color:var(--gold)">Common scenarios</div>
+      <h2>The Deals Fix and Flip Capital Fits</h2>
+      <p>Three profiles that come across the desk most often. Tap a card for how each one is structured and screened.</p>
+    </div>
+    <div class="product-grid cols-3">
+      <div class="flip-card reveal">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="flip-eyebrow">Cosmetic flip</div>
+            <h3>Light Rehab, Fast Turn</h3>
+            <ul class="flip-points">
+              <li>Paint, flooring, kitchen, bath</li>
+              <li>Dated but structurally sound</li>
+              <li>Shortest path to resale</li>
+            </ul>
+            <span class="flip-hint">Tap for details →</span>
+          </div>
+          <div class="flip-back">
+            <h3>Light Rehab, Fast Turn</h3>
+            <p>The cleanest fix and flip: a sound house that shows old. Budget concentrates on finishes, the timeline is short, and the ARV is easy to comp because similar updated houses have sold nearby.</p>
+            <ul class="flip-detail">
+              <li><strong>Best when</strong> — spread beneath ARV is real</li>
+              <li><strong>Leverage</strong> — <span class="pending">{{CLAIM:fixflip.max_ltc}}, confirming</span></li>
+              <li><strong>Watch</strong> — holding cost if the sale drags</li>
+            </ul>
+            <a class="flip-cta" href="/submit-a-deal/">Submit this deal →</a>
+          </div>
+        </div>
+      </div>
+      <div class="flip-card reveal reveal-delay-1">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="flip-eyebrow">Heavy rehab</div>
+            <h3>Full Renovation</h3>
+            <ul class="flip-points">
+              <li>Systems, layout, additions</li>
+              <li>Larger budget and contingency</li>
+              <li>Track record matters more</li>
+            </ul>
+            <span class="flip-hint">Tap for details →</span>
+          </div>
+          <div class="flip-back">
+            <h3>Full Renovation</h3>
+            <p>A gut or near-gut where the value creation is large but so is the risk. Underwriting leans harder on the line-item budget, the contingency, and whether you have executed a project of this size before.</p>
+            <ul class="flip-detail">
+              <li><strong>Best when</strong> — scope matches experience</li>
+              <li><strong>Rehab funds</strong> — draws against completed work</li>
+              <li><strong>Watch</strong> — overruns eat the margin first</li>
+            </ul>
+            <a class="flip-cta" href="/submit-a-deal/">Submit this deal →</a>
+          </div>
+        </div>
+      </div>
+      <div class="flip-card reveal reveal-delay-2">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="flip-eyebrow">BRRRR</div>
+            <h3>Renovate then Refinance</h3>
+            <ul class="flip-points">
+              <li>Rehab now, hold long-term</li>
+              <li>Exit is a refinance, not a sale</li>
+              <li>Rent and DSCR drive the takeout</li>
+            </ul>
+            <span class="flip-hint">Tap for details →</span>
+          </div>
+          <div class="flip-back">
+            <h3>Renovate then Refinance</h3>
+            <p>Buy, rehabilitate, rent, refinance, repeat. The fix and flip loan funds the renovation; the exit is a <a href="/rental/" style="color:var(--gold);font-weight:600">rental / DSCR</a> refinance rather than a sale, so the stabilized rent has to support the takeout.</p>
+            <ul class="flip-detail">
+              <li><strong>Best when</strong> — the finished rent cash-flows</li>
+              <li><strong>Exit</strong> — DSCR refinance at stabilization</li>
+              <li><strong>Watch</strong> — refinance value and rate at takeout</li>
+            </ul>
+            <a class="flip-cta" href="/submit-a-deal/">Submit this deal →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--soft" id="the-math">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="color:var(--gold)">The full math</div>
+      <h2>The 70% Rule, Worked All the Way Through</h2>
+      <p>The 70% rule is the screen flippers use to decide the most they should pay: purchase plus rehab should sit within 70% of a defensible ARV, leaving the rest for selling costs, holding, financing, and profit. Here it is on a real set of numbers.</p>
+    </div>
+    <div class="table-scroll reveal">
+      <table class="worked">
+        <caption>Illustrative only. Not a quote, not an offer, not a representation of terms available for any specific transaction.</caption>
+        <tbody>
+          <tr><th scope="row">After-repair value (ARV)</th><td class="num">$300,000</td><td>Supported by comparable sales</td></tr>
+          <tr><th scope="row">70% of ARV</th><td class="num">$210,000</td><td>The ceiling for purchase + rehab</td></tr>
+          <tr><th scope="row">Less rehab budget</th><td class="num">−$45,000</td><td>Line-item scope by trade</td></tr>
+          <tr class="total"><td>Maximum allowable offer (MAO)</td><td class="num">$165,000</td><td>The most the 70% rule says to pay</td></tr>
+          <tr><th scope="row">Actual purchase price</th><td class="num">$160,000</td><td>Bought $5,000 under MAO</td></tr>
+          <tr><th scope="row">Rehab budget</th><td class="num">$45,000</td><td>Released in draws</td></tr>
+          <tr><th scope="row">Buy-side closing</th><td class="num">$4,000</td><td>Title, transfer, fees</td></tr>
+          <tr><th scope="row">Holding costs (~5 mo)</th><td class="num">$8,000</td><td>Taxes, insurance, utilities, financing</td></tr>
+          <tr><th scope="row">Sell-side costs (8%)</th><td class="num">$24,000</td><td>Commission, closing, concessions</td></tr>
+          <tr class="total"><td>Total project cost</td><td class="num">$241,000</td><td>Everything in and out</td></tr>
+          <tr class="total"><td>Gross project profit</td><td class="num">$59,000</td><td>Resale $300,000 less total cost</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3 style="margin-top:1.5rem;color:var(--navy)">Reading the example</h3>
+    <p>Purchase plus rehab is $205,000 — that lands at roughly <strong>68% of the $300,000 ARV</strong>, comfortably under the 70% ceiling. That margin is not decoration. It is what pays the selling costs, the holding costs, and the profit, and it is the cushion that protects the loan if the house sells for $285,000 instead of $300,000. Push the same purchase and rehab against a $270,000 ARV and the ratio climbs past 75%, the cushion evaporates, and a single soft comp or a two-month-longer hold turns the profit negative.</p>
+    <p><strong>This is the screen, not a promise.</strong> Clearing the 70% rule tells you a deal is worth underwriting; it does not set your leverage. How much of the $241,000 stack the capital covers, at what rate and term, is confirmed per transaction — <span class="pending">up to {{CLAIM:fixflip.max_ltc}} of cost, confirming against the current program sheet</span>. If the deal is strong enough to land total project cost within 70% of ARV, the <a href="/purchase-rehab/" style="color:var(--blue);font-weight:600">100% purchase and rehab joint-venture path</a> can cover the entire stack with no cash from you — a different structure for the same house. Build your own numbers first with the <a href="/tools/mao/" style="color:var(--blue);font-weight:600">maximum allowable offer calculator</a>.</p>
+    <div class="hero-actions" style="margin-top:1.25rem"><a class="btn btn-primary" href="/submit-a-deal/">Submit a Deal for Review</a></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="color:var(--gold)">Eligible properties</div>
+      <h2>What We Fund — and What We Do Not</h2>
+      <p>Fix and flip capital is for business-purpose, non-owner-occupied residential and small mixed-use property. If your property is not on this list, say so up front and we will tell you quickly whether another program fits.</p>
+    </div>
+    <div class="two-col reveal">
+      <div>
+        <h3 style="color:var(--navy);font-size:1.15rem">Eligible property types</h3>
+        <ul class="list-check">
+          <li><strong>Single-family residences</strong> — the most common flip collateral</li>
+          <li><strong>Condominiums and townhomes</strong> — subject to project and HOA review</li>
+          <li><strong>Duplex, triplex, quadplex</strong> — two- to four-unit residential</li>
+          <li><strong>Small multifamily (5+ units)</strong> — routed to <a href="/multifamily/" style="color:var(--blue);font-weight:600">multifamily financing</a> where the business plan fits better</li>
+          <li><strong>Mixed-use</strong> — residential over commercial, reviewed case by case</li>
+          <li><strong>Planned unit developments</strong> — standard PUD collateral</li>
+        </ul>
+        <p style="font-size:.9rem;color:var(--muted);margin-top:.75rem">Specific eligible collateral is confirmed per transaction and by the capital resource carrying the file — <span class="pending">{{CLAIM:fixflip.eligible_property_types}}, confirming against the current program sheet</span>.</p>
+      </div>
+      <div>
+        <h3 style="color:var(--navy);font-size:1.15rem">Not eligible for this program</h3>
+        <ul class="list-check">
+          <li><strong>Owner-occupied property</strong> — business-purpose transactions only, without exception</li>
+          <li><strong>Primary or second homes</strong> — including a flip you intend to move into</li>
+          <li><strong>Raw land with no structure</strong> — see <a href="/ground-up/" style="color:var(--blue);font-weight:600">ground-up construction</a></li>
+          <li><strong>Ground-up new construction</strong> — a different underwrite and draw structure</li>
+          <li><strong>Large commercial assets</strong> — see <a href="/commercial/" style="color:var(--blue);font-weight:600">commercial real estate</a></li>
+          <li><strong>Properties without a defensible ARV</strong> — no comparable sales means no exit to underwrite</li>
+        </ul>
+        <p style="font-size:.9rem;color:var(--muted);margin-top:.75rem">A property outside this program is not a dead deal. RECR maintains multiple capital relationships — <a href="/loan-products/" style="color:var(--blue);font-weight:600">compare all eight programs</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--soft">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow" style="color:var(--gold)">Compare the options</div>
+      <h2>Fix and Flip Loan vs Bank Financing vs 100% JV</h2>
+      <p>The same house, three ways to fund it. The honest answer depends on how much cash you want to leave in the deal and how fast you need to close.</p>
+    </div>
+    <div class="table-scroll reveal">
+      <table class="worked">
+        <caption>Structural comparison. Specific terms vary by transaction, capital resource, and approval. Bank timelines reflect typical conventional investment-property underwriting.</caption>
+        <thead>
+          <tr><th>&nbsp;</th><th>Conventional bank loan</th><th>Fix &amp; flip loan</th><th>100% JV structure</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Cash you bring</th><td>20–25% down plus rehab out of pocket</td><td>Down payment on cost</td><td><strong>None on qualifying deals</strong></td></tr>
+          <tr><th scope="row">Rehab funded?</th><td>No — you self-fund renovation</td><td>Yes, released in draws</td><td>Yes, in draws</td></tr>
+          <tr><th scope="row">Underwritten on</th><td>Your income and credit</td><td>The project and the ARV</td><td>The project economics</td></tr>
+          <tr><th scope="row">Distressed property</th><td>Often ineligible</td><td>Expected</td><td>Expected</td></tr>
+          <tr><th scope="row">Approval</th><td>Weeks — full income underwrite</td><td><strong>Same day</strong> on a complete file</td><td><strong>Same day</strong> on a complete file</td></tr>
+          <tr><th scope="row">Time to funding</th><td>30–60 days typical</td><td><strong>3–5 business days</strong></td><td><strong>3–5 business days</strong></td></tr>
+          <tr><th scope="row">Cost of capital</th><td>Lowest rate</td><td>Interest and points</td><td>Share of project profit</td></tr>
+          <tr><th scope="row">You keep</th><td>All profit</td><td>All profit</td><td>Your share per agreement</td></tr>
+          <tr><th scope="row">Best when</th><td>Move-in ready, long hold, W-2 income</td><td>You have cash and want all the upside</td><td>You have the deal, not the cash</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>We will tell you when another path is better.</strong> If you have the cash and the deal is strong, conventional flip debt keeps more of the profit than a joint venture does — we will say so directly rather than steer you to the structure that pays us more. If the property is move-in ready and you plan to hold it for years, a bank loan is genuinely cheaper and we will tell you that too. See <a href="/resources/debt-vs-jv/" style="color:var(--blue);font-weight:600">debt versus joint-venture capital</a> for the full decision.</p>
+  </div>
+</section>
+
+<section class="section section--navy">
+  <div class="container">
+    <div class="two-col">
+      <div class="reveal-left">
+        <h2 style="color:#fff;font-size:1.6rem">Step-by-Step Process</h2>
+        <div class="steps" style="grid-template-columns:1fr;gap:.75rem;margin-top:1rem">
+          <div class="step"><h3>Preliminary review</h3><p>Send the address, purchase price, rehab budget, and your ARV support. Enough for a first read on whether the flip pencils — same day on a complete submission.</p></div>
+          <div class="step"><h3>ARV and cost screen</h3><p>We test purchase plus rehab against a defensible ARV. Most deals are confirmed or redirected here — fast, so you are not waiting on a no.</p></div>
+          <div class="step"><h3>Same-day approval</h3><p>If the economics support it, you get a credit decision or term sheet the same day, covering leverage, the draw schedule, the term, and the takeout.</p></div>
+          <div class="step"><h3>Full file and underwriting</h3><p>Documentation, valuation, and budget review move through the applicable process with the capital resource. Title and appraisal timing sit outside our control.</p></div>
+          <div class="step"><h3>Close and fund in 3–5 days</h3><p>From an approved, complete file, funding runs 3–5 business days. Acquisition funds at closing; rehab releases in draws against verified completed work.</p></div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <h2 style="color:#fff;font-size:1.6rem">When a Flip Does Not Fit</h2>
+        <p class="muted">We would rather tell you in the first conversation than after three weeks of document collection.</p>
+        <ul class="list-check" style="margin-top:1rem">
+          <li style="color:rgba(255,255,255,.9)"><strong style="color:#fff">ARV not supported by comps.</strong> The most common reason a flip is declined — the exit price is aspirational, not evidenced</li>
+          <li style="color:rgba(255,255,255,.9)"><strong style="color:#fff">Purchase and rehab above 70% of ARV.</strong> There is not enough room beneath value to carry costs and risk</li>
+          <li style="color:rgba(255,255,255,.9)"><strong style="color:#fff">No contingency in the budget.</strong> A rehab number with no cushion has not been thought through</li>
+          <li style="color:rgba(255,255,255,.9)"><strong style="color:#fff">Scope beyond demonstrated experience.</strong> A first full gut with no track record is a hard conversation</li>
+          <li style="color:rgba(255,255,255,.9)"><strong style="color:#fff">No credible exit.</strong> "I'll list it and see" is not a resale plan, and a refinance has to actually underwrite</li>
+          <li style="color:rgba(255,255,255,.9)"><strong style="color:#fff">Thin margin, long timeline.</strong> A small spread over many months is where holding cost quietly consumes the profit</li>
+          <li style="color:rgba(255,255,255,.9)"><strong style="color:#fff">Owner-occupied intent.</strong> Business-purpose, non-owner-occupied transactions only</li>
+        </ul>
+        <p style="color:rgba(255,255,255,.82);margin-top:1rem">If a flip is not the right structure, that does not end the conversation. A declined flip may still fit a <a href="/rental/" style="color:var(--gold);font-weight:600">rental hold</a> or the <a href="/purchase-rehab/" style="color:var(--gold);font-weight:600">100% JV path</a>. <a href="/loan-products/" style="color:var(--gold);font-weight:600">Compare all programs</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head center reveal"><div class="eyebrow" style="color:var(--gold)">FAQ</div><h2>Questions About Fix and Flip Loans</h2></div>
+    <div class="faq-list reveal">
+      <details class="faq-item"><summary>What is a fix and flip loan?</summary><div class="faq-body"><p>Short-term capital that funds the purchase and renovation of a distressed property you intend to resell or refinance. It is underwritten on the project — the discount at purchase, the rehab budget, and the after-repair value — rather than primarily on your income, and the rehab portion typically releases in draws as work is completed.</p></div></details>
+      <details class="faq-item"><summary>How much of the deal will a fix and flip loan cover?</summary><div class="faq-body"><p>Leverage is set per transaction and by the capital resource carrying the file — <span class="pending">up to {{CLAIM:fixflip.max_ltc}} of cost and {{CLAIM:fixflip.max_arv}} against ARV, confirming against the current program sheet</span>. Deals that land total project cost within 70% of ARV may instead qualify for the <a href="/purchase-rehab/" style="color:var(--blue);font-weight:600">100% purchase and rehab</a> joint-venture structure with no cash from you.</p></div></details>
+      <details class="faq-item"><summary>What is the 70% rule?</summary><div class="faq-body"><p>A screening heuristic flippers use: the most you should pay for a property is 70% of its after-repair value minus the rehab budget. It keeps purchase plus rehab within roughly 70% of ARV, leaving the remaining margin for selling costs, holding costs, financing, and profit. It tells you a deal is worth underwriting — it does not set your leverage.</p></div></details>
+      <details class="faq-item"><summary>How is the rehab budget released?</summary><div class="faq-body"><p>In draws, against verified completed work. You request a draw, the completed stage is confirmed, and funds release for that portion of the scope. The purchase funds at closing; the rehab does not arrive as a lump sum you hold.</p></div></details>
+      <details class="faq-item"><summary>What credit score do I need?</summary><div class="faq-body"><p>Credit is one input weighed alongside the deal economics, your experience, and the exit — not the single gate it would be in conventional lending. The specific threshold is confirmed per transaction: <span class="pending">{{CLAIM:fixflip.min_credit}}, confirming</span>.</p></div></details>
+      <details class="faq-item"><summary>Can a first-time flipper get funded?</summary><div class="faq-body"><p>Yes, depending on scope. A first-timer with a cosmetic rehab, a strong ARV spread, and a realistic budget is a more straightforward file than an experienced operator with a thin gut. Experience is a risk factor, not an automatic disqualifier. See <a href="/first-time/" style="color:var(--blue);font-weight:600">first-time investors</a>.</p></div></details>
+      <details class="faq-item"><summary>What loan sizes and terms are available?</summary><div class="faq-body"><p>Loan size and term are set per transaction — <span class="pending">{{CLAIM:fixflip.loan_size_range}} over {{CLAIM:fixflip.term_range}}, confirming against the current program sheet</span>. A flip term is built around the renovation schedule plus a realistic sale window, with the exit defined up front.</p></div></details>
+      <details class="faq-item"><summary>What rate and points should I expect?</summary><div class="faq-body"><p>Pricing depends on the profile, the leverage, and the capital resource — <span class="pending">{{CLAIM:fixflip.rate_range}}, confirming</span>. Because a flip is short-term, the holding-cost impact of the rate is a function of how many months you carry the property, which is why the timeline gets as much scrutiny as the rate.</p></div></details>
+      <details class="faq-item"><summary>How does BRRRR work with a fix and flip loan?</summary><div class="faq-body"><p>Buy, rehabilitate, rent, refinance, repeat. The fix and flip loan funds the renovation, then the exit is a <a href="/rental/" style="color:var(--blue);font-weight:600">rental / DSCR refinance</a> rather than a sale. The stabilized rent has to support the takeout, so both the rehab math and the finished cash-flow matter.</p></div></details>
+      <details class="faq-item"><summary>How fast can a flip close?</summary><div class="faq-body"><p><strong>Same-day approval on a complete submission, and funding in 3–5 business days from an approved file.</strong> The word "complete" is doing real work in that sentence: we need the address, purchase price, a line-item rehab budget, ARV support, and your entity basics. A file missing the ARV comps or carrying a lump-sum rehab number cannot be approved same day, because there is nothing to approve against. Valuation and title also sit outside our control, so they set the floor on the funding side.</p></div></details>
+      <details class="faq-item"><summary>Is "same-day approval" the same as same-day money?</summary><div class="faq-body"><p>No, and anyone blurring the two is selling you something. Approval is a credit decision or term sheet — confirmation that the deal works and on what structure. Funding is money at the closing table, which runs 3–5 business days behind it and depends on valuation, title, and third-party reports. We separate the two deliberately so you can plan a contract deadline around the number that actually matters to you.</p></div></details>
+      <details class="faq-item"><summary>What happens if the flip does not sell?</summary><div class="faq-body"><p>This is why the exit and a stress case are underwritten up front. A common fallback is refinancing into a rental hold if the resale market softens, which is one reason a deal that also cash-flows as a rental is a stronger file. The specifics live in the loan documents and vary by transaction.</p></div></details>
+      <details class="faq-item"><summary>How much money do I need to start flipping houses?</summary><div class="faq-body"><p>On conventional flip debt, plan for a down payment on cost plus buy-side closing costs and a reserve for overruns — the exact contribution is confirmed per transaction (<span class="pending">{{CLAIM:fixflip.max_ltc}}, confirming</span>). On a qualifying joint-venture deal where total project cost lands within 70% of a defensible ARV, the <a href="/purchase-rehab/" style="color:var(--blue);font-weight:600">100% purchase and rehab structure</a> can cover purchase, rehab, and closing with no cash from you. Reserves are still strongly preferred either way, because projects encounter surprises.</p></div></details>
+      <details class="faq-item"><summary>Do I need a down payment?</summary><div class="faq-body"><p>For a conventional fix and flip loan, yes — capital funds a percentage of cost and you bring the balance. For a qualifying joint-venture transaction within 70% of ARV, no: the structure covers 100% of purchase, rehab, and closing, and the capital partner shares project economics instead of taking a down payment. Which path fits is decided by the deal, not by your preference.</p></div></details>
+      <details class="faq-item"><summary>Is a fix and flip loan the same as hard money?</summary><div class="faq-body"><p>They overlap. "Hard money" describes asset-based short-term capital secured by property; a fix and flip loan is that capital applied to a buy-renovate-resell project, with the renovation funded in draws. The meaningful difference is not the label but whether the file is underwritten on a defensible ARV and a credible exit, or simply on the collateral.</p></div></details>
+      <details class="faq-item"><summary>Can I fund more than one flip at a time?</summary><div class="faq-body"><p>Yes — each project is underwritten on its own merits, and running concurrent deals is common for operators with the capacity to manage them. What tightens as deal count rises is scrutiny of your bandwidth, your reserves, and the performance of projects already in progress. See <a href="/experienced/" style="color:var(--blue);font-weight:600">experienced investors</a>.</p></div></details>
+      <details class="faq-item"><summary>Does submitting a deal guarantee funding?</summary><div class="faq-body"><p>No. Submission begins a review. All financing is subject to program availability, underwriting, property eligibility, borrower qualification, and final approval.</p></div></details>
+    </div>
+  </div>
+</section>
+
+<section class="section section--soft">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow" style="color:var(--gold)">Deal profiles</div>
+      <h2>What a Funded Flip Looks Like</h2>
+      <p>Structure profiles showing how a fix and flip file is assembled and screened. These are illustrative layouts, not client transactions — verified funded deals replace them as they are approved for publication.</p>
+    </div>
+    <div class="product-grid cols-3">
+      <article class="product-card reveal">
+        <span class="chip">Cosmetic · Cleveland</span>
+        <h3 style="margin-top:.75rem">Dated Ranch, Light Rehab</h3>
+        <p><strong>ARV</strong> $300,000 · <strong>Purchase</strong> $160,000 · <strong>Rehab</strong> $45,000<br>
+        <strong>Purchase + rehab</strong> 68% of ARV<br>
+        <strong>Screen</strong> Clear — comfortably under the 70% ceiling<br>
+        <strong>Structure</strong> Conventional flip debt, rehab in draws</p>
+        <p class="verify" style="font-size:.8rem">Illustrative layout — replace with verified RECR transaction.</p>
+      </article>
+      <article class="product-card reveal reveal-delay-1">
+        <span class="chip">Full renovation · South Florida</span>
+        <h3 style="margin-top:.75rem">Gut Renovation, Experienced Operator</h3>
+        <p><strong>ARV</strong> $520,000 · <strong>Purchase</strong> $250,000 · <strong>Rehab</strong> $110,000<br>
+        <strong>Purchase + rehab</strong> 69% of ARV<br>
+        <strong>Screen</strong> Clear — track record supports the scope<br>
+        <strong>Structure</strong> Flip debt with a staged draw schedule</p>
+        <p class="verify" style="font-size:.8rem">Illustrative layout — replace with verified RECR transaction.</p>
+      </article>
+      <article class="product-card reveal reveal-delay-2">
+        <span class="chip">Zero cash · JV path</span>
+        <h3 style="margin-top:.75rem">Strong Deal, No Cash to Deploy</h3>
+        <p><strong>ARV</strong> $340,000 · <strong>Purchase</strong> $180,000 · <strong>Rehab</strong> $50,000<br>
+        <strong>Total project cost</strong> 70% of ARV<br>
+        <strong>Screen</strong> Clear — qualifies for the JV structure<br>
+        <strong>Structure</strong> <a href="/purchase-rehab/" style="color:var(--blue);font-weight:600">100% of purchase, rehab, and closing</a></p>
+        <p class="verify" style="font-size:.8rem">Illustrative layout — replace with verified RECR transaction.</p>
+      </article>
+    </div>
+    <p class="section-note reveal">Every profile above was screened the same way: total cost against a defensible ARV first, structure second. That order is the whole method — <a href="/how-it-works/" style="color:var(--blue);font-weight:600">see the full process</a>.</p>
+  </div>
+</section>
+
+<section class="section section--gray">
+  <div class="container">
+    <div class="section-head center reveal"><div class="eyebrow" style="color:var(--gold)">Keep reading</div><h2>Related Tools and Programs</h2></div>
+    <div class="product-grid cols-3">
+      <article class="product-card reveal"><div class="icon">70</div><h3>Maximum Allowable Offer</h3><p>Run the 70% rule on your own deal — enter ARV and rehab, see the most you should offer before you write a contract.</p><a class="card-link" href="/tools/mao/">Open the MAO calculator →</a></article>
+      <article class="product-card reveal reveal-delay-1"><div class="icon">DA</div><h3>Deal Analyzer</h3><p>Model purchase, rehab, holding, and selling costs against ARV to see projected profit and total cost as a share of value.</p><a class="card-link" href="/tools/deal-analyzer/">Open the deal analyzer →</a></article>
+      <article class="product-card reveal reveal-delay-2"><div class="icon">100</div><h3>100% Purchase and Rehab</h3><p>The zero-cash joint-venture structure for deals within 70% of ARV — the full stack covered, project economics shared.</p><a class="card-link" href="/purchase-rehab/">See the 100% path →</a></article>
+    </div>
+    <p class="section-note reveal">More on the value that anchors every flip: <a href="/resources/understanding-arv/" style="color:var(--blue);font-weight:600">how after-repair value is determined</a> · <a href="/rental/" style="color:var(--blue);font-weight:600">rental / DSCR loans for the BRRRR exit</a> · <a href="/loan-products/" style="color:var(--blue);font-weight:600">compare all funding programs</a>.</p>
+  </div>
+</section>
+
+<section class="section section--soft">
+  <div class="container">
+    <div class="cta-band reveal-scale">
+      <h2>Have a Flip That Pencils?</h2>
+      <p>Send the address, purchase price, rehab budget, and ARV support. That is enough for a first read — no full application required to find out whether the numbers work.</p>
+      <div class="cta-actions">
+        <a class="btn btn-white" href="/submit-a-deal/">Submit a Deal</a>
+        <a class="btn btn-ghost" href="/tools/deal-analyzer/">Run the Deal Analyzer</a>
+      </div>
+    </div>
+    <div class="disclosure" style="margin-top:2rem">
+      Fix and flip loan leverage, loan size, term, rate, points, and credit criteria are set per transaction and by the capital resource carrying the file, and are confirmed against the current program sheet before any commitment. Up to 100% of purchase, rehabilitation, and closing costs applies only to qualifying joint-venture transactions when total project cost is within 70% of defensible after-repair value, and is subject to ARV support, documentation, total project economics, program availability, underwriting, property eligibility, borrower qualification, and final approval. Not all transactions qualify. Figures in examples, including the 70% rule worked example, are illustrative and are not a quote, an offer, or a representation of terms available for any specific transaction. Business-purpose, non-owner-occupied transactions only. Program details may change. [ADD APPROVED DISCLOSURE]
+    </div>
+  </div>
+</section>
+
+  </main>
+  <script src="/assets/js/site.js"></script>
+</body>
+</html>

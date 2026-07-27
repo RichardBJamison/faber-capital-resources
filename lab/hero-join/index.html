@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Hero join sandbox | RECR</title>
+  <style>
+    body { margin: 0; font-family: Inter, system-ui, sans-serif; background: #14110e; color: #f6f2ea; }
+    .bar {
+      position: sticky; top: 0; z-index: 20;
+      display: flex; flex-wrap: wrap; gap: .5rem; align-items: center;
+      padding: .75rem 1rem; background: rgba(20,17,14,.95); border-bottom: 1px solid rgba(196,163,90,.3);
+    }
+    .bar strong { margin-right: .5rem; font-size: .85rem; }
+    button {
+      border: 1px solid rgba(246,242,234,.3); background: transparent; color: #f6f2ea;
+      padding: .4rem .75rem; border-radius: 999px; font: inherit; font-size: .8rem; font-weight: 600; cursor: pointer;
+    }
+    button.on { background: #c4a35a; color: #1c1814; border-color: #c4a35a; }
+    .bar a { margin-left: auto; color: #c4a35a; text-decoration: none; font-size: .85rem; }
+    .stage {
+      position: relative; width: 100%; max-width: 1100px; margin: 1rem auto;
+      aspect-ratio: 16/9; background: #000; border-radius: 12px; overflow: hidden;
+    }
+    video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .meta { max-width: 1100px; margin: 0 auto 2rem; padding: 0 1rem; font-size: .9rem; line-height: 1.5; color: rgba(246,242,234,.8); }
+    .meta b { color: #c4a35a; }
+    .mark {
+      position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: rgba(212,137,74,.7);
+      pointer-events: none; opacity: 0; transition: opacity .2s;
+    }
+    .mark.show { opacity: 1; }
+    .time { font-variant-numeric: tabular-nums; color: #c4a35a; }
+  </style>
+</head>
+<body>
+  <div class="bar">
+    <strong>JOIN SANDBOX</strong>
+    <button type="button" data-src="/assets/video/lab/join-FINAL-hard.mp4" class="on">FINAL · hard (freeze-trimmed)</button>
+    <button type="button" data-src="/assets/video/lab/join-A-hard.mp4">A · Hard cut + deep trim</button>
+    <button type="button" data-src="/assets/video/lab/join-B-soft.mp4">B · Soft 0.2s fade</button>
+    <button type="button" data-src="/assets/video/lab/join-C-tight.mp4">C · Tight 0.15s fade</button>
+    <button type="button" data-src="/assets/video/hero-header.mp4">D · Current live</button>
+    <button type="button" id="replay">Replay join region</button>
+    <span class="time" id="t">0.0s</span>
+    <a href="/">← Home</a>
+  </div>
+  <div class="stage">
+    <video id="v" muted playsinline controls autoplay></video>
+    <div class="mark" id="mark"></div>
+  </div>
+  <p class="meta">
+    Watch each variant <b>2–3 times</b> through the mid join (~18–20s). Looking for: no dead stop, no slow→freeze→restart,
+    continuous camera energy. <b>A</b> hard-cuts after cutting freeze tails. <b>B/C</b> short fades. Winner gets copied to live home.
+  </p>
+  <script>
+    const v = document.getElementById("v");
+    const tEl = document.getElementById("t");
+    const mark = document.getElementById("mark");
+    const btns = document.querySelectorAll("button[data-src]");
+    let joinAt = 19.0;
+    function load(src, btn) {
+      btns.forEach((b) => b.classList.toggle("on", b === btn));
+      v.src = src + "?v=" + Date.now();
+      v.load();
+      v.play().catch(() => {});
+      // approx join time by name
+      if (src.includes("C-tight")) joinAt = 18.7;
+      else if (src.includes("hero-header")) joinAt = 19.7;
+      else joinAt = 19.0;
+    }
+    btns.forEach((b) => b.addEventListener("click", () => load(b.dataset.src, b)));
+    document.getElementById("replay").addEventListener("click", () => {
+      v.currentTime = Math.max(0, joinAt - 2.5);
+      v.play().catch(() => {});
+      mark.classList.add("show");
+      setTimeout(() => mark.classList.remove("show"), 3000);
+    });
+    v.addEventListener("timeupdate", () => {
+      tEl.textContent = v.currentTime.toFixed(2) + "s / join~" + joinAt.toFixed(1) + "s";
+    });
+    load("/assets/video/lab/join-FINAL-hard.mp4", btns[0]);
+  </script>
+</body>
+</html>

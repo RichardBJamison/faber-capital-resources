@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 96" role="img" aria-labelledby="rwdTitle rwdDesc">
+  <title id="rwdTitle">Resonant Web Design</title>
+  <desc id="rwdDesc">Network constellation mark with Resonant Web Design wordmark</desc>
+  <defs>
+    <linearGradient id="nodeGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5EEAD4"/>
+      <stop offset="55%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#818CF8"/>
+    </linearGradient>
+    <linearGradient id="lineGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.35"/>
+      <stop offset="50%" stop-color="#67E8F9" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#818CF8" stop-opacity="0.35"/>
+    </linearGradient>
+    <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="1.4" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Mark: constellation / network -->
+  <g transform="translate(8,8)" filter="url(#softGlow)">
+    <circle cx="40" cy="40" r="36" fill="none" stroke="url(#lineGlow)" stroke-width="1.25" opacity="0.55"/>
+    <circle cx="40" cy="40" r="24" fill="none" stroke="url(#lineGlow)" stroke-width="1" opacity="0.35"/>
+
+    <!-- connection lines -->
+    <g stroke="url(#lineGlow)" stroke-width="1.35" fill="none" stroke-linecap="round">
+      <line x1="40" y1="12" x2="62" y2="28"/>
+      <line x1="62" y1="28" x2="64" y2="52"/>
+      <line x1="64" y1="52" x2="40" y2="68"/>
+      <line x1="40" y1="68" x2="16" y2="52"/>
+      <line x1="16" y1="52" x2="18" y2="28"/>
+      <line x1="18" y1="28" x2="40" y2="12"/>
+      <line x1="18" y1="28" x2="40" y2="40"/>
+      <line x1="62" y1="28" x2="40" y2="40"/>
+      <line x1="16" y1="52" x2="40" y2="40"/>
+      <line x1="64" y1="52" x2="40" y2="40"/>
+      <line x1="40" y1="12" x2="40" y2="40"/>
+      <line x1="40" y1="68" x2="40" y2="40"/>
+    </g>
+
+    <!-- nodes -->
+    <g fill="url(#nodeGlow)">
+      <circle cx="40" cy="40" r="5.5"/>
+      <circle cx="40" cy="12" r="3.6"/>
+      <circle cx="62" cy="28" r="3.4"/>
+      <circle cx="64" cy="52" r="3.4"/>
+      <circle cx="40" cy="68" r="3.6"/>
+      <circle cx="16" cy="52" r="3.4"/>
+      <circle cx="18" cy="28" r="3.4"/>
+    </g>
+    <circle cx="40" cy="40" r="2.2" fill="#0B1220"/>
+  </g>
+
+  <!-- Wordmark -->
+  <g transform="translate(100,28)" fill="#E8F4FF" font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+    <text x="0" y="22" font-size="28" font-weight="700" letter-spacing="0.22em">RESONANT</text>
+    <text x="1" y="46" font-size="11.5" font-weight="600" letter-spacing="0.38em" fill="#7DD3FC">WEB DESIGN</text>
+  </g>
+</svg>

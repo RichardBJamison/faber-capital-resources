@@ -1,0 +1,27 @@
+# Real Estate Capital Resources
+# NOTE: pages currently carry noindex pending the launch gate. See LAUNCH-CHECKLIST.md
+
+User-agent: *
+Allow: /
+
+# AI assistants — a growing share of investor research runs through these.
+User-agent: GPTBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+
+# Portfolio standard — blocked across all properties.
+User-agent: Bytespider
+Disallow: /
+User-agent: Amazonbot
+Disallow: /
+
+Sitemap: https://realestatecapitalresources.com/sitemap.xml
