@@ -100,9 +100,7 @@
         </div>
         <a href="${p("/about/")}"${is("about")}>About</a>
         <a href="${p("/contact/")}"${is("contact")}>Contact</a>
-        <a href="${p("/resonant-design-offer/")}"${is("offer")}>Offer</a>
         <a class="nexus-nav-btn" href="${p("/nexus/")}" target="_blank" rel="noopener">Nexus</a>
-        <a class="btn btn-primary header-cta" href="${p("/submit-a-deal/")}">Submit a Deal</a>
       </nav>
       <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-menu-toggle>
         <span></span><span></span><span></span>
@@ -133,9 +131,7 @@
   <a href="${p("/results/")}">Recently Closed</a>
   <a href="${p("/about/")}">About</a>
   <a href="${p("/contact/")}">Contact</a>
-  <a href="${p("/resonant-design-offer/")}"${is("offer")}>Offer</a>
   <a class="nexus-nav-btn" href="${p("/nexus/")}" target="_blank" rel="noopener">Nexus</a>
-  <a class="btn btn-primary" href="${p("/submit-a-deal/")}">Submit a Deal</a>
 </div>`;
   }
 
