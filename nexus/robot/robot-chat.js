@@ -1,8 +1,7 @@
 /**
- * Doodle Bug corner robot.
+ * Doodle Bug corner robot — closed chat circle only.
  *
- * The robot is a quiet visual signature only. It does not open, close,
- * move around the page, follow the pointer, or intercept page controls.
+ * Small fixed circle, bottom-left. No open panel, no follow, no sequence.
  */
 (function () {
   "use strict";
@@ -11,7 +10,10 @@
   window.__doodleBugCornerRobotLoaded = true;
 
   var config = window.ROBOT_CHAT_CONFIG || {};
-  var robotSrc = config.robotSrc || "./robot/chatbot-robot.png";
+  var robotSrc =
+    config.robotCircleSrc ||
+    config.robotSrc ||
+    "./robot/chatbot-robot-circle.png";
 
   function build() {
     if (document.getElementById("sj-chatbot")) return;
@@ -20,21 +22,31 @@
     style.id = "doodle-bug-corner-robot-styles";
     style.textContent =
       "#sj-chatbot{" +
-      "position:fixed;left:18px;bottom:14px;z-index:20;pointer-events:none;" +
-      "width:112px;height:112px;display:grid;place-items:end start;" +
+      "position:fixed;left:16px;bottom:16px;z-index:40;pointer-events:none;" +
+      "width:64px;height:64px;display:grid;place-items:center;" +
+      "border-radius:50%;" +
+      "background:rgba(255,255,255,.92);" +
+      "box-shadow:0 8px 22px rgba(23,35,63,.22);" +
+      "border:2px solid rgba(255,255,255,.95);" +
+      "overflow:hidden;" +
       "}" +
       "#sj-chatbot .sj-corner-robot{" +
-      "display:block;width:112px;height:112px;object-fit:contain;" +
-      "filter:drop-shadow(0 10px 18px rgba(23,35,63,.28));" +
+      "display:block;width:56px;height:56px;object-fit:cover;" +
+      "border-radius:50%;" +
       "}" +
-      "@media (max-width:640px){#sj-chatbot{left:10px;bottom:10px;width:78px;height:78px;}#sj-chatbot .sj-corner-robot{width:78px;height:78px;}}" +
-      "@media (prefers-reduced-motion:reduce){#sj-chatbot .sj-corner-robot{transition:none;}}";
+      "@media (max-width:640px){" +
+      "#sj-chatbot{left:12px;bottom:12px;width:54px;height:54px;}" +
+      "#sj-chatbot .sj-corner-robot{width:46px;height:46px;}" +
+      "}";
     document.head.appendChild(style);
 
     var root = document.createElement("div");
     root.id = "sj-chatbot";
     root.setAttribute("aria-hidden", "true");
-    root.innerHTML = '<img class="sj-corner-robot" src="' + robotSrc + '" alt="" width="112" height="112" draggable="false" />';
+    root.innerHTML =
+      '<img class="sj-corner-robot" src="' +
+      robotSrc +
+      '" alt="" width="56" height="56" draggable="false" />';
     document.body.appendChild(root);
   }
 
