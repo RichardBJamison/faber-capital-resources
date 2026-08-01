@@ -368,7 +368,7 @@ button, input, select, textarea { font: inherit; }
 }
 .menu-toggle span {
   display: block;
-  width: 18px;
+  width: 36px;
   height: 2px;
   background: var(--navy);
 }
@@ -559,8 +559,22 @@ a.nexus-nav-btn:hover {
     );
 }
 .hero::after {
-  content: ""; position: absolute; inset: auto 0 0 0; height: 72px; z-index: 0;
-  background: linear-gradient(to top, var(--off), transparent); pointer-events: none;
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  /* ~20% taller than prior 160–260 band → dreamier blend into cream */
+  height: clamp(192px, 31vh, 312px);
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(246, 242, 234, 0.08) 30%,
+    rgba(246, 242, 234, 0.22) 55%,
+    rgba(246, 242, 234, 0.55) 78%,
+    rgba(246, 242, 234, 0.88) 92%,
+    var(--off) 100%
+  );
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-video { display: none; }
@@ -568,7 +582,7 @@ a.nexus-nav-btn:hover {
 /* Comfortable inset from the left — block sits low in the frame */
 .hero-inner {
   position: relative;
-  z-index: 1;
+  z-index: 2; /* above .hero::after haze so path pills stay as clear as CTAs */
   width: 100%;
   max-width: 1180px;
   margin: 0;
@@ -576,7 +590,7 @@ a.nexus-nav-btn:hover {
   padding:
     clamp(6rem, 14vh, 9rem)
     clamp(1.5rem, 4vw, 2.5rem)
-    clamp(2rem, 4.5vh, 3rem)
+    clamp(3.25rem, 7vh, 4.5rem)
     clamp(2.75rem, 9vw, 6.5rem);
   text-align: left;
 }
@@ -739,16 +753,28 @@ a.nexus-nav-btn:hover {
   gap: 0.45rem;
   padding: 0.65rem 1rem;
   border-radius: 999px;
+  /* Match Submit / Explore opacity — solid cream, not washed by haze */
   background: rgba(255, 250, 240, 0.96);
   color: #1c1814;
   font-weight: 600;
   font-size: 0.84rem;
   line-height: 1.1;
+  opacity: 1;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   /* border + lift shadow applied via .hero shared button chrome above */
   white-space: nowrap;
   flex: 0 0 auto;
+}
+/* Keep path row above any residual hero wash */
+.hero-product-btns {
+  position: relative;
+  z-index: 3;
+  opacity: 1;
+}
+.hero .btn-product {
+  opacity: 1;
+  background: rgba(255, 250, 240, 0.96); /* same as .hero .btn-ghost */
 }
 .btn-product svg,
 .btn-product .btn-product-icon {
@@ -758,7 +784,7 @@ a.nexus-nav-btn:hover {
   color: #3d3226;
   fill: currentColor;
   display: block;
-  opacity: 0.95;
+  opacity: 1;
 }
 .btn-product span { color: #1c1814; }
 .btn-product:hover {
@@ -779,6 +805,82 @@ a.nexus-nav-btn:hover {
   }
   .btn-product svg,
   .btn-product .btn-product-icon { width: 20px; height: 20px; }
+}
+
+/* —— Offer ticker (see also inline #offer-ticker-critical) —— */
+.offer-ticker {
+  position: relative;
+  background: var(--off);
+  overflow: hidden;
+  padding: 1.35rem 0 1.65rem;
+  border: 0;
+  box-shadow: none;
+  z-index: 2;
+  margin-top: -1px;
+}
+.offer-ticker__mask {
+  overflow: hidden;
+  width: 100%;
+}
+.offer-ticker__track {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: max-content;
+  animation: ot-scroll 48s linear infinite;
+}
+.offer-ticker__group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 4.5rem;
+  padding-right: 4.5rem;
+  flex: 0 0 auto;
+}
+.ot-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.1rem;
+  flex: 0 0 auto;
+  color: #a68b4b;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+.ot-label {
+  font-size: 1.75rem;
+  font-weight: 400;
+  letter-spacing: 0.055em;
+  color: #a68b4b;
+  line-height: 1;
+}
+.ot-ico {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  display: block;
+  fill: currentColor;
+  color: #a68b4b;
+}
+@keyframes ot-scroll {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .offer-ticker__track { animation: none; }
+}
+.section--after-ticker {
+  background:
+    linear-gradient(
+      to bottom,
+      var(--off) 0%,
+      rgba(230, 224, 212, 0.45) 88px,
+      var(--gray-section) 160px,
+      var(--gray-section) 100%
+    );
+  padding-top: clamp(2.25rem, 5vh, 3.25rem);
 }
 
 /* RECR marketing typography helpers */
@@ -860,7 +962,7 @@ a.nexus-nav-btn:hover {
 }
 .hero h1 br { display: block; }
 /* legacy alias */
-.hero-chips { display: flex; flex-wrap: wrap; gap: 0.55rem; margin-top: 2rem; justify-content: flex-start; }
+.hero-chips { display: flex; flex-wrap: wrap; gap: 1.1rem; margin-top: 2rem; justify-content: flex-start; }
 .hero-chip {
   padding: 0.55rem 0.95rem; border-radius: 999px;
   background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.18);
