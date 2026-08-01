@@ -287,51 +287,213 @@
     .ledger-note { margin: 0; padding: 16px 24px 20px; color: var(--muted); font-size: 15px; line-height: 1.5; border-top: 1px solid var(--line); background: #fffdf8; }
     .ledger-note a { color: var(--teal); font-weight: 800; }
 
-    /* Talk to Richard */
-    .comms-layout { display: grid; grid-template-columns: minmax(0, 1.95fr) minmax(350px, 1fr); gap: 22px; align-items: stretch; }
-    .chat-shell, .documents-shell { min-width: 0; border: 2px solid var(--coral); border-radius: 24px; background: #fffaf1; box-shadow: var(--shadow); }
-    .chat-shell { display: flex; flex-direction: column; min-height: 740px; overflow: hidden; }
-    .chat-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 23px 25px; border-bottom: 2px solid var(--line); background: #fff0ec; }
-    .chat-head p { margin-top: 5px; color: var(--muted); font-size: 17px; }
-    .chat-stream { display: flex; flex: 1; flex-direction: column; gap: 17px; min-height: 380px; max-height: 620px; overflow-y: auto; padding: 25px; background: linear-gradient(180deg, #fffaf1, #fffdf8); }
-    .bubble { max-width: min(78%, 760px); padding: 17px 19px; border: 2px solid var(--navy); border-radius: 19px; background: #e9f8f5; color: var(--ink); line-height: 1.58; word-break: break-word; }
+    /* Talk to Richard — conversation primary (~75%), filing cabinets below */
+    .comms-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      align-items: stretch;
+    }
+    .chat-shell, .documents-shell {
+      min-width: 0;
+      border: 2px solid var(--coral);
+      border-radius: 24px;
+      background: #fffaf1;
+      box-shadow: var(--shadow);
+    }
+    .chat-shell {
+      display: flex;
+      flex-direction: column;
+      /* Tall conversation first — filing cabinets sit well below */
+      height: min(92vh, 1480px);
+      min-height: 980px;
+      overflow: hidden;
+    }
+    .chat-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 25px;
+      border-bottom: 2px solid var(--line);
+      background: #fff0ec;
+      flex: 0 0 auto;
+    }
+    .chat-head p { margin-top: 5px; color: var(--muted); font-size: 16px; }
+    .chat-head--compact { padding: 14px 22px; }
+    .chat-head--compact h3 { margin: 0; font-size: 1.15rem; }
+    .section-intro--comms {
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    .section-intro--comms h1 {
+      margin: 0;
+      font-size: clamp(28px, 3.2vw, 42px);
+      line-height: 1.08;
+      letter-spacing: -.035em;
+      color: var(--navy);
+    }
+    .section-intro--comms .current-note[hidden] { display: none !important; }
+    .chat-stream {
+      display: flex;
+      flex: 1 1 auto;
+      flex-direction: column;
+      gap: 17px;
+      min-height: 0;
+      overflow-y: auto;
+      padding: 22px 25px;
+      background: linear-gradient(180deg, #fffaf1, #fffdf8);
+    }
+    .bubble {
+      position: relative;
+      width: 88%;
+      max-width: 88%;
+      box-sizing: border-box;
+      padding: 19px 48px 19px 21px;
+      border: 2px solid var(--navy);
+      border-radius: 19px;
+      background: #e9f8f5;
+      color: var(--ink);
+      font-size: 1.05em;
+      line-height: 1.58;
+      word-break: break-word;
+    }
     .bubble.bill { align-self: flex-end; border-color: var(--coral); background: var(--coral); color: var(--navy); border-bottom-right-radius: 6px; }
     .bubble.richard { align-self: flex-start; border-color: var(--teal); border-bottom-left-radius: 6px; }
-    .bubble .meta { margin-bottom: 8px; color: var(--navy); font-size: 15px; font-weight: 900; letter-spacing: .04em; text-transform: uppercase; }
+    .bubble .meta { margin-bottom: 8px; padding-right: 0.5rem; color: var(--navy); font-size: 15px; font-weight: 900; letter-spacing: .04em; text-transform: uppercase; }
     .bubble .bubble-body { white-space: pre-wrap; }
+    .bubble-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      margin: 0;
+      padding: 0;
+      border: 2px solid #b91c1c;
+      border-radius: 50%;
+      background: #ef4444;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 2;
+    }
+    .bubble-close:hover {
+      background: #dc2626;
+      transform: scale(1.06);
+    }
+    .bubble-close:focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 2px;
+    }
+    .bubble .dictation-badge {
+      display: inline-flex; margin-bottom: 8px; padding: 5px 10px; border-radius: 999px;
+      background: var(--iris-soft); border: 2px solid var(--iris); color: var(--navy);
+      font-size: 12px; font-weight: 900; letter-spacing: .06em; text-transform: uppercase;
+    }
     .atts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 13px; }
     .att { display: inline-flex; align-items: center; min-height: 48px; padding: 9px 12px; border: 2px solid var(--navy); border-radius: 10px; background: var(--cream); color: var(--navy); font-size: 15px; font-weight: 800; }
-    .chat-compose { padding: 20px 25px 24px; border-top: 2px solid var(--line); background: #fff0ec; }
-    .compose-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 11px; }
+    .chat-compose { padding: 18px 25px 22px; border-top: 2px solid var(--line); background: #fff0ec; flex: 0 0 auto; }
+    .compose-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 11px; flex-wrap: wrap; }
     .compose-top label { color: var(--navy); font-size: 15px; font-weight: 900; letter-spacing: .07em; text-transform: uppercase; }
     .compose-who { display: flex; gap: 7px; flex-wrap: wrap; }
     .compose-who button { min-height: 42px; padding: 7px 11px; border: 1px solid var(--line); border-radius: 9px; background: var(--cream); color: var(--muted); font-size: 14px; font-weight: 800; }
     .compose-who button.active { border-color: var(--coral); background: var(--coral); color: var(--navy); }
     .compose-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: stretch; }
-    .compose-row textarea { width: 100%; min-height: 112px; max-height: 250px; resize: vertical; padding: 15px 17px; border: 2px solid var(--navy); border-radius: 14px; outline: 0; background: var(--cream); color: var(--ink); }
+    .compose-row textarea { width: 100%; min-height: 100px; max-height: 220px; resize: vertical; padding: 15px 17px; border: 2px solid var(--navy); border-radius: 14px; outline: 0; background: var(--cream); color: var(--ink); }
     .compose-row textarea:focus { box-shadow: 0 0 0 5px rgba(215, 170, 75, .35); }
     .compose-hint { margin-top: 8px; color: var(--muted); font-size: 15px; }
     .compose-actions { display: flex; flex-direction: column; gap: 9px; }
-    .btn-send, .btn-attach, .btn-cab-upload { min-width: 170px; min-height: 66px; padding: 12px 17px; border: 2px solid var(--navy); border-radius: 12px; font-size: 16px; font-weight: 900; letter-spacing: .04em; text-transform: uppercase; }
+    .compose-tools {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px;
+    }
+    .btn-send, .btn-attach, .btn-cab-upload, .btn-dictate, .btn-transfer {
+      min-width: 150px; min-height: 58px; padding: 12px 16px; border: 2px solid var(--navy);
+      border-radius: 12px; font-size: 15px; font-weight: 900; letter-spacing: .04em; text-transform: uppercase;
+    }
     .btn-send { background: var(--navy); color: var(--cream); }
     .btn-send:hover { background: var(--navy-2); }
-    .btn-attach { background: var(--peach); color: var(--navy); }
-    .btn-attach:hover { background: #ffc183; }
+    .btn-attach, .btn-transfer { background: var(--peach); color: var(--navy); }
+    .btn-attach:hover, .btn-transfer:hover { background: #ffc183; }
+    .btn-dictate {
+      background: var(--iris); color: var(--cream); border-color: var(--navy);
+    }
+    .btn-dictate:hover { filter: brightness(1.05); }
+    .btn-dictate.is-recording {
+      background: var(--coral); color: var(--navy); animation: pulse-rec 1.1s ease infinite;
+    }
+    @keyframes pulse-rec {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(244, 124, 107, .45); }
+      50% { box-shadow: 0 0 0 8px rgba(244, 124, 107, 0); }
+    }
     .pending-files { min-height: 25px; margin-top: 8px; color: var(--muted); font-size: 15px; }
-    .documents-shell { padding: 23px; border-color: var(--navy); }
-    .documents-shell > header { margin-bottom: 18px; }
-    .documents-shell > header p { margin-top: 5px; color: var(--muted); font-size: 17px; }
-    .btn-cab-upload { width: 100%; min-height: 60px; margin-bottom: 23px; background: var(--cream); color: var(--navy); }
+    .dictation-status {
+      margin-top: 8px; min-height: 22px; color: var(--navy); font-size: 15px; font-weight: 800;
+    }
+    /* Filing cabinets — below conversation */
+    .documents-shell {
+      padding: 26px 25px 28px;
+      border-color: var(--navy);
+    }
+    .documents-shell > header {
+      display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between;
+      gap: 16px; margin-bottom: 18px;
+    }
+    .documents-shell > header p { margin-top: 5px; color: var(--muted); font-size: 17px; max-width: 62ch; }
+    .cabinet-toolbar { display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn-cab-upload { background: var(--cream); color: var(--navy); }
     .btn-cab-upload:hover { background: var(--cream-2); }
-    .file-group { margin-top: 22px; }
+    .cabinet-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    @media (max-width: 900px) {
+      .cabinet-grid { grid-template-columns: 1fr; }
+    }
+    .file-cabinet-card {
+      border: 2px solid var(--navy);
+      border-radius: 20px;
+      background: #fffdf8;
+      padding: 16px 18px 18px;
+      box-shadow: var(--shadow-soft);
+      min-height: 180px;
+    }
+    .file-cabinet-card.accent-invoice { border-color: var(--gold); background: #fff9e9; }
+    .file-cabinet-card.accent-brokerage { border-color: var(--teal); background: #edf9f7; }
+    .file-cabinet-card.accent-transfer { border-color: var(--coral); background: #fff0ec; }
+    .file-cabinet-card header {
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 10px;
+      margin-bottom: 8px;
+    }
+    .file-cabinet-card h4 {
+      margin: 0; font-size: 16px; letter-spacing: .06em; text-transform: uppercase; color: var(--navy);
+    }
+    .file-cabinet-card .cab-desc {
+      margin: 0 0 10px; color: var(--muted); font-size: 14px; line-height: 1.4;
+    }
+    .file-cabinet-card .cab-count {
+      min-height: 32px; padding: 4px 10px; border: 2px solid var(--navy); border-radius: 999px;
+      background: var(--cream); font-size: 13px; font-weight: 900; white-space: nowrap;
+    }
+    .file-group { margin-top: 0; }
     .file-group h4 { margin-bottom: 9px; font-size: 17px; letter-spacing: .06em; text-transform: uppercase; }
-    .file-row { display: grid; grid-template-columns: 54px minmax(0, 1fr); gap: 12px; padding: 15px 0; border-top: 1px solid var(--line); }
+    .file-row { display: grid; grid-template-columns: 54px minmax(0, 1fr); gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); }
     .file-kind { display: grid; place-items: center; width: 54px; height: 54px; border: 2px solid var(--navy); border-radius: 13px; background: var(--gold-soft); color: var(--navy); font-size: 13px; font-weight: 900; }
-    .file-row strong { display: block; color: var(--navy); font-size: 17px; line-height: 1.28; overflow-wrap: anywhere; }
+    .file-row strong { display: block; color: var(--navy); font-size: 16px; line-height: 1.28; overflow-wrap: anywhere; }
     .file-meta { margin-top: 4px; color: var(--muted); font-size: 14px; }
     .file-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
-    .file-actions a { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 9px 12px; border: 2px solid var(--navy); border-radius: 9px; background: var(--navy); color: var(--cream); font-size: 14px; font-weight: 900; letter-spacing: .03em; text-transform: uppercase; }
-    .file-actions a.download { background: var(--cream); color: var(--navy); }
+    .file-actions a, .file-actions button {
+      display: inline-flex; align-items: center; justify-content: center; min-height: 44px;
+      padding: 8px 12px; border: 2px solid var(--navy); border-radius: 9px; background: var(--navy);
+      color: var(--cream); font-size: 13px; font-weight: 900; letter-spacing: .03em; text-transform: uppercase;
+      cursor: pointer;
+    }
+    .file-actions a.download, .file-actions button.download { background: var(--cream); color: var(--navy); }
 
     /* Help and settings */
     .modal { display: none; position: fixed; inset: 0; z-index: 100; align-items: center; justify-content: center; padding: 24px; background: rgba(23, 35, 63, .76); }
@@ -374,7 +536,7 @@
       .door { padding: 15px; }
       .door h3 { font-size: 21px; }
       .door-cta { min-height: 155px; padding: 18px; }
-      .comms-layout { grid-template-columns: minmax(0, 1.6fr) minmax(310px, 1fr); }
+      .comms-layout { gap: 22px; }
     }
     @media (max-width: 900px) {
       body { font-size: 17px; }
@@ -390,8 +552,8 @@
       .timeline-step:last-child { border-bottom: 0; }
       .decision-card { grid-template-columns: auto 1fr; }
       .decision-card .action-link { grid-column: 1 / -1; justify-self: start; }
-      .comms-layout { grid-template-columns: 1fr; }
-      .chat-shell { min-height: 680px; }
+      .comms-layout { gap: 20px; }
+      .chat-shell { height: min(88vh, 1200px); min-height: 720px; }
     }
     @media (max-width: 620px) {
       .topbar-inner { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
@@ -412,8 +574,8 @@
       .card.pad, .build-area, .progress-card, .chart-card, .documents-shell { padding: 19px; }
       .decision-card { padding: 18px; }
       .chat-head, .chat-compose, .chat-stream { padding-inline: 17px; }
-      .chat-shell { min-height: 620px; }
-      .bubble { max-width: 92%; }
+      .chat-shell { height: min(85vh, 1000px); min-height: 640px; }
+      .bubble { width: 92%; max-width: 92%; }
       .compose-top { align-items: flex-start; flex-direction: column; }
       .compose-row { grid-template-columns: 1fr; }
       .compose-actions { display: grid; grid-template-columns: 1fr 1fr; }
@@ -437,8 +599,8 @@
         <nav class="primary-nav" aria-label="Main areas">
           <button type="button" class="nav-link" data-panel="communications">Talk to Richard</button>
           <button type="button" class="nav-link" data-panel="build-out-box">Build Out Box</button>
-          <a class="nav-link website" href="https://richardbjamison.github.io/faber-capital-resources/resonant-design-offer/" target="_blank" rel="noopener">Your Offer</a>
-          <a class="nav-link website" href="https://richardbjamison.github.io/faber-capital-resources/" target="_blank" rel="noopener">Open Website</a>
+          <a class="nav-link website" href="/resonant-design-offer/" target="_blank" rel="noopener">Your Offer</a>
+          <a class="nav-link website" href="/" target="_blank" rel="noopener">Open Website</a>
         </nav>
         <div class="top-actions">
           <button type="button" class="notification-button" id="notificationButton" aria-label="Open latest notification"><span class="status-dot" aria-hidden="true"></span><span class="sr-only" id="notificationText">No new messages</span><span aria-hidden="true" id="notificationCount">0</span></button>
@@ -465,7 +627,7 @@
         <div class="door-grid" aria-label="Choose a destination">
           <article class="door coral">
             <div class="door-top"><div class="door-icon" aria-hidden="true">↗</div><h3>Talk to Richard</h3></div>
-            <p class="door-support">Messages, questions and shared documents</p>
+            <p class="door-support">Conversation bridge, dictation, file transfer &amp; cabinets</p>
             <button type="button" class="door-cta" data-panel="communications"><strong>OPEN OUR CONVERSATION</strong><span id="talkStatus">Loading messages…</span><span class="arrow" aria-hidden="true">→</span></button>
           </article>
           <article class="door teal">
@@ -481,7 +643,7 @@
           <article class="door iris">
             <div class="door-top"><div class="door-icon" aria-hidden="true">↗</div><h3>Faber Capital Resources</h3></div>
             <p class="door-support">The canvas where we build our web design</p>
-            <a class="door-cta" href="https://richardbjamison.github.io/faber-capital-resources/" target="_blank" rel="noopener" aria-label="Open the Faber Capital Resources website"><strong>OPEN THE WEBSITE</strong><span>The canvas where we build our web design</span><span class="arrow" aria-hidden="true">→</span></a>
+            <a class="door-cta" href="/" target="_blank" rel="noopener" aria-label="Open the Faber Capital Resources website"><strong>OPEN THE WEBSITE</strong><span>The canvas where we build our web design</span><span class="arrow" aria-hidden="true">→</span></a>
           </article>
         </div>
         <section class="today-strip" aria-labelledby="todayTitle">
@@ -495,30 +657,62 @@
       </section>
 
       <section class="panel" id="panel-communications" aria-labelledby="communicationsTitle">
-        <div class="section-intro">
-          <div><p class="section-kicker">Talk to Richard</p><h2 id="communicationsTitle">One clear conversation.</h2><p>Ask a question, reply to Richard, or share a document. This is your working room for RECR.</p></div>
-          <div class="current-note" id="communicationsNote">Your conversation is loading now.</div>
+        <div class="section-intro section-intro--comms">
+          <div>
+            <h1 id="communicationsTitle">Communications Bridge With Richard</h1>
+          </div>
+          <div class="current-note" id="communicationsNote" hidden>Your conversation is loading now.</div>
         </div>
         <div class="comms-layout">
           <section class="chat-shell" aria-label="Conversation with Richard">
-            <header class="chat-head">
-              <div><h3>Richard ↔ Bill</h3><p>Shared conversation for Real Estate Capital Resources</p></div>
+            <header class="chat-head chat-head--compact">
+              <div>
+                <h3>Richard ↔ Bill</h3>
+              </div>
               <span class="status-label" id="chatStatus" aria-live="polite">Connecting…</span>
             </header>
             <div class="chat-stream" id="chatStream" aria-live="polite"><div class="empty-state"><strong>Loading your conversation</strong>Richard’s messages will appear here.</div></div>
             <div class="chat-compose">
-              <div class="compose-top"><label for="chatInput">Write to Richard</label><div class="compose-who" id="composeWho" aria-label="Message sender"><button type="button" data-who="fcr" class="active">Bill</button><button type="button" data-who="richard">Richard (admin)</button></div></div>
-              <div class="compose-row"><textarea id="chatInput" placeholder="Write a message to Richard…" rows="4" aria-describedby="composeHint"></textarea><div class="compose-actions"><button type="button" class="btn-send" id="chatSend">SEND MESSAGE</button><button type="button" class="btn-attach" id="chatAttach">ADD A FILE</button></div></div>
-              <p class="compose-hint" id="composeHint">Press Enter to send. Press Shift + Enter for a new line.</p>
+              <div class="compose-top">
+                <label for="chatInput">Write, dictate, or attach a file</label>
+                <div class="compose-who" id="composeWho" aria-label="Message sender">
+                  <button type="button" data-who="fcr" class="active">Bill</button>
+                  <button type="button" data-who="richard">Richard (admin)</button>
+                </div>
+              </div>
+              <div class="compose-row">
+                <textarea id="chatInput" placeholder="Type a message — or press Dictate to record. Audio + transcript will attach to this conversation." rows="4" aria-describedby="composeHint"></textarea>
+                <div class="compose-actions">
+                  <button type="button" class="btn-send" id="chatSend">SEND MESSAGE</button>
+                </div>
+              </div>
+              <div class="compose-tools" role="group" aria-label="Conversation tools">
+                <button type="button" class="btn-dictate" id="chatDictate" aria-pressed="false">DICTATE · WHISPERFLOW</button>
+                <button type="button" class="btn-attach" id="chatAttach">UPLOAD FILE</button>
+                <button type="button" class="btn-transfer" id="chatDownloadAll" title="Download recent shared files">DOWNLOAD FILES</button>
+              </div>
+              <p class="compose-hint" id="composeHint">Enter to send · Shift+Enter for a new line · Dictate captures audio and a transcript for Richard · Upload/download for real-time file transfer.</p>
+              <div class="dictation-status" id="dictationStatus" aria-live="polite"></div>
               <input type="file" id="chatFile" multiple hidden />
               <div class="pending-files" id="pendingFiles" aria-live="polite"></div>
             </div>
           </section>
+
           <aside class="documents-shell" aria-labelledby="documentsTitle">
-            <header><h3 id="documentsTitle">Shared Documents</h3><p>Files Richard has shared with you, kept in one calm place.</p></header>
-            <button type="button" class="btn-cab-upload" id="cabUpload">ADD A FILE</button>
+            <header>
+              <div>
+                <h3 id="documentsTitle">Filing cabinets</h3>
+                <p>Stored under the conversation. Upload anything Bill or Richard needs for the new brokerage, invoices, or day-to-day transfer. Everything here is openable and downloadable.</p>
+              </div>
+              <div class="cabinet-toolbar">
+                <button type="button" class="btn-cab-upload" id="cabUpload">UPLOAD TO CABINET</button>
+                <button type="button" class="btn-cab-upload" id="cabDownloadAll">DOWNLOAD ALL</button>
+              </div>
+            </header>
             <input type="file" id="cabFile" multiple hidden />
-            <div id="fileCabinet"><div class="empty-state"><strong>Loading documents</strong>Shared files will appear here.</div></div>
+            <div class="cabinet-grid" id="fileCabinet">
+              <div class="empty-state"><strong>Loading filing cabinets</strong>Shared files will appear in sections below.</div>
+            </div>
           </aside>
         </div>
       </section>
@@ -540,7 +734,7 @@
         <div class="decision-card"><div class="decision-mark" aria-hidden="true">?</div><div><h3>BILL — WE NEED YOUR DECISION</h3><p>When you are ready, reply to Richard’s website questions in your conversation so the build can keep moving.</p></div><button type="button" class="action-link" data-panel="communications">OPEN THE QUESTION</button></div>
         <div class="build-areas">
           <article class="build-area"><div class="area-title"><h3>Brokerage System</h3><span class="status-label">Discovery</span></div><dl class="area-detail"><div><dt>Richard is working on</dt><dd>Mapping how RECR operates, from relationships to handoffs.</dd></div><div><dt>Completed</dt><dd>The first working path and six-week plan are in place.</dd></div></dl><button type="button" class="action-link detail-button" data-detail="Brokerage System">VIEW DETAILS</button></article>
-          <article class="build-area"><div class="area-title"><h3>Website</h3><span class="status-label teal">Foundation</span></div><dl class="area-detail"><div><dt>Richard is working on</dt><dd>Preparing the public-facing RECR website foundation.</dd></div><div><dt>Completed</dt><dd>The current Faber Capital Resources website remains available.</dd></div></dl><div><a class="quiet-button" href="https://richardbjamison.github.io/faber-capital-resources/" target="_blank" rel="noopener">VIEW CURRENT WEBSITE</a><button type="button" class="action-link detail-button" data-detail="Website" style="margin:10px 0 0 7px;">VIEW DETAILS</button></div></article>
+          <article class="build-area"><div class="area-title"><h3>Website</h3><span class="status-label teal">Foundation</span></div><dl class="area-detail"><div><dt>Richard is working on</dt><dd>Preparing the public-facing RECR website foundation.</dd></div><div><dt>Completed</dt><dd>The current Faber Capital Resources website remains available.</dd></div></dl><div><a class="quiet-button" href="/" target="_blank" rel="noopener">VIEW CURRENT WEBSITE</a><button type="button" class="action-link detail-button" data-detail="Website" style="margin:10px 0 0 7px;">VIEW DETAILS</button></div></article>
           <article class="build-area"><div class="area-title"><h3>Communications</h3><span class="status-label">Ready</span></div><dl class="area-detail"><div><dt>Richard is working on</dt><dd>Keeping your shared conversation and documents together.</dd></div><div><dt>Completed</dt><dd>Chat history, message sending, and file sharing are connected.</dd></div></dl><button type="button" class="action-link detail-button" data-detail="Communications">VIEW DETAILS</button></article>
           <article class="build-area"><div class="area-title"><h3>Marketing</h3><span class="status-label gold">Planning</span></div><dl class="area-detail"><div><dt>Richard is working on</dt><dd>Connecting the build to the right future marketing activity.</dd></div><div><dt>Completed</dt><dd>The marketing workstream has a place in the launch path.</dd></div></dl><button type="button" class="action-link detail-button" data-detail="Marketing">VIEW DETAILS</button></article>
           <article class="build-area"><div class="area-title"><h3>Search Visibility</h3><span class="status-label gold">Planning</span></div><dl class="area-detail"><div><dt>Richard is working on</dt><dd>Clarifying how people will find RECR when the public site is ready.</dd></div><div><dt>Completed</dt><dd>Search and measurement are included in the build map.</dd></div></dl><button type="button" class="action-link detail-button" data-detail="Search Visibility">VIEW DETAILS</button></article>
@@ -918,6 +1112,7 @@
       var currentPanel = "dashboard";
       var lastAnalytics = null;
       var READ_KEY = "fcr_comms_last_read_id";
+      var DISMISS_KEY = "fcr_comms_dismissed_ids";
       var TOUR_KEY = "doodle-bug-tour-complete-v1";
       var TOUR_STEPS = [
         { title: "Talk to Richard", body: "Start here for messages, questions, replies, and shared documents." },
@@ -991,7 +1186,19 @@
         if (updateHash !== false) window.history.replaceState(null, "", "#" + target);
         if (target === "communications") {
           markCommsRead();
-          setTimeout(function () { var stream = byId("chatStream"); if (stream) stream.scrollTop = stream.scrollHeight; var input = byId("chatInput"); if (input) input.focus(); }, 80);
+          chatOpenAtTop = true;
+          renderMessages(lastCommsMessages, { forceScrollTop: true, forceRender: true });
+          loadComms({ forceScrollTop: true });
+          setTimeout(function () {
+            var stream = byId("chatStream");
+            if (stream) stream.scrollTop = 0;
+            var input = byId("chatInput");
+            if (input) input.focus({ preventScroll: true });
+          }, 80);
+          setTimeout(function () {
+            var stream = byId("chatStream");
+            if (stream && chatOpenAtTop) stream.scrollTop = 0;
+          }, 300);
         }
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
@@ -1041,19 +1248,115 @@
       }
       var lastCommsMessages = [];
 
-      function renderMessages(messages) {
+      var lastMessagesSig = "";
+      var chatOpenAtTop = false; /* true when entering the portal — stay at top until user scrolls or sends */
+      function chatNearBottom(el, threshold) {
+        if (!el) return true;
+        var slop = threshold == null ? 100 : threshold;
+        return el.scrollHeight - el.scrollTop - el.clientHeight <= slop;
+      }
+      function messageKey(m, index) {
+        if (m && m.id != null && String(m.id)) return String(m.id);
+        return "msg-" + index + "-" + String((m && m.ts) || "") + "-" + String((m && m.text) || "").slice(0, 40);
+      }
+      function loadDismissedIds() {
+        try {
+          var raw = localStorage.getItem(DISMISS_KEY);
+          var arr = raw ? JSON.parse(raw) : [];
+          return Array.isArray(arr) ? arr.map(String) : [];
+        } catch (e) { return []; }
+      }
+      function saveDismissedIds(ids) {
+        try { localStorage.setItem(DISMISS_KEY, JSON.stringify(ids.slice(-200))); } catch (e) {}
+      }
+      function dismissMessage(id) {
+        if (!id) return;
+        var ids = loadDismissedIds();
+        if (ids.indexOf(String(id)) === -1) ids.push(String(id));
+        saveDismissedIds(ids);
+        renderMessages(lastCommsMessages, { forceRender: true });
+      }
+      function bindChatScrollPrefer() {
+        var el = byId("chatStream");
+        if (!el || el.dataset.scrollPreferBound) return;
+        el.dataset.scrollPreferBound = "1";
+        el.addEventListener("scroll", function () {
+          if (el.scrollTop > 24) chatOpenAtTop = false;
+        }, { passive: true });
+        el.addEventListener("click", function (e) {
+          var btn = e.target.closest(".bubble-close");
+          if (!btn) return;
+          e.preventDefault();
+          e.stopPropagation();
+          dismissMessage(btn.getAttribute("data-dismiss-id"));
+        });
+      }
+      function renderMessages(messages, opts) {
+        opts = opts || {};
         var el = byId("chatStream"); if (!el) return;
-        if (!messages || !messages.length) { el.innerHTML = '<div class="empty-state"><strong>No messages yet.</strong>Write to Richard below when you are ready.</div>'; return; }
-        el.innerHTML = messages.map(function (m) {
+        bindChatScrollPrefer();
+        if (opts.forceScrollTop === true) chatOpenAtTop = true;
+        if (opts.forceScroll === true) chatOpenAtTop = false;
+        var forceTop = opts.forceScrollTop === true || chatOpenAtTop;
+        var stickToBottom = !forceTop && (opts.forceScroll === true || chatNearBottom(el));
+        var savedTop = el.scrollTop;
+        var dismissed = loadDismissedIds();
+        var dismissedSet = {};
+        dismissed.forEach(function (id) { dismissedSet[id] = true; });
+        var visible = (messages || []).map(function (m, i) {
+          return { m: m, key: messageKey(m, i) };
+        }).filter(function (row) { return !dismissedSet[row.key]; });
+        var sig = JSON.stringify({
+          msgs: messages || [],
+          dismissed: dismissed
+        });
+        /* Polling used to rebuild DOM every 8s and force scroll-to-bottom — that bounced readers. */
+        if (sig === lastMessagesSig && !opts.forceRender) {
+          if (forceTop) el.scrollTop = 0;
+          else if (stickToBottom) el.scrollTop = el.scrollHeight;
+          return;
+        }
+        lastMessagesSig = sig;
+        if (!messages || !messages.length) {
+          el.innerHTML = '<div class="empty-state"><strong>No messages yet.</strong>Write to Richard below when you are ready.</div>';
+          if (forceTop) el.scrollTop = 0;
+          return;
+        }
+        if (!visible.length) {
+          el.innerHTML = '<div class="empty-state"><strong>All caught up.</strong>Closed messages are hidden. New ones from Richard will show here.</div>';
+          if (forceTop) el.scrollTop = 0;
+          return;
+        }
+        el.innerHTML = visible.map(function (row) {
+          var m = row.m;
+          var key = row.key;
           var isRichard = m.role === "richard";
           var name = isRichard ? "Richard" : "Bill";
           var atts = (m.attachments || []).map(function (a) {
             var href = absFileUrl(a.url);
             return '<a class="att" href="' + esc(href) + '" target="_blank" rel="noopener" download>OPEN FILE · ' + esc(humanFileLabel(a.name || "file")) + (a.size ? " · " + esc(fmtBytes(a.size)) : "") + "</a>";
           }).join("");
-          return '<article class="bubble ' + (isRichard ? "richard" : "bill") + '"><div class="meta">' + esc(name) + " · " + esc(fmtWhen(m.ts)) + '</div><div class="bubble-body">' + esc(m.text || "Document shared") + "</div>" + (atts ? '<div class="atts">' + atts + "</div>" : "") + "</article>";
+          var dictBadge = (m.dictation || m.source === "whisperflow" || m.source === "dictation") ? '<div class="dictation-badge">Dictation · WhisperFlow</div>' : "";
+          return '<article class="bubble ' + (isRichard ? "richard" : "bill") + '" data-msg-id="' + esc(key) + '">' +
+            '<button type="button" class="bubble-close" data-dismiss-id="' + esc(key) + '" aria-label="Close message">×</button>' +
+            '<div class="meta">' + esc(name) + " · " + esc(fmtWhen(m.ts)) + "</div>" + dictBadge +
+            '<div class="bubble-body">' + esc(m.text || "Document shared") + "</div>" +
+            (atts ? '<div class="atts">' + atts + "</div>" : "") +
+            "</article>";
         }).join("");
-        el.scrollTop = el.scrollHeight;
+        if (forceTop) el.scrollTop = 0;
+        else if (stickToBottom) el.scrollTop = el.scrollHeight;
+        else el.scrollTop = savedTop;
+      }
+      function fileCabinetCategory(f) {
+        var name = String((f && (f.name || f.label)) || "").toLowerCase();
+        var mime = String((f && f.mime) || "").toLowerCase();
+        var cat = String((f && (f.category || f.cabinet || f.folder)) || "").toLowerCase();
+        if (cat === "invoice" || cat === "invoices" || /invoice|ledger|receipt|payment|agreement_signed|connected_build/.test(name)) return "invoices";
+        if (cat === "brokerage" || /brokerage|listing|agent|mls|ghl|operating.?system|blueprint/.test(name)) return "brokerage";
+        if (cat === "attention" || (f && (f.needs_attention === true || f.attention === true))) return "attention";
+        if (cat === "transfer" || /transfer|whisper|dictation|audio|recording|\.webm$|\.mp3$|\.m4a$|\.wav$/.test(name) || mime.indexOf("audio/") === 0) return "transfer";
+        return "shared";
       }
       function renderFile(f) {
         var href = absFileUrl(f.url); var name = f.name || "file"; var label = f.label || humanFileLabel(name); var who = f.uploaded_by || "Richard";
@@ -1063,25 +1366,95 @@
         if (!files || !files.length) return '<section class="file-group"><h4>' + esc(title) + '</h4><div class="empty-state">' + esc(emptyText) + '</div></section>';
         return '<section class="file-group"><h4>' + esc(title) + '</h4>' + files.map(renderFile).join("") + '</section>';
       }
+      function renderCabinetCard(opts) {
+        var files = opts.files || [];
+        var body = files.length
+          ? files.map(renderFile).join("")
+          : '<div class="empty-state">' + esc(opts.empty || "Nothing here yet.") + "</div>";
+        return (
+          '<article class="file-cabinet-card ' + esc(opts.accent || "") + '" aria-labelledby="' + esc(opts.id) + '">' +
+          '<header><h4 id="' + esc(opts.id) + '">' + esc(opts.title) + '</h4><span class="cab-count">' + files.length + (files.length === 1 ? " file" : " files") + "</span></header>" +
+          '<p class="cab-desc">' + esc(opts.desc || "") + "</p>" + body +
+          "</article>"
+        );
+      }
+      var lastCabinetFiles = [];
       function renderCabinet(files) {
         var el = byId("fileCabinet"); if (!el) return;
-        if (!files || !files.length) { el.innerHTML = '<div class="empty-state"><strong>No documents yet.</strong>Add a file here or attach one to a message.</div>'; return; }
-        var attention = files.filter(function (f) { return f && (f.needs_attention === true || f.attention === true); });
-        var recent = files.slice(0, Math.min(3, files.length));
-        el.innerHTML = renderFileGroup("Needs Your Attention", attention, "Nothing is marked for your attention right now.") + renderFileGroup("Recent Documents", recent, "Your recent shared documents will appear here.") + renderFileGroup("All Documents", files, "No documents yet.");
+        lastCabinetFiles = files || [];
+        var list = lastCabinetFiles.slice();
+        var buckets = { attention: [], transfer: [], brokerage: [], invoices: [], shared: [] };
+        list.forEach(function (f) {
+          if (!f) return;
+          var cat = fileCabinetCategory(f);
+          if (!buckets[cat]) cat = "shared";
+          buckets[cat].push(f);
+        });
+        /* Invoices also surface known billing PDFs from accounting when missing from API */
+        if (!buckets.invoices.length) {
+          buckets.invoices.push({
+            name: "Faber_Capital_Resources_Invoice_and_Connected_Build_Agreement_Signed.pdf",
+            label: "Signed invoice & connected build agreement",
+            url: "files/Faber_Capital_Resources_Invoice_and_Connected_Build_Agreement_Signed.pdf",
+            uploaded_by: "Accounting",
+            ts: Date.now(),
+            category: "invoices"
+          });
+        }
+        el.innerHTML =
+          renderCabinetCard({ id: "cab-attention", title: "Needs Your Attention", desc: "Items Bill should open first.", accent: "", files: buckets.attention, empty: "Nothing is marked for your attention right now." }) +
+          renderCabinetCard({ id: "cab-transfer", title: "Live Transfers", desc: "Files and dictations moving between Richard and Bill right now.", accent: "accent-transfer", files: buckets.transfer, empty: "No transfer files yet. Upload or dictate above." }) +
+          renderCabinetCard({ id: "cab-brokerage", title: "Brokerage Build", desc: "Material for the new brokerage — Windows desk ↔ Mac build bridge.", accent: "accent-brokerage", files: buckets.brokerage, empty: "Drop brokerage specs, exports, and system notes here." }) +
+          renderCabinetCard({ id: "cab-invoices", title: "Invoices & Billing", desc: "Same invoices as Billing on the dashboard, kept here for quick download.", accent: "accent-invoice", files: buckets.invoices, empty: "No invoices filed yet." }) +
+          renderCabinetCard({ id: "cab-shared", title: "General File Storage", desc: "Everything else shared in this room.", accent: "", files: buckets.shared, empty: "No other documents yet." });
       }
-      async function loadComms() {
+      function downloadFileList(files) {
+        var list = (files || []).filter(function (f) { return f && f.url; });
+        if (!list.length) { window.alert("No downloadable files yet."); return; }
+        list.slice(0, 12).forEach(function (f, i) {
+          setTimeout(function () {
+            var a = document.createElement("a");
+            a.href = absFileUrl(f.url);
+            a.download = f.name || "file";
+            a.target = "_blank";
+            a.rel = "noopener";
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+          }, i * 220);
+        });
+      }
+      async function loadComms(opts) {
+        opts = opts || {};
         var status = byId("chatStatus");
         try {
           var r = await fetch(COMMS + "?_=" + Date.now(), { cache: "no-store", mode: "cors" });
           if (!r.ok) throw new Error("HTTP " + r.status);
           var d = await r.json();
           lastCommsMessages = d.messages || [];
-          renderMessages(lastCommsMessages); renderCabinet(d.files || []); updateCommsPeek(lastCommsMessages); updateNotification(lastCommsMessages, lastAnalytics && lastAnalytics.alerts);
+          var stream = byId("chatStream");
+          if (stream && stream.dataset.error) {
+            delete stream.dataset.error;
+            opts.forceRender = true;
+          }
+          if (chatOpenAtTop && !opts.forceScroll) opts.forceScrollTop = true;
+          renderMessages(lastCommsMessages, opts);
+          renderCabinet(d.files || []);
+          updateCommsPeek(lastCommsMessages);
+          updateNotification(lastCommsMessages, lastAnalytics && lastAnalytics.alerts);
           if (status) { status.textContent = "Live"; status.className = "status-label"; }
+          if (chatOpenAtTop) {
+            var streamTop = byId("chatStream");
+            if (streamTop) streamTop.scrollTop = 0;
+          }
         } catch (e) {
           if (status) { status.textContent = "Offline"; status.className = "status-label coral"; }
-          var stream = byId("chatStream"); if (stream && !stream.dataset.error) { stream.dataset.error = "1"; stream.innerHTML = '<div class="empty-state"><strong>We could not reach the conversation just now.</strong>Check the connection and try again. Your existing messages are safe.</div>'; }
+          /* Do not wipe the thread on poll failures — that also resets scroll. */
+          var stream = byId("chatStream");
+          if (stream && !lastCommsMessages.length && !stream.dataset.error) {
+            stream.dataset.error = "1";
+            stream.innerHTML = '<div class="empty-state"><strong>We could not reach the conversation just now.</strong>Check the connection and try again. Your existing messages are safe.</div>';
+          }
           setText("communicationsNote", "The conversation is temporarily offline. Try again in a moment.");
         }
       }
@@ -1101,7 +1474,8 @@
           var attachments = []; for (var i = 0; i < pending.length; i++) attachments.push(await uploadFile(pending[i]));
           var r = await fetch(COMMS, { method: "POST", headers: { "Content-Type": "application/json" }, mode: "cors", body: JSON.stringify({ action: "send", author: chatAuthor, role: chatRole, text: text, attachments: attachments }) });
           var d = await r.json(); if (!r.ok || !d.ok) throw new Error(d.error || "send failed");
-          if (input) input.value = ""; pending = []; setText("pendingFiles", ""); await loadComms();
+          if (input) input.value = ""; pending = []; setText("pendingFiles", "");
+          await loadComms({ forceScroll: true, forceRender: true });
         } catch (e) { window.alert("Could not send: " + (e.message || e)); }
         finally { if (send) { send.disabled = false; send.textContent = "SEND MESSAGE"; } }
       }
@@ -1169,7 +1543,96 @@
       byId("chatAttach").addEventListener("click", function () { byId("chatFile").click(); });
       byId("chatFile").addEventListener("change", function () { var files = Array.prototype.slice.call(this.files || []); pending = pending.concat(files); setText("pendingFiles", pending.length ? "Ready to send: " + pending.map(function (f) { return f.name; }).join(", ") : ""); this.value = ""; });
       byId("cabUpload").addEventListener("click", function () { byId("cabFile").click(); });
-      byId("cabFile").addEventListener("change", async function () { var files = Array.prototype.slice.call(this.files || []); this.value = ""; if (!files.length) return; var btn = byId("cabUpload"); if (btn) { btn.disabled = true; btn.textContent = "UPLOADING…"; } try { for (var i = 0; i < files.length; i++) await uploadFile(files[i]); await loadComms(); } catch (e) { window.alert("Upload failed: " + (e.message || e)); } finally { if (btn) { btn.disabled = false; btn.textContent = "ADD A FILE"; } } });
+      byId("cabFile").addEventListener("change", async function () {
+        var files = Array.prototype.slice.call(this.files || []); this.value = ""; if (!files.length) return;
+        var btn = byId("cabUpload"); if (btn) { btn.disabled = true; btn.textContent = "UPLOADING…"; }
+        try { for (var i = 0; i < files.length; i++) await uploadFile(files[i]); await loadComms(); }
+        catch (e) { window.alert("Upload failed: " + (e.message || e)); }
+        finally { if (btn) { btn.disabled = false; btn.textContent = "UPLOAD TO CABINET"; } }
+      });
+      var cabDl = byId("cabDownloadAll"); if (cabDl) cabDl.addEventListener("click", function () { downloadFileList(lastCabinetFiles); });
+      var chatDl = byId("chatDownloadAll"); if (chatDl) chatDl.addEventListener("click", function () { downloadFileList(lastCabinetFiles); });
+
+      /* WhisperFlow path: record audio + best-effort browser transcript, attach both to the send queue */
+      var mediaRecorder = null;
+      var recordChunks = [];
+      var speechRec = null;
+      var liveTranscript = "";
+      function setDictationStatus(msg) { setText("dictationStatus", msg || ""); }
+      function stopDictationUI() {
+        var btn = byId("chatDictate");
+        if (btn) { btn.classList.remove("is-recording"); btn.setAttribute("aria-pressed", "false"); btn.textContent = "DICTATE · WHISPERFLOW"; }
+      }
+      async function finishDictationBlob(blob) {
+        var stamp = new Date().toISOString().replace(/[:.]/g, "-");
+        var audioFile = new File([blob], "whisperflow-dictation-" + stamp + ".webm", { type: blob.type || "audio/webm" });
+        pending.push(audioFile);
+        var input = byId("chatInput");
+        var transcript = (liveTranscript || "").trim();
+        if (transcript) {
+          var prefix = (input.value ? input.value.replace(/\s+$/, "") + "\n\n" : "");
+          input.value = prefix + "[WhisperFlow transcript]\n" + transcript;
+        } else if (input && !input.value.trim()) {
+          input.value = "[WhisperFlow audio attached — paste or edit transcript here if auto-transcribe was unavailable]";
+        }
+        setText("pendingFiles", pending.length ? "Ready to send: " + pending.map(function (f) { return f.name; }).join(", ") : "");
+        setDictationStatus(transcript
+          ? "Dictation ready: audio file + transcript. Press Send Message."
+          : "Audio captured. Browser transcript unavailable — type or paste WhisperFlow text, then Send.");
+        liveTranscript = "";
+      }
+      async function toggleDictation() {
+        var btn = byId("chatDictate");
+        if (mediaRecorder && mediaRecorder.state === "recording") {
+          mediaRecorder.stop();
+          if (speechRec) { try { speechRec.stop(); } catch (e) {} }
+          stopDictationUI();
+          setDictationStatus("Processing dictation…");
+          return;
+        }
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+          window.alert("Microphone capture is not available in this browser. Use WhisperFlow on the Mac, then paste the transcript and upload the audio file.");
+          return;
+        }
+        try {
+          var stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          recordChunks = [];
+          liveTranscript = "";
+          mediaRecorder = new MediaRecorder(stream);
+          mediaRecorder.ondataavailable = function (e) { if (e.data && e.data.size) recordChunks.push(e.data); };
+          mediaRecorder.onstop = function () {
+            stream.getTracks().forEach(function (tr) { tr.stop(); });
+            var blob = new Blob(recordChunks, { type: (mediaRecorder && mediaRecorder.mimeType) || "audio/webm" });
+            finishDictationBlob(blob);
+            mediaRecorder = null;
+          };
+          mediaRecorder.start();
+          var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+          if (SR) {
+            speechRec = new SR();
+            speechRec.continuous = true;
+            speechRec.interimResults = true;
+            speechRec.lang = "en-US";
+            speechRec.onresult = function (ev) {
+              var parts = [];
+              for (var i = 0; i < ev.results.length; i++) parts.push(ev.results[i][0].transcript);
+              liveTranscript = parts.join(" ").trim();
+              setDictationStatus("Listening… " + (liveTranscript ? liveTranscript.slice(0, 120) : ""));
+            };
+            speechRec.onerror = function () { /* audio still saved */ };
+            try { speechRec.start(); } catch (e) {}
+          }
+          if (btn) { btn.classList.add("is-recording"); btn.setAttribute("aria-pressed", "true"); btn.textContent = "STOP RECORDING"; }
+          setDictationStatus(SR
+            ? "Recording — speak now. WhisperFlow path: audio + live transcript."
+            : "Recording audio. When finished, paste WhisperFlow transcript into the box if needed.");
+        } catch (e) {
+          window.alert("Could not start microphone: " + (e.message || e));
+          stopDictationUI();
+        }
+      }
+      var dictBtn = byId("chatDictate");
+      if (dictBtn) dictBtn.addEventListener("click", toggleDictation);
 
       function bindSettings() {
         var savedSize = "normal"; try { savedSize = localStorage.getItem("doodle-bug-text-size") || "normal"; } catch (e) {}
@@ -1190,5 +1653,24 @@
       window.fcrNexusOpenProjectChat = function () { showPanel("communications"); };
     })();
   </script>
+
+  <script>
+    (function () {
+      var parts = location.pathname.split("/").filter(Boolean);
+      var BASE = parts[0] === "faber-capital-resources" ? "/faber-capital-resources" : "";
+      window.NEXUS_BASE = BASE;
+      function withBase(href) {
+        if (!href || /^(https?:|mailto:|tel:|#|\/\/)/i.test(href)) return href;
+        if (href.charAt(0) === "/") return BASE + href;
+        return href;
+      }
+      document.querySelectorAll("a[href]").forEach(function (a) {
+        var h = a.getAttribute("href");
+        if (!h || h.charAt(0) !== "/") return;
+        a.setAttribute("href", withBase(h));
+      });
+    })();
+  </script>
+
 </body>
 </html>
