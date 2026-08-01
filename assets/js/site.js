@@ -40,6 +40,50 @@
         el.setAttribute(attr, BASE + v);
       });
     });
+    /* Inline style background-image:url(/assets/...) */
+    scope.querySelectorAll("[style*='url(']").forEach(function (el) {
+      const st = el.getAttribute("style");
+      if (!st || st.indexOf("url(/") === -1) return;
+      el.setAttribute(
+        "style",
+        st.replace(/url\(\s*(\/(?!\/)[^)]+)\)/g, function (_, path) {
+          if (path.indexOf(BASE + "/") === 0) return "url(" + path + ")";
+          return "url(" + BASE + path + ")";
+        })
+      );
+    });
+  }
+
+  /** After path rewrite, force media to re-fetch correct URLs (browser may have 404'd first). */
+  function reloadVideos() {
+    document.querySelectorAll("video").forEach(function (v) {
+      try {
+        v.load();
+      } catch (e) { /* no-op */ }
+    });
+  }
+
+  /* Muted autoplay for in-body split videos (investment growth, etc.) */
+  function bindSplitVideos() {
+    const reduce =
+      window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.querySelectorAll("video.split-media-video").forEach(function (v) {
+      if (reduce) {
+        try {
+          v.pause();
+          v.removeAttribute("autoplay");
+        } catch (e) { /* no-op */ }
+        return;
+      }
+      v.muted = true;
+      v.playsInline = true;
+      const tryPlay = function () {
+        const p = v.play();
+        if (p && typeof p.catch === "function") p.catch(function () {});
+      };
+      if (v.readyState >= 2) tryPlay();
+      else v.addEventListener("loadeddata", tryPlay, { once: true });
+    });
   }
 
   function phoneIcon() {
@@ -459,7 +503,7 @@
   /* Load optional tracking-config.js if present (sets RECR_GA4_ID, GSC, IndexNow host). */
   function loadTrackingConfig(cb) {
     const s = document.createElement("script");
-    s.src = "/assets/js/tracking-config.js";
+    s.src = p("/assets/js/tracking-config.js");
     s.onload = cb;
     s.onerror = cb;
     document.head.appendChild(s);
@@ -581,6 +625,7 @@
       initAnalytics();
     });
     rewriteRootAbsolute(document);
+    reloadVideos();
     injectShell();
     bindMenu();
     bindHeaderScroll();
@@ -590,5 +635,6 @@
     injectSchema();
     bindTracking();
     bindHeroVideo();
+    bindSplitVideos();
   });
 })();

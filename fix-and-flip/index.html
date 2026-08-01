@@ -10,8 +10,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/acqua-frame.css">
-  <link rel="preload" as="image" href="/assets/img/fix-and-flip-poster.jpg" fetchpriority="high">
+  <link rel="stylesheet" href="../assets/css/acqua-frame.css">
+  <link rel="preload" as="image" href="../assets/img/fix-and-flip-poster.jpg" fetchpriority="high">
 </head>
 <body data-active="" data-schema="program">
   <div id="site-shell"></div>
@@ -26,12 +26,12 @@
       muted
       playsinline
       preload="metadata"
-      poster="/assets/img/fix-and-flip-poster.jpg"
+      poster="../assets/img/fix-and-flip-poster.jpg"
       data-loop="false"
       disablepictureinpicture
       disableremoteplayback
     >
-      <source src="/assets/video/fix-and-flip-header.mp4" type="video/mp4">
+      <source src="../assets/video/fix-and-flip-header.mp4" type="video/mp4">
     </video>
   </div>
   <div class="hero-inner">
@@ -214,7 +214,7 @@
     <div class="split">
       <div class="split-media reveal-left">
         <img
-          src="/assets/img/fix-flip-before-after.jpg"
+          src="../assets/img/fix-flip-before-after.jpg"
           alt="Before and after of a renovated investment property — distressed house transformed into a finished flip"
           width="1344"
           height="768"
@@ -753,10 +753,10 @@
 </section>
 
   </main>
-  <script src="/assets/js/site.js?v=nav-clean-20260730"></script>
+  <script src="../assets/js/site.js?v=asset-fix-20260801"></script>
   <script>
     /* Page-local: one open flip tile at a time on smaller screens.
-       Both faces remain in the HTML for crawlability; site.js?v=nav-clean-20260730 handles flip. */
+       Both faces remain in the HTML for crawlability; site.js?v=asset-fix-20260801 handles flip. */
     (function () {
       function closeSiblings(card) {
         if (!window.matchMedia("(max-width: 900px)").matches) return;
