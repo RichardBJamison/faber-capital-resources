@@ -118,6 +118,33 @@ a { color: inherit; }
   outline-offset: 3px;
 }
 
+/* Brokerage — soft solid orange CTA (matches main RECR site) */
+.brokerage-nav-btn {
+  display: inline-block !important;
+  background: #E07A3A !important;
+  color: #fff !important;
+  padding: 0.55rem 1.15rem !important;
+  border-radius: 999px !important;
+  font-size: 16px !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: none !important;
+  line-height: 1.2 !important;
+  box-shadow: 0 1px 6px rgba(180, 90, 30, 0.22);
+  transition: background 0.2s, transform 0.2s !important;
+  opacity: 1 !important;
+}
+.brokerage-nav-btn:hover {
+  background: #E98D52 !important;
+  color: #fff !important;
+  transform: translateY(-1px) scale(1.02);
+  opacity: 1 !important;
+}
+.brokerage-nav-btn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
 /* Mobile nav */
 .offer-nav-toggle {
   display: none;
