@@ -25,11 +25,13 @@
       autoplay
       muted
       playsinline
-      preload="metadata"
+      webkit-playsinline
+      preload="auto"
       poster="../assets/img/fix-and-flip-poster.jpg"
       data-loop="false"
       disablepictureinpicture
       disableremoteplayback
+      src="../assets/video/fix-and-flip-header.mp4"
     >
       <source src="../assets/video/fix-and-flip-header.mp4" type="video/mp4">
     </video>
@@ -753,10 +755,10 @@
 </section>
 
   </main>
-  <script src="../assets/js/site.js?v=asset-fix-20260801"></script>
+  <script src="../assets/js/site.js?v=brokerage-video-20260801"></script>
   <script>
     /* Page-local: one open flip tile at a time on smaller screens.
-       Both faces remain in the HTML for crawlability; site.js?v=asset-fix-20260801 handles flip. */
+       Both faces remain in the HTML for crawlability; site.js?v=brokerage-video-20260801 handles flip. */
     (function () {
       function closeSiblings(card) {
         if (!window.matchMedia("(max-width: 900px)").matches) return;

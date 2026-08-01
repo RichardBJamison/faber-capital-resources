@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/acqua-frame.css?v=pills-forward">
+  <link rel="stylesheet" href="assets/css/acqua-frame.css?v=brokerage-video-20260801">
   <!-- LCP: poster first; video streams after (metadata only until play) -->
   <link rel="preload" as="image" href="assets/img/hero-video-poster.jpg" fetchpriority="high">
 </head>
@@ -23,11 +23,13 @@
       autoplay
       muted
       playsinline
-      preload="metadata"
+      webkit-playsinline
+      preload="auto"
       poster="assets/img/hero-video-poster.jpg"
       data-loop="false"
       disablepictureinpicture
       disableremoteplayback
+      src="assets/video/hero-header.mp4"
     >
       <source src="assets/video/hero-header.mp4" type="video/mp4">
     </video>
@@ -320,120 +322,180 @@
   </div>
 </div>
 
-<section class="section section--gray section--after-ticker" id="funding-programs">
+<section class="section section--gray section--after-ticker program-zoom" id="funding-programs" data-program-zoom>
   <div class="container">
+    <!-- Section chrome stays outside the window; only the card stage zooms -->
     <div class="section-head center reveal">
       <div class="eyebrow" style="color:var(--gold)">Program routing</div>
       <h2>What Would You Like to Finance?</h2>
       <p>Every transaction has a different business plan, timeline, property condition, and exit strategy. Start with the financing path that most closely matches the opportunity.</p>
     </div>
-    <div class="product-grid cols-3">
-      
-      <article class="loan-card reveal">
-        <h3>Fix &amp; Flip</h3>
-        <p class="card-lead">Purchase and renovation capital for value-add resale strategies.</p>
-        <div class="program-label">Ideal use · Active renovation, planned sale</div>
-        <ul class="check">
-          <li>Purchase + renovation capital</li>
-<li>Value-add resale strategies</li>
-<li>Scope, ARV, and exit reviewed together</li>
-<li>Experience-aware placement</li>
-<li>Defined sale or refinance path</li>
-        </ul>
-        <a class="btn btn-card" href="/fix-and-flip/">Learn More</a>
-      </article>
-      <article class="loan-card reveal reveal-delay-1">
-        <h3>Rental / DSCR</h3>
-        <p class="card-lead">Longer-term rental financing evaluated around cash flow and reserves.</p>
-        <div class="program-label">Ideal use · Stabilized or stabilizing rental</div>
-        <ul class="check">
-          <li>Cash-flow and DSCR evaluation</li>
-<li>Purchase and refinance conversations</li>
-<li>Reserve expectations stated plainly</li>
-<li>Hold strategies, not speculation theater</li>
-<li>Partner guidelines set the floor</li>
-        </ul>
-        <a class="btn btn-card" href="/rental/">Learn More</a>
-      </article>
-      <article class="loan-card reveal reveal-delay-2">
-        <h3>Bridge Financing</h3>
-        <p class="card-lead">Short-term capital for acquisition, stabilization, or transitional exits.</p>
-        <div class="program-label">Ideal use · Short timeline to refinance or sale</div>
-        <ul class="check">
-          <li>Defined short-term exit required</li>
-<li>Acquisition and transitional uses</li>
-<li>Timeline realism matters</li>
-<li>Sponsor strength reviewed</li>
-<li>Complete files move fastest</li>
-        </ul>
-        <a class="btn btn-card" href="/bridge/">Learn More</a>
-      </article>
-      <article class="loan-card reveal reveal-delay-3">
-        <h3>Ground-Up Construction</h3>
-        <p class="card-lead">Capital structured around plans, budgets, draws, and build timelines.</p>
-        <div class="program-label">Ideal use · New construction or major build</div>
-        <ul class="check">
-          <li>Plans, budgets, and draws</li>
-<li>Builder / GC experience reviewed</li>
-<li>Interest reserves and timeline</li>
-<li>Sale or permanent takeout exit</li>
-<li>LTC confirmed on program sheet</li>
-        </ul>
-        <a class="btn btn-card" href="/ground-up/">Learn More</a>
-      </article>
-      <article class="loan-card reveal reveal-delay-4">
-        <h3>Commercial Real Estate</h3>
-        <p class="card-lead">Acquisition and refinance pathways for investor-owned commercial assets.</p>
-        <div class="program-label">Ideal use · Income-producing commercial</div>
-        <ul class="check">
-          <li>Investor-owned commercial assets</li>
-<li>Acquisition and refinance paths</li>
-<li>Business plan and cash flow</li>
-<li>Document package clarity</li>
-<li>Market depth reviewed</li>
-        </ul>
-        <a class="btn btn-card" href="/commercial/">Learn More</a>
-      </article>
-      <article class="loan-card reveal reveal-delay-5">
-        <h3>Multifamily</h3>
-        <p class="card-lead">2+ unit investment financing aligned to business plan and cash flow.</p>
-        <div class="program-label">Ideal use · Residential income property</div>
-        <ul class="check">
-          <li>2+ unit investment property</li>
-<li>Business plan and cash flow</li>
-<li>Hold / refinance orientation</li>
-<li>Sponsor liquidity reviewed</li>
-<li>Entity structure clarity</li>
-        </ul>
-        <a class="btn btn-card" href="/multifamily/">Learn More</a>
-      </article>
-      <article class="loan-card reveal">
-        <h3>100% Purchase &amp; Rehab</h3>
-        <p class="card-lead">Up to 100% of purchase and rehab on qualifying joint-venture transactions—when the deal supports it.</p>
-        <div class="program-label">Ideal use · Limited cash, strong project</div>
-        <ul class="check">
-          <li>Up to 100% purchase + rehab on qualifying JV</li>
-<li>ARV support is the gate</li>
-<li>Real budget with contingency required</li>
-<li>Credible exit required</li>
-<li>Not every deal qualifies—and we say so</li>
-        </ul>
-        <a class="btn btn-card" href="/purchase-rehab/">Learn More</a>
-      </article>
-      <article class="loan-card reveal reveal-delay-1">
-        <h3>Joint-Venture Funding</h3>
-        <p class="card-lead">Partnership capital that can cover up to 100% of a qualifying project when pure debt is not the right fit.</p>
-        <div class="program-label">Ideal use · Need capital partner</div>
-        <ul class="check">
-          <li>Equity-style partnership path</li>
-<li>When debt alone is wrong</li>
-<li>Transparent economics framework</li>
-<li>Governance and exit clarity</li>
-<li>Redirect to debt when debt is better</li>
-        </ul>
-        <a class="btn btn-card" href="/joint-venture/">Learn More</a>
-      </article>
+
+    <!-- Window: 8 cards OR one large program box — same footprint either way -->
+    <div class="program-zoom-viewport" id="program-zoom-viewport">
+
+      <!-- LAYER A: multi-card grid -->
+      <div class="program-zoom-layer program-zoom-layer--grid" data-zoom-layer="grid">
+        <div class="product-grid cols-3" data-program-grid>
+          <article class="loan-card reveal" data-program-card="fix-and-flip">
+            <h3>Fix &amp; Flip</h3>
+            <p class="card-lead">Purchase and renovation capital for value-add resale strategies.</p>
+            <div class="program-label">Ideal use · Active renovation, planned sale</div>
+            <ul class="check">
+              <li>Purchase + renovation capital</li>
+              <li>Value-add resale strategies</li>
+              <li>Scope, ARV, and exit reviewed together</li>
+              <li>Experience-aware placement</li>
+              <li>Defined sale or refinance path</li>
+            </ul>
+            <button type="button" class="btn btn-card" data-program-zoom-in="fix-and-flip" aria-controls="program-zoom-page-fix-and-flip" aria-expanded="false">Learn More</button>
+          </article>
+          <article class="loan-card reveal reveal-delay-1" data-program-card="rental">
+            <h3>Rental / DSCR</h3>
+            <p class="card-lead">Longer-term rental financing evaluated around cash flow and reserves.</p>
+            <div class="program-label">Ideal use · Stabilized or stabilizing rental</div>
+            <ul class="check">
+              <li>Cash-flow and DSCR evaluation</li>
+              <li>Purchase and refinance conversations</li>
+              <li>Reserve expectations stated plainly</li>
+              <li>Hold strategies, not speculation theater</li>
+              <li>Partner guidelines set the floor</li>
+            </ul>
+            <a class="btn btn-card" href="/rental/">Learn More</a>
+          </article>
+          <article class="loan-card reveal reveal-delay-2" data-program-card="bridge">
+            <h3>Bridge Financing</h3>
+            <p class="card-lead">Short-term capital for acquisition, stabilization, or transitional exits.</p>
+            <div class="program-label">Ideal use · Short timeline to refinance or sale</div>
+            <ul class="check">
+              <li>Defined short-term exit required</li>
+              <li>Acquisition and transitional uses</li>
+              <li>Timeline realism matters</li>
+              <li>Sponsor strength reviewed</li>
+              <li>Complete files move fastest</li>
+            </ul>
+            <a class="btn btn-card" href="/bridge/">Learn More</a>
+          </article>
+          <article class="loan-card reveal reveal-delay-3" data-program-card="ground-up">
+            <h3>Ground-Up Construction</h3>
+            <p class="card-lead">Capital structured around plans, budgets, draws, and build timelines.</p>
+            <div class="program-label">Ideal use · New construction or major build</div>
+            <ul class="check">
+              <li>Plans, budgets, and draws</li>
+              <li>Builder / GC experience reviewed</li>
+              <li>Interest reserves and timeline</li>
+              <li>Sale or permanent takeout exit</li>
+              <li>LTC confirmed on program sheet</li>
+            </ul>
+            <a class="btn btn-card" href="/ground-up/">Learn More</a>
+          </article>
+          <article class="loan-card reveal reveal-delay-4" data-program-card="commercial">
+            <h3>Commercial Real Estate</h3>
+            <p class="card-lead">Acquisition and refinance pathways for investor-owned commercial assets.</p>
+            <div class="program-label">Ideal use · Income-producing commercial</div>
+            <ul class="check">
+              <li>Investor-owned commercial assets</li>
+              <li>Acquisition and refinance paths</li>
+              <li>Business plan and cash flow</li>
+              <li>Document package clarity</li>
+              <li>Market depth reviewed</li>
+            </ul>
+            <a class="btn btn-card" href="/commercial/">Learn More</a>
+          </article>
+          <article class="loan-card reveal reveal-delay-5" data-program-card="multifamily">
+            <h3>Multifamily</h3>
+            <p class="card-lead">2+ unit investment financing aligned to business plan and cash flow.</p>
+            <div class="program-label">Ideal use · Residential income property</div>
+            <ul class="check">
+              <li>2+ unit investment property</li>
+              <li>Business plan and cash flow</li>
+              <li>Hold / refinance orientation</li>
+              <li>Sponsor liquidity reviewed</li>
+              <li>Entity structure clarity</li>
+            </ul>
+            <a class="btn btn-card" href="/multifamily/">Learn More</a>
+          </article>
+          <article class="loan-card reveal" data-program-card="purchase-rehab">
+            <h3>100% Purchase &amp; Rehab</h3>
+            <p class="card-lead">Up to 100% of purchase and rehab on qualifying joint-venture transactions—when the deal supports it.</p>
+            <div class="program-label">Ideal use · Limited cash, strong project</div>
+            <ul class="check">
+              <li>Up to 100% purchase + rehab on qualifying JV</li>
+              <li>ARV support is the gate</li>
+              <li>Real budget with contingency required</li>
+              <li>Credible exit required</li>
+              <li>Not every deal qualifies—and we say so</li>
+            </ul>
+            <a class="btn btn-card" href="/purchase-rehab/">Learn More</a>
+          </article>
+          <article class="loan-card reveal reveal-delay-1" data-program-card="joint-venture">
+            <h3>Joint-Venture Funding</h3>
+            <p class="card-lead">Partnership capital that can cover up to 100% of a qualifying project when pure debt is not the right fit.</p>
+            <div class="program-label">Ideal use · Need capital partner</div>
+            <ul class="check">
+              <li>Equity-style partnership path</li>
+              <li>When debt alone is wrong</li>
+              <li>Transparent economics framework</li>
+              <li>Governance and exit clarity</li>
+              <li>Redirect to debt when debt is better</li>
+            </ul>
+            <a class="btn btn-card" href="/joint-venture/">Learn More</a>
+          </article>
+        </div>
+      </div>
+
+      <!-- LAYER B: one large box — same size as the 8-card stage (window-in-window) -->
+      <div class="program-zoom-layer program-zoom-layer--detail" data-zoom-layer="detail" hidden aria-hidden="true">
+
+        <article class="program-zoom-page" id="program-zoom-page-fix-and-flip" data-program-page="fix-and-flip" hidden>
+          <div class="program-zoom-page-scroll">
+            <header class="program-zoom-hero">
+              <div class="program-zoom-hero-copy">
+                <div class="eyebrow" style="color:var(--gold)">Fix &amp; Flip · concise breakdown</div>
+                <h2 id="program-zoom-title-fix-and-flip">Buy. Rehab. Exit Clean.</h2>
+                <p class="lead-inline">Purchase + renovation capital for investment property. Evaluated on scope, ARV, and a credible exit — business-purpose only.</p>
+              </div>
+              <div class="program-zoom-hero-media" aria-hidden="true">
+                <img src="assets/img/fix-flip-before-after.jpg" alt="" width="672" height="384" loading="lazy">
+              </div>
+            </header>
+
+            <ul class="program-zoom-essentials" aria-label="Program essentials">
+              <li><strong>Purpose</strong> Buy, renovate, resell or refinance — not owner-occupied</li>
+              <li><strong>Structure</strong> Flip debt (you keep upside) or qualifying JV</li>
+              <li><strong>Leverage</strong> Set per deal against cost and ARV — not a rate card</li>
+              <li><strong>Draws</strong> Purchase at close; rehab in stages on verified work</li>
+              <li><strong>Collateral</strong> SFR, many condos, 2–4 unit with defensible ARV</li>
+              <li><strong>Timing</strong> Same-day approval on complete file; fund 3–5 business days after</li>
+            </ul>
+
+            <div class="program-zoom-paths">
+              <div class="program-zoom-path">
+                <h3>Debt path</h3>
+                <p>Cash into the deal · rehab in draws · you keep resale profit</p>
+              </div>
+              <div class="program-zoom-path">
+                <h3>JV path</h3>
+                <p>Up to 100% when qualified · total cost within 70% of ARV · shared economics</p>
+              </div>
+            </div>
+
+            <div class="program-zoom-process" aria-label="How funding works">
+              <div><span>1</span> Submit property · price · rehab · ARV</div>
+              <div><span>2</span> Review cost vs. value · recommend structure</div>
+              <div><span>3</span> Approve · close · manage draws</div>
+            </div>
+          </div>
+
+          <footer class="program-zoom-footer">
+            <button type="button" class="btn btn-card program-zoom-out-btn" data-program-zoom-out aria-label="Return to all funding programs">Learn More</button>
+            <a class="btn btn-primary" href="/submit-a-deal/">Submit Your Deal</a>
+          </footer>
+        </article>
+
+      </div>
     </div>
+
     <p class="section-note reveal">Up to 100% of purchase and rehab applies to qualifying joint-venture transactions only. Subject to ARV limits, documentation, total project economics, program availability, underwriting, and final approval. Not all transactions qualify.</p>
   </div>
 </section>
@@ -526,7 +588,7 @@
         </div>
         <p class="claim-condition" style="margin-top:1rem;color:var(--muted)">Up to 100% of purchase and rehab on qualifying joint-venture transactions. Subject to ARV limits, documentation, total project economics, program availability, underwriting, and final approval. Not all transactions qualify.</p>
       </div>
-      <div class="split-media reveal-right" style="background-image:url('assets/img/hero-house.jpg')"></div>
+      <div class="split-media reveal-right" style="background-image:url('assets/img/purchase-rehab-scaffold.jpg')" role="img" aria-label="Residential building under renovation with scaffolding"></div>
     </div>
   </div>
 </section>
@@ -586,6 +648,6 @@
 </section>
 
 
-<script src="assets/js/site.js?v=asset-fix-20260801"></script>
+<script src="assets/js/site.js?v=brokerage-video-20260801"></script>
 </body>
 </html>

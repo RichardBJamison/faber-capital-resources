@@ -40,7 +40,6 @@
         el.setAttribute(attr, BASE + v);
       });
     });
-    /* Inline style background-image:url(/assets/...) */
     scope.querySelectorAll("[style*='url(']").forEach(function (el) {
       const st = el.getAttribute("style");
       if (!st || st.indexOf("url(/") === -1) return;
@@ -51,38 +50,6 @@
           return "url(" + BASE + path + ")";
         })
       );
-    });
-  }
-
-  /** After path rewrite, force media to re-fetch correct URLs (browser may have 404'd first). */
-  function reloadVideos() {
-    document.querySelectorAll("video").forEach(function (v) {
-      try {
-        v.load();
-      } catch (e) { /* no-op */ }
-    });
-  }
-
-  /* Muted autoplay for in-body split videos (investment growth, etc.) */
-  function bindSplitVideos() {
-    const reduce =
-      window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    document.querySelectorAll("video.split-media-video").forEach(function (v) {
-      if (reduce) {
-        try {
-          v.pause();
-          v.removeAttribute("autoplay");
-        } catch (e) { /* no-op */ }
-        return;
-      }
-      v.muted = true;
-      v.playsInline = true;
-      const tryPlay = function () {
-        const p = v.play();
-        if (p && typeof p.catch === "function") p.catch(function () {});
-      };
-      if (v.readyState >= 2) tryPlay();
-      else v.addEventListener("loadeddata", tryPlay, { once: true });
     });
   }
 
@@ -142,9 +109,15 @@
             <a href="${p("/partners/")}">Partners</a>
           </div>
         </div>
-        <a href="${p("/about/")}"${is("about")}>About</a>
-        <a href="${p("/contact/")}"${is("contact")}>Contact</a>
+        <div class="nav-item">
+          <button type="button" aria-haspopup="true">About</button>
+          <div class="dropdown" role="menu">
+            <a href="${p("/about/")}"${is("about")}>About RECR</a>
+            <a href="${p("/contact/")}"${is("contact")}>Contact</a>
+          </div>
+        </div>
         <a class="nexus-nav-btn" href="${p("/nexus/")}" target="_blank" rel="noopener">Nexus</a>
+        <a class="brokerage-nav-btn" href="${p("/brokerage/")}"${is("brokerage")}>Brokerage</a>
       </nav>
       <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-menu-toggle>
         <span></span><span></span><span></span>
@@ -174,8 +147,9 @@
   <a href="${p("/partners/")}">Partners</a>
   <a href="${p("/results/")}">Recently Closed</a>
   <a href="${p("/about/")}">About</a>
-  <a href="${p("/contact/")}">Contact</a>
+  <a href="${p("/contact/")}" style="padding-left:1.35rem">Contact</a>
   <a class="nexus-nav-btn" href="${p("/nexus/")}" target="_blank" rel="noopener">Nexus</a>
+  <a class="brokerage-nav-btn" href="${p("/brokerage/")}"${is("brokerage")}>Brokerage</a>
 </div>`;
   }
 
@@ -511,11 +485,10 @@
 
   /* Hero background video: muted autoplay (one per page).
      data-loop="false" (home + Fix & Flip):
-       · play once → stay on LAST frame while hero remains on screen
-       · only when hero is FULLY off-screen → reset to t=0 (paused)
-       · when hero comes back on-screen → play from the beginning
-     Never restart just because the video ended.
-     Perf: keep preload=metadata in HTML; never loop = less bandwidth on long sessions. */
+       · play once on load → hold last frame while hero on screen
+       · fully off-screen → reset to t=0
+       · re-enter → play from start
+     Always kick play immediately (do not wait on IntersectionObserver alone). */
   function bindHeroVideo() {
     const v = document.querySelector(".hero-video");
     if (!v) return;
@@ -530,50 +503,53 @@
       try { v.load(); } catch (e) { /* no-op */ }
       return;
     }
-    v.muted = true;
-    v.playsInline = true;
-    /* Hint decoder: background presentation, not a player chrome */
-    try { v.setAttribute("playsinline", ""); } catch (e) { /* no-op */ }
-    const wantLoop =
-      v.hasAttribute("loop") && v.getAttribute("data-loop") !== "false";
-    v.loop = false;
-    v.removeAttribute("loop");
 
-    if (wantLoop) {
-      /* reserved if we ever re-enable home loop via attr */
-      v.loop = true;
-      v.setAttribute("loop", "");
-      const tryPlayLoop = () => {
-        const p = v.play();
-        if (p && typeof p.catch === "function") p.catch(() => {});
-      };
-      if (v.readyState >= 2) tryPlayLoop();
-      else v.addEventListener("loadeddata", tryPlayLoop, { once: true });
-      return;
+    /* Ensure source URLs work on GH Pages project base */
+    v.querySelectorAll("source").forEach(function (s) {
+      const src = s.getAttribute("src");
+      if (!src) return;
+      if (src.startsWith("/") && BASE && src.indexOf(BASE + "/") !== 0) {
+        s.setAttribute("src", BASE + src);
+      }
+    });
+    if (v.getAttribute("poster")) {
+      const po = v.getAttribute("poster");
+      if (po.startsWith("/") && BASE && po.indexOf(BASE + "/") !== 0) {
+        v.setAttribute("poster", BASE + po);
+      }
     }
 
-    let offScreen = true; /* start as off so first visible entry starts cleanly */
-    let playingThrough = false;
+    v.muted = true;
+    v.defaultMuted = true;
+    v.playsInline = true;
+    v.setAttribute("muted", "");
+    v.setAttribute("playsinline", "");
+    v.setAttribute("webkit-playsinline", "");
+    v.preload = "auto";
 
-    const tryPlay = () => {
-      const p = v.play();
-      if (p && typeof p.catch === "function") p.catch(() => {});
+    const wantLoop =
+      v.hasAttribute("loop") && v.getAttribute("data-loop") !== "false";
+    v.loop = !!wantLoop;
+    if (!wantLoop) v.removeAttribute("loop");
+
+    const tryPlay = function () {
+      try {
+        v.muted = true;
+        const pms = v.play();
+        if (pms && typeof pms.catch === "function") pms.catch(function () {});
+      } catch (e) { /* no-op */ }
     };
 
-    /* Freeze on final frame — do NOT seek (seeking can flash frame 0). */
-    v.addEventListener("ended", () => {
-      playingThrough = false;
-      try {
-        v.pause();
-      } catch (e) { /* no-op */ }
+    v.addEventListener("ended", function () {
+      if (wantLoop) return;
+      try { v.pause(); } catch (e) { /* no-op */ }
     });
 
-    const startFromBeginning = () => {
-      playingThrough = true;
-      const kick = () => {
+    const startFromBeginning = function () {
+      const kick = function () {
         try {
           v.pause();
-          v.currentTime = 0;
+          if (v.readyState >= 1) v.currentTime = 0;
         } catch (e) { /* no-op */ }
         tryPlay();
       };
@@ -581,23 +557,27 @@
       else v.addEventListener("loadedmetadata", kick, { once: true });
     };
 
-    const resetParkAtStart = () => {
-      playingThrough = false;
+    const resetParkAtStart = function () {
       try {
         v.pause();
         v.currentTime = 0;
       } catch (e) { /* no-op */ }
     };
 
+    /* First paint: always try to play (main reliability fix) */
+    try { v.load(); } catch (e) { /* no-op */ }
+    startFromBeginning();
+    v.addEventListener("canplay", tryPlay, { once: true });
+    v.addEventListener("loadeddata", tryPlay, { once: true });
+
     if ("IntersectionObserver" in window && hero) {
+      let offScreen = false;
       const io = new IntersectionObserver(
-        (entries) => {
+        function (entries) {
           const en = entries[0];
           if (!en) return;
-          /* Fully gone only — avoids flicker mid-hero / sticky-header noise */
           const fullyOff = !en.isIntersecting || en.intersectionRatio <= 0.02;
-          const substantiallyOn = en.isIntersecting && en.intersectionRatio >= 0.2;
-
+          const substantiallyOn = en.isIntersecting && en.intersectionRatio >= 0.15;
           if (fullyOff) {
             if (!offScreen) {
               offScreen = true;
@@ -606,18 +586,267 @@
             return;
           }
           if (substantiallyOn && offScreen) {
-            /* Re-entered after being completely off (or first paint) */
             offScreen = false;
             startFromBeginning();
           }
-          /* still on-screen (including after ended): leave currentTime alone */
         },
-        { threshold: [0, 0.02, 0.2, 0.5, 1], rootMargin: "0px" }
+        { threshold: [0, 0.02, 0.15, 0.5, 1], rootMargin: "0px" }
       );
       io.observe(hero);
-    } else {
-      startFromBeginning();
     }
+  }
+
+  function bindSplitVideos() {
+    const reduce =
+      window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.querySelectorAll("video.split-media-video").forEach(function (v) {
+      if (reduce) {
+        try { v.pause(); } catch (e) { /* no-op */ }
+        return;
+      }
+      v.querySelectorAll("source").forEach(function (s) {
+        const src = s.getAttribute("src");
+        if (src && src.startsWith("/") && BASE && src.indexOf(BASE + "/") !== 0) {
+          s.setAttribute("src", BASE + src);
+        }
+      });
+      v.muted = true;
+      v.defaultMuted = true;
+      v.playsInline = true;
+      v.setAttribute("muted", "");
+      const tryPlay = function () {
+        const pms = v.play();
+        if (pms && typeof pms.catch === "function") pms.catch(function () {});
+      };
+      try { v.load(); } catch (e) { /* no-op */ }
+      if (v.readyState >= 2) tryPlay();
+      else v.addEventListener("loadeddata", tryPlay, { once: true });
+    });
+  }
+
+  /**
+   * Home #funding-programs: window-in-window zoom.
+   * 8 cards → one large box locked to the same stage footprint.
+   * Bottom Learn More (or Escape) zooms back out.
+   */
+  function bindProgramZoom() {
+    const host = document.querySelector("[data-program-zoom]");
+    if (!host) return;
+
+    const viewport = host.querySelector(".program-zoom-viewport") || host;
+    const gridLayer = host.querySelector('[data-zoom-layer="grid"]');
+    const detailLayer = host.querySelector('[data-zoom-layer="detail"]');
+    if (!gridLayer || !detailLayer) return;
+
+    const reduce =
+      window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    let activeId = null;
+    let lastFocus = null;
+    let animTimer = null;
+    let lockedH = 0;
+
+    function setOriginFromEl(el) {
+      if (!el || !viewport) {
+        host.style.setProperty("--zoom-ox", "50%");
+        host.style.setProperty("--zoom-oy", "40%");
+        return;
+      }
+      const vr = viewport.getBoundingClientRect();
+      const er = el.getBoundingClientRect();
+      const ox = ((er.left + er.width / 2 - vr.left) / Math.max(vr.width, 1)) * 100;
+      const oy = ((er.top + er.height / 2 - vr.top) / Math.max(vr.height, 1)) * 100;
+      host.style.setProperty("--zoom-ox", Math.max(8, Math.min(92, ox)).toFixed(1) + "%");
+      host.style.setProperty("--zoom-oy", Math.max(8, Math.min(92, oy)).toFixed(1) + "%");
+    }
+
+    /** Pin the viewport to the 8-card stage height so the open box cannot grow past it. */
+    function lockStageHeight() {
+      const h = Math.ceil(gridLayer.getBoundingClientRect().height);
+      if (h < 120) return;
+      lockedH = h;
+      viewport.style.height = h + "px";
+      viewport.classList.add("is-height-locked");
+    }
+
+    function unlockStageHeight() {
+      viewport.classList.remove("is-height-locked");
+      viewport.style.height = "";
+      lockedH = 0;
+    }
+
+    function showPage(id) {
+      detailLayer.querySelectorAll("[data-program-page]").forEach((page) => {
+        const match = page.getAttribute("data-program-page") === id;
+        page.hidden = !match;
+        if (match) page.removeAttribute("aria-hidden");
+        else page.setAttribute("aria-hidden", "true");
+      });
+    }
+
+    function lockButtons(expanded, id) {
+      host.querySelectorAll("[data-program-zoom-in]").forEach((btn) => {
+        const on = expanded && btn.getAttribute("data-program-zoom-in") === id;
+        btn.setAttribute("aria-expanded", on ? "true" : "false");
+      });
+    }
+
+    function scrollStageIntoView() {
+      const headerH =
+        parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-h")) || 110;
+      const top = viewport.getBoundingClientRect().top + window.scrollY - headerH - 16;
+      window.scrollTo({ top: Math.max(0, top), behavior: reduce ? "auto" : "smooth" });
+    }
+
+    function zoomIn(id, triggerEl) {
+      if (!id || activeId === id) return;
+      const page = detailLayer.querySelector('[data-program-page="' + id + '"]');
+      if (!page) return;
+
+      lastFocus = triggerEl || document.activeElement;
+      const card =
+        (triggerEl && triggerEl.closest("[data-program-card]")) ||
+        host.querySelector('[data-program-card="' + id + '"]');
+
+      /* Measure grid BEFORE hiding it — this is the max window size */
+      setOriginFromEl(card || triggerEl);
+      lockStageHeight();
+
+      host.querySelectorAll("[data-program-card]").forEach((c) => c.classList.remove("is-zoom-source"));
+      if (card) card.classList.add("is-zoom-source");
+
+      showPage(id);
+      detailLayer.hidden = false;
+      detailLayer.setAttribute("aria-hidden", "false");
+
+      void detailLayer.offsetWidth;
+
+      host.classList.add("is-zooming-in");
+      if (!reduce) {
+        requestAnimationFrame(() => {
+          host.classList.add("is-zoomed");
+        });
+      } else {
+        host.classList.add("is-zoomed");
+      }
+
+      activeId = id;
+      lockButtons(true, id);
+      scrollStageIntoView();
+
+      if (animTimer) clearTimeout(animTimer);
+      animTimer = setTimeout(() => {
+        host.classList.remove("is-zooming-in");
+        host.querySelectorAll("[data-program-card]").forEach((c) => c.classList.remove("is-zoom-source"));
+        const focusTarget = page.querySelector("[data-program-zoom-out]") || page.querySelector("h2") || page;
+        try {
+          if (focusTarget && typeof focusTarget.focus === "function") {
+            if (!focusTarget.hasAttribute("tabindex") && focusTarget.tagName !== "BUTTON" && focusTarget.tagName !== "A") {
+              focusTarget.setAttribute("tabindex", "-1");
+            }
+            focusTarget.focus({ preventScroll: true });
+          }
+        } catch (e) { /* no-op */ }
+        animTimer = null;
+      }, reduce ? 50 : 560);
+
+      try {
+        if (typeof history !== "undefined" && history.replaceState) {
+          history.replaceState(null, "", "#funding-programs/" + id);
+        }
+      } catch (e) { /* no-op */ }
+
+      try {
+        if (window.recrTrack) window.recrTrack("program_zoom_in", { program: id });
+      } catch (e) { /* no-op */ }
+    }
+
+    function zoomOut() {
+      if (!activeId) return;
+      const card = host.querySelector('[data-program-card="' + activeId + '"]');
+      setOriginFromEl(card);
+
+      host.classList.remove("is-zooming-in");
+      host.classList.remove("is-zoomed");
+      lockButtons(false, activeId);
+
+      if (animTimer) clearTimeout(animTimer);
+      animTimer = setTimeout(() => {
+        detailLayer.hidden = true;
+        detailLayer.setAttribute("aria-hidden", "true");
+        detailLayer.querySelectorAll("[data-program-page]").forEach((page) => {
+          page.hidden = true;
+          page.setAttribute("aria-hidden", "true");
+        });
+        unlockStageHeight();
+        animTimer = null;
+      }, reduce ? 50 : 480);
+
+      const returnFocus = lastFocus;
+      activeId = null;
+      lastFocus = null;
+      scrollStageIntoView();
+
+      try {
+        if (returnFocus && typeof returnFocus.focus === "function") {
+          returnFocus.focus({ preventScroll: true });
+        }
+      } catch (e) { /* no-op */ }
+
+      try {
+        if (typeof history !== "undefined" && history.replaceState) {
+          history.replaceState(null, "", "#funding-programs");
+        }
+      } catch (e) { /* no-op */ }
+
+      try {
+        if (window.recrTrack) window.recrTrack("program_zoom_out", {});
+      } catch (e) { /* no-op */ }
+    }
+
+    host.addEventListener("click", (e) => {
+      const out = e.target.closest("[data-program-zoom-out]");
+      if (out && host.contains(out)) {
+        e.preventDefault();
+        zoomOut();
+        return;
+      }
+      const inn = e.target.closest("[data-program-zoom-in]");
+      if (inn && host.contains(inn)) {
+        e.preventDefault();
+        const id = inn.getAttribute("data-program-zoom-in");
+        zoomIn(id, inn);
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && activeId) {
+        e.preventDefault();
+        zoomOut();
+      }
+    });
+
+    /* Keep locked height honest on resize while zoomed */
+    window.addEventListener("resize", () => {
+      if (!activeId || !lockedH) return;
+      /* Re-measure isn't possible while grid is hidden; keep last lock */
+      if (viewport.style.height) {
+        viewport.style.height = lockedH + "px";
+      }
+    });
+
+    function applyHash() {
+      const h = (location.hash || "").replace(/^#/, "");
+      if (!h) return;
+      const m = h.match(/^funding-programs(?:\/([a-z0-9-]+))?$/i);
+      if (!m) return;
+      if (m[1]) {
+        const btn = host.querySelector('[data-program-zoom-in="' + m[1] + '"]');
+        zoomIn(m[1], btn);
+      }
+    }
+    applyHash();
+    window.addEventListener("hashchange", applyHash);
   }
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -625,13 +854,13 @@
       initAnalytics();
     });
     rewriteRootAbsolute(document);
-    reloadVideos();
     injectShell();
     bindMenu();
     bindHeaderScroll();
     bindReveal();
     bindForms();
     bindFlip();
+    bindProgramZoom();
     injectSchema();
     bindTracking();
     bindHeroVideo();

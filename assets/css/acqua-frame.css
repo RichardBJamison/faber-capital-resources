@@ -445,6 +445,50 @@ a.nexus-nav-btn:hover {
   text-align: center;
 }
 
+/* Brokerage — soft solid orange CTA */
+.nav-desktop > a.brokerage-nav-btn,
+.mobile-nav a.brokerage-nav-btn,
+a.brokerage-nav-btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  background: #E07A3A !important;
+  color: #fff !important;
+  padding: 0.5rem 1.05rem !important;
+  border-radius: 999px !important;
+  font-size: 0.88rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: none !important;
+  line-height: 1.2 !important;
+  text-decoration: none !important;
+  border: 0 !important;
+  box-shadow: 0 1px 6px rgba(180, 90, 30, 0.22);
+  white-space: nowrap;
+}
+/* Real gap between the two pills (text links get space from padding; pills need margin) */
+.nav-desktop > a.nexus-nav-btn {
+  margin-left: 0.25rem;
+}
+.nav-desktop > a.nexus-nav-btn + a.brokerage-nav-btn {
+  margin-left: 0.65rem;
+}
+.nav-desktop > a.brokerage-nav-btn:hover,
+.mobile-nav a.brokerage-nav-btn:hover,
+a.brokerage-nav-btn:hover {
+  background: #E98D52 !important;
+  color: #fff !important;
+  transform: translateY(-1px) scale(1.02);
+}
+.site-header.is-scrolled .nav-desktop > a.brokerage-nav-btn {
+  font-size: 0.82rem !important;
+  padding: 0.42rem 0.9rem !important;
+}
+.mobile-nav a.brokerage-nav-btn {
+  margin: 0.35rem 0;
+  text-align: center;
+}
+
 /* —— Buttons —— */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
@@ -1039,6 +1083,329 @@ a.nexus-nav-btn:hover {
 }
 @media (min-width: 1024px) {
   .product-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 720px) {
+  .product-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* =========================================================
+   PROGRAM ZOOM — window-in-window
+   8 cards collapse into ONE box that never exceeds the
+   measured card-grid footprint. Bottom Learn More zooms out.
+   ========================================================= */
+.program-zoom-viewport {
+  position: relative;
+  isolation: isolate;
+  /* JS locks height to the 8-card stage when zoomed */
+  height: auto;
+  overflow: hidden;
+  border-radius: calc(var(--radius) + 2px);
+}
+.program-zoom-viewport.is-height-locked {
+  /* height set inline from measured grid */
+  transition: height 0.45s var(--ease);
+}
+.program-zoom-layer {
+  width: 100%;
+}
+.program-zoom-layer--grid {
+  position: relative;
+  z-index: 1;
+  transform-origin: var(--zoom-ox, 50%) var(--zoom-oy, 40%);
+  transition:
+    opacity 0.4s var(--ease),
+    transform 0.5s var(--ease),
+    filter 0.4s var(--ease),
+    visibility 0s linear 0s;
+}
+.program-zoom-layer--detail {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: scale(0.78);
+  transform-origin: var(--zoom-ox, 50%) var(--zoom-oy, 40%);
+  filter: blur(6px);
+  transition:
+    opacity 0.42s var(--ease),
+    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.4s var(--ease),
+    visibility 0s linear 0.5s;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* Zoomed: both layers fill the locked viewport; stage size stays put */
+.program-zoom.is-zoomed .program-zoom-layer--grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: scale(0.9);
+  filter: blur(5px);
+  pointer-events: none;
+  visibility: hidden;
+  overflow: hidden;
+  transition:
+    opacity 0.35s var(--ease),
+    transform 0.5s var(--ease),
+    filter 0.35s var(--ease),
+    visibility 0s linear 0.5s;
+}
+.program-zoom.is-zoomed .program-zoom-layer--detail {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: scale(1);
+  filter: none;
+  transition:
+    opacity 0.4s var(--ease) 0.06s,
+    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.04s,
+    filter 0.35s var(--ease) 0.04s,
+    visibility 0s linear 0s;
+}
+
+/* Sibling cards peel away toward the source card */
+.program-zoom.is-zooming-in [data-program-card] {
+  transition:
+    opacity 0.32s var(--ease),
+    transform 0.4s var(--ease),
+    filter 0.32s var(--ease);
+}
+.program-zoom.is-zooming-in [data-program-card]:not(.is-zoom-source) {
+  opacity: 0;
+  transform: scale(0.88) translateY(10px);
+  filter: blur(2px);
+}
+.program-zoom.is-zooming-in [data-program-card]:nth-child(1):not(.is-zoom-source) { transition-delay: 0.02s; }
+.program-zoom.is-zooming-in [data-program-card]:nth-child(2):not(.is-zoom-source) { transition-delay: 0.05s; }
+.program-zoom.is-zooming-in [data-program-card]:nth-child(3):not(.is-zoom-source) { transition-delay: 0.08s; }
+.program-zoom.is-zooming-in [data-program-card]:nth-child(4):not(.is-zoom-source) { transition-delay: 0.04s; }
+.program-zoom.is-zooming-in [data-program-card]:nth-child(5):not(.is-zoom-source) { transition-delay: 0.07s; }
+.program-zoom.is-zooming-in [data-program-card]:nth-child(6):not(.is-zoom-source) { transition-delay: 0.1s; }
+.program-zoom.is-zooming-in [data-program-card]:nth-child(7):not(.is-zoom-source) { transition-delay: 0.06s; }
+.program-zoom.is-zooming-in [data-program-card]:nth-child(8):not(.is-zoom-source) { transition-delay: 0.09s; }
+.program-zoom.is-zooming-in [data-program-card].is-zoom-source {
+  transform: scale(1.03);
+  box-shadow: 0 22px 48px rgba(42, 34, 24, 0.2);
+  border-color: rgba(196, 163, 90, 0.55);
+  z-index: 2;
+}
+
+/* One large box — fills the locked window exactly */
+.program-zoom-page {
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(120% 70% at 50% 0%, rgba(196, 163, 90, 0.11), transparent 50%),
+    linear-gradient(180deg, #fff 0%, var(--off) 100%);
+  border: 1px solid rgba(113, 92, 65, 0.22);
+  border-radius: calc(var(--radius) + 2px);
+  box-shadow:
+    0 18px 44px rgba(42, 34, 24, 0.12),
+    0 0 0 1px rgba(255, 255, 255, 0.55) inset;
+  overflow: hidden;
+}
+.program-zoom-page[hidden] { display: none !important; }
+
+.program-zoom-page-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding: clamp(0.85rem, 1.8vw, 1.25rem) clamp(0.9rem, 2vw, 1.4rem) 0.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(113, 92, 65, 0.35) transparent;
+}
+
+.program-zoom-hero {
+  display: grid;
+  gap: 0.85rem;
+  align-items: center;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--line);
+}
+@media (min-width: 720px) {
+  .program-zoom-hero {
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: 1.15rem;
+  }
+}
+.program-zoom-hero h2 {
+  margin: 0.2rem 0 0.4rem;
+  font-size: clamp(1.25rem, 2.4vw, 1.7rem);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--navy);
+}
+.program-zoom-hero .lead-inline {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+.program-zoom-hero-media {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid rgba(113, 92, 65, 0.15);
+  aspect-ratio: 16 / 10;
+  max-height: 140px;
+  background: var(--navy-deep);
+}
+@media (min-width: 720px) {
+  .program-zoom-hero-media { max-height: 160px; }
+}
+.program-zoom-hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 6 concise essentials in a dense grid */
+.program-zoom-essentials {
+  list-style: none;
+  margin: 0 0 0.85rem;
+  padding: 0;
+  display: grid;
+  gap: 0.45rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) {
+  .program-zoom-essentials { grid-template-columns: 1fr 1fr; gap: 0.5rem 0.85rem; }
+}
+.program-zoom-essentials li {
+  margin: 0;
+  padding: 0.55rem 0.7rem;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  color: var(--body);
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(113, 92, 65, 0.14);
+  border-radius: 10px;
+}
+.program-zoom-essentials li strong {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 0.15rem;
+}
+
+.program-zoom-paths {
+  display: grid;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+@media (min-width: 640px) {
+  .program-zoom-paths { grid-template-columns: 1fr 1fr; }
+}
+.program-zoom-path {
+  padding: 0.65rem 0.8rem;
+  border-radius: 10px;
+  background: rgba(246, 242, 234, 0.9);
+  border: 1px solid rgba(113, 92, 65, 0.14);
+}
+.program-zoom-path h3 {
+  margin: 0 0 0.25rem;
+  font-size: 0.92rem;
+  color: var(--navy);
+}
+.program-zoom-path p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.program-zoom-process {
+  display: grid;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+@media (min-width: 720px) {
+  .program-zoom-process { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+}
+.program-zoom-process > div {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  color: var(--body);
+  padding: 0.45rem 0.55rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(113, 92, 65, 0.1);
+}
+.program-zoom-process span {
+  flex: 0 0 auto;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #fff;
+  background: var(--blue);
+}
+
+/* Sticky-feel footer inside the locked window */
+.program-zoom-footer {
+  flex: 0 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.75rem 1rem 0.9rem;
+  border-top: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.55), #fff);
+}
+.program-zoom-out-btn {
+  min-width: 9.5rem;
+  width: auto;
+  margin-top: 0;
+  background: transparent;
+  color: var(--blue);
+  border: 1.5px solid rgba(113, 92, 65, 0.45);
+}
+.program-zoom-out-btn:hover {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+}
+.program-zoom-out-btn::before {
+  content: "← ";
+  font-weight: 700;
+  opacity: 0.75;
+}
+.loan-card button.btn-card {
+  font: inherit;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* Reduced motion: crossfade only, still locked to window */
+@media (prefers-reduced-motion: reduce) {
+  .program-zoom-layer--grid,
+  .program-zoom-layer--detail,
+  .program-zoom.is-zooming-in [data-program-card],
+  .program-zoom-viewport.is-height-locked {
+    transition: opacity 0.2s ease !important;
+    transform: none !important;
+    filter: none !important;
+  }
+  .program-zoom.is-zoomed .program-zoom-layer--grid { opacity: 0; }
+  .program-zoom.is-zoomed .program-zoom-layer--detail { opacity: 1; }
 }
 
 /* LIGHT program panels — ivory/white + bronze/gold accents
