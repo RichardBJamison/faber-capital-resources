@@ -615,7 +615,7 @@
         <div class="home-hero">
           <div class="home-hero-copy">
             <p class="section-kicker">Doodle Bug · RECR build console</p>
-            <h1 id="homeTitle">Good morning, Bill.</h1>
+            <h1 id="homeTitle">Good day, Bill.</h1>
             <p>Everything we are building together is right here.</p>
           </div>
           <div class="home-meta">
@@ -1171,9 +1171,36 @@
         var aliases = { dashboard: "dashboard", communications: "communications", "build-out-box": "build-out-box", "ghl-build": "build-out-box", "see-progress": "see-progress", "website-analytics": "see-progress", "seo-marketing": "see-progress", settings: "settings" };
         return aliases[id] || "dashboard";
       }
+      /** America/New_York hour (0–23). */
+      function easternHour() {
+        try {
+          var parts = new Intl.DateTimeFormat("en-US", {
+            timeZone: "America/New_York",
+            hour: "numeric",
+            hourCycle: "h23"
+          }).formatToParts(new Date());
+          var raw = "";
+          for (var i = 0; i < parts.length; i++) {
+            if (parts[i].type === "hour") { raw = parts[i].value; break; }
+          }
+          var h = parseInt(raw, 10);
+          if (isNaN(h)) return new Date().getHours();
+          if (h === 24) h = 0;
+          return h;
+        } catch (e) {
+          return new Date().getHours();
+        }
+      }
+      /** Time-of-day greeting for Bill (Eastern). */
+      function greetingForBill() {
+        var h = easternHour();
+        if (h >= 5 && h < 12) return "Good morning, Bill.";
+        if (h >= 12 && h < 17) return "Good afternoon, Bill.";
+        return "Good evening, Bill.";
+      }
       function panelMeta(id) {
         var meta = {
-          dashboard: { title: "Good morning, Bill.", sub: "Everything we are building together is right here." },
+          dashboard: { title: greetingForBill(), sub: "Everything we are building together is right here." },
           communications: { title: "Talk to Richard", sub: "Messages, questions, replies, and shared documents." },
           "build-out-box": { title: "Build Out Box", sub: "Real Estate Capital Resources is being built from the foundation up." },
           "see-progress": { title: "Billing and Invoice", sub: "Your invoices and agency monthly expenses." },
@@ -1214,7 +1241,23 @@
         modal.classList.add("open"); modal.setAttribute("aria-hidden", "false");
         var close = modal.querySelector(".close-button"); if (close) close.focus();
       }
-      function updateDate() { setText("todayDate", new Date().toLocaleDateString([], { weekday: "long", month: "long", day: "numeric", year: "numeric" })); }
+      function updateDate() {
+        try {
+          setText(
+            "todayDate",
+            new Date().toLocaleDateString("en-US", {
+              timeZone: "America/New_York",
+              weekday: "long",
+              month: "long",
+              day: "numeric",
+              year: "numeric"
+            })
+          );
+        } catch (e) {
+          setText("todayDate", new Date().toLocaleDateString([], { weekday: "long", month: "long", day: "numeric", year: "numeric" }));
+        }
+        setText("homeTitle", greetingForBill());
+      }
 
       function readId() { try { return localStorage.getItem(READ_KEY) || ""; } catch (e) { return ""; } }
       function updateNotification(messages, alerts) {
