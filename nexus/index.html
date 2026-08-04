@@ -29,6 +29,10 @@
       --shadow-soft: 0 8px 24px rgba(23, 35, 63, .09);
       --radius: 24px;
       --max: 1480px;
+      /* Bill light purple (iris). Richard keeps original mint/teal window color. */
+      --chat-bill: var(--iris-soft);
+      --chat-bill-deep: var(--iris);
+      --chat-bill-ink: #3d3470;
     }
 
     * { box-sizing: border-box; }
@@ -352,14 +356,35 @@
       padding: 19px 48px 19px 21px;
       border: 2px solid var(--navy);
       border-radius: 19px;
-      background: #e9f8f5;
+      background: var(--cream);
       color: var(--ink);
       font-size: 1.05em;
       line-height: 1.58;
       word-break: break-word;
     }
-    .bubble.bill { align-self: flex-end; border-color: var(--coral); background: var(--coral); color: var(--navy); border-bottom-right-radius: 6px; }
-    .bubble.richard { align-self: flex-start; border-color: var(--teal); border-bottom-left-radius: 6px; }
+    /* Bill — light purple (iris soft / top window family) */
+    .bubble.bill {
+      align-self: flex-end;
+      border-color: var(--chat-bill-deep);
+      background: var(--chat-bill);
+      color: var(--chat-bill-ink);
+      border-bottom-right-radius: 6px;
+    }
+    .bubble.bill .meta { color: var(--chat-bill-ink); }
+    .bubble.bill .att {
+      background: rgba(255, 255, 255, .72);
+      border-color: var(--chat-bill-deep);
+      color: var(--chat-bill-ink);
+    }
+    /* Richard — original mint/teal (do not darken) */
+    .bubble.richard {
+      align-self: flex-start;
+      border-color: var(--teal);
+      background: #e9f8f5;
+      color: var(--ink);
+      border-bottom-left-radius: 6px;
+    }
+    .bubble.richard .meta { color: var(--navy); }
     .bubble .meta { margin-bottom: 8px; padding-right: 0.5rem; color: var(--navy); font-size: 15px; font-weight: 900; letter-spacing: .04em; text-transform: uppercase; }
     .bubble .bubble-body { white-space: pre-wrap; }
     .bubble-close {
@@ -1317,10 +1342,22 @@
       }
       function dismissMessage(id) {
         if (!id) return;
-        var ids = loadDismissedIds();
-        if (ids.indexOf(String(id)) === -1) ids.push(String(id));
-        saveDismissedIds(ids);
+        var key = String(id);
+        /* Optimistic hide */
+        lastCommsMessages = (lastCommsMessages || []).filter(function (m, i) {
+          return messageKey(m, i) !== key && String(m && m.id) !== key;
+        });
+        lastMessagesSig = "";
         renderMessages(lastCommsMessages, { forceRender: true });
+        /* Permanent delete on shared store so closed messages do not reappear */
+        fetch(COMMS, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          mode: "cors",
+          body: JSON.stringify({ action: "delete", id: key })
+        }).then(function (r) { return r.json().catch(function () { return {}; }); })
+          .then(function () { loadComms({ forceRender: true }); })
+          .catch(function () { /* keep optimistic hide if offline */ });
       }
       function bindChatScrollPrefer() {
         var el = byId("chatStream");
