@@ -427,7 +427,17 @@
     .compose-top label { color: var(--navy); font-size: 15px; font-weight: 900; letter-spacing: .07em; text-transform: uppercase; }
     .compose-who { display: flex; gap: 7px; flex-wrap: wrap; }
     .compose-who button { min-height: 42px; padding: 7px 11px; border: 1px solid var(--line); border-radius: 9px; background: var(--cream); color: var(--muted); font-size: 14px; font-weight: 800; }
-    .compose-who button.active { border-color: var(--coral); background: var(--coral); color: var(--navy); }
+    /* Active sender matches bubble colors: Bill purple, Richard mint */
+    .compose-who button[data-who="bill"].active {
+      border-color: var(--chat-bill-deep);
+      background: var(--chat-bill);
+      color: var(--chat-bill-ink);
+    }
+    .compose-who button[data-who="richard"].active {
+      border-color: var(--teal);
+      background: #e9f8f5;
+      color: var(--navy);
+    }
     .compose-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: stretch; }
     .compose-row textarea { width: 100%; min-height: 100px; max-height: 220px; resize: vertical; padding: 15px 17px; border: 2px solid var(--navy); border-radius: 14px; outline: 0; background: var(--cream); color: var(--ink); }
     .compose-row textarea:focus { box-shadow: 0 0 0 5px rgba(215, 170, 75, .35); }
