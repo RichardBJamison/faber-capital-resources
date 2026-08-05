@@ -783,7 +783,7 @@
           <div>
             <p class="section-kicker">Billing and Invoice</p>
             <h2 id="progressTitle">Accounting for the RECR engagement.</h2>
-            <p>Two simple ledgers: the complete-build offer schedule, and your recurring agency / platform fees.</p>
+            <p>Three ledgers: complete-build offer schedule, monthly agency / platform fees, and the digital fees float (always $2,000 target).</p>
           </div>
           <div class="current-note" id="progressNote">$5,000 deposit received. Next project payment due Fri Jul 31. Project total restored to $16,499. End cap $1,499 fully covered by computer-invoice credit.</div>
         </div>
@@ -829,8 +829,8 @@
                 <p>Original complete-build offer restored: package standard <strong>$18,499</strong>, less <strong>$2,000</strong> acceptance discount = contract total <strong>$16,499</strong>.</p>
               </div>
               <div class="ledger-totals">
-                <div class="ledger-pill paid"><strong>$6,499</strong><span>Paid</span></div>
-                <div class="ledger-pill due"><strong>$10,000</strong><span>Remaining</span></div>
+                <div class="ledger-pill paid"><strong>$11,499</strong><span>Paid</span></div>
+                <div class="ledger-pill due"><strong>$5,000</strong><span>Remaining</span></div>
                 <div class="ledger-pill"><strong>$16,499</strong><span>Project total</span></div>
               </div>
             </header>
@@ -904,17 +904,17 @@
                   </tr>
                   <tr>
                     <td>Second payment</td>
-                    <td>$5,000 · end of week two (this Friday)</td>
+                    <td>$5,000 · end of week two · received</td>
                     <td class="num">$5,000</td>
                     <td>Fri, Jul 31, 2026</td>
-                    <td><span class="status-chip due">Due Friday</span></td>
+                    <td><span class="status-chip paid">Paid</span></td>
                   </tr>
                   <tr>
                     <td>Third payment</td>
                     <td>$5,000 · before primary deployment</td>
                     <td class="num">$5,000</td>
                     <td>Fri, Aug 21, 2026</td>
-                    <td><span class="status-chip scheduled">Scheduled</span></td>
+                    <td><span class="status-chip due">Due Aug 21</span></td>
                   </tr>
                   <tr>
                     <td>End cap / completion</td>
@@ -964,13 +964,13 @@
                 </tbody>
                 <tfoot>
                   <tr>
-                    <td colspan="2">Paid to date (deposit $5,000 + end cap $1,499)</td>
-                    <td class="num">$6,499</td>
+                    <td colspan="2">Paid to date (deposit $5,000 + second $5,000 + end cap $1,499)</td>
+                    <td class="num">$11,499</td>
                     <td colspan="2"></td>
                   </tr>
                   <tr>
-                    <td colspan="2">Cash still due (Fri $5,000 + Aug 21 $5,000)</td>
-                    <td class="num">$10,000</td>
+                    <td colspan="2">Cash still due (Aug 21 $5,000)</td>
+                    <td class="num">$5,000</td>
                     <td colspan="2"></td>
                   </tr>
                   <tr>
@@ -985,7 +985,7 @@
               Restored original offer: $15,000 OS + $1,000 stabilization + $1,500 website + $999 SEO = <strong>$18,499</strong> standard;
               less <strong>$2,000</strong> acceptance discount = <strong>$16,499</strong> contract total.
               End cap is <strong>$1,499</strong> (not $3,499). Computer invoice credit of <strong>$2,035.85</strong> fully covers that end cap.
-              Next cash: <strong>July 31, 2026 — $5,000</strong>.
+              Second project payment of <strong>$5,000</strong> is received. Next cash: <strong>Aug 21, 2026 — $5,000</strong>.
             </p>
           </article>
 
@@ -1100,6 +1100,130 @@
               </table>
             </div>
             <p class="ledger-note">Agency fees: SEO <strong>$599/mo</strong> and CRM/website management <strong>$249/mo</strong> (offer-aligned monthly program fees). Business tools: GHL <strong>$299</strong>, power dialer <strong>$199</strong>, Google Workspace <strong>$140</strong>, Twilio <strong>$69</strong>, plus primary AI avatar <strong>$299</strong> in month 1 only. Totals auto-summed for month 1 vs ongoing months.</p>
+          </article>
+
+          <!-- LEDGER 3: Digital fees float (target always $2,000) -->
+          <article class="ledger-card" aria-labelledby="ledgerDigitalTitle">
+            <header>
+              <div>
+                <h3 id="ledgerDigitalTitle">Ledger 3 · Digital Fees Float</h3>
+                <p>Prepaid balance for AI and platform subscriptions. <strong>Target balance is always $2,000</strong> — top up when draws pull it down.</p>
+              </div>
+              <div class="ledger-totals">
+                <div class="ledger-pill due"><strong>$50</strong><span>Current balance</span></div>
+                <div class="ledger-pill"><strong>$2,000</strong><span>Target</span></div>
+                <div class="ledger-pill due"><strong>$1,950</strong><span>Top-up needed</span></div>
+              </div>
+            </header>
+            <div class="ledger-table-wrap">
+              <table class="ledger">
+                <caption class="sr-only">Digital fees float deposits and draws</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Line</th>
+                    <th scope="col">Detail</th>
+                    <th scope="col" class="num">Amount</th>
+                    <th scope="col">When</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="5" style="background:#f8f4ec;font-weight:800;color:var(--navy);font-size:13px;letter-spacing:.04em;text-transform:uppercase">Funding</td>
+                  </tr>
+                  <tr>
+                    <td>Digital fees deposit</td>
+                    <td>Bill funded the digital float · last week</td>
+                    <td class="num">+$1,000</td>
+                    <td>Last week</td>
+                    <td><span class="status-chip paid">Deposited</span></td>
+                  </tr>
+                  <tr>
+                    <td>Balance after deposit</td>
+                    <td>Float ready for annual / platform charges</td>
+                    <td class="num">$1,000</td>
+                    <td>—</td>
+                    <td><span class="status-chip paid">Recorded</span></td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" style="background:#f8f4ec;font-weight:800;color:var(--navy);font-size:13px;letter-spacing:.04em;text-transform:uppercase">Draws from float</td>
+                  </tr>
+                  <tr>
+                    <td>ChatGPT + Claude Code Business</td>
+                    <td>1 full year · AI tools for the agency</td>
+                    <td class="num">−$650</td>
+                    <td>From float</td>
+                    <td><span class="status-chip paid">Paid from float</span></td>
+                  </tr>
+                  <tr>
+                    <td>GoHighLevel</td>
+                    <td>CRM / ops platform · charged from float</td>
+                    <td class="num">−$299</td>
+                    <td>From float</td>
+                    <td><span class="status-chip paid">Paid from float</span></td>
+                  </tr>
+                  <tr>
+                    <td>Other digital charges</td>
+                    <td>Remainder of draws to reconcile $1,000 → $50</td>
+                    <td class="num">−$1</td>
+                    <td>From float</td>
+                    <td><span class="status-chip paid">Paid from float</span></td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" style="background:#f8f4ec;font-weight:800;color:var(--navy);font-size:13px;letter-spacing:.04em;text-transform:uppercase">Position</td>
+                  </tr>
+                  <tr>
+                    <td>Current digital balance</td>
+                    <td>After deposit and subscription draws</td>
+                    <td class="num">$50</td>
+                    <td>Now</td>
+                    <td><span class="status-chip due">Low</span></td>
+                  </tr>
+                  <tr>
+                    <td>Target float</td>
+                    <td>Standing policy · always keep $2,000 available</td>
+                    <td class="num">$2,000</td>
+                    <td>Standing</td>
+                    <td><span class="status-chip scheduled">Policy</span></td>
+                  </tr>
+                  <tr>
+                    <td>Top-up to target</td>
+                    <td>$2,000 target − $50 current</td>
+                    <td class="num">$1,950</td>
+                    <td>When ready</td>
+                    <td><span class="status-chip due">Due to restore</span></td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="2">Deposited to float</td>
+                    <td class="num">$1,000</td>
+                    <td colspan="2"></td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">Drawn from float (ChatGPT/Claude $650 + GHL $299 + $1)</td>
+                    <td class="num">$950</td>
+                    <td colspan="2"></td>
+                  </tr>
+                  <tr>
+                    <td colspan="2"><strong>Current balance</strong></td>
+                    <td class="num"><strong>$50</strong></td>
+                    <td colspan="2"></td>
+                  </tr>
+                  <tr>
+                    <td colspan="2"><strong>Top-up to restore $2,000 target</strong></td>
+                    <td class="num"><strong>$1,950</strong></td>
+                    <td colspan="2"></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <p class="ledger-note">
+              Digital float is separate from the complete-build schedule and monthly agency fees.
+              Target is always <strong>$2,000</strong>. Last week’s deposit was <strong>$1,000</strong>; draws for
+              <strong>ChatGPT + Claude Code Business (1 year, $650)</strong> and <strong>GoHighLevel ($299)</strong>
+              left the balance at <strong>$50</strong>. Restore with a <strong>$1,950</strong> top-up when ready.
+            </p>
           </article>
 
         </div>
