@@ -263,33 +263,300 @@
     .activity-item strong { color: var(--navy); }
     .activity-item .when { margin-top: 2px; color: var(--muted); font-size: 15px; }
 
-    /* Accounting ledgers */
-    .ledger-stack { display: grid; gap: 22px; }
-    .ledger-card { border: 2px solid var(--navy); border-radius: 24px; background: #fffaf1; box-shadow: var(--shadow-soft); overflow: hidden; }
-    .ledger-card header { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 14px; padding: 22px 24px; border-bottom: 2px solid var(--line); background: linear-gradient(180deg, #fff6e8, #ffefd7); }
-    .ledger-card header h3 { margin: 0 0 6px; font-size: 1.45rem; color: var(--navy); }
-    .ledger-card header p { margin: 0; color: var(--muted); font-size: 16px; max-width: 52ch; }
-    .ledger-totals { display: flex; flex-wrap: wrap; gap: 10px; }
-    .ledger-pill { min-width: 120px; padding: 10px 14px; border: 2px solid var(--line); border-radius: 14px; background: #fff; text-align: right; }
-    .ledger-pill strong { display: block; font-size: 1.2rem; color: var(--navy); }
-    .ledger-pill span { color: var(--muted); font-size: 13px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
-    .ledger-pill.paid strong { color: #1b6b4a; }
-    .ledger-pill.due strong { color: #b45309; }
-    .ledger-table-wrap { overflow-x: auto; }
-    table.ledger { width: 100%; border-collapse: collapse; min-width: 640px; }
-    table.ledger th, table.ledger td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; font-size: 16px; }
-    table.ledger th { background: #f4efe6; color: var(--navy); font-size: 13px; font-weight: 900; letter-spacing: .05em; text-transform: uppercase; }
-    table.ledger tr:last-child td { border-bottom: 0; }
-    table.ledger td.num, table.ledger th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
-    table.ledger tfoot td { background: #fff6e8; font-weight: 800; color: var(--navy); }
+    /* Accounting — snapshot-first (easy scan) */
+    .acct-stack { display: grid; gap: 20px; }
+    .acct-glance {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+    @media (max-width: 960px) {
+      .acct-glance { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 520px) {
+      .acct-glance { grid-template-columns: 1fr; }
+    }
+    .acct-stat {
+      padding: 18px 18px 16px;
+      border: 2px solid var(--navy);
+      border-radius: 20px;
+      background: #fffaf1;
+      box-shadow: 5px 5px 0 rgba(23, 35, 63, .08);
+    }
+    .acct-stat .label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .acct-stat .value {
+      display: block;
+      color: var(--navy);
+      font-size: clamp(1.55rem, 2.6vw, 2rem);
+      font-weight: 900;
+      line-height: 1.05;
+      font-variant-numeric: tabular-nums;
+    }
+    .acct-stat .hint {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+    .acct-stat.is-paid { border-color: #5FA87A; background: #edf8f1; }
+    .acct-stat.is-paid .value { color: #145c3e; }
+    .acct-stat.is-due { border-color: #e0a54a; background: #fff8eb; }
+    .acct-stat.is-due .value { color: #8a4b08; }
+    .acct-stat.is-low { border-color: var(--coral); background: #fff0ec; }
+    .acct-stat.is-low .value { color: #9a3412; }
+
+    .acct-card {
+      border: 2px solid var(--navy);
+      border-radius: 24px;
+      background: #fffaf1;
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+    .acct-card > header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 18px 22px;
+      border-bottom: 2px solid var(--line);
+      background: linear-gradient(180deg, #fff6e8, #ffefd7);
+    }
+    .acct-card > header h3 {
+      margin: 0 0 4px;
+      font-size: 1.25rem;
+      color: var(--navy);
+    }
+    .acct-card > header p {
+      margin: 0;
+      max-width: 48ch;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.4;
+    }
+    .acct-card-body { padding: 18px 22px 20px; }
+
+    .pay-steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+    @media (max-width: 900px) {
+      .pay-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 520px) {
+      .pay-steps { grid-template-columns: 1fr; }
+    }
+    .pay-step {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-height: 118px;
+      padding: 14px 14px 12px;
+      border: 2px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+    }
+    .pay-step .step-tag {
+      display: inline-flex;
+      align-self: flex-start;
+      min-height: 28px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      border: 2px solid transparent;
+    }
+    .pay-step .step-amt {
+      color: var(--navy);
+      font-size: 1.45rem;
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+    }
+    .pay-step .step-name {
+      color: var(--navy);
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+    .pay-step .step-when {
+      margin-top: auto;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .pay-step.is-paid {
+      border-color: #8fd4b0;
+      background: #edf8f1;
+    }
+    .pay-step.is-paid .step-tag {
+      background: #d8f3e7;
+      color: #145c3e;
+      border-color: #8fd4b0;
+    }
+    .pay-step.is-due {
+      border-color: #f0c36d;
+      background: #fff8eb;
+      box-shadow: 0 0 0 3px rgba(240, 195, 109, .25);
+    }
+    .pay-step.is-due .step-tag {
+      background: #fff1d6;
+      color: #8a4b08;
+      border-color: #f0c36d;
+    }
+
+    .fee-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 720px) {
+      .fee-cols { grid-template-columns: 1fr; }
+    }
+    .fee-block {
+      padding: 14px 16px;
+      border: 2px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+    }
+    .fee-block h4 {
+      margin: 0 0 10px;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+    .fee-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 15px;
+    }
+    .fee-row:last-child { border-bottom: 0; }
+    .fee-row .fee-name { color: var(--ink); font-weight: 700; }
+    .fee-row .fee-amt {
+      color: var(--navy);
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .fee-total {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 12px;
+      padding: 12px 14px;
+      border: 2px solid var(--navy);
+      border-radius: 14px;
+      background: var(--cream);
+      font-weight: 900;
+      color: var(--navy);
+    }
+
+    .wallet-meter {
+      height: 14px;
+      margin: 10px 0 8px;
+      border: 2px solid var(--navy);
+      border-radius: 999px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .wallet-meter > i {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, var(--coral), #f6b26b);
+    }
+    .wallet-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .wallet-draws {
+      display: grid;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .wallet-draw {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      font-size: 15px;
+    }
+    .wallet-draw strong { color: var(--navy); font-variant-numeric: tabular-nums; }
+
+    .acct-details {
+      margin-top: 14px;
+      border: 2px dashed var(--line);
+      border-radius: 14px;
+      background: #fffdf8;
+      overflow: hidden;
+    }
+    .acct-details > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 12px 16px;
+      color: var(--navy);
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .acct-details > summary::-webkit-details-marker { display: none; }
+    .acct-details[open] > summary { border-bottom: 1px solid var(--line); }
+    .acct-details-body { padding: 12px 16px 16px; }
+    .mini-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(23, 35, 63, .08);
+      font-size: 14px;
+      color: var(--ink);
+    }
+    .mini-line:last-child { border-bottom: 0; }
+    .mini-line span:last-child {
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      color: var(--navy);
+      white-space: nowrap;
+    }
+
     .status-chip { display: inline-flex; align-items: center; min-height: 32px; padding: 4px 12px; border-radius: 999px; font-size: 13px; font-weight: 900; letter-spacing: .04em; text-transform: uppercase; border: 2px solid transparent; }
     .status-chip.paid { background: #d8f3e7; color: #145c3e; border-color: #8fd4b0; }
     .status-chip.due { background: #fff1d6; color: #8a4b08; border-color: #f0c36d; }
     .status-chip.scheduled { background: #e7f1ff; color: #1e3a5f; border-color: #9bb8e0; }
     .status-chip.active { background: #e9f8f5; color: #0f5c55; border-color: #7ecfc6; }
     .status-chip.once { background: #eeeaff; color: #4b3f8a; border-color: #b8aee8; }
-    .ledger-note { margin: 0; padding: 16px 24px 20px; color: var(--muted); font-size: 15px; line-height: 1.5; border-top: 1px solid var(--line); background: #fffdf8; }
-    .ledger-note a { color: var(--teal); font-weight: 800; }
+
+    /* legacy aliases if any leftover markup */
+    .ledger-stack { display: grid; gap: 22px; }
+    .ledger-card { border: 2px solid var(--navy); border-radius: 24px; background: #fffaf1; }
+    .ledger-note { margin: 0; padding: 16px 24px 20px; color: var(--muted); font-size: 15px; }
 
     /* Talk to Richard — conversation primary (~75%), filing cabinets below */
     .comms-layout {
@@ -782,417 +1049,160 @@
         <div class="section-intro">
           <div>
             <p class="section-kicker">Billing and Invoice</p>
-            <h2 id="progressTitle">Accounting for the RECR engagement.</h2>
-            <p>Three ledgers: complete-build offer schedule, monthly agency / platform fees, and the digital fees float (always $2,000 target).</p>
+            <h2 id="progressTitle">Money at a glance.</h2>
+            <p>Four numbers first. Details only if you open them.</p>
           </div>
-          <div class="current-note" id="progressNote">Paid to date $11,499. Cash still due $5,000 (Aug 21). Digital float $50 · top-up $1,950 to $2,000 target. Project total $16,499.</div>
+          <div class="current-note" id="progressNote">Next project cash: <strong>$5,000 on Aug 21</strong>. Digital float needs <strong>$1,950</strong> top-up to stay at $2,000.</div>
         </div>
 
-        <div class="ledger-stack">
+        <div class="acct-stack">
 
-          <!-- LEDGER 1: Offer / project payments -->
-          <article class="ledger-card" aria-labelledby="ledgerOfferTitle">
+          <!-- 10-second snapshot -->
+          <div class="acct-glance" aria-label="Money snapshot">
+            <div class="acct-stat is-paid">
+              <span class="label">Project paid</span>
+              <span class="value">$11,499</span>
+              <span class="hint">Deposit + second payment + end cap</span>
+            </div>
+            <div class="acct-stat is-due">
+              <span class="label">Still due</span>
+              <span class="value">$5,000</span>
+              <span class="hint">One payment · Aug 21, 2026</span>
+            </div>
+            <div class="acct-stat">
+              <span class="label">Project total</span>
+              <span class="value">$16,499</span>
+              <span class="hint">Complete-build contract</span>
+            </div>
+            <div class="acct-stat is-low">
+              <span class="label">Digital float</span>
+              <span class="value">$50</span>
+              <span class="hint">Target $2,000 · top-up $1,950</span>
+            </div>
+          </div>
+
+          <!-- Project payments timeline -->
+          <article class="acct-card" aria-labelledby="acctProjectTitle">
             <header>
               <div>
-                <h3 id="ledgerOfferTitle">Ledger 1 · Complete Build Offer</h3>
-                <p>Original complete-build offer restored: package standard <strong>$18,499</strong>, less <strong>$2,000</strong> acceptance discount = contract total <strong>$16,499</strong>.</p>
+                <h3 id="acctProjectTitle">1 · Project payments</h3>
+                <p>How the $16,499 complete-build is paid. Green = done. Gold = next.</p>
               </div>
-              <div class="ledger-totals">
-                <div class="ledger-pill paid"><strong>$11,499</strong><span>Paid</span></div>
-                <div class="ledger-pill due"><strong>$5,000</strong><span>Remaining</span></div>
-                <div class="ledger-pill"><strong>$16,499</strong><span>Project total</span></div>
-              </div>
+              <span class="status-chip due">Next: Aug 21</span>
             </header>
-            <div class="ledger-table-wrap">
-              <table class="ledger">
-                <caption class="sr-only">Project offer line items and payment schedule</caption>
-                <thead>
-                  <tr>
-                    <th scope="col">Line</th>
-                    <th scope="col">Detail</th>
-                    <th scope="col" class="num">Amount</th>
-                    <th scope="col">Due</th>
-                    <th scope="col">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td colspan="5" style="background:#f8f4ec;font-weight:800;color:var(--navy);font-size:13px;letter-spacing:.04em;text-transform:uppercase">Project package</td>
-                  </tr>
-                  <tr>
-                    <td>Operating system build</td>
-                    <td>Six-week Faber operating system build</td>
-                    <td class="num">$15,000</td>
-                    <td>—</td>
-                    <td><span class="status-chip scheduled">Package</span></td>
-                  </tr>
-                  <tr>
-                    <td>Stabilization</td>
-                    <td>Four-week on-call stabilization</td>
-                    <td class="num">$1,000</td>
-                    <td>—</td>
-                    <td><span class="status-chip scheduled">Package</span></td>
-                  </tr>
-                  <tr>
-                    <td>Website rebuild</td>
-                    <td>Public RECR website rebuild</td>
-                    <td class="num">$1,500</td>
-                    <td>—</td>
-                    <td><span class="status-chip scheduled">Package</span></td>
-                  </tr>
-                  <tr>
-                    <td>SEO system setup</td>
-                    <td>Search foundation setup</td>
-                    <td class="num">$999</td>
-                    <td>—</td>
-                    <td><span class="status-chip scheduled">Package</span></td>
-                  </tr>
-                  <tr>
-                    <td>Package subtotal</td>
-                    <td>Before acceptance discount</td>
-                    <td class="num">$18,499</td>
-                    <td>—</td>
-                    <td><span class="status-chip scheduled">Standard</span></td>
-                  </tr>
-                  <tr>
-                    <td>Acceptance discount</td>
-                    <td>$2,000 complete-build reduction</td>
-                    <td class="num">−$2,000</td>
-                    <td>—</td>
-                    <td><span class="status-chip paid">Applied</span></td>
-                  </tr>
-                  <tr>
-                    <td colspan="5" style="background:#f8f4ec;font-weight:800;color:var(--navy);font-size:13px;letter-spacing:.04em;text-transform:uppercase">Payment schedule → $16,499</td>
-                  </tr>
-                  <tr>
-                    <td>Deposit to begin</td>
-                    <td>$5,000 to begin · received</td>
-                    <td class="num">$5,000</td>
-                    <td>At start</td>
-                    <td><span class="status-chip paid">Paid</span></td>
-                  </tr>
-                  <tr>
-                    <td>Second payment</td>
-                    <td>$5,000 · end of week two · received</td>
-                    <td class="num">$5,000</td>
-                    <td>Fri, Jul 31, 2026</td>
-                    <td><span class="status-chip paid">Paid</span></td>
-                  </tr>
-                  <tr>
-                    <td>Third payment</td>
-                    <td>$5,000 · before primary deployment</td>
-                    <td class="num">$5,000</td>
-                    <td>Fri, Aug 21, 2026</td>
-                    <td><span class="status-chip due">Due Aug 21</span></td>
-                  </tr>
-                  <tr>
-                    <td>End cap / completion</td>
-                    <td>$1,499 at completion · satisfied via computer invoice credit (parts)</td>
-                    <td class="num">$1,499</td>
-                    <td>Completion</td>
-                    <td><span class="status-chip paid">Paid · gear credit</span></td>
-                  </tr>
-                  <tr>
-                    <td colspan="5" style="background:#f8f4ec;font-weight:800;color:var(--navy);font-size:13px;letter-spacing:.04em;text-transform:uppercase">Computer invoice · applied to end cap</td>
-                  </tr>
-                  <tr>
-                    <td>Computer invoice total</td>
-                    <td>Laptop / computer parts invoice (source document pending attach)</td>
-                    <td class="num">$2,711.84</td>
-                    <td>—</td>
-                    <td><span class="status-chip paid">Invoiced</span></td>
-                  </tr>
-                  <tr>
-                    <td>Mac Mini (his machine)</td>
-                    <td>Personal equipment · already paid · not project end-cap credit</td>
-                    <td class="num">$650.99</td>
-                    <td>—</td>
-                    <td><span class="status-chip paid">Paid · personal</span></td>
-                  </tr>
-                  <tr>
-                    <td>Sales tax (est.)</td>
-                    <td>Tax on Mac Mini · ~$25 · already paid with Mini · not end-cap credit</td>
-                    <td class="num">$25.00</td>
-                    <td>—</td>
-                    <td><span class="status-chip paid">Paid · personal</span></td>
-                  </tr>
-                  <tr>
-                    <td>Applied to end cap</td>
-                    <td>Invoice remainder after Mini + tax covers the full $1,499 end cap (surplus stays as gear credit)</td>
-                    <td class="num">$2,035.85</td>
-                    <td>—</td>
-                    <td><span class="status-chip paid">Paid · end cap</span></td>
-                  </tr>
-                  <tr>
-                    <td>End cap balance</td>
-                    <td>$1,499 fully covered by computer-invoice credit</td>
-                    <td class="num">$0.00</td>
-                    <td>Completion</td>
-                    <td><span class="status-chip paid">Paid in full</span></td>
-                  </tr>
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <td colspan="2">Paid to date (deposit $5,000 + second $5,000 + end cap $1,499)</td>
-                    <td class="num">$11,499</td>
-                    <td colspan="2"></td>
-                  </tr>
-                  <tr>
-                    <td colspan="2">Cash still due (Aug 21 $5,000)</td>
-                    <td class="num">$5,000</td>
-                    <td colspan="2"></td>
-                  </tr>
-                  <tr>
-                    <td colspan="2">Complete-build total</td>
-                    <td class="num">$16,499</td>
-                    <td colspan="2"></td>
-                  </tr>
-                </tfoot>
-              </table>
+            <div class="acct-card-body">
+              <div class="pay-steps">
+                <div class="pay-step is-paid">
+                  <span class="step-tag">Paid</span>
+                  <span class="step-amt">$5,000</span>
+                  <span class="step-name">Deposit to begin</span>
+                  <span class="step-when">At start · received</span>
+                </div>
+                <div class="pay-step is-paid">
+                  <span class="step-tag">Paid</span>
+                  <span class="step-amt">$5,000</span>
+                  <span class="step-name">Second payment</span>
+                  <span class="step-when">End of week two · received</span>
+                </div>
+                <div class="pay-step is-due">
+                  <span class="step-tag">Due</span>
+                  <span class="step-amt">$5,000</span>
+                  <span class="step-name">Third payment</span>
+                  <span class="step-when">Fri, Aug 21, 2026</span>
+                </div>
+                <div class="pay-step is-paid">
+                  <span class="step-tag">Paid</span>
+                  <span class="step-amt">$1,499</span>
+                  <span class="step-name">End cap</span>
+                  <span class="step-when">Covered by computer invoice credit</span>
+                </div>
+              </div>
+
+              <details class="acct-details">
+                <summary>What’s inside the $16,499 package?</summary>
+                <div class="acct-details-body">
+                  <div class="mini-line"><span>Operating system build</span><span>$15,000</span></div>
+                  <div class="mini-line"><span>Stabilization (4 weeks)</span><span>$1,000</span></div>
+                  <div class="mini-line"><span>Website rebuild</span><span>$1,500</span></div>
+                  <div class="mini-line"><span>SEO system setup</span><span>$999</span></div>
+                  <div class="mini-line"><span>Standard package</span><span>$18,499</span></div>
+                  <div class="mini-line"><span>Acceptance discount</span><span>−$2,000</span></div>
+                  <div class="mini-line"><span><strong>Contract total</strong></span><span><strong>$16,499</strong></span></div>
+                  <div class="mini-line" style="margin-top:8px"><span>Computer invoice credit applied to end cap</span><span>$2,035.85</span></div>
+                </div>
+              </details>
             </div>
-            <p class="ledger-note">
-              Restored original offer: $15,000 OS + $1,000 stabilization + $1,500 website + $999 SEO = <strong>$18,499</strong> standard;
-              less <strong>$2,000</strong> acceptance discount = <strong>$16,499</strong> contract total.
-              End cap is <strong>$1,499</strong> (not $3,499). Computer invoice credit of <strong>$2,035.85</strong> fully covers that end cap.
-              Second project payment of <strong>$5,000</strong> is received. Next cash: <strong>Aug 21, 2026 — $5,000</strong>.
-            </p>
           </article>
 
-          <!-- LEDGER 2: Monthly / business fees -->
-          <article class="ledger-card" aria-labelledby="ledgerMonthlyTitle">
+          <!-- Monthly fees -->
+          <article class="acct-card" aria-labelledby="acctMonthlyTitle">
             <header>
               <div>
-                <h3 id="ledgerMonthlyTitle">Ledger 2 · Monthly Agency &amp; Business Fees</h3>
-                <p>Recurring SEO and CRM management, plus monthly business platform costs. First month includes the primary AI avatar setup fee (one-time).</p>
+                <h3 id="acctMonthlyTitle">2 · Monthly operating costs</h3>
+                <p>Agency care + business tools. Month 1 is higher because of one-time AI avatar setup.</p>
               </div>
-              <div class="ledger-totals">
-                <div class="ledger-pill due"><strong>$1,854</strong><span>Month 1 all-in</span></div>
-                <div class="ledger-pill"><strong>$1,555</strong><span>Month 2+ all-in</span></div>
-              </div>
+              <span class="status-chip active">Ongoing</span>
             </header>
-            <div class="ledger-table-wrap">
-              <table class="ledger">
-                <caption class="sr-only">Monthly agency and business fees</caption>
-                <thead>
-                  <tr>
-                    <th scope="col">Fee</th>
-                    <th scope="col">Category</th>
-                    <th scope="col" class="num">Amount</th>
-                    <th scope="col">Cadence</th>
-                    <th scope="col">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td colspan="5" style="background:#f8f4ec;font-weight:800;color:var(--navy);font-size:13px;letter-spacing:.04em;text-transform:uppercase">Agency monthly</td>
-                  </tr>
-                  <tr>
-                    <td>SEO management</td>
-                    <td>Agency · search program</td>
-                    <td class="num">$599.00</td>
-                    <td>Monthly</td>
-                    <td><span class="status-chip active">Active</span></td>
-                  </tr>
-                  <tr>
-                    <td>CRM / website management</td>
-                    <td>Agency · CRM &amp; site care</td>
-                    <td class="num">$249.00</td>
-                    <td>Monthly</td>
-                    <td><span class="status-chip active">Active</span></td>
-                  </tr>
-                  <tr>
-                    <td colspan="5" style="background:#f8f4ec;font-weight:800;color:var(--navy);font-size:13px;letter-spacing:.04em;text-transform:uppercase">Business platform fees (monthly)</td>
-                  </tr>
-                  <tr>
-                    <td>Primary AI avatar</td>
-                    <td>Business · first month only</td>
-                    <td class="num">$299.00</td>
-                    <td>Month 1 only</td>
-                    <td><span class="status-chip once">First month</span></td>
-                  </tr>
-                  <tr>
-                    <td>GoHighLevel</td>
-                    <td>Business · CRM / ops platform</td>
-                    <td class="num">$299.00</td>
-                    <td>Monthly</td>
-                    <td><span class="status-chip active">Active</span></td>
-                  </tr>
-                  <tr>
-                    <td>Power dialer</td>
-                    <td>Business · calling stack</td>
-                    <td class="num">$199.00</td>
-                    <td>Monthly</td>
-                    <td><span class="status-chip active">Active</span></td>
-                  </tr>
-                  <tr>
-                    <td>Google Workspace</td>
-                    <td>Business · email &amp; productivity</td>
-                    <td class="num">$140.00</td>
-                    <td>Monthly</td>
-                    <td><span class="status-chip active">Active</span></td>
-                  </tr>
-                  <tr>
-                    <td>Twilio (phone numbers)</td>
-                    <td>Business · numbers &amp; telephony</td>
-                    <td class="num">$69.00</td>
-                    <td>Monthly</td>
-                    <td><span class="status-chip active">Active</span></td>
-                  </tr>
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <td colspan="2">Agency monthly (SEO + CRM)</td>
-                    <td class="num">$848.00</td>
-                    <td colspan="2"></td>
-                  </tr>
-                  <tr>
-                    <td colspan="2">Business platforms month 1 (incl. AI avatar)</td>
-                    <td class="num">$1,006.00</td>
-                    <td colspan="2"></td>
-                  </tr>
-                  <tr>
-                    <td colspan="2">Business platforms month 2+ (no AI avatar)</td>
-                    <td class="num">$707.00</td>
-                    <td colspan="2"></td>
-                  </tr>
-                  <tr>
-                    <td colspan="2"><strong>All-in month 1</strong> (agency + business)</td>
-                    <td class="num"><strong>$1,854.00</strong></td>
-                    <td colspan="2"></td>
-                  </tr>
-                  <tr>
-                    <td colspan="2"><strong>All-in month 2+</strong> (agency + business)</td>
-                    <td class="num"><strong>$1,555.00</strong></td>
-                    <td colspan="2"></td>
-                  </tr>
-                </tfoot>
-              </table>
+            <div class="acct-card-body">
+              <div class="fee-cols">
+                <div class="fee-block">
+                  <h4>Agency (Richard)</h4>
+                  <div class="fee-row"><span class="fee-name">SEO management</span><span class="fee-amt">$599</span></div>
+                  <div class="fee-row"><span class="fee-name">CRM / website care</span><span class="fee-amt">$249</span></div>
+                  <div class="fee-total"><span>Agency monthly</span><span>$848</span></div>
+                </div>
+                <div class="fee-block">
+                  <h4>Business platforms</h4>
+                  <div class="fee-row"><span class="fee-name">GoHighLevel</span><span class="fee-amt">$299</span></div>
+                  <div class="fee-row"><span class="fee-name">Power dialer</span><span class="fee-amt">$199</span></div>
+                  <div class="fee-row"><span class="fee-name">Google Workspace</span><span class="fee-amt">$140</span></div>
+                  <div class="fee-row"><span class="fee-name">Twilio numbers</span><span class="fee-amt">$69</span></div>
+                  <div class="fee-row"><span class="fee-name">AI avatar (month 1 only)</span><span class="fee-amt">$299</span></div>
+                  <div class="fee-total"><span>Platforms mo.1 / mo.2+</span><span>$1,006 / $707</span></div>
+                </div>
+              </div>
+              <div class="fee-cols" style="margin-top:14px">
+                <div class="fee-total" style="margin:0"><span>All-in month 1</span><span>$1,854</span></div>
+                <div class="fee-total" style="margin:0;background:#e9f8f5;border-color:var(--teal)"><span>All-in month 2+</span><span>$1,555</span></div>
+              </div>
             </div>
-            <p class="ledger-note">Agency fees: SEO <strong>$599/mo</strong> and CRM/website management <strong>$249/mo</strong> (offer-aligned monthly program fees). Business tools: GHL <strong>$299</strong>, power dialer <strong>$199</strong>, Google Workspace <strong>$140</strong>, Twilio <strong>$69</strong>, plus primary AI avatar <strong>$299</strong> in month 1 only. Totals auto-summed for month 1 vs ongoing months.</p>
           </article>
 
-          <!-- LEDGER 3: Digital fees float (target always $2,000) -->
-          <article class="ledger-card" aria-labelledby="ledgerDigitalTitle">
+          <!-- Digital float -->
+          <article class="acct-card" aria-labelledby="acctDigitalTitle">
             <header>
               <div>
-                <h3 id="ledgerDigitalTitle">Ledger 3 · Digital Fees Float</h3>
-                <p>Prepaid balance for AI and platform subscriptions. <strong>Target balance is always $2,000</strong> — top up when draws pull it down.</p>
+                <h3 id="acctDigitalTitle">3 · Digital fees float</h3>
+                <p>Prepaid wallet for AI and platform charges. <strong>Always keep $2,000</strong> in this account.</p>
               </div>
-              <div class="ledger-totals">
-                <div class="ledger-pill due"><strong>$50</strong><span>Current balance</span></div>
-                <div class="ledger-pill"><strong>$2,000</strong><span>Target</span></div>
-                <div class="ledger-pill due"><strong>$1,950</strong><span>Top-up needed</span></div>
-              </div>
+              <span class="status-chip due">Low · top up</span>
             </header>
-            <div class="ledger-table-wrap">
-              <table class="ledger">
-                <caption class="sr-only">Digital fees float deposits and draws</caption>
-                <thead>
-                  <tr>
-                    <th scope="col">Line</th>
-                    <th scope="col">Detail</th>
-                    <th scope="col" class="num">Amount</th>
-                    <th scope="col">When</th>
-                    <th scope="col">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td colspan="5" style="background:#f8f4ec;font-weight:800;color:var(--navy);font-size:13px;letter-spacing:.04em;text-transform:uppercase">Funding</td>
-                  </tr>
-                  <tr>
-                    <td>Digital fees deposit</td>
-                    <td>Bill funded the digital float · last week</td>
-                    <td class="num">+$1,000</td>
-                    <td>Last week</td>
-                    <td><span class="status-chip paid">Deposited</span></td>
-                  </tr>
-                  <tr>
-                    <td>Balance after deposit</td>
-                    <td>Float ready for annual / platform charges</td>
-                    <td class="num">$1,000</td>
-                    <td>—</td>
-                    <td><span class="status-chip paid">Recorded</span></td>
-                  </tr>
-                  <tr>
-                    <td colspan="5" style="background:#f8f4ec;font-weight:800;color:var(--navy);font-size:13px;letter-spacing:.04em;text-transform:uppercase">Draws from float</td>
-                  </tr>
-                  <tr>
-                    <td>ChatGPT + Claude Code Business</td>
-                    <td>1 full year · AI tools for the agency</td>
-                    <td class="num">−$650</td>
-                    <td>From float</td>
-                    <td><span class="status-chip paid">Paid from float</span></td>
-                  </tr>
-                  <tr>
-                    <td>GoHighLevel</td>
-                    <td>CRM / ops platform · charged from float</td>
-                    <td class="num">−$299</td>
-                    <td>From float</td>
-                    <td><span class="status-chip paid">Paid from float</span></td>
-                  </tr>
-                  <tr>
-                    <td>Other digital charges</td>
-                    <td>Remainder of draws to reconcile $1,000 → $50</td>
-                    <td class="num">−$1</td>
-                    <td>From float</td>
-                    <td><span class="status-chip paid">Paid from float</span></td>
-                  </tr>
-                  <tr>
-                    <td colspan="5" style="background:#f8f4ec;font-weight:800;color:var(--navy);font-size:13px;letter-spacing:.04em;text-transform:uppercase">Position</td>
-                  </tr>
-                  <tr>
-                    <td>Current digital balance</td>
-                    <td>After deposit and subscription draws</td>
-                    <td class="num">$50</td>
-                    <td>Now</td>
-                    <td><span class="status-chip due">Low</span></td>
-                  </tr>
-                  <tr>
-                    <td>Target float</td>
-                    <td>Standing policy · always keep $2,000 available</td>
-                    <td class="num">$2,000</td>
-                    <td>Standing</td>
-                    <td><span class="status-chip scheduled">Policy</span></td>
-                  </tr>
-                  <tr>
-                    <td>Top-up to target</td>
-                    <td>$2,000 target − $50 current</td>
-                    <td class="num">$1,950</td>
-                    <td>When ready</td>
-                    <td><span class="status-chip due">Due to restore</span></td>
-                  </tr>
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <td colspan="2">Deposited to float</td>
-                    <td class="num">$1,000</td>
-                    <td colspan="2"></td>
-                  </tr>
-                  <tr>
-                    <td colspan="2">Drawn from float (ChatGPT/Claude $650 + GHL $299 + $1)</td>
-                    <td class="num">$950</td>
-                    <td colspan="2"></td>
-                  </tr>
-                  <tr>
-                    <td colspan="2"><strong>Current balance</strong></td>
-                    <td class="num"><strong>$50</strong></td>
-                    <td colspan="2"></td>
-                  </tr>
-                  <tr>
-                    <td colspan="2"><strong>Top-up to restore $2,000 target</strong></td>
-                    <td class="num"><strong>$1,950</strong></td>
-                    <td colspan="2"></td>
-                  </tr>
-                </tfoot>
-              </table>
+            <div class="acct-card-body">
+              <div class="fee-cols">
+                <div>
+                  <div class="acct-stat is-low" style="box-shadow:none">
+                    <span class="label">In the wallet now</span>
+                    <span class="value">$50</span>
+                    <span class="hint">of $2,000 target</span>
+                  </div>
+                  <div class="wallet-meter" aria-hidden="true"><i style="width:2.5%"></i></div>
+                  <div class="wallet-meta">
+                    <span>Target $2,000</span>
+                    <span>Top-up needed <strong style="color:var(--navy)">$1,950</strong></span>
+                  </div>
+                </div>
+                <div>
+                  <h4 style="margin:0 0 8px;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--navy)">Recent activity</h4>
+                  <div class="wallet-draws">
+                    <div class="wallet-draw"><span>Deposit last week</span><strong>+$1,000</strong></div>
+                    <div class="wallet-draw"><span>ChatGPT + Claude Code (1 year)</span><strong>−$650</strong></div>
+                    <div class="wallet-draw"><span>GoHighLevel</span><strong>−$299</strong></div>
+                    <div class="wallet-draw"><span>Other digital charges</span><strong>−$1</strong></div>
+                    <div class="wallet-draw" style="background:var(--cream);border-color:var(--navy)"><span>Balance now</span><strong>$50</strong></div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <p class="ledger-note">
-              Digital float is separate from the complete-build schedule and monthly agency fees.
-              Target is always <strong>$2,000</strong>. Last week’s deposit was <strong>$1,000</strong>; draws for
-              <strong>ChatGPT + Claude Code Business (1 year, $650)</strong> and <strong>GoHighLevel ($299)</strong>
-              left the balance at <strong>$50</strong>. Restore with a <strong>$1,950</strong> top-up when ready.
-            </p>
           </article>
 
         </div>
