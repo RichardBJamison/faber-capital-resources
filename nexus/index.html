@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>Faber Nexus — Real Estate Capital Resources</title>
+  <title>Big Ben — Real Estate Capital Resources</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet" />
@@ -87,12 +87,19 @@
     }
     .brand-mark {
       position: relative; display: grid; place-items: center; width: 58px; height: 58px; flex: 0 0 58px;
-      border: 3px solid var(--navy); border-radius: 50%; background: var(--aqua); box-shadow: 5px 5px 0 var(--coral);
-      color: var(--navy); font-size: 14px; font-weight: 900; letter-spacing: .08em;
+      border: 3px solid var(--navy); border-radius: 50%;
+      background: #fffaf1;
+      box-shadow: 5px 5px 0 var(--coral);
+      overflow: hidden;
+      padding: 4px;
     }
-    .brand-mark::before, .brand-mark::after { position: absolute; top: 12px; width: 9px; height: 23px; content: ""; border: 2px solid var(--navy); border-radius: 50%; }
-    .brand-mark::before { left: -9px; transform: rotate(-34deg); }
-    .brand-mark::after { right: -9px; transform: rotate(34deg); }
+    .brand-mark img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center bottom;
+    }
     .brand-copy { display: grid; gap: 1px; }
     .brand-copy strong { font-size: 22px; line-height: 1.05; letter-spacing: .04em; }
     .brand-copy span { font-size: 13px; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; }
@@ -894,9 +901,11 @@
   <div class="app-shell">
     <header class="topbar">
       <div class="topbar-inner">
-        <button class="brand" type="button" data-panel="dashboard" aria-label="Faber Nexus home">
-          <span class="brand-mark" aria-hidden="true">FN</span>
-          <span class="brand-copy"><strong>Faber Nexus</strong><span>Mi Protocol Nexus · RECR</span></span>
+        <button class="brand" type="button" data-panel="dashboard" aria-label="Big Ben home">
+          <span class="brand-mark" aria-hidden="true">
+            <img src="./assets/big-ben-logo.png" width="48" height="48" alt="" />
+          </span>
+          <span class="brand-copy"><strong>Big Ben</strong><span>Mi Protocol Nexus · RECR</span></span>
         </button>
         <nav class="primary-nav" aria-label="Main areas">
           <button type="button" class="nav-link" data-panel="communications">Talk to Richard</button>
@@ -916,7 +925,7 @@
       <section class="panel home-panel active" id="panel-dashboard" aria-labelledby="homeTitle">
         <div class="home-hero">
           <div class="home-hero-copy">
-            <p class="section-kicker">Faber Nexus · RECR build console</p>
+            <p class="section-kicker">Big Ben · RECR build console</p>
             <h1 id="homeTitle">Good day, Bill.</h1>
             <p>Everything we are building together is right here.</p>
           </div>
@@ -1260,12 +1269,12 @@
         <div class="card pad settings-grid"><div class="setting-row"><div><label for="textSize">Text size</label><span>Choose a comfortable reading size.</span></div><select id="textSize"><option value="normal">Standard</option><option value="large">Large</option></select></div><div class="setting-row"><div><label for="contrastToggle">Higher contrast</label><span>Strengthen borders and text contrast.</span></div><input type="checkbox" id="contrastToggle" /></div><div class="setting-row"><div><label for="soundToggle">Sound</label><span>Keep notification sounds on or off.</span></div><input type="checkbox" id="soundToggle" /></div><div class="setting-row"><div><label>Guided tour</label><span>Take the four-step tour again whenever you want.</span></div><button type="button" class="quiet-button" id="restartTour">SHOW ME AROUND</button></div><div class="setting-row"><div><label>Full screen</label><span>Use the whole monitor without trapping the browser.</span></div><button type="button" class="quiet-button" id="fullscreenButton">FULL SCREEN</button></div><div class="setting-row"><div><label for="notificationToggle">Notifications</label><span>Keep meaningful message and decision notices visible.</span></div><input type="checkbox" id="notificationToggle" checked /></div></div>
       </section>
 
-      <p class="footer-note">Faber Nexus is Bill’s RECR workspace inside the Mi Protocol Nexus.</p>
+      <p class="footer-note">Big Ben is Bill’s RECR workspace inside the Mi Protocol Nexus.</p>
     </main>
   </div>
 
   <div class="modal" id="helpModal" role="dialog" aria-modal="true" aria-labelledby="helpTitle" aria-hidden="true">
-    <div class="modal-panel"><header><div><p class="section-kicker">A calm place to start</p><h2 id="helpTitle">How can I help?</h2><p>Choose one clear next step. You can always return HOME.</p></div><button type="button" class="close-button" data-close-modal="helpModal" aria-label="Close help">×</button></header><div class="help-options"><button type="button" class="help-option accent" data-help-action="tour">SHOW ME AROUND</button><button type="button" class="help-option" data-help-action="explain">WHAT AM I LOOKING AT?</button><button type="button" class="help-option" data-help-action="question">SEND RICHARD A QUESTION</button><button type="button" class="help-option" data-help-action="home">RETURN HOME</button></div><div class="help-explanation" id="helpExplanation"><strong>Faber Nexus has three doors.</strong><span>Talk to Richard is your conversation and shared documents. Build Out Box is the RECR plan and current work. Billing and Invoice is your invoices and agency monthly expenses. Your Offer opens the Resonant Design offer page.</span></div><div class="secondary-actions"><button type="button" data-help-action="settings">WORKSPACE SETTINGS</button><button type="button" data-close-modal="helpModal">CLOSE HELP</button></div></div>
+    <div class="modal-panel"><header><div><p class="section-kicker">A calm place to start</p><h2 id="helpTitle">How can I help?</h2><p>Choose one clear next step. You can always return HOME.</p></div><button type="button" class="close-button" data-close-modal="helpModal" aria-label="Close help">×</button></header><div class="help-options"><button type="button" class="help-option accent" data-help-action="tour">SHOW ME AROUND</button><button type="button" class="help-option" data-help-action="explain">WHAT AM I LOOKING AT?</button><button type="button" class="help-option" data-help-action="question">SEND RICHARD A QUESTION</button><button type="button" class="help-option" data-help-action="home">RETURN HOME</button></div><div class="help-explanation" id="helpExplanation"><strong>Big Ben has three doors.</strong><span>Talk to Richard is your conversation and shared documents. Build Out Box is the RECR plan and current work. Billing and Invoice is your invoices and agency monthly expenses. Your Offer opens the Resonant Design offer page.</span></div><div class="secondary-actions"><button type="button" data-help-action="settings">WORKSPACE SETTINGS</button><button type="button" data-close-modal="helpModal">CLOSE HELP</button></div></div>
   </div>
   <div class="modal" id="tourModal" role="dialog" aria-modal="true" aria-labelledby="tourTitle" aria-hidden="true">
     <div class="modal-panel"><header><div><p class="section-kicker">Optional guided tour</p><h2 id="tourTitle">Four simple steps.</h2><p>Skip now or take the tour again from Help whenever you like.</p></div><button type="button" class="close-button" id="tourClose" aria-label="Skip tour">×</button></header><div class="tour-step"><div class="tour-number" id="tourNumber">Step 1 of 4</div><h3 id="tourStepTitle">Talk to Richard</h3><p id="tourStepBody">Start here for messages, questions, replies, and shared documents.</p></div><div class="tour-actions"><button type="button" class="quiet-button" id="tourSkip">SKIP TOUR</button><button type="button" class="action-link" id="tourNext">NEXT</button></div></div>
@@ -1382,7 +1391,7 @@
           communications: { title: "Talk to Richard", sub: "Messages, questions, replies, and shared documents." },
           "build-out-box": { title: "Build Out Box", sub: "Real Estate Capital Resources is being built from the foundation up." },
           "see-progress": { title: "Billing and Invoice", sub: "Your invoices and agency monthly expenses." },
-          settings: { title: "Workspace settings", sub: "Comfort and session preferences for Faber Nexus." }
+          settings: { title: "Workspace settings", sub: "Comfort and session preferences for Big Ben." }
         };
         return meta[id] || meta.dashboard;
       }
