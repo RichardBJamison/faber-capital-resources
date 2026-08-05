@@ -22,24 +22,66 @@
   <link rel="stylesheet" href="/faber-capital-resources/assets/offer.css" />
 </head>
 <body class="offer-body">
-  <header class="offer-header">
-    <div class="offer-header-inner">
-      <a class="offer-logo" href="/faber-capital-resources/" aria-label="Real Estate Capital Resources home">
+  <header class="offer-header offer-header--simple">
+    <div class="offer-header-inner offer-header-inner--simple">
+      <a class="offer-logo" href="/faber-capital-resources/resonant-design-offer/" aria-label="Resonant Design Offer">
         <img src="/faber-capital-resources/assets/img/logo.png" alt="Real Estate Capital Resources" width="120" height="107" />
       </a>
-      <button type="button" class="offer-nav-toggle" aria-expanded="false" aria-controls="offer-nav">Menu</button>
-      <ul class="offer-nav" id="offer-nav">
-        <li><a href="/faber-capital-resources/">Home</a></li>
-        <li><a href="/faber-capital-resources/about/">About</a></li>
-        <li><a href="/faber-capital-resources/services/">Services</a></li>
-        <li><a href="/faber-capital-resources/loan-products/">Funding Programs</a></li>
-        <li><a href="/faber-capital-resources/partners/">Partners</a></li>
-        <li><a href="/faber-capital-resources/resonant-design-offer/" aria-current="page">Resonant Design Offer</a></li>
-        <li><a class="nexus-nav-btn" href="/faber-capital-resources/nexus/" target="_blank" rel="noopener">Nexus</a></li>
-        <li><a class="brokerage-nav-btn" href="/faber-capital-resources/brokerage/">Brokerage</a></li>
-      </ul>
+      <div class="offer-big-actions" role="navigation" aria-label="Offer destinations">
+        <a class="offer-big-btn offer-big-btn--nexus" href="/faber-capital-resources/nexus/" target="_blank" rel="noopener">Open Big Ben Nexus</a>
+        <a class="offer-big-btn offer-big-btn--brokerage" href="/faber-capital-resources/brokerage/">Open Brokerage</a>
+      </div>
     </div>
   </header>
+  <style>
+    .offer-header--simple { padding: 0.85rem 0; }
+    .offer-header-inner--simple {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem 1.25rem;
+    }
+    .offer-big-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .offer-big-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0.85rem 1.35rem;
+      border-radius: 14px;
+      font-size: 0.95rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 2px solid transparent;
+      transition: transform 0.15s ease, filter 0.15s ease;
+    }
+    .offer-big-btn:hover { transform: translateY(-2px); filter: brightness(1.05); }
+    .offer-big-btn--nexus {
+      background: #3DFF8A;
+      color: #04351C;
+      border-color: #1a5c38;
+      box-shadow: 0 4px 0 #1a5c38;
+    }
+    .offer-big-btn--brokerage {
+      background: #E07A3A;
+      color: #fff;
+      border-color: #9a4a1a;
+      box-shadow: 0 4px 0 #9a4a1a;
+    }
+    @media (max-width: 640px) {
+      .offer-header-inner--simple { flex-direction: column; align-items: stretch; }
+      .offer-big-actions { flex-direction: column; }
+      .offer-big-btn { width: 100%; }
+    }
+  </style>
 
   <main class="offer-main">
     <section class="intro-hero">
@@ -98,22 +140,6 @@
           </div>
         </article>
       </div>
-
-      
-      <section class="demo-explorer" aria-labelledby="demo-explore-heading" style="margin:2.5rem 0 0;padding:1.75rem 1.5rem;border-radius:16px;background:#243B55;color:#fff;">
-        <p class="eyebrow" style="color:#9fd9ab;margin:0 0 0.5rem;">Live RECR site</p>
-        <h2 id="demo-explore-heading" class="display" style="color:#fff;font-size:1.75rem;margin:0 0 0.65rem;">Explore Real Estate Capital Resources</h2>
-        <p style="opacity:0.9;margin:0 0 1.15rem;max-width:42rem;">These open the <strong>new</strong> RECR build (not the archived mock-up). Same destinations as the public menu.</p>
-        <div class="demo-explorer-grid" style="display:flex;flex-wrap:wrap;gap:0.65rem;">
-          <a href="/faber-capital-resources/" style="display:inline-block;padding:0.75rem 1.15rem;border-radius:12px;background:#fff;color:#1a2744;font-weight:800;text-decoration:none;">Home</a>
-          <a href="/faber-capital-resources/about/" style="display:inline-block;padding:0.75rem 1.15rem;border-radius:12px;background:rgba(255,255,255,0.12);color:#fff;font-weight:800;text-decoration:none;border:1px solid rgba(255,255,255,0.25);">About</a>
-          <a href="/faber-capital-resources/services/" style="display:inline-block;padding:0.75rem 1.15rem;border-radius:12px;background:rgba(255,255,255,0.12);color:#fff;font-weight:800;text-decoration:none;border:1px solid rgba(255,255,255,0.25);">Services</a>
-          <a href="/faber-capital-resources/loan-products/" style="display:inline-block;padding:0.75rem 1.15rem;border-radius:12px;background:#3DFF8A;color:#04351C;font-weight:900;text-decoration:none;">Funding Programs</a>
-          <a href="/faber-capital-resources/partners/" style="display:inline-block;padding:0.75rem 1.15rem;border-radius:12px;background:rgba(255,255,255,0.12);color:#fff;font-weight:800;text-decoration:none;border:1px solid rgba(255,255,255,0.25);">Partners</a>
-          <a href="/faber-capital-resources/contact/" style="display:inline-block;padding:0.75rem 1.15rem;border-radius:12px;background:rgba(255,255,255,0.12);color:#fff;font-weight:800;text-decoration:none;border:1px solid rgba(255,255,255,0.25);">Contact</a>
-          <a href="/faber-capital-resources/brokerage/" style="display:inline-block;padding:0.75rem 1.15rem;border-radius:12px;background:#E07A3A;color:#fff;font-weight:900;text-decoration:none;">Brokerage</a>
-        </div>
-      </section>
 
       <aside class="mint-invite" aria-labelledby="mint-heading">
         <p class="mint-label">A Personal Proposal from Richard</p>
@@ -181,26 +207,8 @@
   </main>
 
   <footer class="offer-footer">
-    Private working portal for Real Estate Capital Resources ·
-    <a href="/faber-capital-resources/">Home</a> ·
-    <a href="/faber-capital-resources/about/">About</a> ·
-    <a href="/faber-capital-resources/loan-products/">Funding Programs</a> ·
-    <a href="/faber-capital-resources/partners/">Partners</a> ·
-    <a href="/faber-capital-resources/services/">Services</a> ·
-    <a href="/faber-capital-resources/contact/">Contact</a>
+    Private working portal for Real Estate Capital Resources · Resonant Design Offer
   </footer>
-
-  <script>
-    (function () {
-      var btn = document.querySelector('.offer-nav-toggle');
-      var nav = document.getElementById('offer-nav');
-      if (!btn || !nav) return;
-      btn.addEventListener('click', function () {
-        var open = nav.classList.toggle('is-open');
-        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      });
-    })();
-  </script>
 
 <script>
   window.OFFER_TRACKER = {
