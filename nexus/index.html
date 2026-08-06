@@ -229,12 +229,14 @@
     .timeline-step { position: relative; min-height: 143px; padding: 17px 13px; border-right: 1px solid var(--line); background: #fffaf1; }
     .timeline-step:last-child { border-right: 0; }
     .timeline-step.current { background: var(--teal); color: var(--cream); }
+    .timeline-step.done { background: #edf9f7; opacity: 1; }
     .timeline-step.future { opacity: .66; }
     .timeline-step .week { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
     .timeline-step strong { display: block; color: var(--navy); font-size: 16px; line-height: 1.2; }
     .timeline-step.current strong, .timeline-step.current .week { color: var(--cream); }
     .timeline-step .check { display: grid; place-items: center; width: 27px; height: 27px; margin-bottom: 10px; border: 2px solid var(--navy); border-radius: 50%; background: var(--cream); color: var(--navy); font-weight: 900; }
     .timeline-step.current .check { border-color: var(--cream); background: var(--cream); }
+    .timeline-step.done .check { border-color: var(--teal); background: var(--teal); color: var(--cream); }
     .build-areas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
     .build-area { display: flex; flex-direction: column; min-height: 260px; padding: 24px; border: 2px solid var(--line); border-radius: 20px; background: #fffaf1; box-shadow: var(--shadow-soft); }
     .build-area .area-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 17px; }
@@ -954,7 +956,7 @@
           <article class="door teal">
             <div class="door-top"><div class="door-icon" aria-hidden="true">□</div><h3>Build Out Box</h3></div>
             <p class="door-support">Follow the Real Estate Capital Resources build</p>
-            <button type="button" class="door-cta" data-panel="build-out-box"><strong>OPEN THE BUILD</strong><span>Week 1 · Discovery and Foundation</span><span class="arrow" aria-hidden="true">→</span></button>
+            <button type="button" class="door-cta" data-panel="build-out-box"><strong>OPEN THE BUILD</strong><span>Week 3 · Core Build</span><span class="arrow" aria-hidden="true">→</span></button>
           </article>
           <article class="door gold">
             <div class="door-top"><div class="door-icon" aria-hidden="true">↗</div><h3>Billing and Invoice</h3></div>
@@ -972,7 +974,7 @@
           <div class="today-items">
             <div class="today-item"><strong>Latest message</strong><span id="todayMessage">Loading your conversation…</span></div>
             <div class="today-item"><strong>Next decision</strong><span>Review the website questions Richard sent.</span></div>
-            <div class="today-item"><strong>Most recent milestone</strong><span>RECR discovery and foundation are ready to begin.</span></div>
+            <div class="today-item"><strong>Most recent milestone</strong><span>Week 3 · Core Build is underway.</span></div>
           </div>
         </section>
       </section>
@@ -1041,11 +1043,11 @@
       <section class="panel" id="panel-build-out-box" aria-labelledby="buildTitle">
         <div class="build-hero"><p class="section-kicker">Build Out Box</p><h2 id="buildTitle">REAL ESTATE CAPITAL RESOURCES</h2><p>Your brokerage is being built from the foundation up.</p></div>
         <div class="timeline-wrap">
-          <div class="timeline-title"><h3>The six-week build path</h3><span>Current: Week 1</span></div>
+          <div class="timeline-title"><h3>The six-week build path</h3><span>Current: Week 3</span></div>
           <div class="timeline" aria-label="RECR six-week build path">
-            <div class="timeline-step current"><span class="check" aria-hidden="true">•</span><span class="week">Week 1</span><strong>Discovery and Foundation</strong></div>
-            <div class="timeline-step future"><span class="check" aria-hidden="true">2</span><span class="week">Week 2</span><strong>Agency Blueprint</strong></div>
-            <div class="timeline-step future"><span class="check" aria-hidden="true">3</span><span class="week">Week 3</span><strong>Core Build</strong></div>
+            <div class="timeline-step done"><span class="check" aria-hidden="true">✓</span><span class="week">Week 1</span><strong>Discovery and Foundation</strong></div>
+            <div class="timeline-step done"><span class="check" aria-hidden="true">✓</span><span class="week">Week 2</span><strong>Agency Blueprint</strong></div>
+            <div class="timeline-step current"><span class="check" aria-hidden="true">•</span><span class="week">Week 3</span><strong>Core Build</strong></div>
             <div class="timeline-step future"><span class="check" aria-hidden="true">4</span><span class="week">Week 4</span><strong>Connections and Marketing</strong></div>
             <div class="timeline-step future"><span class="check" aria-hidden="true">5</span><span class="week">Week 5</span><strong>Testing and Refinement</strong></div>
             <div class="timeline-step future"><span class="check" aria-hidden="true">6</span><span class="week">Week 6</span><strong>Training and Launch Preparation</strong></div>
@@ -1054,7 +1056,7 @@
         </div>
         <div class="decision-card"><div class="decision-mark" aria-hidden="true">?</div><div><h3>BILL — WE NEED YOUR DECISION</h3><p>When you are ready, reply to Richard’s website questions in your conversation so the build can keep moving.</p></div><button type="button" class="action-link" data-panel="communications">OPEN THE QUESTION</button></div>
         <div class="build-areas">
-          <article class="build-area"><div class="area-title"><h3>Brokerage System</h3><span class="status-label">Discovery</span></div><dl class="area-detail"><div><dt>Richard is working on</dt><dd>Mapping how RECR operates, from relationships to handoffs.</dd></div><div><dt>Completed</dt><dd>The first working path and six-week plan are in place.</dd></div></dl><button type="button" class="action-link detail-button" data-detail="Brokerage System">VIEW DETAILS</button></article>
+          <article class="build-area"><div class="area-title"><h3>Brokerage System</h3><span class="status-label teal">Core Build</span></div><dl class="area-detail"><div><dt>Richard is working on</dt><dd>Building the RECR Deal Desk and brokerage operating system.</dd></div><div><dt>Completed</dt><dd>Discovery, foundation, and agency blueprint are in place. Deal Desk Stage A is live in Nexus.</dd></div></dl><button type="button" class="action-link detail-button" data-detail="Brokerage System">VIEW DETAILS</button></article>
           <article class="build-area"><div class="area-title"><h3>Website</h3><span class="status-label teal">Foundation</span></div><dl class="area-detail"><div><dt>Richard is working on</dt><dd>Preparing the public-facing RECR website foundation.</dd></div><div><dt>Completed</dt><dd>The current Faber Capital Resources website remains available.</dd></div></dl><div><a class="quiet-button" href="/" target="_blank" rel="noopener">VIEW CURRENT WEBSITE</a><button type="button" class="action-link detail-button" data-detail="Website" style="margin:10px 0 0 7px;">VIEW DETAILS</button></div></article>
           <article class="build-area"><div class="area-title"><h3>Communications</h3><span class="status-label">Ready</span></div><dl class="area-detail"><div><dt>Richard is working on</dt><dd>Keeping your shared conversation and documents together.</dd></div><div><dt>Completed</dt><dd>Chat history, message sending, and file sharing are connected.</dd></div></dl><button type="button" class="action-link detail-button" data-detail="Communications">VIEW DETAILS</button></article>
           <article class="build-area"><div class="area-title"><h3>Marketing</h3><span class="status-label gold">Planning</span></div><dl class="area-detail"><div><dt>Richard is working on</dt><dd>Connecting the build to the right future marketing activity.</dd></div><div><dt>Completed</dt><dd>The marketing workstream has a place in the launch path.</dd></div></dl><button type="button" class="action-link detail-button" data-detail="Marketing">VIEW DETAILS</button></article>
