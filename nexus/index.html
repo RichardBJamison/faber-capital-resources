@@ -710,6 +710,19 @@
     }
     .atts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 13px; }
     .att { display: inline-flex; align-items: center; min-height: 48px; padding: 9px 12px; border: 2px solid var(--navy); border-radius: 10px; background: var(--cream); color: var(--navy); font-size: 15px; font-weight: 800; }
+    .atts { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
+    .bubble-img-wrap { display: block; max-width: 100%; }
+    .bubble-img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      border: 2px solid var(--navy);
+      background: #fff;
+      cursor: zoom-in;
+    }
+    .bubble.bill .bubble-img { border-color: var(--chat-bill-deep); }
     .chat-compose { padding: 18px 25px 22px; border-top: 2px solid var(--line); background: #fff0ec; flex: 0 0 auto; }
     .compose-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 11px; flex-wrap: wrap; }
     .compose-top label { color: var(--navy); font-size: 15px; font-weight: 900; letter-spacing: .07em; text-transform: uppercase; }
@@ -1596,13 +1609,25 @@
           var name = isRichard ? "Richard" : "Bill";
           var atts = (m.attachments || []).map(function (a) {
             var href = absFileUrl(a.url);
-            return '<a class="att" href="' + esc(href) + '" target="_blank" rel="noopener" download>OPEN FILE · ' + esc(humanFileLabel(a.name || "file")) + (a.size ? " · " + esc(fmtBytes(a.size)) : "") + "</a>";
+            var mime = String(a.mime || "").toLowerCase();
+            var nm = String(a.name || "");
+            var isImg = mime.indexOf("image/") === 0 || /\.(png|jpe?g|gif|webp|svg)$/i.test(nm);
+            if (isImg) {
+              return '<a class="bubble-img-wrap" href="' + esc(href) + '" target="_blank" rel="noopener" title="' + esc(humanFileLabel(nm || "image")) + '">' +
+                '<img class="bubble-img" src="' + esc(href) + '" alt="' + esc(humanFileLabel(nm || "Shared image")) + '" loading="lazy" />' +
+                "</a>";
+            }
+            return '<a class="att" href="' + esc(href) + '" target="_blank" rel="noopener" download>OPEN FILE · ' + esc(humanFileLabel(nm || "file")) + (a.size ? " · " + esc(fmtBytes(a.size)) : "") + "</a>";
           }).join("");
           var dictBadge = (m.dictation || m.source === "whisperflow" || m.source === "dictation") ? '<div class="dictation-badge">Dictation · WhisperFlow</div>' : "";
+          var bodyText = (m.text || "").trim();
+          var bodyHtml = bodyText
+            ? '<div class="bubble-body">' + esc(bodyText) + "</div>"
+            : "";
           return '<article class="bubble ' + (isRichard ? "richard" : "bill") + '" data-msg-id="' + esc(key) + '">' +
             '<button type="button" class="bubble-close" data-dismiss-id="' + esc(key) + '" aria-label="Close message">×</button>' +
             '<div class="meta">' + esc(name) + " · " + esc(fmtWhen(m.ts)) + "</div>" + dictBadge +
-            '<div class="bubble-body">' + esc(m.text || "Document shared") + "</div>" +
+            bodyHtml +
             (atts ? '<div class="atts">' + atts + "</div>" : "") +
             "</article>";
         }).join("");
