@@ -1,0 +1,2 @@
+# Cloudflare Pages SPA fallback for Deal Desk client routes
+/deal-desk/*    /deal-desk/index.html   200
