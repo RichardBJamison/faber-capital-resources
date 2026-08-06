@@ -818,7 +818,14 @@
     }
     .file-group { margin-top: 0; }
     .file-group h4 { margin-bottom: 9px; font-size: 17px; letter-spacing: .06em; text-transform: uppercase; }
-    .file-row { display: grid; grid-template-columns: 54px minmax(0, 1fr); gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); }
+    .file-row {
+      position: relative;
+      display: grid;
+      grid-template-columns: 54px minmax(0, 1fr);
+      gap: 12px;
+      padding: 12px 36px 12px 0;
+      border-top: 1px solid var(--line);
+    }
     .file-kind { display: grid; place-items: center; width: 54px; height: 54px; border: 2px solid var(--navy); border-radius: 13px; background: var(--gold-soft); color: var(--navy); font-size: 13px; font-weight: 900; }
     .file-row strong { display: block; color: var(--navy); font-size: 16px; line-height: 1.28; overflow-wrap: anywhere; }
     .file-meta { margin-top: 4px; color: var(--muted); font-size: 14px; }
@@ -830,6 +837,25 @@
       cursor: pointer;
     }
     .file-actions a.download, .file-actions button.download { background: var(--cream); color: var(--navy); }
+    .file-delete {
+      position: absolute;
+      top: 10px;
+      right: 0;
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      border: 2px solid var(--navy);
+      border-radius: 999px;
+      background: var(--coral);
+      color: var(--navy);
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .file-delete:hover { background: #ff927f; transform: scale(1.05); }
+    .file-delete:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
 
     /* Help and settings */
     .modal { display: none; position: fixed; inset: 0; z-index: 100; align-items: center; justify-content: center; padding: 24px; background: rgba(23, 35, 63, .76); }
@@ -1551,6 +1577,30 @@
           .then(function () { loadComms({ forceRender: true }); })
           .catch(function () { /* keep optimistic hide if offline */ });
       }
+      function deleteCabinetFile(id) {
+        if (!id) return;
+        var key = String(id);
+        if (!window.confirm("Delete this file from the shared cabinet for everyone?")) return;
+        /* Optimistic remove */
+        lastCabinetFiles = (lastCabinetFiles || []).filter(function (f) {
+          return String(f && f.id) !== key;
+        });
+        renderCabinet(lastCabinetFiles);
+        fetch(COMMS, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          mode: "cors",
+          body: JSON.stringify({ action: "delete_file", id: key })
+        }).then(function (r) { return r.json().catch(function () { return {}; }); })
+          .then(function (d) {
+            if (d && d.ok === false) window.alert(d.error || "Could not delete file.");
+            loadComms({ forceRender: true });
+          })
+          .catch(function () {
+            window.alert("Could not reach the server to delete this file.");
+            loadComms({ forceRender: true });
+          });
+      }
       function bindChatScrollPrefer() {
         var el = byId("chatStream");
         if (!el || el.dataset.scrollPreferBound) return;
@@ -1646,8 +1696,25 @@
         return "shared";
       }
       function renderFile(f) {
-        var href = absFileUrl(f.url); var name = f.name || "file"; var label = f.label || humanFileLabel(name); var who = f.uploaded_by || "Richard";
-        return '<div class="file-row"><div class="file-kind" aria-hidden="true">' + esc(fileKind(name, f.mime)) + '</div><div><strong>' + esc(label) + '</strong><div class="file-meta">' + esc(who) + " · " + esc(fmtWhen(f.ts)) + (f.size ? " · " + esc(fmtBytes(f.size)) : "") + '</div><div class="file-actions"><a href="' + esc(href) + '" target="_blank" rel="noopener">OPEN</a><a class="download" href="' + esc(href) + '" target="_blank" rel="noopener" download="' + esc(name) + '">DOWNLOAD</a></div></div></div>';
+        var href = absFileUrl(f.url);
+        var name = f.name || "file";
+        var label = f.label || humanFileLabel(name);
+        var who = f.uploaded_by || "Richard";
+        var fid = f.id ? String(f.id) : "";
+        var delBtn = fid
+          ? '<button type="button" class="file-delete" data-file-id="' + esc(fid) + '" aria-label="Delete ' + esc(label) + '">×</button>'
+          : "";
+        return (
+          '<div class="file-row" data-file-id="' + esc(fid) + '">' +
+          delBtn +
+          '<div class="file-kind" aria-hidden="true">' + esc(fileKind(name, f.mime)) + "</div>" +
+          "<div><strong>" + esc(label) + "</strong>" +
+          '<div class="file-meta">' + esc(who) + " · " + esc(fmtWhen(f.ts)) + (f.size ? " · " + esc(fmtBytes(f.size)) : "") + "</div>" +
+          '<div class="file-actions">' +
+          '<a href="' + esc(href) + '" target="_blank" rel="noopener">OPEN</a>' +
+          '<a class="download" href="' + esc(href) + '" target="_blank" rel="noopener" download="' + esc(name) + '">DOWNLOAD</a>' +
+          "</div></div></div>"
+        );
       }
       function renderFileGroup(title, files, emptyText) {
         if (!files || !files.length) return '<section class="file-group"><h4>' + esc(title) + '</h4><div class="empty-state">' + esc(emptyText) + '</div></section>';
@@ -1839,6 +1906,17 @@
       });
       var cabDl = byId("cabDownloadAll"); if (cabDl) cabDl.addEventListener("click", function () { downloadFileList(lastCabinetFiles); });
       var chatDl = byId("chatDownloadAll"); if (chatDl) chatDl.addEventListener("click", function () { downloadFileList(lastCabinetFiles); });
+      var cabEl = byId("fileCabinet");
+      if (cabEl && !cabEl.dataset.deleteBound) {
+        cabEl.dataset.deleteBound = "1";
+        cabEl.addEventListener("click", function (e) {
+          var btn = e.target.closest(".file-delete");
+          if (!btn) return;
+          e.preventDefault();
+          e.stopPropagation();
+          deleteCabinetFile(btn.getAttribute("data-file-id"));
+        });
+      }
 
       /* WhisperFlow path: record audio + best-effort browser transcript, attach both to the send queue */
       var mediaRecorder = null;
