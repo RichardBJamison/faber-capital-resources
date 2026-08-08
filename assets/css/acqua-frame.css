@@ -1676,16 +1676,23 @@ a.brokerage-nav-btn:hover {
 .program-zoom-highlight-icon {
   width: 2.35rem;
   height: 2.35rem;
-  border-radius: 10px;
+  border-radius: 50%;
   background: #e7f6f3;
   color: #3aa89a;
   display: grid;
   place-items: center;
   margin-bottom: 0.85rem;
   flex-shrink: 0;
+  /* Solid disc — no border gaps or clipped corners */
+  box-shadow: none;
+  border: none;
+  overflow: hidden;
 }
 .program-zoom-highlight-icon svg {
   display: block;
+  width: 1.05rem;
+  height: 1.05rem;
+  flex-shrink: 0;
 }
 .program-zoom-highlight strong {
   display: block;
