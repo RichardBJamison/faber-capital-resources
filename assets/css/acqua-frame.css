@@ -1031,10 +1031,25 @@ a.brokerage-nav-btn:hover {
   margin: 0 0 0.25rem;
   font-size: 1.02rem;
 }
+/* Homepage story splits: larger media column, image on the right */
+.split-media--lg {
+  min-height: 400px;
+  background-position: center;
+  background-size: cover;
+}
 @media (min-width: 900px) {
-  .split .split-media[style*="deal-comes-first-handshake"] {
-    min-height: 480px;
+  .split:has(.split-media--lg) {
+    grid-template-columns: 0.95fr 1.15fr;
+    align-items: stretch;
+  }
+  .split-media--lg {
+    min-height: 560px;
     align-self: stretch;
+  }
+}
+@media (min-width: 1200px) {
+  .split-media--lg {
+    min-height: 600px;
   }
 }
 .steps-5 { counter-reset: step; }
