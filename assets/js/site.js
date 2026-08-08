@@ -659,12 +659,14 @@
       host.style.setProperty("--zoom-oy", Math.max(8, Math.min(92, oy)).toFixed(1) + "%");
     }
 
-    /** Pin the viewport to the 8-card stage height so the open box cannot grow past it. */
+    /** Pin the viewport to the 8-card stage height, plus a small bottom margin so content isn’t hard against the footer. */
     function lockStageHeight() {
       const h = Math.ceil(gridLayer.getBoundingClientRect().height);
       if (h < 120) return;
-      lockedH = h;
-      viewport.style.height = h + "px";
+      /* ~56px breathing room under the grid footprint (not a full re-layout) */
+      const EXTRA = 56;
+      lockedH = h + EXTRA;
+      viewport.style.height = lockedH + "px";
       viewport.classList.add("is-height-locked");
     }
 
