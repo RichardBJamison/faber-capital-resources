@@ -666,13 +666,17 @@
       /* ~56px breathing room under the grid footprint (not a full re-layout) */
       const EXTRA = 56;
       lockedH = h + EXTRA;
+      /* Set height immediately — never animate layout height during zoom */
+      viewport.style.transition = "none";
       viewport.style.height = lockedH + "px";
       viewport.classList.add("is-height-locked");
+      void viewport.offsetHeight;
     }
 
     function unlockStageHeight() {
       viewport.classList.remove("is-height-locked");
       viewport.style.height = "";
+      viewport.style.transition = "";
       lockedH = 0;
     }
 
@@ -724,8 +728,11 @@
 
       host.classList.add("is-zooming-in");
       if (!reduce) {
+        /* Double rAF: paint closed state first, then open — avoids mid-frame glitch */
         requestAnimationFrame(() => {
-          host.classList.add("is-zoomed");
+          requestAnimationFrame(() => {
+            host.classList.add("is-zoomed");
+          });
         });
       } else {
         host.classList.add("is-zoomed");
@@ -733,12 +740,19 @@
 
       activeId = id;
       lockButtons(true, id);
-      scrollStageIntoView();
+      /* Scroll after paint so it doesn’t fight the zoom frame */
+      if (reduce) scrollStageIntoView();
+      else requestAnimationFrame(() => scrollStageIntoView());
 
       if (animTimer) clearTimeout(animTimer);
       animTimer = setTimeout(() => {
         host.classList.remove("is-zooming-in");
         host.querySelectorAll("[data-program-card]").forEach((c) => c.classList.remove("is-zoom-source"));
+        /* Drop will-change after settle to free GPU */
+        try {
+          gridLayer.style.willChange = "auto";
+          detailLayer.style.willChange = "auto";
+        } catch (e) { /* no-op */ }
         const focusTarget = page.querySelector("h2") || page.querySelector("[data-program-zoom-out]") || page;
         try {
           if (focusTarget && typeof focusTarget.focus === "function") {
@@ -749,7 +763,7 @@
           }
         } catch (e) { /* no-op */ }
         animTimer = null;
-      }, reduce ? 50 : 560);
+      }, reduce ? 50 : 420);
 
       try {
         if (typeof history !== "undefined" && history.replaceState) {
@@ -780,8 +794,12 @@
           page.setAttribute("aria-hidden", "true");
         });
         unlockStageHeight();
+        try {
+          gridLayer.style.willChange = "";
+          detailLayer.style.willChange = "";
+        } catch (e) { /* no-op */ }
         animTimer = null;
-      }, reduce ? 50 : 480);
+      }, reduce ? 50 : 380);
 
       const returnFocus = lastFocus;
       activeId = null;

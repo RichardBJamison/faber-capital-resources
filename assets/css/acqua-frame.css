@@ -1261,8 +1261,8 @@ a.brokerage-nav-btn:hover {
   border-radius: calc(var(--radius) + 2px);
 }
 .program-zoom-viewport.is-height-locked {
-  /* height set inline from measured grid */
-  transition: height 0.45s var(--ease);
+  /* Height set inline — no height transition (layout thrash / jank) */
+  transition: none;
 }
 .program-zoom-layer {
   width: 100%;
@@ -1271,11 +1271,13 @@ a.brokerage-nav-btn:hover {
   position: relative;
   z-index: 1;
   transform-origin: var(--zoom-ox, 50%) var(--zoom-oy, 40%);
+  /* Opacity + transform only — blur was the main zoom jank */
   transition:
-    opacity 0.4s var(--ease),
-    transform 0.5s var(--ease),
-    filter 0.4s var(--ease),
+    opacity 0.32s var(--ease),
+    transform 0.4s var(--ease),
     visibility 0s linear 0s;
+  will-change: opacity, transform;
+  backface-visibility: hidden;
 }
 .program-zoom-layer--detail {
   position: absolute;
@@ -1284,17 +1286,17 @@ a.brokerage-nav-btn:hover {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: scale(0.78);
+  transform: scale(0.96);
   transform-origin: var(--zoom-ox, 50%) var(--zoom-oy, 40%);
-  filter: blur(6px);
   transition:
-    opacity 0.42s var(--ease),
-    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-    filter 0.4s var(--ease),
-    visibility 0s linear 0.5s;
+    opacity 0.35s var(--ease),
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0s linear 0.4s;
   display: flex;
   flex-direction: column;
   min-height: 0;
+  will-change: opacity, transform;
+  backface-visibility: hidden;
 }
 
 /* Zoomed: both layers fill the locked viewport; stage size stays put */
@@ -1302,41 +1304,35 @@ a.brokerage-nav-btn:hover {
   position: absolute;
   inset: 0;
   opacity: 0;
-  transform: scale(0.9);
-  filter: blur(5px);
+  transform: scale(0.97);
   pointer-events: none;
   visibility: hidden;
   overflow: hidden;
   transition:
-    opacity 0.35s var(--ease),
-    transform 0.5s var(--ease),
-    filter 0.35s var(--ease),
-    visibility 0s linear 0.5s;
+    opacity 0.28s var(--ease),
+    transform 0.36s var(--ease),
+    visibility 0s linear 0.36s;
 }
 .program-zoom.is-zoomed .program-zoom-layer--detail {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
   transform: scale(1);
-  filter: none;
   transition:
-    opacity 0.4s var(--ease) 0.06s,
-    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.04s,
-    filter 0.35s var(--ease) 0.04s,
+    opacity 0.32s var(--ease),
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
     visibility 0s linear 0s;
 }
 
 /* Sibling cards peel away toward the source card */
 .program-zoom.is-zooming-in [data-program-card] {
   transition:
-    opacity 0.32s var(--ease),
-    transform 0.4s var(--ease),
-    filter 0.32s var(--ease);
+    opacity 0.28s var(--ease),
+    transform 0.32s var(--ease);
 }
 .program-zoom.is-zooming-in [data-program-card]:not(.is-zoom-source) {
   opacity: 0;
-  transform: scale(0.88) translateY(10px);
-  filter: blur(2px);
+  transform: scale(0.96) translateY(6px);
 }
 .program-zoom.is-zooming-in [data-program-card]:nth-child(1):not(.is-zoom-source) { transition-delay: 0.02s; }
 .program-zoom.is-zooming-in [data-program-card]:nth-child(2):not(.is-zoom-source) { transition-delay: 0.05s; }
