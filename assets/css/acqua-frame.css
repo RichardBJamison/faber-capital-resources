@@ -1042,6 +1042,10 @@ a.brokerage-nav-btn:hover {
     grid-template-columns: 0.95fr 1.15fr;
     align-items: stretch;
   }
+  /* Image left: keep the wider column on the media side */
+  .split.reverse:has(.split-media--lg) {
+    grid-template-columns: 1.15fr 0.95fr;
+  }
   .split-media--lg {
     min-height: 560px;
     align-self: stretch;
