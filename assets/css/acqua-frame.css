@@ -1111,6 +1111,54 @@ a.brokerage-nav-btn:hover {
     min-height: 600px;
   }
 }
+
+/* How It Works hero: copy left, money-tree video right — left column fits */
+.how-it-works-hero {
+  align-items: center;
+}
+.how-it-works-hero .split-body h1 {
+  margin: 0.35rem 0 0.75rem;
+  font-size: clamp(1.65rem, 3.2vw, 2.35rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  color: var(--navy);
+}
+.how-it-works-hero .split-body .lead-inline {
+  margin: 0 0 0.85rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  max-width: 36rem;
+}
+.how-it-works-hero .split-body .verify {
+  margin: 0;
+  max-width: 34rem;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  padding-left: 0.85rem;
+  border-left: 3px solid rgba(113, 92, 65, 0.35);
+}
+.how-it-works-hero .split-media {
+  min-height: 280px;
+}
+@media (min-width: 900px) {
+  .how-it-works-hero {
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 2.25rem;
+    align-items: center;
+  }
+  .how-it-works-hero .split-media,
+  .how-it-works-hero .split-media--lg {
+    min-height: 360px;
+    max-height: 420px;
+    align-self: center;
+  }
+  .how-it-works-hero .split-media video,
+  .how-it-works-hero .split-media .split-media-video {
+    min-height: 360px;
+    max-height: 420px;
+  }
+}
 .steps-5 { counter-reset: step; }
 @media (min-width: 900px) {
   .steps-5 { grid-template-columns: repeat(5, 1fr); }
