@@ -1,0 +1,24 @@
+{
+  "rc": "PASS",
+  "production": "BLOCKED",
+  "sitemap_count": 48,
+  "verified_tx": 0,
+  "mock_tx": 8,
+  "verified_tm": 0,
+  "mock_tm": 4,
+  "rc_errors": [],
+  "rc_warnings": [],
+  "production_blockers": [
+    "No verified transactions \u2014 Results must stay excluded from production index/sitemap",
+    "Contact/Submit forms still mock-local \u2014 production destination not wired",
+    "GA4 measurement ID still placeholder G-XXXXXXXXXX",
+    "Dev noindex,nofollow still present on launch pages (indexing flip not authorized)"
+  ],
+  "notes": [
+    "proof.json: verified_tx=0 mock_tx=8 draft_tx=1 verified_tm=0 mock_tm=4",
+    "No verified testimonials (ok if modules stay empty)",
+    "Counsel/disclosures acceptance is human-gated (see LAUNCH-INPUT-TRIAGE-13.md LC-04)",
+    "Richard deploy authorization is human-gated (LC-01)",
+    "Proof mounts remain on launch pages (verified-only renderer). Count=11. Empty verified mounts OK for RC."
+  ]
+}

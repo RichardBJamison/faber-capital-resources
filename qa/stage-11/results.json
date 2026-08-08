@@ -1,0 +1,528 @@
+{
+  "passed": 60,
+  "failed": 0,
+  "total": 60,
+  "results": {
+    "scenarios": [
+      {
+        "id": "01-sf-flip",
+        "name": "SF purchase rehab sell → Fix & Flip",
+        "ok": true,
+        "guidance": {
+          "outcome": "path",
+          "primaryPath": "fix-and-flip",
+          "secondaryPath": null,
+          "multifamilyContext": false
+        }
+      },
+      {
+        "id": "02-purchase-rehab-hold",
+        "name": "SF purchase+rehab hold → Purchase & Rehab",
+        "ok": true,
+        "guidance": {
+          "outcome": "path",
+          "primaryPath": "purchase-rehab",
+          "secondaryPath": "rental",
+          "multifamilyContext": false
+        }
+      },
+      {
+        "id": "03-stabilized-dscr",
+        "name": "Stabilized rental hold → Rental/DSCR",
+        "ok": true,
+        "guidance": {
+          "outcome": "path",
+          "primaryPath": "rental",
+          "secondaryPath": null,
+          "multifamilyContext": false
+        }
+      },
+      {
+        "id": "04-bridge-to-rental",
+        "name": "Timing constraint + hold exit → Bridge → rental transition",
+        "ok": true,
+        "guidance": {
+          "outcome": "path",
+          "primaryPath": "bridge",
+          "secondaryPath": null,
+          "multifamilyContext": false
+        }
+      },
+      {
+        "id": "04b-bridge-hold-transition",
+        "name": "Timing + buy_rehab_hold → Bridge + rental transition",
+        "ok": true,
+        "guidance": {
+          "outcome": "path",
+          "primaryPath": "bridge",
+          "secondaryPath": "rental",
+          "multifamilyContext": false
+        }
+      },
+      {
+        "id": "05-ground-up-sell",
+        "name": "Ground-up sell → Ground-Up",
+        "ok": true,
+        "guidance": {
+          "outcome": "path",
+          "primaryPath": "ground-up",
+          "secondaryPath": null,
+          "multifamilyContext": false
+        }
+      },
+      {
+        "id": "06-ground-up-hold",
+        "name": "Ground-up hold → Ground-Up + future hold context",
+        "ok": true,
+        "guidance": {
+          "outcome": "path",
+          "primaryPath": "ground-up",
+          "secondaryPath": "rental",
+          "multifamilyContext": false
+        }
+      },
+      {
+        "id": "07-duplex-context",
+        "name": "Duplex + flip → 2–4 context + strategy",
+        "ok": true,
+        "guidance": {
+          "outcome": "path",
+          "primaryPath": "fix-and-flip",
+          "secondaryPath": null,
+          "multifamilyContext": true
+        }
+      },
+      {
+        "id": "08-five-plus-oos",
+        "name": "5+ units → out of scope",
+        "ok": true,
+        "guidance": {
+          "outcome": "oos",
+          "primaryPath": null,
+          "secondaryPath": null,
+          "multifamilyContext": false
+        }
+      },
+      {
+        "id": "09-owner-occupied-oos",
+        "name": "Owner-occupied → out of scope",
+        "ok": true,
+        "guidance": {
+          "outcome": "oos",
+          "primaryPath": null,
+          "secondaryPath": null,
+          "multifamilyContext": false
+        }
+      },
+      {
+        "id": "10-unknown-figures",
+        "name": "Not sure / missing optional figures → finish + readiness",
+        "ok": true,
+        "guidance": {
+          "outcome": "needs_conversation",
+          "primaryPath": null,
+          "secondaryPath": null,
+          "multifamilyContext": false
+        }
+      }
+    ],
+    "viewports": [
+      {
+        "name": "desktop",
+        "vp": {
+          "width": 1440,
+          "height": 900
+        },
+        "overflowX": false
+      },
+      {
+        "name": "tablet",
+        "vp": {
+          "width": 768,
+          "height": 1024
+        },
+        "overflowX": false
+      },
+      {
+        "name": "mobile",
+        "vp": {
+          "width": 390,
+          "height": 844
+        },
+        "overflowX": false
+      },
+      {
+        "name": "small",
+        "vp": {
+          "width": 360,
+          "height": 800
+        },
+        "overflowX": false
+      }
+    ],
+    "a11y": [],
+    "console": []
+  },
+  "ledger": [
+    {
+      "ts": "2026-08-08T16:32:39.433Z",
+      "scenario": "01-sf-flip",
+      "detail": "primary fix-and-flip",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:39.434Z",
+      "scenario": "01-sf-flip-logic-lang",
+      "detail": "no forbidden underwriting language",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:39.435Z",
+      "scenario": "02-purchase-rehab-hold",
+      "detail": "primary purchase-rehab + secondary rental",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:39.435Z",
+      "scenario": "02-purchase-rehab-hold-logic-lang",
+      "detail": "no forbidden underwriting language",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:39.436Z",
+      "scenario": "03-stabilized-dscr",
+      "detail": "primary rental; no min DSCR invented",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:39.436Z",
+      "scenario": "03-stabilized-dscr-logic-lang",
+      "detail": "no forbidden underwriting language",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:39.437Z",
+      "scenario": "04-bridge-to-rental",
+      "detail": "primary bridge",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:39.437Z",
+      "scenario": "04-bridge-to-rental-logic-lang",
+      "detail": "no forbidden underwriting language",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:39.438Z",
+      "scenario": "04b-bridge-hold-transition",
+      "detail": "bridge primary + rental secondary (transition, not guarantee)",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:39.438Z",
+      "scenario": "04b-bridge-hold-transition-logic-lang",
+      "detail": "no forbidden underwriting language",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:39.439Z",
+      "scenario": "05-ground-up-sell",
+      "detail": "primary ground-up",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:39.439Z",
+      "scenario": "05-ground-up-sell-logic-lang",
+      "detail": "no forbidden underwriting language",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:39.440Z",
+      "scenario": "06-ground-up-hold",
+      "detail": "ground-up + secondary rental (no refinance guarantee)",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:39.440Z",
+      "scenario": "06-ground-up-hold-logic-lang",
+      "detail": "no forbidden underwriting language",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:39.441Z",
+      "scenario": "07-duplex-context",
+      "detail": "fix-and-flip with multifamilyContext",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:39.441Z",
+      "scenario": "07-duplex-context-logic-lang",
+      "detail": "no forbidden underwriting language",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:39.442Z",
+      "scenario": "08-five-plus-oos",
+      "detail": "oos five_plus; no commercial routing in primary",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:39.442Z",
+      "scenario": "08-five-plus-oos-logic-lang",
+      "detail": "no forbidden underwriting language",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:39.442Z",
+      "scenario": "09-owner-occupied-oos",
+      "detail": "oos owner_occupied; no investor loan path",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:39.442Z",
+      "scenario": "09-owner-occupied-oos-logic-lang",
+      "detail": "no forbidden underwriting language",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:39.443Z",
+      "scenario": "10-unknown-figures",
+      "detail": "needs_conversation + readiness checklist",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:39.443Z",
+      "scenario": "10-unknown-figures-logic-lang",
+      "detail": "no forbidden underwriting language",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:41.329Z",
+      "scenario": "ui-01-flip",
+      "detail": "caveat present",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:41.329Z",
+      "scenario": "ui-01-flip-ui-lang",
+      "detail": "no forbidden underwriting language",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:41.329Z",
+      "scenario": "ui-01-flip",
+      "detail": "UI result content ok",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:41.632Z",
+      "scenario": "ui-01-flip-restart",
+      "detail": "restart → step 1",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:41.632Z",
+      "scenario": "ui-01-flip-console",
+      "detail": "no console errors",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:43.588Z",
+      "scenario": "ui-03-rental",
+      "detail": "caveat present",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:43.588Z",
+      "scenario": "ui-03-rental-ui-lang",
+      "detail": "no forbidden underwriting language",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:43.588Z",
+      "scenario": "ui-03-rental",
+      "detail": "UI result content ok",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:44.922Z",
+      "scenario": "ui-03-rental-restart",
+      "detail": "restart → step 1",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:44.922Z",
+      "scenario": "ui-03-rental-console",
+      "detail": "no console errors",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:47.696Z",
+      "scenario": "ui-08-five-plus",
+      "detail": "caveat present",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:47.696Z",
+      "scenario": "ui-08-five-plus-ui-lang",
+      "detail": "no forbidden underwriting language",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:47.696Z",
+      "scenario": "ui-08-five-plus",
+      "detail": "UI result content ok",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:49.030Z",
+      "scenario": "ui-08-five-plus-restart",
+      "detail": "restart → step 1",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:49.030Z",
+      "scenario": "ui-08-five-plus-console",
+      "detail": "no console errors",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:51.789Z",
+      "scenario": "ui-09-oo",
+      "detail": "caveat present",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:51.789Z",
+      "scenario": "ui-09-oo-ui-lang",
+      "detail": "no forbidden underwriting language",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:51.789Z",
+      "scenario": "ui-09-oo",
+      "detail": "UI result content ok",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:53.124Z",
+      "scenario": "ui-09-oo-restart",
+      "detail": "restart → step 1",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:53.124Z",
+      "scenario": "ui-09-oo-console",
+      "detail": "no console errors",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:55.087Z",
+      "scenario": "ui-10-unknown",
+      "detail": "caveat present",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:55.087Z",
+      "scenario": "ui-10-unknown-ui-lang",
+      "detail": "no forbidden underwriting language",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:55.087Z",
+      "scenario": "ui-10-unknown",
+      "detail": "UI result content ok",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:55.390Z",
+      "scenario": "ui-10-unknown-restart",
+      "detail": "restart → step 1",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:55.390Z",
+      "scenario": "ui-10-unknown-console",
+      "detail": "no console errors",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:57.222Z",
+      "scenario": "back-preserve",
+      "detail": "step 2 answers preserved after Back",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:57.946Z",
+      "scenario": "keyboard-focus",
+      "detail": "radio focusable",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:57.948Z",
+      "scenario": "keyboard-select",
+      "detail": "space selects radio",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:32:57.948Z",
+      "scenario": "keyboard-focus-style",
+      "detail": "focus styles {\"outline\":\"auto\",\"outlineWidth\":\"1px\",\"boxShadow\":\"none\"}",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:33:00.114Z",
+      "scenario": "viewport-desktop",
+      "detail": "1440x900 no overflow",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:33:02.310Z",
+      "scenario": "viewport-tablet",
+      "detail": "768x1024 no overflow",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:33:03.587Z",
+      "scenario": "viewport-mobile",
+      "detail": "390x844 no overflow",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:33:05.712Z",
+      "scenario": "viewport-small",
+      "detail": "360x800 no overflow",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:33:07.616Z",
+      "scenario": "reduced-motion",
+      "detail": "wizard completes with reduced motion",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:33:07.616Z",
+      "scenario": "reduced-motion-lang",
+      "detail": "no forbidden underwriting language",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:33:08.374Z",
+      "scenario": "validation-text",
+      "detail": "4 field errors shown in text",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:33:09.090Z",
+      "scenario": "seo-noindex",
+      "detail": "noindex,nofollow",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-08T16:33:09.091Z",
+      "scenario": "seo-canonical",
+      "detail": "https://realestatecapitalresources.com/tools/deal-path/",
+      "result": "PASS"
+    }
+  ]
+}

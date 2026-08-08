@@ -1,0 +1,276 @@
+{
+  "version": "2026-08-08-stage-12",
+  "notes": "Single source of truth for RECR proof UI. status mock|verified|draft. draft never renders. mock never enters JSON-LD/meta/llms. Stage 12: bill.verified expanded from interview-backed non-numeric facts. No verified transactions/testimonials yet — mocks retained for Results design only; launch surfaces render verified-only unless data-proof-include-mock.",
+  "bill": {
+    "displayName": "William M. Faber",
+    "verified": {
+      "role": "Business authority for Faber Capital Resources / Real Estate Capital Resources (RECR) program direction and investor capital-path conversations.",
+      "markets": [
+        "Cleveland, OH",
+        "Fort Lauderdale / South Florida"
+      ],
+      "phone": "954-676-4205",
+      "email": "fabercapitalresources@gmail.com",
+      "organization": "Real Estate Capital Resources",
+      "organizationAlsoKnownAs": [
+        "RECR",
+        "Faber Capital Resources"
+      ],
+      "approach": "Transaction-first capital-path guidance: evaluate the property, plan, and exit, then match private-lender financing options. RECR is a broker/connector — not automatically the direct funder.",
+      "focus": "Business-purpose financing conversations for non-owner-occupied residential investment property — principally 1–4 units.",
+      "productFocus": [
+        "Fix & Flip",
+        "Rental / DSCR",
+        "Bridge Financing",
+        "Ground-Up Construction",
+        "Small Multifamily (2–4 units)",
+        "Purchase & Rehab"
+      ],
+      "method": "Slow the conversation enough to get real numbers: property, budget or income, timing, and exit. Package a complete file so capital partners can respond to facts — not hope. Path matching is deal-led, not brochure-led.",
+      "exclusions": "Not the current launch sweet spot: commercial/office CRE, mobile homes, and owner-occupied primary-residence loans. Joint-venture equity is not a standard launch product and is not marketed as RECR’s differentiator.",
+      "geographyNote": "Site authority markets: Cleveland / Northeast Ohio and Fort Lauderdale / South Florida. Lender availability can vary by state and by capital partner.",
+      "narrative": [
+        "William M. Faber leads the capital-path conversation at Real Estate Capital Resources (also known as Faber Capital Resources). The work is practical: investors bring a property and a plan; RECR helps identify which private-capital path is worth discussing and what belongs in a complete file.",
+        "The launch universe is residential investment — fix-and-flip, purchase-and-rehab, bridge, rental/DSCR hold, ground-up construction, and small multifamily within 2–4 units — always as a broker/connector matching paths, not as a promise that RECR itself is the funder.",
+        "Public biography on this site stays limited to facts that can be supported. Tenure dates, licenses, volume claims, and lender-specific numeric thresholds publish only when Bill/Richard approve them from primary sources — never from design placeholders."
+      ]
+    },
+    "mock": {
+      "timeline": [
+        {
+          "period": "Illustrative early career",
+          "detail": "Banking / credit-side exposure to residential investment underwriting concepts (placeholder for Bill's verified history)."
+        },
+        {
+          "period": "Illustrative mid career",
+          "detail": "Private-capital and investor-lending relationships supporting fix-and-flip and rental strategies (placeholder)."
+        },
+        {
+          "period": "Illustrative current chapter",
+          "detail": "RECR capital-path guidance across Cleveland and South Florida investor markets (placeholder until interview-sourced dates)."
+        }
+      ],
+      "specialties": [
+        "Business-purpose residential investment financing (1–4 units)",
+        "Fix-and-flip and purchase-rehab path matching",
+        "DSCR / rental hold conversations",
+        "Bridge-to-stabilization sequencing",
+        "Ground-up construction packaging (non-numeric)"
+      ],
+      "credentialsPlaceholder": [
+        "Licenses / certifications (awaiting Bill-approved list)",
+        "Professional affiliations (awaiting Bill-approved list)",
+        "Education (awaiting Bill-approved list)"
+      ],
+      "headshot": null,
+      "stage12Note": "Mock timeline/credentials retained only for optional design review (data-proof-include-mock). Default Team/About render uses verified narrative only."
+    }
+  },
+  "transactions": [
+    {
+      "id": "tx-mock-ff-01",
+      "status": "mock",
+      "program": "fix-and-flip",
+      "propertyType": "Single-family investment",
+      "marketLabel": "Illustrative Northeast Ohio suburb",
+      "marketTag": "cleveland",
+      "purpose": "Purchase and renovate for resale",
+      "situation": "Investor under contract on a dated SFR with deferred mechanicals and a 90-day rehab plan.",
+      "capitalNeed": "Acquisition plus staged renovation capital with a defined sale exit.",
+      "structureArranged": "Short-term private-lender fix-and-flip path matched after cost-to-ARV and scope review.",
+      "challenge": "Initial ARV was retail list pricing; path only worked after comps were rebuilt to finished condition.",
+      "result": "Capital path identified; file packaged for private-lender review with draw schedule aligned to work stages.",
+      "yearLabel": "Illustrative year",
+      "testimonialId": "tm-mock-01"
+    },
+    {
+      "id": "tx-mock-dscr-01",
+      "status": "mock",
+      "program": "rental",
+      "propertyType": "1–4 unit investment rental",
+      "marketLabel": "Illustrative South Florida submarket",
+      "marketTag": "south-florida",
+      "purpose": "Long-term hold refinance",
+      "situation": "Stabilized rental after light rehab; investor wanted permanent cash-flow financing rather than short-term debt.",
+      "capitalNeed": "DSCR-style rental financing evaluated on property income versus full debt service.",
+      "structureArranged": "Rental / DSCR path matched after PITIA-inclusive coverage math and reserve discussion.",
+      "challenge": "First coverage draft omitted insurance reality; file only held once full payment stack was modeled.",
+      "result": "Path fit confirmed for hold strategy; investor submitted complete rent and expense package.",
+      "yearLabel": "Illustrative year",
+      "testimonialId": "tm-mock-02"
+    },
+    {
+      "id": "tx-mock-br-01",
+      "status": "mock",
+      "program": "bridge",
+      "propertyType": "Investment SFR pending refinance",
+      "marketLabel": "Illustrative Fort Lauderdale area",
+      "marketTag": "south-florida",
+      "purpose": "Short-term acquisition bridge to permanent takeout",
+      "situation": "Investor needed to close quickly while a DSCR refinance package was still assembling.",
+      "capitalNeed": "Temporary capital with a named refinance exit date.",
+      "structureArranged": "Bridge path sequenced to a planned rental/DSCR takeout after stabilization.",
+      "challenge": "Soft exit risk — permanent loan was assumed, not underwritten; exit documentation had to be made concrete first.",
+      "result": "Bridge conversation proceeded only after takeout checklist and timeline were written down.",
+      "yearLabel": "Illustrative year",
+      "testimonialId": null
+    },
+    {
+      "id": "tx-mock-gu-01",
+      "status": "mock",
+      "program": "ground-up",
+      "propertyType": "Investor new-construction residential",
+      "marketLabel": "Illustrative Northeast Ohio site",
+      "marketTag": "cleveland",
+      "purpose": "Ground-up build for sale or permanent takeout",
+      "situation": "Lot under contract with preliminary plans and a GC quote that needed line-item discipline.",
+      "capitalNeed": "Construction capital structured around plans, budget, draws, and completion exit.",
+      "structureArranged": "Ground-up path packaging: budget, builder credibility, draw milestones, sale/refinance exit.",
+      "challenge": "Contingency and soft costs were understated; build schedule did not leave room for takeout.",
+      "result": "Revised construction package prepared before private-lender construction desk review.",
+      "yearLabel": "Illustrative year",
+      "testimonialId": null
+    },
+    {
+      "id": "tx-mock-mf-01",
+      "status": "mock",
+      "program": "multifamily",
+      "propertyType": "Fourplex residential investment",
+      "marketLabel": "Illustrative Cleveland fourplex",
+      "marketTag": "cleveland",
+      "purpose": "Acquisition of 2–4 unit for cash-flow hold",
+      "situation": "Buyer targeting a fourplex with mixed unit rents and deferred exterior work.",
+      "capitalNeed": "Small multifamily investment financing within the 1–4 unit universe.",
+      "structureArranged": "2–4 unit path with DSCR-style income review and unit-level rent matrix.",
+      "challenge": "Seller T-12 expenses looked incomplete; insurance and vacancy needed re-underwriting before path fit.",
+      "result": "Unit economics rebuilt; file ready for rental-style private-lender conversation.",
+      "yearLabel": "Illustrative year",
+      "testimonialId": "tm-mock-03"
+    },
+    {
+      "id": "tx-mock-pr-01",
+      "status": "mock",
+      "program": "purchase-rehab",
+      "propertyType": "Value-add investment SFR",
+      "marketLabel": "Illustrative South Florida renovation",
+      "marketTag": "south-florida",
+      "purpose": "Purchase plus major renovation in one capital plan",
+      "situation": "Heavy rehab scope (systems + layout) with hold-or-sell exit still undecided at contract.",
+      "capitalNeed": "Combined acquisition and rehab budget with draw mechanics.",
+      "structureArranged": "Purchase-and-rehab path: basis, line-item budget, contribution, and exit evaluated together.",
+      "challenge": "Purchase only worked if rehab was free; budget and ARV support had to be rebuilt before leverage talk.",
+      "result": "Honest capital plan assembled; private-lender options scoped without fixed marketing percentages.",
+      "yearLabel": "Illustrative year",
+      "testimonialId": null
+    },
+    {
+      "id": "tx-mock-ff-02",
+      "status": "mock",
+      "program": "fix-and-flip",
+      "propertyType": "Investment condo (project-eligible)",
+      "marketLabel": "Illustrative coastal condo flip",
+      "marketTag": "south-florida",
+      "purpose": "Cosmetic-to-moderate rehab for resale",
+      "situation": "Investor with a defined flip timeline and association document package in progress.",
+      "capitalNeed": "Short-term private capital for purchase and light rehab.",
+      "structureArranged": "Fix-and-flip path contingent on association eligibility and defensible finished comps.",
+      "challenge": "Association reserves and project rules delayed underwriting more than the paint scope.",
+      "result": "Eligibility checklist completed before capital-path matching continued.",
+      "yearLabel": "Illustrative year",
+      "testimonialId": null
+    },
+    {
+      "id": "tx-mock-dscr-02",
+      "status": "mock",
+      "program": "rental",
+      "propertyType": "Duplex investment",
+      "marketLabel": "Illustrative dual-market hold",
+      "marketTag": null,
+      "purpose": "Cash-out refinance of performing duplex",
+      "situation": "Seasoned investor pulling liquidity while keeping the asset as a rental.",
+      "capitalNeed": "DSCR cash-out subject to coverage after the larger payment.",
+      "structureArranged": "Rental/DSCR refinance conversation with cash-flow and reserve scrutiny.",
+      "challenge": "Cash-out payment pushed coverage thin until rent support and expenses were scrubbed.",
+      "result": "Revised ask matched to property income reality before lender introduction.",
+      "yearLabel": "Illustrative year",
+      "testimonialId": "tm-mock-04"
+    },
+    {
+      "id": "tx-draft-private-01",
+      "status": "draft",
+      "program": "bridge",
+      "propertyType": "Private draft only",
+      "marketLabel": "Not for public HTML",
+      "marketTag": null,
+      "purpose": "Should never render",
+      "situation": "draft",
+      "capitalNeed": "draft",
+      "structureArranged": "draft",
+      "challenge": "draft",
+      "result": "draft",
+      "yearLabel": "draft",
+      "testimonialId": null
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "tm-mock-01",
+      "status": "mock",
+      "quote": "The path conversation started with my numbers and exit, not a product brochure. That is what I needed before we talked private capital.",
+      "displayName": "Mock Borrower A",
+      "role": "Illustrative real-estate investor",
+      "relationship": "borrower/client",
+      "programTags": [
+        "fix-and-flip"
+      ],
+      "marketTags": [
+        "cleveland"
+      ],
+      "permission": "mock-only"
+    },
+    {
+      "id": "tm-mock-02",
+      "status": "mock",
+      "quote": "DSCR only made sense once taxes and insurance were in the payment. The review caught that before I wasted a week.",
+      "displayName": "Mock Borrower B",
+      "role": "Illustrative rental investor",
+      "relationship": "borrower/client",
+      "programTags": [
+        "rental"
+      ],
+      "marketTags": [
+        "south-florida"
+      ],
+      "permission": "mock-only"
+    },
+    {
+      "id": "tm-mock-03",
+      "status": "mock",
+      "quote": "Unit-level rents and expenses were treated seriously. The fourplex conversation stayed inside 2–4 unit reality.",
+      "displayName": "Mock Borrower C",
+      "role": "Illustrative small-multifamily investor",
+      "relationship": "borrower/client",
+      "programTags": [
+        "multifamily"
+      ],
+      "marketTags": [
+        "cleveland"
+      ],
+      "permission": "mock-only"
+    },
+    {
+      "id": "tm-mock-04",
+      "status": "mock",
+      "quote": "Clear on what RECR is — capital-path guidance and matching — not a fantasy rate card.",
+      "displayName": "Mock Professional Partner D",
+      "role": "Illustrative industry partner",
+      "relationship": "professional partner",
+      "programTags": [
+        "rental",
+        "bridge"
+      ],
+      "marketTags": [],
+      "permission": "mock-only"
+    }
+  ]
+}

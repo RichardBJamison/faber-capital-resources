@@ -83,18 +83,17 @@
       <nav class="nav-desktop" aria-label="Primary">
         <a href="${p("/")}"${is("home")}>Home</a>
         <div class="nav-item">
-          <button type="button" aria-haspopup="true">Funding Programs</button>
+          <button type="button" aria-haspopup="true">Financing Programs</button>
           <div class="mega" role="menu">
-            <a href="${p("/#funding-programs")}"><strong>All Funding Programs</strong><span>Compare every path</span></a>
+            <a href="${p("/#funding-programs")}"><strong>All Financing Programs</strong><span>Compare every path</span></a>
             <a href="${p("/fix-and-flip/")}"><strong>Fix &amp; Flip</strong><span>Purchase and renovation capital</span></a>
             <a href="${p("/rental/")}"><strong>Rental / DSCR</strong><span>Cash flow and reserves</span></a>
             <a href="${p("/bridge/")}"><strong>Bridge Financing</strong><span>Short-term transitional capital</span></a>
             <a href="${p("/ground-up/")}"><strong>Ground-Up Construction</strong><span>Plans, budgets, draws</span></a>
-            <a href="${p("/commercial/")}"><strong>Commercial Real Estate</strong><span>Investor-owned commercial</span></a>
-            <a href="${p("/multifamily/")}"><strong>Multifamily</strong><span>2+ unit investment</span></a>
-            <a href="${p("/purchase-rehab/")}"><strong>100% Purchase &amp; Rehab</strong><span>Qualifying JV transactions</span></a>
-            <a href="${p("/joint-venture/")}"><strong>Joint-Venture Funding</strong><span>When pure debt is not the fit</span></a>
-          </div>
+                        <a href="${p("/loan-products/")}"><strong>Program Overview</strong><span>Compare launch paths</span></a>
+            <a href="${p("/multifamily/")}"><strong>Small Multifamily (2-4)</strong><span>Duplex, triplex, fourplex</span></a>
+            <a href="${p("/purchase-rehab/")}"><strong>Purchase &amp; Rehab</strong><span>Acquisition plus major renovation</span></a>
+                      </div>
         </div>
         <a href="${p("/how-it-works/")}"${is("how")}>How It Works</a>
         <div class="nav-item">
@@ -113,11 +112,10 @@
           <button type="button" aria-haspopup="true">About</button>
           <div class="dropdown" role="menu">
             <a href="${p("/about/")}"${is("about")}>About RECR</a>
+            <a href="${p("/team/")}">Team</a>
             <a href="${p("/contact/")}"${is("contact")}>Contact</a>
           </div>
         </div>
-        <a class="nexus-nav-btn" href="${p("/nexus/")}" target="_blank" rel="noopener">Nexus</a>
-        <a class="brokerage-nav-btn" href="${p("/brokerage/")}"${is("brokerage")}>Brokerage</a>
       </nav>
       <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-menu-toggle>
         <span></span><span></span><span></span>
@@ -132,13 +130,12 @@
     ${phoneIcon()}
   </a>
   <a href="${p("/")}">Home</a>
-  <a href="${p("/loan-products/")}">Funding Programs</a>
+  <a href="${p("/loan-products/")}">Financing Programs</a>
   <a href="${p("/fix-and-flip/")}">Fix &amp; Flip</a>
   <a href="${p("/rental/")}">Rental</a>
-  <a href="${p("/purchase-rehab/")}">100% Purchase &amp; Rehab</a>
+  <a href="${p("/purchase-rehab/")}">Purchase &amp; Rehab</a>
   <a href="${p("/bridge/")}">Bridge</a>
-  <a href="${p("/commercial/")}">Commercial</a>
-  <a href="${p("/multifamily/")}">Multifamily</a>
+    <a href="${p("/multifamily/")}">Multifamily</a>
   <a href="${p("/tools/")}">Investor Tools</a>
   <a href="${p("/resources/")}">Learning Center</a>
   <a href="${p("/how-it-works/")}">How It Works</a>
@@ -147,9 +144,8 @@
   <a href="${p("/partners/")}">Partners</a>
   <a href="${p("/results/")}">Recently Closed</a>
   <a href="${p("/about/")}">About</a>
+  <a href="${p("/team/")}">Team</a>
   <a href="${p("/contact/")}" style="padding-left:1.35rem">Contact</a>
-  <a class="nexus-nav-btn" href="${p("/nexus/")}" target="_blank" rel="noopener">Nexus</a>
-  <a class="brokerage-nav-btn" href="${p("/brokerage/")}"${is("brokerage")}>Brokerage</a>
 </div>`;
   }
 
@@ -161,7 +157,7 @@
       <div class="footer-brand">
         <div class="logo-name">Real Estate Capital Resources</div>
         <span class="logo-sub" style="display:block;margin-top:.4rem;color:#c4a35a">RECR</span>
-        <p>Real estate capital for investors and their next opportunity. Transaction-first review across purchase, rehab, rental, bridge, construction, and selected joint-venture paths.</p>
+        <p>Capital-path guidance for real-estate investors. RECR helps match non-owner-occupied investment transactions to private-lender and program options — not as the automatic direct funder.</p>
         <p style="margin-top:1rem">
           <a href="${BRAND.phoneHref}" style="color:#fff;font-weight:700">${BRAND.phone}</a><br>
           <a href="${BRAND.emailHref}">${BRAND.email}</a><br>
@@ -170,16 +166,14 @@
         </p>
       </div>
       <div class="footer-col">
-        <h4>Products</h4>
+        <h4>Programs</h4>
         <a href="${p("/loan-products/")}">All Programs</a>
         <a href="${p("/fix-and-flip/")}">Fix &amp; Flip</a>
         <a href="${p("/rental/")}">Rental / DSCR</a>
-        <a href="${p("/purchase-rehab/")}">100% Purchase &amp; Rehab</a>
+        <a href="${p("/purchase-rehab/")}">Purchase &amp; Rehab</a>
         <a href="${p("/bridge/")}">Bridge</a>
         <a href="${p("/ground-up/")}">Ground Up</a>
-        <a href="${p("/commercial/")}">Commercial</a>
-        <a href="${p("/multifamily/")}">Multifamily</a>
-        <a href="${p("/joint-venture/")}">Joint Venture</a>
+        <a href="${p("/multifamily/")}">Small Multifamily (2–4)</a>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
@@ -190,6 +184,11 @@
         <a href="${p("/team/")}">Meet the Team</a>
         <a href="${p("/partners/")}">Partners</a>
         <a href="${p("/faq/")}">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Markets</h4>
+        <a href="${p("/cleveland-real-estate-investor-financing/")}">Cleveland / Northeast Ohio</a>
+        <a href="${p("/south-florida-real-estate-investor-financing/")}">Fort Lauderdale / South Florida</a>
       </div>
       <div class="footer-col">
         <h4>Help &amp; Legal</h4>
@@ -373,7 +372,7 @@
       "@id": ORIGIN + "/#organization",
       name: BRAND.name, alternateName: BRAND.short, url: ORIGIN,
       telephone: BRAND.phone, email: BRAND.email,
-      description: "Capital-path guidance for real-estate investors. Property-first review across purchase, rehab, rental, bridge, construction, commercial, multifamily, and joint-venture structures.",
+      description: "Capital-path guidance for real-estate investors. Property-first review across fix-and-flip, DSCR rental, purchase-and-rehab, bridge, ground-up, and 2–4 unit multifamily investment financing.",
       areaServed: [
         { "@type": "City", name: "Cleveland", address: { "@type": "PostalAddress", addressRegion: "OH" } },
         { "@type": "City", name: "Fort Lauderdale", address: { "@type": "PostalAddress", addressRegion: "FL" } }
@@ -626,8 +625,8 @@
 
   /**
    * Home #funding-programs: window-in-window zoom.
-   * 8 cards → one large box locked to the same stage footprint.
-   * Bottom Learn More (or Escape) zooms back out.
+   * Launch cards → one large briefing locked to the same stage footprint.
+   * Explore Another (or Escape) zooms back out; Continue Exploring closes and scrolls to #recr-homepage-story.
    */
   function bindProgramZoom() {
     const host = document.querySelector("[data-program-zoom]");
@@ -738,7 +737,7 @@
       animTimer = setTimeout(() => {
         host.classList.remove("is-zooming-in");
         host.querySelectorAll("[data-program-card]").forEach((c) => c.classList.remove("is-zoom-source"));
-        const focusTarget = page.querySelector("[data-program-zoom-out]") || page.querySelector("h2") || page;
+        const focusTarget = page.querySelector("h2") || page.querySelector("[data-program-zoom-out]") || page;
         try {
           if (focusTarget && typeof focusTarget.focus === "function") {
             if (!focusTarget.hasAttribute("tabindex") && focusTarget.tagName !== "BUTTON" && focusTarget.tagName !== "A") {
@@ -804,7 +803,34 @@
       } catch (e) { /* no-op */ }
     }
 
+    function continueExploring() {
+      const target = document.getElementById("recr-homepage-story");
+      zoomOut();
+      const go = () => {
+        if (!target) return;
+        const headerH =
+          parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-h")) || 110;
+        const top = target.getBoundingClientRect().top + window.scrollY - headerH - 12;
+        window.scrollTo({ top: Math.max(0, top), behavior: reduce ? "auto" : "smooth" });
+        try {
+          if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+          target.focus({ preventScroll: true });
+        } catch (err) { /* no-op */ }
+      };
+      // Wait for zoom-out to release layout before scrolling past the stage
+      window.setTimeout(go, reduce ? 60 : 500);
+      try {
+        if (window.recrTrack) window.recrTrack("program_zoom_continue", {});
+      } catch (err) { /* no-op */ }
+    }
+
     host.addEventListener("click", (e) => {
+      const cont = e.target.closest("[data-program-zoom-continue]");
+      if (cont && host.contains(cont)) {
+        e.preventDefault();
+        continueExploring();
+        return;
+      }
       const out = e.target.closest("[data-program-zoom-out]");
       if (out && host.contains(out)) {
         e.preventDefault();

@@ -1,0 +1,105 @@
+RECR Stage 08 browser QA
+BASE http://127.0.0.1:8840
+[/] no escapes fix-and-flip → PASS
+[/] no escapes rental → PASS
+[/] no escapes bridge → PASS
+[/] no escapes ground-up → PASS
+[/] no escapes multifamily → PASS
+[/] no escapes purchase-rehab → PASS
+[/] home mock badge → PASS
+[/] home draft absent → PASS
+[/] desktop overflow-x → PASS
+[/] no escapes fix-and-flip → PASS
+[/] no escapes rental → PASS
+[/] no escapes bridge → PASS
+[/] no escapes ground-up → PASS
+[/] no escapes multifamily → PASS
+[/] no escapes purchase-rehab → PASS
+[/] home mock badge → PASS
+[/] home draft absent → PASS
+[/] desktop overflow-x → PASS
+[/] mobile nav open → PASS
+[/] mobile footer markets → PASS
+[/results/] 8 mock transactions → PASS
+[/results/] 4 mock testimonials → PASS
+[/results/] draft not rendered → PASS
+[/results/] mock badges visible → PASS
+[/results/] mobile overflow → PASS
+[/team/] bill mock structure → PASS
+[/team/] 4 quotes → PASS
+[/team/] schema clean → PASS
+[/about/] bill mount rendered → PASS
+[/cleveland…/] market proof → PASS
+[/cleveland…/] mobile overflow → PASS
+[/fix-and-flip/] program proof cases → PASS
+[/rental/] program proof cases → PASS
+[/bridge/] program proof cases → PASS
+[/ground-up/] program proof cases → PASS
+[/multifamily/] program proof cases → PASS
+[/purchase-rehab/] program proof cases → PASS
+[/loan-products/] load → PASS
+[/tools/] load → PASS
+[/tools/dscr/] load → PASS
+[/resources/] load → PASS
+[/resources/understanding-arv/] load → PASS
+[/submit-a-deal/] load → PASS
+[/contact/] load → PASS
+[/faq/] load → PASS
+[/south-florida-real-estate-investor-financing/] load → PASS
+[sitemap] count 45 → PASS
+[sitemap] deferred excluded → PASS
+
+=== SUMMARY ===
+issuesFound 0
+proof { mockTx: 8, mockTm: 4, draft: 0, badges: 13 }
+matrix {
+  "fix-and-flip": {
+    "open": "PASS",
+    "focus": "PASS",
+    "exploreAnother": "PASS",
+    "continue": "PASS",
+    "escape": "PASS",
+    "mobile": "PASS"
+  },
+  "rental": {
+    "open": "PASS",
+    "focus": "PASS",
+    "exploreAnother": "PASS",
+    "continue": "PASS",
+    "escape": "PASS",
+    "mobile": "PASS"
+  },
+  "bridge": {
+    "open": "PASS",
+    "focus": "PASS",
+    "exploreAnother": "PASS",
+    "continue": "PASS",
+    "escape": "PASS",
+    "mobile": "PASS"
+  },
+  "ground-up": {
+    "open": "PASS",
+    "focus": "PASS",
+    "exploreAnother": "PASS",
+    "continue": "PASS",
+    "escape": "PASS",
+    "mobile": "PASS"
+  },
+  "multifamily": {
+    "open": "PASS",
+    "focus": "PASS",
+    "exploreAnother": "PASS",
+    "continue": "PASS",
+    "escape": "PASS",
+    "mobile": "PASS"
+  },
+  "purchase-rehab": {
+    "open": "PASS",
+    "focus": "PASS",
+    "exploreAnother": "PASS",
+    "continue": "PASS",
+    "escape": "PASS",
+    "mobile": "PASS"
+  }
+}
+screenshots 9

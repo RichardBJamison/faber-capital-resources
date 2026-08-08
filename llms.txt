@@ -1,36 +1,55 @@
 # Real Estate Capital Resources (RECR)
-> Capital-path guidance for real-estate investors. Property-first review across purchase, rehab, rental, bridge, construction, commercial, multifamily, portfolio, and joint-venture structures.
+# Machine-readable orientation file (experimental convention — not a ranking guarantee).
+# Only launch-eligible facts and URLs. No mock transactions, rates, or credentials.
+
+> RECR provides capital-path guidance for real-estate investors. RECR is a broker/connector that helps evaluate business-purpose, non-owner-occupied residential investment transactions (principally 1–4 units) and match private-lender financing options. RECR is not automatically the direct lender, funding source, or final underwriter.
 
 Site: https://realestatecapitalresources.com/
-Markets: Cleveland, OH and Fort Lauderdale / South Florida
-Phone: 954-676-4205
+Phone: +1-954-676-4205
 Email: fabercapitalresources@gmail.com
-Address: 1273 W 6th St, Cleveland, OH 44113
+Markets of focus: Cleveland / Northeast Ohio; Fort Lauderdale / South Florida
 
-## Confirmed differentiator (mockup; owner-confirmed, not yet launch-approved)
-- Up to 100% of purchase, rehab, and closing costs on qualifying joint-venture transactions
-- When total project cost is within 70% of after-repair value (ARV)
-- Always subject to ARV support, documentation, economics, availability, underwriting, and final approval
-- Not all transactions qualify
+## Organization
+- Name: Real Estate Capital Resources (RECR); also known as Faber Capital Resources
+- Canonical entity: https://realestatecapitalresources.com/#organization
+- Leadership (verified public facts only): William M. Faber — https://realestatecapitalresources.com/#william-m-faber
 
-## Primary pages
-- [Home](https://realestatecapitalresources.com/)
-- [Funding Programs](https://realestatecapitalresources.com/loan-products/)
-- [100% Purchase & Rehab](https://realestatecapitalresources.com/purchase-rehab/)
-- [Joint Venture](https://realestatecapitalresources.com/joint-venture/)
-- [Fix & Flip](https://realestatecapitalresources.com/fix-and-flip/)
-- [Rental / DSCR](https://realestatecapitalresources.com/rental/)
-- [Bridge](https://realestatecapitalresources.com/bridge/)
-- [Ground-Up](https://realestatecapitalresources.com/ground-up/)
-- [Commercial](https://realestatecapitalresources.com/commercial/)
-- [Multifamily](https://realestatecapitalresources.com/multifamily/)
-- [Portfolio](https://realestatecapitalresources.com/portfolio/)
-- [How It Works](https://realestatecapitalresources.com/how-it-works/)
-- [Submit a Deal](https://realestatecapitalresources.com/submit-a-deal/)
-- [Tools](https://realestatecapitalresources.com/tools/)
-- [Resources](https://realestatecapitalresources.com/resources/)
-- [Partners](https://realestatecapitalresources.com/partners/)
+## Launch financing paths (exactly six)
+- /fix-and-flip/ — Fix & Flip
+- /rental/ — Rental / DSCR
+- /bridge/ — Bridge Financing
+- /ground-up/ — Ground-Up Construction
+- /multifamily/ — Small Multifamily (2–4 units only)
+- /purchase-rehab/ — Purchase & Rehab
+- Overview: /loan-products/
 
-## Optional
-- Sitemap: https://realestatecapitalresources.com/sitemap.xml
-- Robots: https://realestatecapitalresources.com/robots.txt
+## Decision guides (Stage 09)
+- /resources/which-financing-path/
+- /resources/bridge-to-dscr/
+- /resources/fix-and-flip-vs-purchase-rehab/
+
+## Markets
+- /cleveland-real-estate-investor-financing/
+- /south-florida-real-estate-investor-financing/
+
+## Tools & learning
+- /tools/ · /resources/
+- Key tools: /tools/dscr/, /tools/mao/, /tools/deal-analyzer/, /tools/rehab-budget/, /tools/checklist/
+- Key resources: /resources/understanding-arv/, /resources/dscr-explained/, /resources/rehab-draws/, /resources/bridge-exit-risk/, /resources/construction-budget/, /resources/preparing-a-deal-submission/
+
+## Conversion
+- /submit-a-deal/
+- /contact/
+
+## Not launch offerings
+- Commercial office/CRE product page
+- Joint venture / equity as a standard product
+- Portfolio / blanket multi-asset product
+
+## Proof
+- Verified case studies only when published; mock demonstration content is development-only and not described here.
+- /results/ is conditional and not treated as launch-indexable while mock-only.
+
+## Claims discipline
+- No invented rates, LTV/LTC/ARV floors, DSCR minimums, fees, volume, or credentials in public copy.
+- Leverage and contribution confirmed per transaction against the private-lender program under review.

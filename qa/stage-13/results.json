@@ -1,0 +1,306 @@
+{
+  "pass": 75,
+  "fail": 0,
+  "ledger": [
+    {
+      "result": "PASS",
+      "detail": "home noindex"
+    },
+    {
+      "result": "PASS",
+      "detail": "home zero mock markers"
+    },
+    {
+      "result": "PASS",
+      "detail": "home desktop no overflow"
+    },
+    {
+      "result": "PASS",
+      "detail": "home funding programs region present"
+    },
+    {
+      "result": "PASS",
+      "detail": "home link to /fix-and-flip/"
+    },
+    {
+      "result": "PASS",
+      "detail": "home link to /rental/"
+    },
+    {
+      "result": "PASS",
+      "detail": "home link to /bridge/"
+    },
+    {
+      "result": "PASS",
+      "detail": "home link to /ground-up/"
+    },
+    {
+      "result": "PASS",
+      "detail": "home link to /multifamily/"
+    },
+    {
+      "result": "PASS",
+      "detail": "home link to /purchase-rehab/"
+    },
+    {
+      "result": "PASS",
+      "detail": "home no pageerror"
+    },
+    {
+      "result": "PASS",
+      "detail": "mobile nav toggle present"
+    },
+    {
+      "result": "PASS",
+      "detail": "home mobile no overflow"
+    },
+    {
+      "result": "PASS",
+      "detail": "/loan-products/ status 200"
+    },
+    {
+      "result": "PASS",
+      "detail": "/loan-products/ noindex"
+    },
+    {
+      "result": "PASS",
+      "detail": "/loan-products/ zero mock"
+    },
+    {
+      "result": "PASS",
+      "detail": "/about/ status 200"
+    },
+    {
+      "result": "PASS",
+      "detail": "/about/ noindex"
+    },
+    {
+      "result": "PASS",
+      "detail": "/about/ zero mock"
+    },
+    {
+      "result": "PASS",
+      "detail": "/team/ status 200"
+    },
+    {
+      "result": "PASS",
+      "detail": "/team/ noindex"
+    },
+    {
+      "result": "PASS",
+      "detail": "/team/ zero mock"
+    },
+    {
+      "result": "PASS",
+      "detail": "/faq/ status 200"
+    },
+    {
+      "result": "PASS",
+      "detail": "/faq/ noindex"
+    },
+    {
+      "result": "PASS",
+      "detail": "/faq/ zero mock"
+    },
+    {
+      "result": "PASS",
+      "detail": "/contact/ status 200"
+    },
+    {
+      "result": "PASS",
+      "detail": "/contact/ noindex"
+    },
+    {
+      "result": "PASS",
+      "detail": "/contact/ zero mock"
+    },
+    {
+      "result": "PASS",
+      "detail": "/submit-a-deal/ status 200"
+    },
+    {
+      "result": "PASS",
+      "detail": "/submit-a-deal/ noindex"
+    },
+    {
+      "result": "PASS",
+      "detail": "/submit-a-deal/ zero mock"
+    },
+    {
+      "result": "PASS",
+      "detail": "/tools/deal-path/ status 200"
+    },
+    {
+      "result": "PASS",
+      "detail": "/tools/deal-path/ noindex"
+    },
+    {
+      "result": "PASS",
+      "detail": "/tools/deal-path/ zero mock"
+    },
+    {
+      "result": "PASS",
+      "detail": "/tools/dscr/ status 200"
+    },
+    {
+      "result": "PASS",
+      "detail": "/tools/dscr/ noindex"
+    },
+    {
+      "result": "PASS",
+      "detail": "/tools/dscr/ zero mock"
+    },
+    {
+      "result": "PASS",
+      "detail": "/resources/which-financing-path/ status 200"
+    },
+    {
+      "result": "PASS",
+      "detail": "/resources/which-financing-path/ noindex"
+    },
+    {
+      "result": "PASS",
+      "detail": "/resources/which-financing-path/ zero mock"
+    },
+    {
+      "result": "PASS",
+      "detail": "/cleveland-real-estate-investor-financing/ status 200"
+    },
+    {
+      "result": "PASS",
+      "detail": "/cleveland-real-estate-investor-financing/ noindex"
+    },
+    {
+      "result": "PASS",
+      "detail": "/cleveland-real-estate-investor-financing/ zero mock"
+    },
+    {
+      "result": "PASS",
+      "detail": "/south-florida-real-estate-investor-financing/ status 200"
+    },
+    {
+      "result": "PASS",
+      "detail": "/south-florida-real-estate-investor-financing/ noindex"
+    },
+    {
+      "result": "PASS",
+      "detail": "/south-florida-real-estate-investor-financing/ zero mock"
+    },
+    {
+      "result": "PASS",
+      "detail": "/fix-and-flip/ zero mock"
+    },
+    {
+      "result": "PASS",
+      "detail": "/fix-and-flip/ claims clean"
+    },
+    {
+      "result": "PASS",
+      "detail": "/rental/ zero mock"
+    },
+    {
+      "result": "PASS",
+      "detail": "/rental/ claims clean"
+    },
+    {
+      "result": "PASS",
+      "detail": "/bridge/ zero mock"
+    },
+    {
+      "result": "PASS",
+      "detail": "/bridge/ claims clean"
+    },
+    {
+      "result": "PASS",
+      "detail": "/ground-up/ zero mock"
+    },
+    {
+      "result": "PASS",
+      "detail": "/ground-up/ claims clean"
+    },
+    {
+      "result": "PASS",
+      "detail": "/multifamily/ zero mock"
+    },
+    {
+      "result": "PASS",
+      "detail": "/multifamily/ claims clean"
+    },
+    {
+      "result": "PASS",
+      "detail": "/purchase-rehab/ zero mock"
+    },
+    {
+      "result": "PASS",
+      "detail": "/purchase-rehab/ claims clean"
+    },
+    {
+      "result": "PASS",
+      "detail": "deal-path desktop no overflow"
+    },
+    {
+      "result": "PASS",
+      "detail": "deal-path laptop no overflow"
+    },
+    {
+      "result": "PASS",
+      "detail": "deal-path tablet no overflow"
+    },
+    {
+      "result": "PASS",
+      "detail": "deal-path mobile no overflow"
+    },
+    {
+      "result": "PASS",
+      "detail": "deal-path small no overflow"
+    },
+    {
+      "result": "PASS",
+      "detail": "deal-path flip → fix-and-flip"
+    },
+    {
+      "result": "PASS",
+      "detail": "deal-path oos-oo oos"
+    },
+    {
+      "result": "PASS",
+      "detail": "deal-path oos-5 oos"
+    },
+    {
+      "result": "PASS",
+      "detail": "deal-path unknown needs conversation"
+    },
+    {
+      "result": "PASS",
+      "detail": "deal-path keyboard focus"
+    },
+    {
+      "result": "PASS",
+      "detail": "/contact/ mock form present"
+    },
+    {
+      "result": "PASS",
+      "detail": "/contact/ no CRM request"
+    },
+    {
+      "result": "PASS",
+      "detail": "/submit-a-deal/ mock form present"
+    },
+    {
+      "result": "PASS",
+      "detail": "/submit-a-deal/ no CRM request"
+    },
+    {
+      "result": "PASS",
+      "detail": "results design mocks labeled count=13"
+    },
+    {
+      "result": "PASS",
+      "detail": "results noindex"
+    },
+    {
+      "result": "PASS",
+      "detail": "footer links 26"
+    }
+  ]
+}

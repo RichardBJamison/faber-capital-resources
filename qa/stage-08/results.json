@@ -1,0 +1,471 @@
+{
+  "base": "http://127.0.0.1:8840",
+  "browser": "playwright chromium",
+  "viewports": {
+    "desktop": {
+      "width": 1440,
+      "height": 900
+    },
+    "laptop": {
+      "width": 1280,
+      "height": 800
+    },
+    "tablet": {
+      "width": 768,
+      "height": 1024
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844
+    },
+    "small": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  "homepageMatrix": {
+    "fix-and-flip": {
+      "open": "PASS",
+      "focus": "PASS",
+      "exploreAnother": "PASS",
+      "continue": "PASS",
+      "escape": "PASS",
+      "mobile": "PASS"
+    },
+    "rental": {
+      "open": "PASS",
+      "focus": "PASS",
+      "exploreAnother": "PASS",
+      "continue": "PASS",
+      "escape": "PASS",
+      "mobile": "PASS"
+    },
+    "bridge": {
+      "open": "PASS",
+      "focus": "PASS",
+      "exploreAnother": "PASS",
+      "continue": "PASS",
+      "escape": "PASS",
+      "mobile": "PASS"
+    },
+    "ground-up": {
+      "open": "PASS",
+      "focus": "PASS",
+      "exploreAnother": "PASS",
+      "continue": "PASS",
+      "escape": "PASS",
+      "mobile": "PASS"
+    },
+    "multifamily": {
+      "open": "PASS",
+      "focus": "PASS",
+      "exploreAnother": "PASS",
+      "continue": "PASS",
+      "escape": "PASS",
+      "mobile": "PASS"
+    },
+    "purchase-rehab": {
+      "open": "PASS",
+      "focus": "PASS",
+      "exploreAnother": "PASS",
+      "continue": "PASS",
+      "escape": "PASS",
+      "mobile": "PASS"
+    }
+  },
+  "reducedMotionMatrix": {
+    "fix-and-flip": {
+      "open": "PASS",
+      "focus": "PASS",
+      "exploreAnother": "PASS",
+      "continue": "PASS",
+      "escape": "PASS",
+      "mobile": "pending"
+    },
+    "rental": {
+      "open": "PASS",
+      "focus": "PASS",
+      "exploreAnother": "PASS",
+      "continue": "PASS",
+      "escape": "PASS",
+      "mobile": "pending"
+    },
+    "bridge": {
+      "open": "PASS",
+      "focus": "PASS",
+      "exploreAnother": "PASS",
+      "continue": "PASS",
+      "escape": "PASS",
+      "mobile": "pending"
+    },
+    "ground-up": {
+      "open": "PASS",
+      "focus": "PASS",
+      "exploreAnother": "PASS",
+      "continue": "PASS",
+      "escape": "PASS",
+      "mobile": "pending"
+    },
+    "multifamily": {
+      "open": "PASS",
+      "focus": "PASS",
+      "exploreAnother": "PASS",
+      "continue": "PASS",
+      "escape": "PASS",
+      "mobile": "pending"
+    },
+    "purchase-rehab": {
+      "open": "PASS",
+      "focus": "PASS",
+      "exploreAnother": "PASS",
+      "continue": "PASS",
+      "escape": "PASS",
+      "mobile": "pending"
+    }
+  },
+  "proof": {
+    "mockTx": 8,
+    "mockTm": 4,
+    "draft": 0,
+    "badges": 13
+  },
+  "issuesFound": 0,
+  "issuesFixed": 0,
+  "ledger": [
+    {
+      "ts": "2026-08-07T23:16:30.217Z",
+      "route": "/",
+      "action": "no escapes fix-and-flip",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:16:37.435Z",
+      "route": "/",
+      "action": "no escapes rental",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:16:43.940Z",
+      "route": "/",
+      "action": "no escapes bridge",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:16:50.348Z",
+      "route": "/",
+      "action": "no escapes ground-up",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:16:57.148Z",
+      "route": "/",
+      "action": "no escapes multifamily",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:17:03.648Z",
+      "route": "/",
+      "action": "no escapes purchase-rehab",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:17:04.066Z",
+      "route": "/",
+      "action": "home mock badge",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:17:04.066Z",
+      "route": "/",
+      "action": "home draft absent",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:17:04.067Z",
+      "route": "/",
+      "action": "desktop overflow-x",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:17:06.926Z",
+      "route": "/",
+      "action": "no escapes fix-and-flip",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:17:09.408Z",
+      "route": "/",
+      "action": "no escapes rental",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:17:11.912Z",
+      "route": "/",
+      "action": "no escapes bridge",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:17:16.661Z",
+      "route": "/",
+      "action": "no escapes ground-up",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:17:23.962Z",
+      "route": "/",
+      "action": "no escapes multifamily",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:17:30.709Z",
+      "route": "/",
+      "action": "no escapes purchase-rehab",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:17:31.128Z",
+      "route": "/",
+      "action": "home mock badge",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:17:31.128Z",
+      "route": "/",
+      "action": "home draft absent",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:17:31.129Z",
+      "route": "/",
+      "action": "desktop overflow-x",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:17:33.047Z",
+      "route": "/",
+      "action": "mobile nav open",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:17:44.035Z",
+      "route": "/",
+      "action": "mobile footer markets",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:17:44.787Z",
+      "route": "/results/",
+      "action": "8 mock transactions",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:17:44.787Z",
+      "route": "/results/",
+      "action": "4 mock testimonials",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:17:44.787Z",
+      "route": "/results/",
+      "action": "draft not rendered",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:17:44.787Z",
+      "route": "/results/",
+      "action": "mock badges visible",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:17:45.174Z",
+      "route": "/results/",
+      "action": "mobile overflow",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:17:45.923Z",
+      "route": "/team/",
+      "action": "bill mock structure",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:17:45.923Z",
+      "route": "/team/",
+      "action": "4 quotes",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:17:45.925Z",
+      "route": "/team/",
+      "action": "schema clean",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:17:46.493Z",
+      "route": "/about/",
+      "action": "bill mount rendered",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:17:47.220Z",
+      "route": "/cleveland…/",
+      "action": "market proof",
+      "detail": 2,
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:17:47.509Z",
+      "route": "/cleveland…/",
+      "action": "mobile overflow",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:18:10.016Z",
+      "route": "/fix-and-flip/",
+      "action": "program proof cases",
+      "detail": 2,
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:18:10.570Z",
+      "route": "/rental/",
+      "action": "program proof cases",
+      "detail": 2,
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:18:11.120Z",
+      "route": "/bridge/",
+      "action": "program proof cases",
+      "detail": 1,
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:18:11.664Z",
+      "route": "/ground-up/",
+      "action": "program proof cases",
+      "detail": 1,
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:18:12.208Z",
+      "route": "/multifamily/",
+      "action": "program proof cases",
+      "detail": 1,
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:18:12.763Z",
+      "route": "/purchase-rehab/",
+      "action": "program proof cases",
+      "detail": 1,
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:18:12.781Z",
+      "route": "/loan-products/",
+      "action": "load",
+      "detail": 200,
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:18:12.802Z",
+      "route": "/tools/",
+      "action": "load",
+      "detail": 200,
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:18:12.819Z",
+      "route": "/tools/dscr/",
+      "action": "load",
+      "detail": 200,
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:18:12.837Z",
+      "route": "/resources/",
+      "action": "load",
+      "detail": 200,
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:18:12.855Z",
+      "route": "/resources/understanding-arv/",
+      "action": "load",
+      "detail": 200,
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:18:12.877Z",
+      "route": "/submit-a-deal/",
+      "action": "load",
+      "detail": 200,
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:18:12.893Z",
+      "route": "/contact/",
+      "action": "load",
+      "detail": 200,
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:18:12.908Z",
+      "route": "/faq/",
+      "action": "load",
+      "detail": 200,
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:18:12.927Z",
+      "route": "/south-florida-real-estate-investor-financing/",
+      "action": "load",
+      "detail": 200,
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:18:12.979Z",
+      "route": "sitemap",
+      "action": "count 45",
+      "result": "PASS"
+    },
+    {
+      "ts": "2026-08-07T23:18:12.979Z",
+      "route": "sitemap",
+      "action": "deferred excluded",
+      "result": "PASS"
+    }
+  ],
+  "consoleByPage": [
+    {
+      "route": "/",
+      "viewport": "desktop",
+      "errors": [
+        "Failed to load resource: the server responded with a status of 404 (File not found)"
+      ]
+    },
+    {
+      "route": "/",
+      "viewport": "desktop",
+      "errors": [
+        "Failed to load resource: the server responded with a status of 404 (File not found)"
+      ]
+    },
+    {
+      "route": "/results/",
+      "errors": []
+    }
+  ],
+  "screenshots": [
+    "qa/stage-08/screenshots/01-homepage-desktop-selector.png",
+    "qa/stage-08/screenshots/02-homepage-briefing-desktop-fix-and-flip.png",
+    "qa/stage-08/screenshots/03-homepage-briefing-mobile-rental.png",
+    "qa/stage-08/screenshots/04-results-desktop-mocks.png",
+    "qa/stage-08/screenshots/05-results-mobile-mocks.png",
+    "qa/stage-08/screenshots/06-team-proof-treatment.png",
+    "qa/stage-08/screenshots/07-cleveland-desktop.png",
+    "qa/stage-08/screenshots/07b-cleveland-mobile.png",
+    "qa/stage-08/screenshots/08-mobile-footer.png"
+  ]
+}

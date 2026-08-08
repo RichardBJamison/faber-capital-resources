@@ -1,0 +1,182 @@
+{
+  "pass": 40,
+  "fail": 0,
+  "ledger": [
+    {
+      "result": "PASS",
+      "detail": "homepage: zero mock status nodes"
+    },
+    {
+      "result": "PASS",
+      "detail": "homepage desktop no overflow"
+    },
+    {
+      "result": "PASS",
+      "detail": "homepage program links present (29)"
+    },
+    {
+      "result": "PASS",
+      "detail": "/team/ Bill name"
+    },
+    {
+      "result": "PASS",
+      "detail": "/team/ broker framing"
+    },
+    {
+      "result": "PASS",
+      "detail": "/team/ zero mock markers"
+    },
+    {
+      "result": "PASS",
+      "detail": "/team/ no invented numeric credentials"
+    },
+    {
+      "result": "PASS",
+      "detail": "/about/ Bill name"
+    },
+    {
+      "result": "PASS",
+      "detail": "/about/ broker framing"
+    },
+    {
+      "result": "PASS",
+      "detail": "/about/ zero mock markers"
+    },
+    {
+      "result": "PASS",
+      "detail": "/about/ no invented numeric credentials"
+    },
+    {
+      "result": "PASS",
+      "detail": "results: mock cards labeled (13)"
+    },
+    {
+      "result": "PASS",
+      "detail": "results: draft not rendered"
+    },
+    {
+      "result": "PASS",
+      "detail": "/fix-and-flip/ zero mock"
+    },
+    {
+      "result": "PASS",
+      "detail": "/fix-and-flip/ no residual JV-100 claim"
+    },
+    {
+      "result": "PASS",
+      "detail": "/rental/ zero mock"
+    },
+    {
+      "result": "PASS",
+      "detail": "/rental/ no residual JV-100 claim"
+    },
+    {
+      "result": "PASS",
+      "detail": "/bridge/ zero mock"
+    },
+    {
+      "result": "PASS",
+      "detail": "/bridge/ no residual JV-100 claim"
+    },
+    {
+      "result": "PASS",
+      "detail": "/ground-up/ zero mock"
+    },
+    {
+      "result": "PASS",
+      "detail": "/ground-up/ no residual JV-100 claim"
+    },
+    {
+      "result": "PASS",
+      "detail": "/multifamily/ zero mock"
+    },
+    {
+      "result": "PASS",
+      "detail": "/multifamily/ no residual JV-100 claim"
+    },
+    {
+      "result": "PASS",
+      "detail": "/purchase-rehab/ zero mock"
+    },
+    {
+      "result": "PASS",
+      "detail": "/purchase-rehab/ no residual JV-100 claim"
+    },
+    {
+      "result": "PASS",
+      "detail": "/cleveland-real-estate-investor-financing/ zero mock"
+    },
+    {
+      "result": "PASS",
+      "detail": "/cleveland-real-estate-investor-financing/ mobile no overflow"
+    },
+    {
+      "result": "PASS",
+      "detail": "/south-florida-real-estate-investor-financing/ zero mock"
+    },
+    {
+      "result": "PASS",
+      "detail": "/south-florida-real-estate-investor-financing/ mobile no overflow"
+    },
+    {
+      "result": "PASS",
+      "detail": "deal-path OOS owner-occupied"
+    },
+    {
+      "result": "PASS",
+      "detail": "deal-path OOS 5+"
+    },
+    {
+      "result": "PASS",
+      "detail": "deal-path mobile no overflow"
+    },
+    {
+      "result": "PASS",
+      "detail": "deal-path noindex intact"
+    },
+    {
+      "result": "PASS",
+      "detail": "/submit-a-deal/ noindex"
+    },
+    {
+      "result": "PASS",
+      "detail": "/submit-a-deal/ no CRM network calls"
+    },
+    {
+      "result": "PASS",
+      "detail": "/contact/ noindex"
+    },
+    {
+      "result": "PASS",
+      "detail": "/contact/ no CRM network calls"
+    },
+    {
+      "result": "PASS",
+      "detail": "keyboard focus radio"
+    },
+    {
+      "result": "PASS",
+      "detail": "sitemap count 48"
+    },
+    {
+      "result": "PASS",
+      "detail": "sitemap excludes results"
+    }
+  ],
+  "summary": {
+    "mockLaunch": {
+      "home": {
+        "statusNodes": 0,
+        "labelHits": 0,
+        "bodyHasMockLabel": false
+      }
+    },
+    "results": {
+      "statusNodes": 13,
+      "labelHits": 51,
+      "bodyHasMockLabel": true
+    },
+    "dealPath": {},
+    "viewports": {}
+  }
+}

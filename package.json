@@ -1,0 +1,21 @@
+{
+  "name": "faber-capital-resources-gh",
+  "version": "1.0.0",
+  "description": "**Public URL:** https://richardbjamison.github.io/faber-capital-resources/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RichardBJamison/faber-capital-resources.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/RichardBJamison/faber-capital-resources/issues"
+  },
+  "homepage": "https://github.com/RichardBJamison/faber-capital-resources#readme"
+}

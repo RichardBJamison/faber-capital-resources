@@ -1,24 +1,130 @@
-# Real Estate Capital Resources
-# NOTE: pages currently carry noindex pending the launch gate. See LAUNCH-CHECKLIST.md
+# Real Estate Capital Resources (RECR)
+# https://realestatecapitalresources.com/
+#
+# Development / GH Pages: HTML still carries meta robots=noindex,nofollow until launch flip.
+# robots.txt is crawl-access policy for production; noindex is the indexability gate.
+# See INDEXING-MANIFEST.md and LAUNCH-CHECKLIST.md.
 
+# --- Default search crawlers ---
 User-agent: *
 Allow: /
 
-# AI assistants — a growing share of investor research runs through these.
+# Launch-deferred product surfaces (retained in repo, not launch-indexable)
+Disallow: /commercial/
+Disallow: /joint-venture/
+Disallow: /portfolio/
+
+# Internal / lab / private surfaces
+Disallow: /nexus/
+Disallow: /brokerage/
+Disallow: /resonant-design-offer/
+Disallow: /lab/
+Disallow: /legacy-fcr/
+Disallow: /deal-desk/
+Disallow: /qa/
+
+# Conditional proof hub — mock-only until verified cases exist (also off sitemap when mock-only)
+Disallow: /results/
+
+# --- AI / answer-engine crawlers (documented policy; no inclusion guarantee) ---
+# OAI-SearchBot: ChatGPT search / referral discovery — ALLOW at launch unless Richard opts out.
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /commercial/
+Disallow: /joint-venture/
+Disallow: /portfolio/
+Disallow: /nexus/
+Disallow: /brokerage/
+Disallow: /resonant-design-offer/
+Disallow: /lab/
+Disallow: /legacy-fcr/
+Disallow: /deal-desk/
+Disallow: /qa/
+Disallow: /results/
+
+# GPTBot: OpenAI training crawler — treated separately from SearchBot.
+# Current default: ALLOW public launch paths (same disallow list). Opt-out is a later policy decision.
 User-agent: GPTBot
 Allow: /
+Disallow: /commercial/
+Disallow: /joint-venture/
+Disallow: /portfolio/
+Disallow: /nexus/
+Disallow: /brokerage/
+Disallow: /resonant-design-offer/
+Disallow: /lab/
+Disallow: /legacy-fcr/
+Disallow: /deal-desk/
+Disallow: /qa/
+Disallow: /results/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /commercial/
+Disallow: /joint-venture/
+Disallow: /portfolio/
+Disallow: /nexus/
+Disallow: /brokerage/
+Disallow: /resonant-design-offer/
+Disallow: /lab/
+Disallow: /deal-desk/
+Disallow: /qa/
+Disallow: /results/
+
 User-agent: ClaudeBot
 Allow: /
+Disallow: /commercial/
+Disallow: /joint-venture/
+Disallow: /portfolio/
+Disallow: /nexus/
+Disallow: /brokerage/
+Disallow: /resonant-design-offer/
+Disallow: /lab/
+Disallow: /deal-desk/
+Disallow: /qa/
+Disallow: /results/
+
 User-agent: anthropic-ai
 Allow: /
+Disallow: /commercial/
+Disallow: /joint-venture/
+Disallow: /portfolio/
+Disallow: /nexus/
+Disallow: /lab/
+Disallow: /deal-desk/
+Disallow: /results/
+
 User-agent: PerplexityBot
 Allow: /
+Disallow: /commercial/
+Disallow: /joint-venture/
+Disallow: /portfolio/
+Disallow: /nexus/
+Disallow: /lab/
+Disallow: /deal-desk/
+Disallow: /results/
+
 User-agent: Google-Extended
 Allow: /
+Disallow: /commercial/
+Disallow: /joint-venture/
+Disallow: /portfolio/
+Disallow: /nexus/
+Disallow: /lab/
+Disallow: /deal-desk/
+Disallow: /results/
+
 User-agent: Applebot-Extended
 Allow: /
+Disallow: /commercial/
+Disallow: /joint-venture/
+Disallow: /portfolio/
+Disallow: /nexus/
+Disallow: /lab/
+Disallow: /deal-desk/
+Disallow: /results/
 
-# Portfolio standard — blocked across all properties.
+# Block known aggressive scrapers
 User-agent: Bytespider
 Disallow: /
 User-agent: Amazonbot
