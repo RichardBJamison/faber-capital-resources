@@ -9,7 +9,7 @@
     phoneHref: "tel:9546764205",
     email: "fabercapitalresources@gmail.com",
     emailHref: "mailto:fabercapitalresources@gmail.com",
-    markets: "Cleveland, OH · Fort Lauderdale / South Florida",
+    markets: "Nationwide · Continental U.S.",
     addressCleveland: "1273 W 6th St, Cleveland, OH 44113",
   };
 
@@ -187,6 +187,7 @@
       </div>
       <div class="footer-col">
         <h4>Markets</h4>
+        <a href="${p("/")}">Nationwide · Continental U.S.</a>
         <a href="${p("/cleveland-real-estate-investor-financing/")}">Cleveland / Northeast Ohio</a>
         <a href="${p("/south-florida-real-estate-investor-financing/")}">Fort Lauderdale / South Florida</a>
       </div>
@@ -374,6 +375,7 @@
       telephone: BRAND.phone, email: BRAND.email,
       description: "Capital-path guidance for real-estate investors. Property-first review across fix-and-flip, DSCR rental, purchase-and-rehab, bridge, ground-up, and 2–4 unit multifamily investment financing.",
       areaServed: [
+        { "@type": "Country", name: "United States" },
         { "@type": "City", name: "Cleveland", address: { "@type": "PostalAddress", addressRegion: "OH" } },
         { "@type": "City", name: "Fort Lauderdale", address: { "@type": "PostalAddress", addressRegion: "FL" } }
       ],
