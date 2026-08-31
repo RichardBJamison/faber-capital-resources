@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Launch a Deal | Seller Services | RECR</title>
+  <meta name="description" content="Start a Deal Launch request. Tell us what you have. We will tell you what is needed next.">
+  <link rel="canonical" href="https://realestatecapitalresources.com/seller-services/launch/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Real Estate Capital Resources">
+  <meta property="og:url" content="https://realestatecapitalresources.com/seller-services/launch/">
+  <meta property="og:image" content="https://realestatecapitalresources.com/assets/img/fix-and-flip-poster.jpg">
+  <link rel="icon" href="/assets/img/favicon.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/acqua-frame.css">
+  <link rel="stylesheet" href="/assets/css/seller-services.css">
+</head>
+<body data-active="seller" data-funnel="form">
+  <div id="site-shell"></div>
+  <main id="main">
+    <section class="section section--soft" style="padding-top:2.5rem">
+      <div class="container" style="max-width:820px">
+        <div class="section-head reveal">
+          <div class="eyebrow" style="color:var(--gold)">Start a request</div>
+          <h1>Launch a Deal</h1>
+          <p>Tell us what you have. We will tell you what is needed next. Incomplete is fine. Fiction is not.</p>
+        </div>
+
+        <form class="wizard reveal" data-wizard>
+          <div class="wizard-top">
+            <strong id="wizard-label">Contact → Property → Package</strong>
+            <div class="wizard-dots" aria-hidden="true">
+              <span data-dot class="is-on"></span><span data-dot></span><span data-dot></span>
+            </div>
+          </div>
+          <div class="wizard-track"><div class="wizard-fill" data-fill></div></div>
+
+          <div data-step>
+            <h2 style="margin:.2rem 0 1rem;font-size:1.2rem">Who’s sending this?</h2>
+            <div class="form-grid">
+              <div class="form-field"><label>Full name</label><input name="name" required autocomplete="name"></div>
+              <div class="form-field"><label>Company name</label><input name="company" autocomplete="organization"></div>
+              <div class="form-field"><label>Email</label><input type="email" name="email" required autocomplete="email"></div>
+              <div class="form-field"><label>Mobile number</label><input type="tel" name="phone" required autocomplete="tel"></div>
+              <div class="form-field full"><label>Preferred contact method</label>
+                <select name="contact_pref">
+                  <option>Mobile</option>
+                  <option>Email</option>
+                  <option>Text</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div data-step hidden>
+            <h2 style="margin:.2rem 0 1rem;font-size:1.2rem">The property</h2>
+            <div class="form-grid">
+              <div class="form-field full"><label>Property address</label><input name="address" required placeholder="Street, city, state"></div>
+              <div class="form-field"><label>Property type</label>
+                <select name="type">
+                  <option>SFR</option>
+                  <option>2–4 unit</option>
+                  <option>Condo / townhome</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="form-field"><label>Contract or asking price</label><input name="price" inputmode="decimal"></div>
+              <div class="form-field"><label>Contract expiration</label><input name="exp" type="date"></div>
+              <div class="form-field"><label>Target assignment fee, if any</label><input name="assign" inputmode="decimal"></div>
+              <div class="form-field"><label>Estimated ARV, if known</label><input name="arv" inputmode="decimal"></div>
+              <div class="form-field"><label>Estimated repair budget, if known</label><input name="rehab" inputmode="decimal"></div>
+              <div class="form-field"><label>Current condition</label>
+                <select name="condition">
+                  <option>Needs cosmetic</option>
+                  <option>Needs full rehab</option>
+                  <option>Habitable / light work</option>
+                  <option>Unknown</option>
+                </select>
+              </div>
+              <div class="form-field"><label>Occupancy, if known</label>
+                <select name="occupancy">
+                  <option>Vacant</option>
+                  <option>Owner occupied</option>
+                  <option>Tenant occupied</option>
+                  <option>Unknown</option>
+                </select>
+              </div>
+              <div class="form-field full"><label>Planned exit strategy</label>
+                <select name="exit">
+                  <option>Fix and flip</option>
+                  <option>Assign / wholesale</option>
+                  <option>Rehab and hold</option>
+                  <option>Not sure yet</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div data-step hidden>
+            <h2 style="margin:.2rem 0 1rem;font-size:1.2rem">Uploads, need, and consent</h2>
+            <div class="form-grid">
+              <div class="form-field full">
+                <label>Uploads</label>
+                <div class="drop">Drop photos, contract, inspection, comps, scope, or a listing link — mock only, nothing leaves this machine.</div>
+              </div>
+              <div class="form-field full"><label>What do you need most?</label>
+                <select name="need">
+                  <option>Buyer-ready deal package</option>
+                  <option>Help organizing the deal numbers</option>
+                  <option>Buyer-network exposure</option>
+                  <option>Financing information for potential buyers</option>
+                  <option>A conversation about the opportunity</option>
+                </select>
+              </div>
+              <div class="form-field full check-list">
+                <label><input type="checkbox" name="right" required> I confirm that I have the right to share this property information and documents.</label>
+                <label><input type="checkbox" name="info" required> I understand that Deal Launch materials are informational and may include assumptions.</label>
+                <label><input type="checkbox" name="notloan" required> I understand that this is not an appraisal, loan approval, financing guarantee, or guarantee of sale.</label>
+                <label><input type="checkbox" name="contactok" required> I agree that RECR may contact me about this submission and related partner services.</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="wizard-nav">
+            <button class="btn btn-outline" type="button" data-back>Back</button>
+            <button class="btn btn-primary" type="button" data-next>Continue</button>
+            <button class="btn btn-primary" type="submit" data-submit hidden>Submit My Deal</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+  <script>
+    window.OFFER_TRACKER = { siteId: "recr-seller-services", debug: false };
+  </script>
+  <script src="/js/tracker.js" defer></script>
+  <script src="/assets/js/site.js"></script>
+  <script src="/assets/js/seller-services.js"></script>
+</body>
+</html>

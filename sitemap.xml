@@ -166,6 +166,11 @@
     <priority>0.85</priority>
   </url>
   <url>
+    <loc>https://realestatecapitalresources.com/seller-services/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://realestatecapitalresources.com/services/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.65</priority>

@@ -5,12 +5,12 @@
   const BRAND = {
     name: "Real Estate Capital Resources",
     short: "RECR",
-    phone: "954-676-4205",
-    phoneHref: "tel:9546764205",
-    email: "fabercapitalresources@gmail.com",
-    emailHref: "mailto:fabercapitalresources@gmail.com",
+    phone: "(216) 677-4029",
+    phoneHref: "tel:+12166774029",
+    email: "bill@realestatecapitalresources.com",
+    emailHref: "mailto:bill@realestatecapitalresources.com",
     markets: "Nationwide · Continental U.S.",
-    addressCleveland: "1273 W 6th St, Cleveland, OH 44113",
+    addressCleveland: "12866 Lakeshore Blvd, Bratenahl, OH 44108",
   };
 
   /* GitHub Pages project base; empty on local lab (port 8840). */
@@ -95,6 +95,7 @@
             <a href="${p("/purchase-rehab/")}"><strong>Purchase &amp; Rehab</strong><span>Acquisition plus major renovation</span></a>
                       </div>
         </div>
+        <a href="${p("/seller-services/")}"${is("seller")}>Seller Services</a>
         <a href="${p("/how-it-works/")}"${is("how")}>How It Works</a>
         <div class="nav-item">
           <button type="button" aria-haspopup="true">Investors</button>
@@ -138,6 +139,7 @@
     <a href="${p("/multifamily/")}">Multifamily</a>
   <a href="${p("/tools/")}">Investor Tools</a>
   <a href="${p("/resources/")}">Learning Center</a>
+  <a href="${p("/seller-services/")}">Seller Services</a>
   <a href="${p("/how-it-works/")}">How It Works</a>
   <a href="${p("/first-time/")}">First-Time Investors</a>
   <a href="${p("/experienced/")}">Experienced Borrowers</a>
@@ -180,6 +182,7 @@
         <a href="${p("/about/")}">About</a>
         <a href="${p("/how-it-works/")}">How It Works</a>
         <a href="${p("/services/")}">Our Services</a>
+        <a href="${p("/seller-services/")}">Seller Services</a>
         <a href="${p("/results/")}">Recently Closed</a>
         <a href="${p("/team/")}">Meet the Team</a>
         <a href="${p("/partners/")}">Partners</a>
@@ -371,7 +374,9 @@
       "@context": "https://schema.org",
       "@type": ["Organization", "FinancialService"],
       "@id": ORIGIN + "/#organization",
-      name: BRAND.name, alternateName: BRAND.short, url: ORIGIN,
+      name: BRAND.name,
+      legalName: "REAL ESTATE CAPITAL RESOURCES LLC",
+      alternateName: BRAND.short, url: ORIGIN,
       telephone: BRAND.phone, email: BRAND.email,
       description: "Capital-path guidance for real-estate investors. Property-first review across fix-and-flip, DSCR rental, purchase-and-rehab, bridge, ground-up, and 2–4 unit multifamily investment financing.",
       areaServed: [
@@ -379,7 +384,7 @@
         { "@type": "City", name: "Cleveland", address: { "@type": "PostalAddress", addressRegion: "OH" } },
         { "@type": "City", name: "Fort Lauderdale", address: { "@type": "PostalAddress", addressRegion: "FL" } }
       ],
-      address: { "@type": "PostalAddress", streetAddress: "1273 W 6th St", addressLocality: "Cleveland", addressRegion: "OH", postalCode: "44113", addressCountry: "US" }
+      address: { "@type": "PostalAddress", streetAddress: "12866 Lakeshore Blvd", addressLocality: "Bratenahl", addressRegion: "OH", postalCode: "44108", addressCountry: "US" }
     });
     jsonld({ "@context": "https://schema.org", "@type": "WebSite", "@id": ORIGIN + "/#website", url: ORIGIN, name: BRAND.name, publisher: { "@id": ORIGIN + "/#organization" } });
   }
